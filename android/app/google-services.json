@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1079309162970",
+    "project_id": "loginauth-396c9",
+    "storage_bucket": "loginauth-396c9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1079309162970:android:f0bd5c3edef3483a4188e3",
+        "android_client_info": {
+          "package_name": "com.example.little_paw"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1079309162970-j82h7q0ngesnt97fk2nihm3ar1oukihp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnhQcavB5esPdl6Wkp1wQ2HjXERPhKoOQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1079309162970-j82h7q0ngesnt97fk2nihm3ar1oukihp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
