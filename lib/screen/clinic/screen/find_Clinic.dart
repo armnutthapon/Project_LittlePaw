@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'filter.dart';
-import 'package:persistent_bottom/screen/clinic/screen/filter.dart';
-import 'package:persistent_bottom/screen/clinic/component/ClinicCard.dart';
+import 'package:little_paw/screen/clinic/screen/filter.dart';
+import 'package:little_paw/screen/clinic/component/ClinicCard.dart';
 
 class Page_FindClinic extends StatefulWidget {
   const Page_FindClinic({Key key}) : super(key: key);

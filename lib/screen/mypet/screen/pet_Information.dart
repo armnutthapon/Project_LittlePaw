@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // import 'package:persistent_bottom/screen/mypet/component/PetInfoCard.dart';
-import 'package:persistent_bottom/screen/mypet/component/PetInfo.dart';
+import 'package:little_paw/screen/mypet/component/PetInfo.dart';
 
 class Page_PetInformations extends StatefulWidget {
   const Page_PetInformations({Key key}) : super(key: key);

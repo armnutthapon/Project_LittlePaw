@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:persistent_bottom/app.dart';
+import 'package:little_paw/app.dart';
 // import '../component/MenuCard.dart';
 // import './clinic/find_Clinic.dart';
-import 'package:persistent_bottom/screen/clinic/screen/find_Clinic.dart';
+import 'package:little_paw/screen/clinic/screen/find_Clinic.dart';
 
 class Clinic extends StatefulWidget {
   const Clinic({Key key}) : super(key: key);

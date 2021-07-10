@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:persistent_bottom/screen/mypet/component/PetMedical.dart';
+import 'package:little_paw/screen/mypet/component/PetMedical.dart';
 
 class Page_PetMedical extends StatefulWidget {
   const Page_PetMedical({Key key}) : super(key: key);

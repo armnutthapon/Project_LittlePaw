@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import './screen/mypet.dart';
 import './screen/clinic.dart';
-import 'package:persistent_bottom/app.dart';
-import 'package:persistent_bottom/bottom_navigation.dart';
+import 'package:little_paw/app.dart';
+import 'package:little_paw/bottom_navigation.dart';
 
 class TabNavigatorRoutes {
   static const String root = '/';

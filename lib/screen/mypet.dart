@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:persistent_bottom/component/PetInfo.dart';
-import 'package:persistent_bottom/screen/mypet/screen/pet_Addpet.dart';
-import 'package:persistent_bottom/screen/mypet/component/PetCard.dart';
-import 'package:persistent_bottom/screen/mypet/screen/pet_Select.dart';
+import 'package:little_paw/component/PetInfo.dart';
+import 'package:little_paw/screen/mypet/screen/pet_Addpet.dart';
+import 'package:little_paw/screen/mypet/component/PetCard.dart';
+import 'package:little_paw/screen/mypet/screen/pet_Select.dart';
 
 // import 'mypet/component/PetCard.dart';
 // import './mypet/screen/pet_Select.dart';

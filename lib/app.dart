@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:persistent_bottom/tab_navigator.dart';
+import 'package:little_paw/tab_navigator.dart';
 import 'package:flutter/cupertino.dart';
 
 class App extends StatefulWidget {
