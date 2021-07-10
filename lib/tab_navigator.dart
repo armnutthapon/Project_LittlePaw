@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:little_paw/screen/setting.dart';
 import './screen/mypet.dart';
 import './screen/clinic.dart';
 import 'package:little_paw/app.dart';
@@ -25,7 +26,7 @@ class TabNavigator extends StatelessWidget {
       child = MyPet();
     else if (tabItem == "Page4")
       child = Page4();
-    else if (tabItem == "Page5") child = Page5();
+    else if (tabItem == "Page5") child = Setting();
 
     return Navigator(
       key: navigatorKey,

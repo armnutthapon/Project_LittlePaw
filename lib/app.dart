@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:little_paw/services/authentication/auth__service.dart';
 import 'package:little_paw/tab_navigator.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 
 class App extends StatefulWidget {
   @override

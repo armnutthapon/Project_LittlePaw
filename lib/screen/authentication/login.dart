@@ -52,19 +52,19 @@ class _LoginState extends State<Login> {
                   SizedBox(
                     height: size.height * 0.03,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ClipOval(
-                        child: Image.asset(
-                          './assets/images/logo.png',
-                          height: 120.0,
-                          width: 120.0,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ],
-                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     ClipOval(
+                  //       child: Image.asset(
+                  //         './assets/images/logo.png',
+                  //         height: 120.0,
+                  //         width: 120.0,
+                  //         fit: BoxFit.cover,
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
                   Container(
                     margin: EdgeInsets.fromLTRB(30, 15, 30, 15),
                     child: Padding(

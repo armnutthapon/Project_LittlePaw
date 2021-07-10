@@ -1,28 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:little_paw/services/authentication/auth__service.dart';
+import 'package:provider/provider.dart';
 
-class setting extends StatefulWidget {
+class Setting extends StatefulWidget {
   static const routeName = '/setting';
 
   @override
   State<StatefulWidget> createState() {
-    return _settingState();
+    return _SettingState();
   }
 }
 
-class _settingState extends State<setting> {
+class _SettingState extends State<Setting> {
   @override
   Widget build(BuildContext context) {
+    final loginProvider = Provider.of<AuthServices>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Setting'),
-      ),
-      body: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text('setting'),
+        title: Text("Homepage"),
+        actions: [
+          IconButton(
+              onPressed: () async => await loginProvider.logout(),
+              icon: Icon(Icons.exit_to_app))
         ],
-      )),
+      ),
     );
   }
 }
