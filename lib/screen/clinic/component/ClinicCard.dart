@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:little_paw/screen/clinic/screen/clinic_detail.dart';
+import 'package:little_paw/screen/clinic/screen/filter.dart';
 
 class ClinicCard extends StatelessWidget {
   final String clinicname;
@@ -17,6 +19,10 @@ class ClinicCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: InkWell(
+        onTap: () {
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => Page_ClinicDetail()));
+        },
         borderRadius: BorderRadius.circular(10),
         splashColor: Colors.red.shade100,
         child: Container(
