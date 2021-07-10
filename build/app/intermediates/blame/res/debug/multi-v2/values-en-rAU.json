@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\Final_pj\\Project_LittlePaw\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-en-rAU\\values-en-rAU.xml",
+            "outputFile": "K:\\kannika\\Project_LittlePaw\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-en-rAU\\values-en-rAU.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\66818\\.gradle\\caches\\transforms-2\\files-2.1\\cd2306d09bcf7af840551cf55ebfcf4c\\core-1.1.0\\res\\values-en-rAU\\values-en-rAU.xml",
+                    "source": "C:\\Users\\66910\\.gradle\\caches\\transforms-2\\files-2.1\\cd2306d09bcf7af840551cf55ebfcf4c\\core-1.1.0\\res\\values-en-rAU\\values-en-rAU.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
