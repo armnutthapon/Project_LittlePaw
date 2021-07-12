@@ -24,7 +24,7 @@ class _MyPetState extends State<MyPet> {
       appBar: AppBar(
         title: Text("สัตว์เลี้ยงของฉัน",
             style: TextStyle(
-                fontSize: 16,
+                fontSize: 22,
                 color: Colors.black,
                 fontWeight: FontWeight.w500,
                 fontFamily: 'Mitr')),
@@ -46,9 +46,8 @@ class _MyPetState extends State<MyPet> {
             ),
           ),
         ],
-        backgroundColor:
-            Colors.grey.shade100.withOpacity(1), //You can make this transparent
-        elevation: 0.0, //No shadow
+        backgroundColor: Colors.white, //You can make this transparent
+        elevation: 10.0, //No shadow
       ),
     );
   }

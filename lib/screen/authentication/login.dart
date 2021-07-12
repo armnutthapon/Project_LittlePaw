@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:little_paw/screen/authentication/google_signin.dart';
+import 'package:little_paw/screen/authentication/reset_password.dart';
 import 'package:little_paw/services/authentication/auth__service.dart';
 import 'package:provider/provider.dart';
 
@@ -132,22 +133,27 @@ class _LoginState extends State<Login> {
                               },
                             ),
                           ]),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(top: 10),
-                                child: Text(
-                                  "ลืมรหัสผ่าน ?",
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w400,
-                                      fontFamily: 'Mitr'),
+                          InkWell(
+                              child: Container(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.only(top: 10),
+                                      child: Text(
+                                        "ลืมรหัสผ่าน ?",
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w400,
+                                            fontFamily: 'Mitr'),
+                                      ),
+                                    )
+                                  ],
                                 ),
-                              )
-                            ],
-                          ),
+                              ),
+                              onTap: () =>
+                                  navigateToResetPasswordPage(context)),
                           Container(
                             margin: EdgeInsets.only(top: 10),
                             child: Column(
@@ -231,5 +237,10 @@ class _LoginState extends State<Login> {
         ),
       ),
     ));
+  }
+
+  navigateToResetPasswordPage(BuildContext context) {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => MyResetPasswordPage()));
   }
 }

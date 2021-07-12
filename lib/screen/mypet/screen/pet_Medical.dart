@@ -105,7 +105,7 @@ class _ShowMedicalDetailState extends State<ShowMedicalDetail> {
                       margin: EdgeInsets.only(left: 15, right: 15),
                       padding: EdgeInsets.all(5),
                       decoration: BoxDecoration(
-                          color: Colors.red.shade400,
+                          color: Colors.green.shade400,
                           borderRadius: BorderRadius.circular(50)),
                       child: Icon(
                         Icons.check,
