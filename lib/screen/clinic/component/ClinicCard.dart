@@ -69,7 +69,7 @@ class ClinicCard extends StatelessWidget {
                         distance,
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: 12,
+                            fontSize: 14,
                             fontWeight: FontWeight.w400,
                             fontFamily: 'Mitr'),
                       ),
@@ -77,7 +77,7 @@ class ClinicCard extends StatelessWidget {
                         location,
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: 12,
+                            fontSize: 14,
                             fontWeight: FontWeight.w400,
                             fontFamily: 'Mitr'),
                       ),
@@ -85,7 +85,7 @@ class ClinicCard extends StatelessWidget {
                         time,
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: 12,
+                            fontSize: 14,
                             fontWeight: FontWeight.w400,
                             fontFamily: 'Mitr'),
                       )

@@ -38,9 +38,11 @@ class _Page_PetMedicalState extends State<Page_PetMedical> {
               icon: new Icon(Icons.arrow_back_ios, color: Colors.black),
               onPressed: () => Navigator.of(context).pop(),
             ),
-            backgroundColor:
-                Colors.blue.withOpacity(0.0), //You can make this transparent
-            elevation: 0.0, //No shadow
+            backgroundColor: Colors.white, //You can make this transparent
+            elevation: 10.0,
+            // backgroundColor:
+            //     Colors.blue.withOpacity(0.0), //You can make this transparent
+            // elevation: 0.0, //No shadow
           ),
         ),
       ]),
@@ -122,38 +124,39 @@ class _ShowMedicalDetailState extends State<ShowMedicalDetail> {
                 ),
                 Expanded(
                     child: Container(
-                        margin: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
-                            border:
-                                Border.all(width: 1.0, color: Colors.grey[200])
-
-                            // // boxShadow: [
-                            // //   BoxShadow(
-                            // //     color: Colors.grey.withOpacity(0.4),
-                            // //     spreadRadius: 5,
-                            // //     blurRadius: 7,
-                            // //     // changes position of shadow
-                            // //   ),
-                            // ],
-                            ),
-                        height: 140,
+                        height: 150,
                         child: Padding(
                           padding: EdgeInsets.fromLTRB(10, 15, 15, 10),
-                          child: Row(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
+                          child: Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  PetMedical(
+                                    date: "AA",
+                                    title: "DD",
+                                    details: "DD",
+                                    clinicname: "SS",
+                                  ),
+                                  Text('dfsfdsf'),
+                                ],
                               ),
-                              PetMedical(
-                                date: "02/02/2020",
-                                title: "ฉีดยา",
-                                clinicname: "คลินิคหมอตู่",
-                                details: "วัคซีน ABC",
-                              ),
-                            ],
+                            ),
                           ),
+                          // child: Row(
+                          //   children: [
+                          //     Row(
+                          //       mainAxisAlignment: MainAxisAlignment.start,
+                          //     ),
+                          //     PetMedical(
+                          //       date: "02/02/2020",
+                          //       title: "ฉีดยา",
+                          //       clinicname: "คลินิคหมอตู่",
+                          //       details: "วัคซีน ABC",
+                          //     ),
+                          //   ],
+                          // ),
                         )))
               ],
             ),

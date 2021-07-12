@@ -1,9 +1,13 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:little_paw/component/PetInfo.dart';
+import 'package:little_paw/screen/mypet/component/PetList.dart';
 import 'package:little_paw/screen/mypet/screen/pet_Addpet.dart';
 import 'package:little_paw/screen/mypet/component/PetCard.dart';
 import 'package:little_paw/screen/mypet/screen/pet_Select.dart';
+import 'package:little_paw/screen/mypet/component/PetCard.dart';
 
 // import 'mypet/component/PetCard.dart';
 // import './mypet/screen/pet_Select.dart';
@@ -41,14 +45,13 @@ class _MyPetState extends State<MyPet> {
               onPressed: () {
                 Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => Page_AddPet()));
-                setState(() {});
+                // setState(() {});
               },
             ),
           ),
         ],
-        backgroundColor:
-            Colors.grey.shade100.withOpacity(1), //You can make this transparent
-        elevation: 0.0, //No shadow
+        backgroundColor: Colors.white, //You can make this transparent
+        elevation: 5.0, //No shadow
       ),
     );
   }
@@ -81,7 +84,7 @@ class _mainPetState extends State<mainPet> {
                           Container(
                             padding: EdgeInsets.only(top: 10, bottom: 10),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 InkWell(
                                   splashColor: Colors.red.shade100,
@@ -92,10 +95,9 @@ class _mainPetState extends State<mainPet> {
                                                 Page_SelectPet()));
                                   },
                                   child: Container(
-                                    child: PetCard(
-                                      child: Column(
-                                        children: [PetCardInfo(petname: 'A')],
-                                      ),
+                                    child: PetList(
+                                      petname: "ปีโป้",
+                                      //
                                     ),
                                   ),
                                 ),
@@ -108,49 +110,12 @@ class _mainPetState extends State<mainPet> {
                                                 Page_SelectPet()));
                                   },
                                   child: Container(
-                                    child: PetCard(
-                                      child: Column(
-                                        children: [],
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.only(top: 10, bottom: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                InkWell(
-                                  splashColor: Colors.red.shade100,
-                                  // onTap: () {
-                                  //   Navigator.of(context)
-                                  //       .push(MaterialPageRoute());
-                                  // },
-                                  child: Container(
-                                    child: PetCard(
-                                      child: Column(
-                                        children: [],
-                                      ),
+                                    child: PetList(
+                                      petname: "แฟนต้า",
+                                      //
                                     ),
                                   ),
                                 ),
-                                InkWell(
-                                  splashColor: Colors.red.shade100,
-                                  // onTap: () {
-                                  //   Navigator.of(context)
-                                  //       .push(MaterialPageRoute());
-                                  // },
-                                  child: Container(
-                                    child: PetCard(
-                                      child: Column(
-                                        children: [],
-                                      ),
-                                    ),
-                                  ),
-                                )
                               ],
                             ),
                           ),

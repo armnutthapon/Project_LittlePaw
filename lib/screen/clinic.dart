@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:little_paw/app.dart';
+import 'package:little_paw/screen/clinic/component/ButtonInfo.dart';
 // import '../component/MenuCard.dart';
 // import './clinic/find_Clinic.dart';
 import 'package:little_paw/screen/clinic/screen/find_Clinic.dart';
@@ -27,9 +28,8 @@ class _ClinicState extends State<Clinic> {
               fontWeight: FontWeight.w500,
               fontFamily: 'Mitr'),
         ),
-        backgroundColor:
-            Colors.grey.shade100.withOpacity(1), //You can make this transparent
-        elevation: 0.0, //No shadow
+        backgroundColor: Colors.white, //You can make this transparent
+        elevation: 10.0, //No shadow
       ),
     );
   }
@@ -92,142 +92,32 @@ class _mainClinicState extends State<mainClinic> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Container(
-                          padding: EdgeInsets.fromLTRB(0, 22, 0, 0),
-                          height: 120,
-                          width: 150,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
-                          ),
-                          child: Column(
-                            children: <Widget>[
-                              ClipRRect(
-                                child: Icon(
-                                  FontAwesomeIcons.search,
-                                  color: Colors.red.shade400,
-                                  size: 40,
-                                ),
-                              ),
-                              InkWell(
-                                  onTap: () {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                Page_FindClinic()));
-                                  },
-                                  child: Container(
-                                    child: Container(
-                                      padding: EdgeInsets.only(top: 15),
-                                      child: Text(
-                                        "ค้นหาคลินิก",
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.normal,
-                                            fontFamily: 'Mitr'),
-                                      ),
-                                    ),
-                                  )),
-                            ],
+                        InkWell(
+                          splashColor: Colors.red.shade100,
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => Page_FindClinic()));
+                          },
+                          child: Container(
+                            child: ButtonInfo(
+                              icon: FontAwesomeIcons.search,
+                              text: "ค้นหาคลินิค",
+                            ),
                           ),
                         ),
-                        Container(
-                          padding: EdgeInsets.fromLTRB(0, 22, 0, 0),
-                          height: 120,
-                          width: 150,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
-                          ),
-                          child: Column(
-                            children: <Widget>[
-                              ClipRRect(
-                                child: Icon(
-                                  FontAwesomeIcons.calendar,
-                                  color: Colors.red.shade400,
-                                  size: 40,
-                                ),
-                              ),
-                              InkWell(
-                                  // onTap: () {
-                                  //   Navigator.of(context).push(
-                                  //       MaterialPageRoute(
-                                  //           builder: (context) => App()));
-                                  // },
-                                  child: Container(
-                                child: Container(
-                                  padding: EdgeInsets.only(top: 15),
-                                  child: Text(
-                                    "การนัดหมาย",
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.normal,
-                                        fontFamily: 'Mitr'),
-                                  ),
-                                ),
-                              )),
-                            ],
+                        InkWell(
+                          splashColor: Colors.red.shade100,
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => Page_FindClinic()));
+                          },
+                          child: Container(
+                            child: ButtonInfo(
+                              icon: Icons.calendar_today,
+                              text: "การนัดหมาย",
+                            ),
                           ),
                         ),
-
-                        // InkWell(
-                        //   onTap: () {
-                        //     Navigator.of(context).push(MaterialPageRoute(
-                        //         builder: (context) => Page_FindClinic()));
-                        //   },
-                        //   child: MenuCard(
-                        //       child: Column(
-                        //     children: <Widget>[
-                        //       ClipRRect(
-                        //         child: Icon(
-                        //           FontAwesomeIcons.search,
-                        //           color: Colors.red.shade400,
-                        //           size: 40,
-                        //         ),
-                        //       ),
-                        //       Container(
-                        //         padding: EdgeInsets.only(top: 15),
-                        //         child: Text(
-                        //           "ค้นหาคลินิก",
-                        //           style: TextStyle(
-                        //               fontSize: 14,
-                        //               color: Colors.black,
-                        //               fontWeight: FontWeight.normal,
-                        //               fontFamily: 'Mitr'),
-                        //         ),
-                        //       )
-                        //     ],
-                        //   )),
-                        // ),
-
-                        // InkWell(
-                        //   onTap: () {},
-                        //   child: MenuCard(
-                        //       child: Column(
-                        //     children: <Widget>[
-                        //       ClipRRect(
-                        //         child: Icon(
-                        //           FontAwesomeIcons.calendar,
-                        //           color: Colors.red.shade400,
-                        //           size: 40,
-                        //         ),
-                        //       ),
-                        //       Container(
-                        //         padding: EdgeInsets.only(top: 15),
-                        //         child: Text(
-                        //           "การนัดหมาย",
-                        //           style: TextStyle(
-                        //               fontSize: 14,
-                        //               color: Colors.black,
-                        //               fontWeight: FontWeight.normal,
-                        //               fontFamily: 'Mitr'),
-                        //         ),
-                        //       )
-                        //     ],
-                        //   )),
-                        // ),
                       ],
                     ),
                   ),

@@ -39,9 +39,8 @@ class _Page_FindClinicState extends State<Page_FindClinic> {
               icon: new Icon(Icons.arrow_back_ios, color: Colors.black),
               onPressed: () => Navigator.of(context).pop(),
             ),
-            backgroundColor:
-                Colors.red.withOpacity(0.0), //You can make this transparent
-            elevation: 0.0, //No shadow
+            backgroundColor: Colors.white, //You can make this transparent
+            elevation: 5.0,
           ),
         ),
       ]),
@@ -103,7 +102,7 @@ class _findClinicMainState extends State<findClinicMain> {
                               hintText: "ค้นหาคลินิก",
                               prefixIcon: IconButton(
                                   icon: Icon(
-                                    Icons.search,
+                                    FontAwesomeIcons.search,
                                     size: 20,
                                     color: Colors.red.shade400,
                                   ),
@@ -152,7 +151,6 @@ class _findClinicMainState extends State<findClinicMain> {
                       // ],
                     ),
                   ))),
-
           Expanded(
               child: Container(
             padding: EdgeInsets.fromLTRB(0, 5, 0, 0),

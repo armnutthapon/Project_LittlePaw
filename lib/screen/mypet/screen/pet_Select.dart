@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:little_paw/screen/clinic/component/MedicalCard.dart';
 import 'package:little_paw/screen/mypet/screen/pet_Medical.dart';
 import 'package:little_paw/screen/mypet/screen/pet_Information.dart';
-import 'package:little_paw/component/MenuCard.dart';
+import 'package:little_paw/screen/mypet/component/ButtonInfo.dart';
 
 class Page_SelectPet extends StatefulWidget {
   const Page_SelectPet({Key key}) : super(key: key);
@@ -39,10 +40,11 @@ class Page_SelectPetState extends State<Page_SelectPet> {
               icon: new Icon(Icons.arrow_back_ios, color: Colors.black),
               onPressed: () => Navigator.of(context).pop(),
             ),
-
-            backgroundColor:
-                Colors.white.withOpacity(0), //You can make this transparent
-            elevation: 0.0, //No shadow
+            backgroundColor: Colors.white, //You can make this transparent
+            elevation: 10.0, //No s
+            // backgroundColor:
+            //     Colors.white.withOpacity(0), //You can make this transparent
+            // elevation: 0.0, //No shadow
           ),
         ),
       ]),
@@ -94,137 +96,215 @@ class _selectedPetState extends State<selectedPet> {
             height: size.height * 0.025,
           ),
 
-          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-            Container(
-              padding: EdgeInsets.fromLTRB(0, 22, 0, 0),
-              height: 120,
-              width: 150,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.white,
-              ),
-              child: Column(
-                children: <Widget>[
-                  ClipRRect(
-                    child: Icon(
-                      FontAwesomeIcons.paw,
-                      color: Colors.red.shade400,
-                      size: 40,
+          Container(
+            margin: new EdgeInsets.all(2),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                InkWell(
+                  splashColor: Colors.red.shade100,
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => Page_PetInformations()));
+                  },
+                  child: Container(
+                    child: ButtonInfo(
+                      icon: FontAwesomeIcons.search,
+                      text: "ข้อมูลสัตว์เลี้ยง",
                     ),
                   ),
-                  InkWell(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => Page_PetInformations()));
-                      },
-                      child: Container(
-                        child: Container(
-                          padding: EdgeInsets.only(top: 15),
-                          child: Text(
-                            "ข้อมูลสัตว์เลี้ยง",
-                            style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.black,
-                                fontWeight: FontWeight.normal,
-                                fontFamily: 'Mitr'),
-                          ),
-                        ),
-                      )),
-                ],
-              ),
+                ),
+                InkWell(
+                  splashColor: Colors.red.shade100,
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => Page_PetMedical()));
+                  },
+                  child: Container(
+                    child: ButtonInfo(
+                      icon: FontAwesomeIcons.heartbeat,
+                      text: "ประวัติการรักษา",
+                    ),
+                  ),
+                ),
+              ],
             ),
-            Container(
-              padding: EdgeInsets.fromLTRB(0, 22, 0, 0),
-              height: 120,
-              width: 150,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.white,
-              ),
-              child: Column(
-                children: <Widget>[
-                  ClipRRect(
-                    child: Icon(
-                      FontAwesomeIcons.heartbeat,
-                      color: Colors.red.shade400,
-                      size: 40,
-                    ),
-                  ),
-                  InkWell(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => Page_PetMedical()));
-                      },
-                      child: Container(
-                        child: Container(
-                          padding: EdgeInsets.only(top: 15),
-                          child: Text(
-                            "ประวัติการรักษา",
-                            style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.black,
-                                fontWeight: FontWeight.normal,
-                                fontFamily: 'Mitr'),
-                          ),
-                        ),
-                      )),
-                ],
-              ),
-            )
-          ]),
-
-          SizedBox(
-            height: size.height * 0.01,
           ),
-
-          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-            Container(
-              padding: EdgeInsets.fromLTRB(0, 22, 0, 0),
-              height: 120,
-              width: 150,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.white,
-              ),
-              child: Column(
-                children: <Widget>[
-                  ClipRRect(
-                    child: Icon(
-                      FontAwesomeIcons.syringe,
-                      color: Colors.red.shade400,
-                      size: 40,
+          Container(
+            margin: new EdgeInsets.all(2),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                InkWell(
+                  splashColor: Colors.red.shade100,
+                  onTap: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => MedicalCard()));
+                  },
+                  child: Container(
+                    child: ButtonInfo(
+                      icon: FontAwesomeIcons.syringe,
+                      text: "ข้อมูลวัคซีน",
                     ),
                   ),
-                  InkWell(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => Page_PetMedical()));
-                      },
-                      child: Container(
-                        child: Container(
-                          padding: EdgeInsets.only(top: 15),
-                          child: Text(
-                            "ข้อมูลวัคซีน",
-                            style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.black,
-                                fontWeight: FontWeight.normal,
-                                fontFamily: 'Mitr'),
-                          ),
-                        ),
-                      )),
-                ],
-              ),
+                ),
+                InkWell(
+                  splashColor: Colors.red.shade100,
+                  onTap: () {
+                    // Navigator.of(context).push(MaterialPageRoute(
+                    //     builder: (context) => Page_PetMedical()));
+                  },
+                  child: Container(
+                    child: ButtonInfo(
+                      icon: FontAwesomeIcons.heartbeat,
+                      text: "",
+                    ),
+                  ),
+                ),
+              ],
             ),
-            Container(
-              height: 120,
-              width: 150,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.white,
-              ),
-            )
-          ]),
+          )
+
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+          //     ButtonInfo(
+          //       text: "ข้อมูลสัตว์เลี้ยง",
+          //       icon: FontAwesomeIcons.paw,
+          //     ),
+          //     ButtonInfo(
+          //       text: "ประวัติการรักษา",
+          //       icon: FontAwesomeIcons.heartbeat,
+          //     )
+          //   ],
+          // )
+
+          // Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+          //   Container(
+          //     padding: EdgeInsets.fromLTRB(0, 22, 0, 0),
+          //     height: 120,
+          //     width: 150,
+          //     decoration: BoxDecoration(
+          //       borderRadius: BorderRadius.circular(10),
+          //       color: Colors.white,
+          //     ),
+          //     child: Column(
+          //       children: <Widget>[
+          //         ClipRRect(
+          //           child: Icon(
+          //             FontAwesomeIcons.paw,
+          //             color: Colors.red.shade400,
+          //             size: 40,
+          //           ),
+          //         ),
+          //         InkWell(
+          //             onTap: () {
+          //               Navigator.of(context).push(MaterialPageRoute(
+          //                   builder: (context) => Page_PetInformations()));
+          //             },
+          //             child: Container(
+          //               child: Container(
+          //                 padding: EdgeInsets.only(top: 15),
+          //                 child: Text(
+          //                   "ข้อมูลสัตว์เลี้ยง",
+          //                 ),
+          //               ),
+          //             )),
+          //       ],
+          //     ),
+          //   ),
+          //   Container(
+          //     padding: EdgeInsets.fromLTRB(0, 22, 0, 0),
+          //     height: 120,
+          //     width: 150,
+          //     decoration: BoxDecoration(
+          //       borderRadius: BorderRadius.circular(10),
+          //       color: Colors.white,
+          //     ),
+          //     child: Column(
+          //       children: <Widget>[
+          //         ClipRRect(
+          //           child: Icon(
+          //             FontAwesomeIcons.heartbeat,
+          //             color: Colors.red.shade400,
+          //             size: 40,
+          //           ),
+          //         ),
+          //         InkWell(
+          //             onTap: () {
+          //               Navigator.of(context).push(MaterialPageRoute(
+          //                   builder: (context) => Page_PetMedical()));
+          //             },
+          //             child: Container(
+          //               child: Container(
+          //                 padding: EdgeInsets.only(top: 15),
+          //                 child: Text(
+          //                   "ประวัติการรักษา",
+          //                   style: TextStyle(
+          //                       fontSize: 14,
+          //                       color: Colors.black,
+          //                       fontWeight: FontWeight.normal,
+          //                       fontFamily: 'Mitr'),
+          //                 ),
+          //               ),
+          //             )),
+          //       ],
+          //     ),
+          //   )
+          // ]),
+
+          // SizedBox(
+          //   height: size.height * 0.01,
+          // ),
+
+          // Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+          //   Container(
+          //     padding: EdgeInsets.fromLTRB(0, 22, 0, 0),
+          //     height: 120,
+          //     width: 150,
+          //     decoration: BoxDecoration(
+          //       borderRadius: BorderRadius.circular(10),
+          //       color: Colors.white,
+          //     ),
+          //     child: Column(
+          //       children: <Widget>[
+          //         ClipRRect(
+          //           child: Icon(
+          //             FontAwesomeIcons.syringe,
+          //             color: Colors.red.shade400,
+          //             size: 40,
+          //           ),
+          //         ),
+          //         InkWell(
+          //             onTap: () {
+          //               Navigator.of(context).push(MaterialPageRoute(
+          //                   builder: (context) => Page_PetMedical()));
+          //             },
+          //             child: Container(
+          //               child: Container(
+          //                 padding: EdgeInsets.only(top: 15),
+          //                 child: Text(
+          //                   "ข้อมูลวัคซีน",
+          //                   style: TextStyle(
+          //                       fontSize: 14,
+          //                       color: Colors.black,
+          //                       fontWeight: FontWeight.normal,
+          //                       fontFamily: 'Mitr'),
+          //                 ),
+          //               ),
+          //             )),
+          //       ],
+          //     ),
+          //   ),
+          //   Container(
+          //     height: 120,
+          //     width: 150,
+          //     decoration: BoxDecoration(
+          //       borderRadius: BorderRadius.circular(10),
+          //       color: Colors.white,
+          //     ),
+          //   )
+          // ]),
 
           // Column(
           //   children: [

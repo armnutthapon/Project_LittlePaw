@@ -38,6 +38,8 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     final loginProvider = Provider.of<AuthServices>(context);
+    final registerProvider = Provider.of<AuthServices>(context);
+
     Size size = MediaQuery.of(context).size;
     return Scaffold(
         body: SafeArea(
@@ -161,7 +163,7 @@ class _LoginState extends State<Login> {
                                     if (_formkey.currentState.validate())
                                       print("Email : ${_emailController.text}");
                                     print(
-                                        "Email : ${_passwordController.text}");
+                                        "Password : ${_passwordController.text}");
                                     await loginProvider.login(
                                         _emailController.text.trim(),
                                         _passwordController.text.trim());
@@ -201,7 +203,18 @@ class _LoginState extends State<Login> {
                                       fontFamily: 'Mitr'),
                                 ),
                                 TextButton(
-                                    onPressed: () => widget.toggleScreen,
+                                    onPressed: () async {
+                                      // if (_formkey.currentState.validate())
+                                      //   print(
+                                      //       "Email : ${_emailController.text}");
+                                      // print(
+                                      //     "Email : ${_passwordController.text}");
+                                      await registerProvider.logout(
+                                          // _emailController.text.trim(),
+                                          // _passwordController.text.trim()
+                                          );
+                                    },
+                                    // onPressed: () => widget.toggleScreen,
                                     child: Text(
                                       "สมัครสมาชิก",
                                       style: TextStyle(

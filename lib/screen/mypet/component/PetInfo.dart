@@ -11,7 +11,7 @@ class PetInfo extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Container(
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(15, 2, 15, 2),
+        padding: const EdgeInsets.fromLTRB(10, 2, 10, 2),
         child: Container(
           height: 50,
           decoration: BoxDecoration(
@@ -28,6 +28,7 @@ class PetInfo extends StatelessWidget {
                   children: [
                     Text(
                       text,
+                      overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 14,
@@ -38,6 +39,7 @@ class PetInfo extends StatelessWidget {
                       children: [
                         Text(
                           textdetail,
+                          overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                               color: Colors.red.shade400,
                               fontSize: 14,

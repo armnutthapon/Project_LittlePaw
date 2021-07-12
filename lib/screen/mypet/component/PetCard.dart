@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../../component/PetInfo.dart';
 import 'package:little_paw/screen/mypet/component/PetCardInfo.dart';
+import '../../../component/PetInfo.dart';
 // import 'package:persistent_bottom/component/PetInfoCard.dart';
 // import 'package:persistent_bottom/component/looo.dart';
 
