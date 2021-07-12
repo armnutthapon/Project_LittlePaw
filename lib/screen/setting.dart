@@ -17,7 +17,7 @@ class _SettingState extends State<Setting> {
     final loginProvider = Provider.of<AuthServices>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Homepage"),
+        title: Text("Log Out"),
         actions: [
           IconButton(
               onPressed: () async => await loginProvider.logout(),

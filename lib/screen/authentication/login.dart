@@ -201,7 +201,7 @@ class _LoginState extends State<Login> {
                                       fontFamily: 'Mitr'),
                                 ),
                                 TextButton(
-                                    onPressed: () => widget.toggleScreen,
+                                    onPressed: () => widget.toggleScreen(),
                                     child: Text(
                                       "สมัครสมาชิก",
                                       style: TextStyle(

@@ -1,28 +1,22 @@
 import 'package:flutter/material.dart';
 
-class notifications extends StatefulWidget {
-  static const routeName = '/notifications';
+class NotificationFeed extends StatefulWidget {
+  static const routeName = '/notification';
+
+  const NotificationFeed({Key key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() {
-    return _notificationsState();
-  }
+  _NotificationFeedState createState() => _NotificationFeedState();
 }
 
-class _notificationsState extends State<notifications> {
+class _NotificationFeedState extends State<NotificationFeed> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Notifications'),
+        backgroundColor: Colors.green,
+        title: Text("Notifications Feed"),
       ),
-      body: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text('notifications Screen'),
-        ],
-      )),
     );
   }
 }

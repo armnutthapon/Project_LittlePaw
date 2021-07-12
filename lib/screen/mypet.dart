@@ -24,7 +24,7 @@ class _MyPetState extends State<MyPet> {
       appBar: AppBar(
         title: Text("สัตว์เลี้ยงของฉัน",
             style: TextStyle(
-                fontSize: 22,
+                fontSize: 16,
                 color: Colors.black,
                 fontWeight: FontWeight.w500,
                 fontFamily: 'Mitr')),

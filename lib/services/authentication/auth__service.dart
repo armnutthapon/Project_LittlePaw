@@ -15,6 +15,7 @@ class AuthServices with ChangeNotifier {
     try {
       GoogleAuthProvider();
       setLoading(true);
+
       UserCredential authResult = await firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password);
       User user = authResult.user;

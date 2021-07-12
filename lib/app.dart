@@ -12,13 +12,19 @@ class App extends StatefulWidget {
 
 class AppState extends State<App> {
   String _currentPage = "MyPet";
-  List<String> pageKeys = ["Page1", "Clinic", "MyPet", "Page4", "Page5"];
+  List<String> pageKeys = [
+    "Newfeed",
+    "Clinic",
+    "MyPet",
+    "NotificationFeed",
+    "Setting"
+  ];
   Map<String, GlobalKey<NavigatorState>> _navigatorKeys = {
-    "Page1": GlobalKey<NavigatorState>(),
+    "Newfeed": GlobalKey<NavigatorState>(),
     "Clinic": GlobalKey<NavigatorState>(),
     "MyPet": GlobalKey<NavigatorState>(),
-    "Page4": GlobalKey<NavigatorState>(),
-    "Page5": GlobalKey<NavigatorState>(),
+    "NotificationFeed": GlobalKey<NavigatorState>(),
+    "Setting": GlobalKey<NavigatorState>(),
   };
   int _selectedIndex = 2;
 
@@ -51,11 +57,11 @@ class AppState extends State<App> {
       },
       child: Scaffold(
         body: Stack(children: <Widget>[
-          _buildOffstageNavigator("Page1"),
+          _buildOffstageNavigator("Newfeed"),
           _buildOffstageNavigator("Clinic"),
           _buildOffstageNavigator("MyPet"),
-          _buildOffstageNavigator("Page4"),
-          _buildOffstageNavigator("Page5"),
+          _buildOffstageNavigator("NotificationFeed"),
+          _buildOffstageNavigator("Setting"),
         ]),
         bottomNavigationBar: BottomNavigationBar(
           selectedItemColor: Colors.redAccent,
