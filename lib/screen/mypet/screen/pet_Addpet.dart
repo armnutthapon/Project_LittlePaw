@@ -136,111 +136,209 @@ class _AddpetState extends State<Addpet> {
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 5, bottom: 5),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.grey.shade500,
-                                    spreadRadius: 0.05,
-                                    offset: Offset(2, 3)),
-                              ],
-                              border: Border.all(
-                                  width: 1.0, color: Colors.grey[200]),
-                            ),
-                            child: Container(
-                                constraints: BoxConstraints(
-                                  maxWidth: double.infinity,
+                      child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.grey.shade500,
+                                  spreadRadius: 0.05,
+                                  offset: Offset(2, 3)),
+                            ],
+                            border:
+                                Border.all(width: 1.0, color: Colors.grey[200]),
+                          ),
+                          child: Container(
+                              height: size.height * 0.08,
+                              padding: EdgeInsets.only(left: 20, right: 20),
+                              child: DropdownButtonHideUnderline(
+                                child: DropdownButton(
+                                  hint: Text(
+                                    "เพศ",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w300,
+                                        fontFamily: 'Mitr'),
+                                  ),
+                                  dropdownColor: Colors.white,
+                                  value: valueGender,
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w400,
+                                      fontFamily: 'Mitr'),
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      valueGender = newValue;
+                                      newValue = _addPetBreed;
+                                    });
+                                  },
+                                  items: listGender.map((valueItem) {
+                                    return DropdownMenuItem(
+                                        value: valueItem,
+                                        child: Text(
+                                          valueItem,
+                                        ));
+                                  }).toList(),
                                 ),
-                                height: size.height * 0.07,
-                                padding: EdgeInsets.only(left: 20, right: 20),
-                                child: DropdownButtonHideUnderline(
-                                  child: DropdownButton(
-                                    hint: Text(
-                                      "เพศ",
+                              ))),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 5, bottom: 5),
+                      child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.grey.shade500,
+                                  spreadRadius: 0.05,
+                                  offset: Offset(2, 3)),
+                            ],
+                            border:
+                                Border.all(width: 1.0, color: Colors.grey[200]),
+                          ),
+                          child: Container(
+                              height: size.height * 0.08,
+                              padding: EdgeInsets.only(left: 20, right: 20),
+                              child: DropdownButtonHideUnderline(
+                                child: DropdownButton(
+                                  hint: Text("ประเภท",
                                       style: TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w300,
-                                          fontFamily: 'Mitr'),
-                                    ),
-                                    dropdownColor: Colors.white,
-                                    value: valueGender,
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w400,
-                                        fontFamily: 'Mitr'),
-                                    onChanged: (newValue) {
-                                      setState(() {
-                                        valueGender = newValue;
-                                        newValue = _addPetBreed;
-                                      });
-                                    },
-                                    items: listGender.map((valueItem) {
-                                      return DropdownMenuItem(
-                                          value: valueItem,
-                                          child: Text(
-                                            valueItem,
-                                          ));
-                                    }).toList(),
-                                  ),
-                                )),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.grey.shade500,
-                                    spreadRadius: 0.05,
-                                    offset: Offset(2, 3)),
-                              ],
-                              border: Border.all(
-                                  width: 1.0, color: Colors.grey[200]),
-                            ),
-                            child: Container(
-                                height: size.height * 0.07,
-                                padding: EdgeInsets.only(left: 20, right: 20),
-                                child: DropdownButtonHideUnderline(
-                                  child: DropdownButton(
-                                    hint: Text("ประเภท",
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w300,
-                                            fontFamily: 'Mitr')),
-                                    dropdownColor: Colors.white,
-                                    value: valueCategory,
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w400,
-                                        fontFamily: 'Mitr'),
-                                    onChanged: (newValue) {
-                                      setState(() {
-                                        valueCategory = newValue;
-                                        newValue = _addPetCategory;
-                                      });
-                                    },
-                                    items: listCategory.map((valueItem) {
-                                      return DropdownMenuItem(
-                                          value: valueItem,
-                                          child: Text(
-                                            valueItem,
-                                          ));
-                                    }).toList(),
-                                  ),
-                                )),
-                          )
-                        ],
-                      ),
+                                          fontFamily: 'Mitr')),
+                                  dropdownColor: Colors.white,
+                                  value: valueCategory,
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w400,
+                                      fontFamily: 'Mitr'),
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      valueCategory = newValue;
+                                      newValue = _addPetCategory;
+                                    });
+                                  },
+                                  items: listCategory.map((valueItem) {
+                                    return DropdownMenuItem(
+                                        value: valueItem,
+                                        child: Text(
+                                          valueItem,
+                                        ));
+                                  }).toList(),
+                                ),
+                              ))),
                     ),
+                    // Padding(
+                    //   padding: EdgeInsets.only(top: 5, bottom: 5),
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    //     children: [
+                    //       Container(
+                    //         decoration: BoxDecoration(
+                    //           borderRadius:
+                    //               BorderRadius.all(Radius.circular(10)),
+                    //           color: Colors.white,
+                    //           boxShadow: [
+                    //             BoxShadow(
+                    //                 color: Colors.grey.shade500,
+                    //                 spreadRadius: 0.05,
+                    //                 offset: Offset(2, 3)),
+                    //           ],
+                    //           border: Border.all(
+                    //               width: 1.0, color: Colors.grey[200]),
+                    //         ),
+                    //         child: Container(
+                    //             constraints: BoxConstraints(
+                    //               maxWidth: double.infinity,
+                    //             ),
+                    //             height: size.height * 0.07,
+                    //             padding: EdgeInsets.only(left: 20, right: 20),
+                    //             child: DropdownButtonHideUnderline(
+                    //               child: DropdownButton(
+                    //                 hint: Text(
+                    //                   "เพศ",
+                    //                   style: TextStyle(
+                    //                       fontSize: 16,
+                    //                       fontWeight: FontWeight.w300,
+                    //                       fontFamily: 'Mitr'),
+                    //                 ),
+                    //                 dropdownColor: Colors.white,
+                    //                 value: valueGender,
+                    //                 style: TextStyle(
+                    //                     color: Colors.black,
+                    //                     fontSize: 18,
+                    //                     fontWeight: FontWeight.w400,
+                    //                     fontFamily: 'Mitr'),
+                    //                 onChanged: (newValue) {
+                    //                   setState(() {
+                    //                     valueGender = newValue;
+                    //                     newValue = _addPetBreed;
+                    //                   });
+                    //                 },
+                    //                 items: listGender.map((valueItem) {
+                    //                   return DropdownMenuItem(
+                    //                       value: valueItem,
+                    //                       child: Text(
+                    //                         valueItem,
+                    //                       ));
+                    //                 }).toList(),
+                    //               ),
+                    //             )),
+                    //       ),
+                    //       Container(
+                    //         decoration: BoxDecoration(
+                    //           borderRadius:
+                    //               BorderRadius.all(Radius.circular(10)),
+                    //           color: Colors.white,
+                    //           boxShadow: [
+                    //             BoxShadow(
+                    //                 color: Colors.grey.shade500,
+                    //                 spreadRadius: 0.05,
+                    //                 offset: Offset(2, 3)),
+                    //           ],
+                    //           border: Border.all(
+                    //               width: 1.0, color: Colors.grey[200]),
+                    //         ),
+                    //         child: Container(
+                    //             height: size.height * 0.07,
+                    //             padding: EdgeInsets.only(left: 20, right: 20),
+                    //             child: DropdownButtonHideUnderline(
+                    //               child: DropdownButton(
+                    //                 hint: Text("ประเภท",
+                    //                     style: TextStyle(
+                    //                         fontSize: 16,
+                    //                         fontWeight: FontWeight.w300,
+                    //                         fontFamily: 'Mitr')),
+                    //                 dropdownColor: Colors.white,
+                    //                 value: valueCategory,
+                    //                 style: TextStyle(
+                    //                     color: Colors.black,
+                    //                     fontSize: 18,
+                    //                     fontWeight: FontWeight.w400,
+                    //                     fontFamily: 'Mitr'),
+                    //                 onChanged: (newValue) {
+                    //                   setState(() {
+                    //                     valueCategory = newValue;
+                    //                     newValue = _addPetCategory;
+                    //                   });
+                    //                 },
+                    //                 items: listCategory.map((valueItem) {
+                    //                   return DropdownMenuItem(
+                    //                       value: valueItem,
+                    //                       child: Text(
+                    //                         valueItem,
+                    //                       ));
+                    //                 }).toList(),
+                    //               ),
+                    //             )),
+                    //       )
+                    //     ],
+                    //   ),
+                    // ),
                     Padding(
                       padding: EdgeInsets.only(top: 5, bottom: 5),
                       child: Container(
