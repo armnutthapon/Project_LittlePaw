@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class AuthServices with ChangeNotifier {
   bool _isLoading = false;
@@ -13,9 +15,6 @@ class AuthServices with ChangeNotifier {
 
   Future register(String email, String password) async {
     try {
-      GoogleAuthProvider();
-      setLoading(true);
-
       UserCredential authResult = await firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password);
       User user = authResult.user;
@@ -35,6 +34,8 @@ class AuthServices with ChangeNotifier {
   Future login(String email, String password) async {
     setLoading(true);
     try {
+      GoogleAuthProvider();
+      setLoading(true);
       UserCredential authResult = await firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
       User user = authResult.user;
@@ -43,10 +44,14 @@ class AuthServices with ChangeNotifier {
     } on SocketException {
       setMessage("No internet");
       setLoading(false);
-    } catch (e) {
-      setLoading(false);
-      setMessage("Error");
-    }
+    } on FirebaseAuthException catch (e) {
+      print('Failed with error code: ${e.code}');
+      print(e.message);
+      Wrong();
+    } on PlatformException catch (e) {
+      print(e.toString());
+      return e.code;
+    } catch (e) {}
     notifyListeners();
   }
 
@@ -66,4 +71,17 @@ class AuthServices with ChangeNotifier {
 
   Stream<User> get user =>
       firebaseAuth.authStateChanges().map((event) => event);
+}
+
+class Wrong extends StatelessWidget {
+  const Wrong({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Row(
+        children: [Text("data")],
+      ),
+    );
+  }
 }

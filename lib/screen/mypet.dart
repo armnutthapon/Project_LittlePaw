@@ -40,7 +40,7 @@ class _MyPetState extends State<MyPet> {
               tooltip: 'เพิ่มสัตว์เลี้ยง',
               onPressed: () {
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => Page_AddPet()));
+                    MaterialPageRoute(builder: (context) => Page_Addpet()));
                 setState(() {});
               },
             ),

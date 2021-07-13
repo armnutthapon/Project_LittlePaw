@@ -27,6 +27,7 @@ class _MyResetPasswordPageState extends State<MyResetPasswordPage> {
 
     return Scaffold(
         key: scaffoldKey,
+        backgroundColor: Colors.red.shade300,
         body: SafeArea(
           child: Form(
             key: _formkey,
@@ -142,7 +143,9 @@ class _MyResetPasswordPageState extends State<MyResetPasswordPage> {
                             color: Colors.white,
                             boxShadow: [
                               BoxShadow(
-                                  color: Colors.grey.shade200, spreadRadius: 3),
+                                  color: Colors.black,
+                                  spreadRadius: 3,
+                                  offset: Offset(10, 10)),
                             ],
                           ),
                         ),

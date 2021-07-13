@@ -146,6 +146,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "grouped_checkbox",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/grouped_checkbox-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.1"
+    },
+    {
       "name": "http_parser",
       "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/http_parser-4.0.0",
       "packageUri": "lib/",
@@ -290,7 +296,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-07-10T19:09:08.174167Z",
+  "generated": "2021-07-13T11:01:07.102496Z",
   "generator": "pub",
   "generatorVersion": "2.14.0-258.0.dev"
 }

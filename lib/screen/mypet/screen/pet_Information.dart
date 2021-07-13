@@ -92,68 +92,6 @@ class _petInformationState extends State<petInformation> {
   }
 }
 
-// Container(
-//   margin: EdgeInsets.only(
-//     top: 10,
-//   ),
-//   child: Row(
-//     mainAxisAlignment: MainAxisAlignment.center,
-//     children: [
-//       Container(
-//         padding: EdgeInsets.only(bottom: 10, top: 50),
-//         child: ClipRRect(
-//           borderRadius: BorderRadius.circular(10),
-//           child: Image.asset(
-//             'assets/images/1.jpg',
-//             height: 140,
-//             width: 140,
-//             fit: BoxFit.fill,
-//           ),
-//         ),
-//       ),
-//     ],
-//   ),
-// )
-// Expanded(
-//   child: Container(
-//       child: ListView(
-//     children: [
-//       TextInfo(
-//         text: "ชื่อ",
-//         textdetail: "ปีโป้",
-//       ),
-//       TextInfo(
-//         text: "ประเภท",
-//         textdetail: "สุนัข",
-//       ),
-//       TextInfo(
-//         text: "เพศ",
-//         textdetail: "ผู้",
-//       ),
-//       TextInfo(
-//         text: "สี",
-//         textdetail: "น้ำตาล-ขาว",
-//       ),
-//       TextInfo(
-//         text: "สายพันธุ์",
-//         textdetail: "บางแก้ว",
-//       ),
-//       TextInfo(
-//         text: "ลักษณะเฉพาะ",
-//         textdetail: "-",
-//       ),
-//       TextInfo(
-//         text: "อายุ",
-//         textdetail: "1 ปี",
-//       ),
-//       TextInfo(
-//         text: "ทำหมัน",
-//         textdetail: "ใช่",
-//       )
-//     ],
-//   )),
-// )
-
 class showimage extends StatefulWidget {
   showimage({Key key}) : super(key: key);
 
