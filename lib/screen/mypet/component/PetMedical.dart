@@ -85,7 +85,7 @@ class PetMedical extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Card(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(15, 2, 15, 2),
         child: Align(

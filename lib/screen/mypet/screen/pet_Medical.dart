@@ -87,6 +87,8 @@ class ShowMedicalDetail extends StatefulWidget {
 class _ShowMedicalDetailState extends State<ShowMedicalDetail> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return ListView.builder(
         itemCount: 5,
         itemBuilder: (context, index) {
@@ -123,21 +125,6 @@ class _ShowMedicalDetailState extends State<ShowMedicalDetail> {
                 Expanded(
                     child: Container(
                         margin: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
-                            border:
-                                Border.all(width: 1.0, color: Colors.grey[200])
-
-                            // // boxShadow: [
-                            // //   BoxShadow(
-                            // //     color: Colors.grey.withOpacity(0.4),
-                            // //     spreadRadius: 5,
-                            // //     blurRadius: 7,
-                            // //     // changes position of shadow
-                            // //   ),
-                            // ],
-                            ),
                         height: 140,
                         child: Padding(
                           padding: EdgeInsets.fromLTRB(10, 15, 15, 10),
