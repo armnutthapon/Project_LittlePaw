@@ -20,6 +20,14 @@ class _RegisterState extends State<Register> {
   var _confirmPasswordController = TextEditingController();
   final _formkey = GlobalKey<FormState>();
 
+  bool _obscureText = true;
+
+  void _toggle() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
+
   @override
   void initState() {
     _emailController = TextEditingController();
@@ -116,10 +124,20 @@ class _RegisterState extends State<Register> {
                                         fontSize: 18,
                                         fontWeight: FontWeight.w400,
                                         fontFamily: 'Mitr'),
-                                    obscureText: true,
+                                    obscureText: _obscureText,
                                     decoration: InputDecoration(
                                       icon: Icon(
                                         FontAwesomeIcons.key,
+                                      ),
+                                      suffixIcon: InkWell(
+                                        onTap: _toggle,
+                                        child: Icon(
+                                          _obscureText
+                                              ? FontAwesomeIcons.eyeSlash
+                                              : FontAwesomeIcons.eye,
+                                          size: 15.0,
+                                          color: Colors.black,
+                                        ),
                                       ),
                                       labelText: 'รหัสผ่าน',
                                       labelStyle: TextStyle(
@@ -143,10 +161,20 @@ class _RegisterState extends State<Register> {
                                         fontSize: 18,
                                         fontWeight: FontWeight.w400,
                                         fontFamily: 'Mitr'),
-                                    obscureText: true,
+                                    obscureText: _obscureText,
                                     decoration: InputDecoration(
                                       icon: Icon(
                                         FontAwesomeIcons.key,
+                                      ),
+                                      suffixIcon: InkWell(
+                                        onTap: _toggle,
+                                        child: Icon(
+                                          _obscureText
+                                              ? FontAwesomeIcons.eyeSlash
+                                              : FontAwesomeIcons.eye,
+                                          size: 15.0,
+                                          color: Colors.black,
+                                        ),
                                       ),
                                       labelText: 'ยืนยันรหัสผ่าน',
                                       labelStyle: TextStyle(
@@ -196,7 +224,8 @@ class _RegisterState extends State<Register> {
                                               ? CircularProgressIndicator(
                                                   valueColor:
                                                       new AlwaysStoppedAnimation<
-                                                          Color>(Colors.white),
+                                                              Color>(
+                                                          Colors.red.shade300),
                                                 )
                                               : Text(
                                                   'สมัครสมาชิก',

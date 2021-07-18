@@ -22,6 +22,14 @@ class _LoginState extends State<Login> {
   var _passwordController = TextEditingController();
   final _formkey = GlobalKey<FormState>();
 
+  bool _obscureText = true;
+
+  void _toggle() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
+
   @override
   void initState() {
     _emailController = TextEditingController();
@@ -41,7 +49,7 @@ class _LoginState extends State<Login> {
     final loginProvider = Provider.of<AuthServices>(context);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-        backgroundColor: Colors.red.shade300,
+        backgroundColor: Colors.red.shade200,
         body: SafeArea(
           child: Form(
             key: _formkey,
@@ -113,10 +121,20 @@ class _LoginState extends State<Login> {
                                       fontSize: 18,
                                       fontWeight: FontWeight.w400,
                                       fontFamily: 'Mitr'),
-                                  obscureText: true,
+                                  obscureText: _obscureText,
                                   decoration: InputDecoration(
                                     icon: Icon(
                                       FontAwesomeIcons.key,
+                                    ),
+                                    suffixIcon: InkWell(
+                                      onTap: _toggle,
+                                      child: Icon(
+                                        _obscureText
+                                            ? FontAwesomeIcons.eyeSlash
+                                            : FontAwesomeIcons.eye,
+                                        size: 15.0,
+                                        color: Colors.black,
+                                      ),
                                     ),
                                     labelText: 'รหัสผ่าน',
                                     labelStyle: TextStyle(
@@ -181,7 +199,8 @@ class _LoginState extends State<Login> {
                                             ? CircularProgressIndicator(
                                                 valueColor:
                                                     new AlwaysStoppedAnimation<
-                                                        Color>(Colors.white),
+                                                            Color>(
+                                                        Colors.red.shade300),
                                               )
                                             : Text(
                                                 'เข้าสู่ระบบ',
