@@ -49,248 +49,282 @@ class _LoginState extends State<Login> {
     final loginProvider = Provider.of<AuthServices>(context);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-        backgroundColor: Colors.red.shade200,
-        body: SafeArea(
-          child: Form(
-            key: _formkey,
-            child: SingleChildScrollView(
-              child: Container(
-                padding: EdgeInsets.all(15),
-                child: Center(
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: size.height * 0.03,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+        backgroundColor: Colors.red.shade400,
+        body: Stack(
+          children: [
+            ClipPath(
+                clipper: MyClipper(),
+                child: Container(
+                  height: 450,
+                  color: Colors.white,
+                )),
+            SafeArea(
+              child: Form(
+                key: _formkey,
+                child: SingleChildScrollView(
+                  child: Container(
+                    padding: EdgeInsets.all(15),
+                    child: Center(
+                      child: Column(
                         children: [
-                          ClipOval(
-                            child: Image.asset(
-                              './assets/images/logo.png',
-                              height: 120.0,
-                              width: 120.0,
-                              fit: BoxFit.cover,
+                          SizedBox(
+                            height: size.height * 0.03,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ClipOval(
+                                child: Image.asset(
+                                  './assets/images/logo.png',
+                                  height: 120.0,
+                                  width: 120.0,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Card(
+                            margin: EdgeInsets.fromLTRB(30, 15, 30, 15),
+                            child: Padding(
+                              padding: EdgeInsets.all(30),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text("เข้าสู่ระบบ",
+                                          style: TextStyle(
+                                              fontSize: 22,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w500,
+                                              fontFamily: 'Mitr')),
+                                    ],
+                                  ),
+                                  Column(children: [
+                                    TextFormField(
+                                      controller: _emailController,
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: 'Mitr'),
+                                      decoration: InputDecoration(
+                                        icon: Icon(
+                                          FontAwesomeIcons.envelope,
+                                        ),
+                                        labelText: 'อีเมล',
+                                        labelStyle: TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w400,
+                                            fontFamily: 'Mitr'),
+                                      ),
+                                      validator: (val) => val.isNotEmpty
+                                          ? null
+                                          : "กรุณาใส่อีเมล",
+                                    ),
+                                    TextFormField(
+                                      controller: _passwordController,
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: 'Mitr'),
+                                      obscureText: _obscureText,
+                                      decoration: InputDecoration(
+                                        icon: Icon(
+                                          FontAwesomeIcons.key,
+                                        ),
+                                        suffixIcon: InkWell(
+                                          onTap: _toggle,
+                                          child: Icon(
+                                            _obscureText
+                                                ? FontAwesomeIcons.eyeSlash
+                                                : FontAwesomeIcons.eye,
+                                            size: 15.0,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        labelText: 'รหัสผ่าน',
+                                        labelStyle: TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w400,
+                                            fontFamily: 'Mitr'),
+                                      ),
+                                      // The validator receives the text that the user has entered.
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'กรุณาใส่รหัสผ่าน';
+                                        }
+                                        return null;
+                                      },
+                                    ),
+                                  ]),
+                                  Container(
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        InkWell(
+                                            child: Container(
+                                              margin: EdgeInsets.only(top: 10),
+                                              child: Text(
+                                                "ลืมรหัสผ่าน ?",
+                                                style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.w400,
+                                                    fontFamily: 'Mitr'),
+                                              ),
+                                            ),
+                                            onTap: () =>
+                                                navigateToResetPasswordPage(
+                                                    context))
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.only(top: 10),
+                                    child: Column(
+                                      children: [
+                                        MaterialButton(
+                                          height: 40.0,
+                                          minWidth: loginProvider.isLoading
+                                              ? null
+                                              : double.infinity,
+                                          onPressed: () async {
+                                            if (_formkey.currentState
+                                                .validate())
+                                              print(
+                                                  "Email : ${_emailController.text}");
+                                            print(
+                                                "Password : ${_passwordController.text}");
+
+                                            await loginProvider.login(
+                                                _emailController.text.trim(),
+                                                _passwordController.text
+                                                    .trim());
+                                          },
+                                          child: Center(
+                                            child: loginProvider.isLoading
+                                                ? CircularProgressIndicator(
+                                                    valueColor:
+                                                        new AlwaysStoppedAnimation<
+                                                                Color>(
+                                                            Colors
+                                                                .red.shade300),
+                                                  )
+                                                : Text(
+                                                    'เข้าสู่ระบบ',
+                                                    style: TextStyle(
+                                                        fontSize: 20,
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily: 'Mitr'),
+                                                  ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.red.shade400,
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                  ),
+                                  GoogleSiginBtn(),
+                                  Container(
+                                    margin: EdgeInsets.only(top: 10),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "ไม่มีบัญชีผู้ใช้ ?  ",
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w300,
+                                              fontFamily: 'Mitr'),
+                                        ),
+                                        TextButton(
+                                            onPressed: () =>
+                                                widget.toggleScreen(),
+                                            child: Text(
+                                              "สมัครสมาชิก",
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  color: Colors.red.shade500,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily: 'Mitr'),
+                                            ))
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(height: 20),
+                                  if (loginProvider.errorMessage != null)
+                                    Container(
+                                      color: Colors.amber,
+                                      child: ListTile(
+                                        title: Text(loginProvider.errorMessage,
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w400,
+                                                fontFamily: 'Mitr')),
+                                        leading: Icon(
+                                          Icons.error,
+                                        ),
+                                        trailing: IconButton(
+                                            onPressed: () {
+                                              loginProvider.setMessage(null);
+                                              loginProvider.setLoading(false);
+                                            },
+                                            icon: Icon(Icons.close)),
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            ),
+                            elevation: 10,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.0),
                             ),
                           ),
                         ],
                       ),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(30, 15, 30, 15),
-                        child: Padding(
-                          padding: EdgeInsets.all(30),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text("เข้าสู่ระบบ",
-                                      style: TextStyle(
-                                          fontSize: 22,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w500,
-                                          fontFamily: 'Mitr')),
-                                ],
-                              ),
-                              Column(children: [
-                                TextFormField(
-                                  controller: _emailController,
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w400,
-                                      fontFamily: 'Mitr'),
-                                  decoration: InputDecoration(
-                                    icon: Icon(
-                                      FontAwesomeIcons.envelope,
-                                    ),
-                                    labelText: 'อีเมล',
-                                    labelStyle: TextStyle(
-                                        fontSize: 18,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w400,
-                                        fontFamily: 'Mitr'),
-                                  ),
-                                  validator: (val) =>
-                                      val.isNotEmpty ? null : "กรุณาใส่อีเมล",
-                                ),
-                                TextFormField(
-                                  controller: _passwordController,
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w400,
-                                      fontFamily: 'Mitr'),
-                                  obscureText: _obscureText,
-                                  decoration: InputDecoration(
-                                    icon: Icon(
-                                      FontAwesomeIcons.key,
-                                    ),
-                                    suffixIcon: InkWell(
-                                      onTap: _toggle,
-                                      child: Icon(
-                                        _obscureText
-                                            ? FontAwesomeIcons.eyeSlash
-                                            : FontAwesomeIcons.eye,
-                                        size: 15.0,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                    labelText: 'รหัสผ่าน',
-                                    labelStyle: TextStyle(
-                                        fontSize: 18,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w400,
-                                        fontFamily: 'Mitr'),
-                                  ),
-                                  // The validator receives the text that the user has entered.
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'กรุณาใส่รหัสผ่าน';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                              ]),
-                              Container(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    InkWell(
-                                        child: Container(
-                                          margin: EdgeInsets.only(top: 10),
-                                          child: Text(
-                                            "ลืมรหัสผ่าน ?",
-                                            style: TextStyle(
-                                                fontSize: 14,
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w400,
-                                                fontFamily: 'Mitr'),
-                                          ),
-                                        ),
-                                        onTap: () =>
-                                            navigateToResetPasswordPage(
-                                                context))
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(top: 10),
-                                child: Column(
-                                  children: [
-                                    MaterialButton(
-                                      height: 40.0,
-                                      minWidth: loginProvider.isLoading
-                                          ? null
-                                          : double.infinity,
-                                      onPressed: () async {
-                                        if (_formkey.currentState.validate())
-                                          print(
-                                              "Email : ${_emailController.text}");
-                                        print(
-                                            "Password : ${_passwordController.text}");
-
-                                        await loginProvider.login(
-                                            _emailController.text.trim(),
-                                            _passwordController.text.trim());
-                                      },
-                                      child: Center(
-                                        child: loginProvider.isLoading
-                                            ? CircularProgressIndicator(
-                                                valueColor:
-                                                    new AlwaysStoppedAnimation<
-                                                            Color>(
-                                                        Colors.red.shade300),
-                                              )
-                                            : Text(
-                                                'เข้าสู่ระบบ',
-                                                style: TextStyle(
-                                                    fontSize: 20,
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.w500,
-                                                    fontFamily: 'Mitr'),
-                                              ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                decoration: BoxDecoration(
-                                  color: Colors.red.shade400,
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                              ),
-                              GoogleSiginBtn(),
-                              Container(
-                                margin: EdgeInsets.only(top: 10),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      "ไม่มีบัญชีผู้ใช้ ?  ",
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w300,
-                                          fontFamily: 'Mitr'),
-                                    ),
-                                    TextButton(
-                                        onPressed: () => widget.toggleScreen(),
-                                        child: Text(
-                                          "สมัครสมาชิก",
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              color: Colors.red.shade500,
-                                              fontWeight: FontWeight.w500,
-                                              fontFamily: 'Mitr'),
-                                        ))
-                                  ],
-                                ),
-                              ),
-                              SizedBox(height: 20),
-                              if (loginProvider.errorMessage != null)
-                                Container(
-                                  color: Colors.amber,
-                                  child: ListTile(
-                                    title: Text(loginProvider.errorMessage,
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w400,
-                                            fontFamily: 'Mitr')),
-                                    leading: Icon(
-                                      Icons.error,
-                                    ),
-                                    trailing: IconButton(
-                                        onPressed: () {
-                                          loginProvider.setMessage(null);
-                                          loginProvider.setLoading(false);
-                                        },
-                                        icon: Icon(Icons.close)),
-                                  ),
-                                ),
-                            ],
-                          ),
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.grey.shade200, spreadRadius: 3),
-                          ],
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ),
+            )
+          ],
         ));
   }
 
   navigateToResetPasswordPage(BuildContext context) {
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => MyResetPasswordPage()));
+  }
+}
+
+class MyClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    Path path = Path();
+    path.lineTo(0, size.height - 50);
+    var controllPoint = Offset(50, size.height);
+    var endPoint = Offset(size.width / 2, size.height);
+    path.quadraticBezierTo(
+        controllPoint.dx, controllPoint.dy, endPoint.dx, endPoint.dy);
+    path.lineTo(size.width, size.height);
+    path.lineTo(size.width, 0);
+
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
+    return false;
   }
 }

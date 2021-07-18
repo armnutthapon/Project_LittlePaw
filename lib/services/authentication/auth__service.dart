@@ -17,6 +17,11 @@ class AuthServices with ChangeNotifier {
   bool get isLoadingRegist => _isLoadingRegist;
   String get errorMessageRegist => _errorMessageRegist;
 
+  bool _isLoadingReset = false;
+  String _errorMessageReset;
+  bool get isLoadingReset => _isLoadingReset;
+  String get errorMessageReset => _errorMessageReset;
+
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   Future register(String email, String password) async {
@@ -81,6 +86,28 @@ class AuthServices with ChangeNotifier {
     notifyListeners();
   }
 
+  Future resetPassword(String email) async {
+    try {} on FirebaseAuthException catch (e) {
+      print('Failed with error code: ${e.code}');
+      print(e.message);
+      if (e.code == "invalid-email") {
+        print("แบบฟอร์มอีเมลไม่ถูกต้อง");
+        setMessageReset("แบบฟอร์มอีเมลไม่ถูกต้อง");
+      }
+      if (e.code == "user-not-found") {
+        print("ไม่พบบัญชีผู้ใช้");
+        setMessageReset("ไม่พบบัญชีผู้ใช้");
+      } else if (e.code == "wrong-password") {
+        print("โปรดตรวจสอบรหัสผ่าน");
+        setMessageReset("โปรดตรวจสอบรหัสผ่าน");
+      }
+      print(_errorMessage);
+    } catch (e) {
+      setLoading(false);
+      setMessage(e.message);
+    }
+  }
+
   Future logout() async {
     await firebaseAuth.signOut();
   }
@@ -102,6 +129,16 @@ class AuthServices with ChangeNotifier {
 
   void setMessageRegist(message) {
     _errorMessageRegist = message;
+    notifyListeners();
+  }
+
+  void setLoadingReset(val) {
+    _isLoading = val;
+    notifyListeners();
+  }
+
+  void setMessageReset(message) {
+    _errorMessage = message;
     notifyListeners();
   }
 

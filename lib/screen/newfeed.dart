@@ -5,34 +5,39 @@ class Newfeed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var mediaQuery = MediaQuery.of(context);
-
     return Scaffold(
-      body: CustomScrollView(
-        slivers: <Widget>[
-          SliverAppBar(
-            expandedHeight: mediaQuery.size.height / 4,
-            backgroundColor: Colors.deepOrange,
-            shape: RoundedRectangleBorder(
-                borderRadius:
-                    BorderRadius.only(bottomRight: Radius.circular(80))),
-          ),
-          SliverList(
-            delegate: SliverChildListDelegate(
-              [
-                Container(
-                  height: mediaQuery.size.height,
-                  decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius:
-                          BorderRadius.only(topLeft: Radius.circular(80))),
-                  child: Center(child: Text('data')),
-                )
-              ],
-            ),
+      backgroundColor: Colors.white,
+      body: Stack(
+        children: [
+          ClipPath(
+              clipper: MyClipper(),
+              child: Container(
+                color: Colors.red.shade400,
+              )),
+          Container(
+            color: Colors.amber,
+            child: Text("sssss"),
           )
         ],
       ),
     );
+  }
+}
+
+class MyClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    Path path = Path();
+    path.lineTo(0, size.height);
+    path.quadraticBezierTo(
+        size.width / 2, size.height - 100, size.width, size.height);
+    path.lineTo(size.width, 0);
+
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
+    return false;
   }
 }

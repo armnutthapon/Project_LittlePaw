@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:little_paw/screen/authentication/login.dart';
+import 'package:little_paw/services/authentication/auth__service.dart';
+import 'package:provider/provider.dart';
 
 class MyResetPasswordPage extends StatefulWidget {
   MyResetPasswordPage(
@@ -20,9 +22,21 @@ class _MyResetPasswordPageState extends State<MyResetPasswordPage> {
   final _formkey = GlobalKey<FormState>();
 
   TextEditingController _resetPasswordController = TextEditingController();
+  void initState() {
+    _resetPasswordController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _resetPasswordController.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final loginProvider = Provider.of<AuthServices>(context);
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -57,7 +71,7 @@ class _MyResetPasswordPageState extends State<MyResetPasswordPage> {
                         SizedBox(
                           height: size.height * 0.1,
                         ),
-                        Container(
+                        Card(
                           margin: EdgeInsets.fromLTRB(30, 15, 30, 15),
                           child: Padding(
                             padding: EdgeInsets.all(30),
@@ -107,6 +121,8 @@ class _MyResetPasswordPageState extends State<MyResetPasswordPage> {
                                           if (_formkey.currentState
                                               .validate()) {
                                             resetPassword();
+                                            _resetPasswordController.text
+                                                .trim();
                                             Timer(Duration(seconds: 2), () {
                                               // 5 seconds over, navigate to Page2.
                                               Navigator.push(
@@ -138,15 +154,9 @@ class _MyResetPasswordPageState extends State<MyResetPasswordPage> {
                               ],
                             ),
                           ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.black,
-                                  spreadRadius: 3,
-                                  offset: Offset(10, 10)),
-                            ],
+                          elevation: 10,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0),
                           ),
                         ),
                       ],
