@@ -171,13 +171,18 @@ class _LoginState extends State<Login> {
                                               "Email : ${_emailController.text}");
                                         print(
                                             "Password : ${_passwordController.text}");
+
                                         await loginProvider.login(
                                             _emailController.text.trim(),
                                             _passwordController.text.trim());
                                       },
                                       child: Center(
                                         child: loginProvider.isLoading
-                                            ? CircularProgressIndicator()
+                                            ? CircularProgressIndicator(
+                                                valueColor:
+                                                    new AlwaysStoppedAnimation<
+                                                        Color>(Colors.white),
+                                              )
                                             : Text(
                                                 'เข้าสู่ระบบ',
                                                 style: TextStyle(
@@ -221,7 +226,29 @@ class _LoginState extends State<Login> {
                                         ))
                                   ],
                                 ),
-                              )
+                              ),
+                              SizedBox(height: 20),
+                              if (loginProvider.errorMessage != null)
+                                Container(
+                                  color: Colors.amber,
+                                  child: ListTile(
+                                    title: Text(loginProvider.errorMessage,
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w400,
+                                            fontFamily: 'Mitr')),
+                                    leading: Icon(
+                                      Icons.error,
+                                    ),
+                                    trailing: IconButton(
+                                        onPressed: () {
+                                          loginProvider.setMessage(null);
+                                          loginProvider.setLoading(false);
+                                        },
+                                        icon: Icon(Icons.close)),
+                                  ),
+                                ),
                             ],
                           ),
                         ),

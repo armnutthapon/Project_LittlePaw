@@ -67,7 +67,7 @@ class _RegisterState extends State<Register> {
                           ],
                         ),
                         SizedBox(
-                          height: size.height * 0.1,
+                          height: size.height * 0.05,
                         ),
                         Container(
                           margin: EdgeInsets.fromLTRB(30, 15, 30, 15),
@@ -174,19 +174,16 @@ class _RegisterState extends State<Register> {
                                     children: [
                                       MaterialButton(
                                         height: 40.0,
-                                        minWidth: loginProvider.isLoading
+                                        minWidth: loginProvider.isLoadingRegist
                                             ? null
                                             : double.infinity,
                                         onPressed: () async {
-                                          if (_formkey.currentState
-                                              .validate()) {
+                                          if (_formkey.currentState.validate())
                                             await loginProvider.register(
                                               _emailController.text.trim(),
                                               _passwordController.text.trim(),
                                             );
-                                          } else {
-                                            print("object");
-                                          }
+
                                           print(
                                               "Email : ${_emailController.text}");
                                           print(
@@ -195,8 +192,12 @@ class _RegisterState extends State<Register> {
                                               "Email : ${_confirmPasswordController.text}");
                                         },
                                         child: Center(
-                                          child: loginProvider.isLoading
-                                              ? CircularProgressIndicator()
+                                          child: loginProvider.isLoadingRegist
+                                              ? CircularProgressIndicator(
+                                                  valueColor:
+                                                      new AlwaysStoppedAnimation<
+                                                          Color>(Colors.white),
+                                                )
                                               : Text(
                                                   'สมัครสมาชิก',
                                                   style: TextStyle(
@@ -241,7 +242,31 @@ class _RegisterState extends State<Register> {
                                           ))
                                     ],
                                   ),
-                                )
+                                ),
+                                SizedBox(height: 20),
+                                if (loginProvider.errorMessageRegist != null)
+                                  Container(
+                                    padding: EdgeInsets.all(1),
+                                    color: Colors.amber,
+                                    child: ListTile(
+                                      title: Text(
+                                          loginProvider.errorMessageRegist,
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w400,
+                                              fontFamily: 'Mitr')),
+                                      leading: Icon(Icons.error),
+                                      trailing: IconButton(
+                                          onPressed: () {
+                                            loginProvider
+                                                .setMessageRegist(null);
+                                            loginProvider
+                                                .setLoadingRegist(false);
+                                          },
+                                          icon: Icon(Icons.close)),
+                                    ),
+                                  ),
                               ],
                             ),
                           ),
@@ -254,21 +279,6 @@ class _RegisterState extends State<Register> {
                             ],
                           ),
                         ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        if (loginProvider.errorMessage != null)
-                          Container(
-                            color: Colors.amber,
-                            child: ListTile(
-                              title: Text(loginProvider.errorMessage),
-                              leading: Icon(Icons.error),
-                              trailing: IconButton(
-                                  icon: Icon(Icons.close),
-                                  onPressed: () =>
-                                      loginProvider.setMessage(null)),
-                            ),
-                          )
                       ],
                     ),
                   ),

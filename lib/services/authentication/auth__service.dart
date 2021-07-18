@@ -11,47 +11,73 @@ class AuthServices with ChangeNotifier {
   String _errorMessage;
   bool get isLoading => _isLoading;
   String get errorMessage => _errorMessage;
+
+  bool _isLoadingRegist = false;
+  String _errorMessageRegist;
+  bool get isLoadingRegist => _isLoadingRegist;
+  String get errorMessageRegist => _errorMessageRegist;
+
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   Future register(String email, String password) async {
     try {
+      setLoadingRegist(true);
       UserCredential authResult = await firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password);
       User user = authResult.user;
-      setLoading(false);
+      setLoadingRegist(false);
       return user;
     } on SocketException {
-      setMessage("No internet");
-      setLoading(false);
+      setMessageRegist("No internet");
+      setLoadingRegist(false);
+    } on FirebaseAuthException catch (e) {
+      setLoadingRegist(true);
+      print('Failed with error code: ${e.code}');
+      print(e.message);
+      if (e.code == "invalid-email") {
+        print("แบบฟอร์มอีเมลไม่ถูกต้อง");
+        setMessageRegist("แบบฟอร์มอีเมลไม่ถูกต้อง");
+      }
+      if (e.code == "email-already-in-use") {
+        print("อีเมลนี้มีบัญชีอยู่แล้ว");
+        setMessageRegist("อีเมลนี้มีบัญชีอยู่แล้ว");
+      }
+
+      print(_errorMessage);
     } catch (e) {
       setLoading(false);
-      print(e);
-      setMessage("Error");
+      setMessage(e.message);
     }
-    notifyListeners();
   }
 
   Future login(String email, String password) async {
-    setLoading(true);
     try {
-      GoogleAuthProvider();
       setLoading(true);
+      GoogleAuthProvider();
       UserCredential authResult = await firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
       User user = authResult.user;
       setLoading(false);
       return user;
-    } on SocketException {
-      setMessage("No internet");
-      setLoading(false);
     } on FirebaseAuthException catch (e) {
       print('Failed with error code: ${e.code}');
       print(e.message);
-      Wrong();
-    } on PlatformException catch (e) {
-      print(e.toString());
-      return e.code;
-    } catch (e) {}
+      if (e.code == "invalid-email") {
+        print("แบบฟอร์มอีเมลไม่ถูกต้อง");
+        setMessage("แบบฟอร์มอีเมลไม่ถูกต้อง");
+      }
+      if (e.code == "user-not-found") {
+        print("ไม่พบบัญชีผู้ใช้");
+        setMessage("ไม่พบบัญชีผู้ใช้");
+      } else if (e.code == "wrong-password") {
+        print("โปรดตรวจสอบรหัสผ่าน");
+        setMessage("โปรดตรวจสอบรหัสผ่าน");
+      }
+      print(_errorMessage);
+    } catch (e) {
+      setLoading(false);
+      setMessage(e.message);
+    }
     notifyListeners();
   }
 
@@ -69,19 +95,16 @@ class AuthServices with ChangeNotifier {
     notifyListeners();
   }
 
+  void setLoadingRegist(val) {
+    _isLoadingRegist = val;
+    notifyListeners();
+  }
+
+  void setMessageRegist(message) {
+    _errorMessageRegist = message;
+    notifyListeners();
+  }
+
   Stream<User> get user =>
       firebaseAuth.authStateChanges().map((event) => event);
-}
-
-class Wrong extends StatelessWidget {
-  const Wrong({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        children: [Text("data")],
-      ),
-    );
-  }
 }
