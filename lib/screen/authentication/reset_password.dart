@@ -41,131 +41,144 @@ class _MyResetPasswordPageState extends State<MyResetPasswordPage> {
 
     return Scaffold(
         key: scaffoldKey,
-        backgroundColor: Colors.red.shade300,
-        body: SafeArea(
-          child: Form(
-            key: _formkey,
-            child: SingleChildScrollView(
-              child: Container(
-                padding: EdgeInsets.all(15),
+        backgroundColor: Colors.red.shade400,
+        body: Stack(
+          children: [
+            ClipPath(
+                clipper: MyClipper(),
                 child: Container(
-                  child: Center(
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                  height: 450,
+                  color: Colors.white,
+                )),
+            SafeArea(
+              child: Form(
+                key: _formkey,
+                child: SingleChildScrollView(
+                  child: Container(
+                    padding: EdgeInsets.all(15),
+                    child: Container(
+                      child: Center(
+                        child: Column(
                           children: [
-                            IconButton(
-                              onPressed: () {
-                                Navigator.pop(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Login()),
-                                );
-                              },
-                              icon: Icon(Icons.arrow_back_ios,
-                                  color: Colors.black),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: size.height * 0.1,
-                        ),
-                        Card(
-                          margin: EdgeInsets.fromLTRB(30, 15, 30, 15),
-                          child: Padding(
-                            padding: EdgeInsets.all(30),
-                            child: Column(
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text("ลืมรหัสผ่าน",
-                                        style: TextStyle(
-                                            fontSize: 22,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: 'Mitr')),
-                                  ],
-                                ),
-                                Column(children: [
-                                  TextFormField(
-                                    controller: _resetPasswordController,
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w400,
-                                        fontFamily: 'Mitr'),
-                                    decoration: InputDecoration(
-                                      icon: Icon(
-                                        FontAwesomeIcons.envelope,
-                                      ),
-                                      labelText: 'อีเมล',
-                                      labelStyle: TextStyle(
-                                          fontSize: 18,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w400,
-                                          fontFamily: 'Mitr'),
-                                    ),
-                                    validator: (val) => val.isNotEmpty
-                                        ? null
-                                        : "กรุณาระบุอีเมล",
-                                  ),
-                                ]),
-                                Container(
-                                  margin: EdgeInsets.only(top: 40),
-                                  child: Column(
-                                    children: [
-                                      MaterialButton(
-                                        onPressed: () {
-                                          if (_formkey.currentState
-                                              .validate()) {
-                                            resetPassword();
-                                            _resetPasswordController.text
-                                                .trim();
-                                            Timer(Duration(seconds: 2), () {
-                                              // 5 seconds over, navigate to Page2.
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (_) => Login()));
-                                            });
-                                          }
-                                        },
-                                        height: 40.0,
-                                        child: Center(
-                                          child: Text(
-                                            'เปลี่ยนรหัสผ่าน',
-                                            style: TextStyle(
-                                                fontSize: 20,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: 'Mitr'),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Colors.red.shade400,
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
+                                IconButton(
+                                  onPressed: () {
+                                    Navigator.pop(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Login()),
+                                    );
+                                  },
+                                  icon: Icon(Icons.arrow_back_ios,
+                                      color: Colors.black),
                                 ),
                               ],
                             ),
-                          ),
-                          elevation: 10,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
+                            SizedBox(
+                              height: size.height * 0.1,
+                            ),
+                            Card(
+                              margin: EdgeInsets.fromLTRB(30, 15, 30, 15),
+                              child: Padding(
+                                padding: EdgeInsets.all(30),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text("ลืมรหัสผ่าน",
+                                            style: TextStyle(
+                                                fontSize: 22,
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: 'Mitr')),
+                                      ],
+                                    ),
+                                    Column(children: [
+                                      TextFormField(
+                                        controller: _resetPasswordController,
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w400,
+                                            fontFamily: 'Mitr'),
+                                        decoration: InputDecoration(
+                                          icon: Icon(
+                                            FontAwesomeIcons.envelope,
+                                          ),
+                                          labelText: 'อีเมล',
+                                          labelStyle: TextStyle(
+                                              fontSize: 18,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w400,
+                                              fontFamily: 'Mitr'),
+                                        ),
+                                        validator: (val) => val.isNotEmpty
+                                            ? null
+                                            : "กรุณาระบุอีเมล",
+                                      ),
+                                    ]),
+                                    Container(
+                                      margin: EdgeInsets.only(top: 40),
+                                      child: Column(
+                                        children: [
+                                          MaterialButton(
+                                            onPressed: () {
+                                              if (_formkey.currentState
+                                                  .validate()) {
+                                                resetPassword();
+                                                _resetPasswordController.text
+                                                    .trim();
+                                                Timer(Duration(seconds: 2), () {
+                                                  // 5 seconds over, navigate to Page2.
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (_) =>
+                                                              Login()));
+                                                });
+                                              }
+                                            },
+                                            height: 40.0,
+                                            child: Center(
+                                              child: Text(
+                                                'เปลี่ยนรหัสผ่าน',
+                                                style: TextStyle(
+                                                    fontSize: 20,
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.w500,
+                                                    fontFamily: 'Mitr'),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: Colors.red.shade400,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              elevation: 10,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30.0),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ),
+            )
+          ],
         ));
   }
 
@@ -183,5 +196,26 @@ class _MyResetPasswordPageState extends State<MyResetPasswordPage> {
       ),
       backgroundColor: Colors.green[300],
     ));
+  }
+}
+
+class MyClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    Path path = Path();
+    path.lineTo(0, size.height - 50);
+    var controllPoint = Offset(50, size.height);
+    var endPoint = Offset(size.width / 2, size.height);
+    path.quadraticBezierTo(
+        controllPoint.dx, controllPoint.dy, endPoint.dx, endPoint.dy);
+    path.lineTo(size.width, size.height);
+    path.lineTo(size.width, 0);
+
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
+    return false;
   }
 }
