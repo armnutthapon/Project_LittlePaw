@@ -55,8 +55,8 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
               onPressed: () => Navigator.of(context).pop(),
             ),
             backgroundColor:
-                Colors.red.withOpacity(0.0), //You can make this transparent
-            elevation: 0.0, //No shadow
+                Colors.white.withOpacity(1.0), //You can make this transparent
+            elevation: 10.0, //No shadow
           ),
         ),
       ]),
@@ -77,7 +77,7 @@ class _petInformationState extends State<petInformation> {
     return Column(
       children: <Widget>[
         SizedBox(
-          height: size.height * 0.05,
+          height: size.height * 0.1,
         ),
         Container(
           child: Container(color: Colors.grey[100], child: showimage()),

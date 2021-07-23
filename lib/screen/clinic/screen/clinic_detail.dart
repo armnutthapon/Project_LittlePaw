@@ -26,7 +26,6 @@ class _Page_ClinicDetailState extends State<Page_ClinicDetail> {
           left: 0.0,
           right: 0.0,
           child: AppBar(
-            centerTitle: true,
             title: Text("ข้อมูลคลินิก",
                 style: TextStyle(
                     fontSize: 22,

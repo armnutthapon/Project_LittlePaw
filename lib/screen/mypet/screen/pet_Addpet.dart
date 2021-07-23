@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:little_paw/component/PetInfo.dart';
+import 'package:little_paw/screen/mypet/component/AddPet.dart';
 
 class Page_Addpet extends StatefulWidget {
   const Page_Addpet({Key key}) : super(key: key);
@@ -140,6 +141,8 @@ class _AddpetState extends State<Addpet> {
                               ),
                             )),
                       ),
+                      Addpet_Container(),
+
                       Padding(
                         padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
                         child: Container(

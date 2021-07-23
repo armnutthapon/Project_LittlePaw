@@ -28,8 +28,8 @@ class _ClinicState extends State<Clinic> {
               fontFamily: 'Mitr'),
         ),
         backgroundColor:
-            Colors.grey.shade100.withOpacity(1), //You can make this transparent
-        elevation: 0.0, //No shadow
+            Colors.white.withOpacity(1), //You can make this transparent
+        elevation: 10.0, //No shadow
       ),
     );
   }

@@ -22,21 +22,22 @@ class ClinicCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         splashColor: Colors.red.shade100,
         child: Container(
+          margin: EdgeInsets.all(10),
           child: Container(
             margin: EdgeInsets.fromLTRB(15, 2, 15, 2),
             height: 150,
             width: 250,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.white,
-                border: Border.all(width: 1.0, color: Colors.grey[200])
-                // boxShadow: [
-                //   BoxShadow(
-                //       color: Colors.black45, offset: Offset(2, 2), blurRadius: 4
-                //       // changes position of shadow
-                //       ),
-                // ],
+              borderRadius: BorderRadius.circular(10.0),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black45,
+                  offset: Offset(2, 2),
+                  blurRadius: 4,
                 ),
+              ],
+            ),
             padding: EdgeInsets.fromLTRB(10, 10, 20, 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,

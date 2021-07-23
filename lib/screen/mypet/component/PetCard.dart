@@ -23,8 +23,15 @@ class _PetCardState extends State<PetCard> {
             height: 190,
             width: 150,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(10.0),
               color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black45,
+                  offset: Offset(2, 2),
+                  blurRadius: 4,
+                ),
+              ],
             ),
             padding: EdgeInsets.all(15),
             child: Column(

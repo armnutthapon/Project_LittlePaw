@@ -39,8 +39,8 @@ class _Page_PetMedicalState extends State<Page_PetMedical> {
               onPressed: () => Navigator.of(context).pop(),
             ),
             backgroundColor:
-                Colors.blue.withOpacity(0.0), //You can make this transparent
-            elevation: 0.0, //No shadow
+                Colors.white.withOpacity(1.0), //You can make this transparent
+            elevation: 10.0, //No shadow
           ),
         ),
       ]),
@@ -63,11 +63,11 @@ class _petMedicalState extends State<petMedical> {
       child: Column(
         children: [
           SizedBox(
-            height: size.height * 0.05,
+            height: size.height * 0.1,
           ),
           Expanded(
               child: Container(
-            margin: EdgeInsets.fromLTRB(0, 40, 0, 0),
+            margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
             color: Colors.grey[100],
             child: ShowMedicalDetail(),
           )),

@@ -40,8 +40,8 @@ class _Page_FindClinicState extends State<Page_FindClinic> {
               onPressed: () => Navigator.of(context).pop(),
             ),
             backgroundColor:
-                Colors.red.withOpacity(0.0), //You can make this transparent
-            elevation: 0.0, //No shadow
+                Colors.white.withOpacity(1.0), //You can make this transparent
+            elevation: 10.0, //No shadow
           ),
         ),
       ]),
@@ -60,12 +60,11 @@ class _findClinicMainState extends State<findClinicMain> {
 
     return Container(
       alignment: Alignment.center,
-      height: size.height,
       color: Colors.grey[100],
       child: Column(
         children: [
           SizedBox(
-            height: size.height * 0.1,
+            height: size.height * 0.15,
             //  height: size.height * 0.05,
           ),
           // Container(
@@ -116,7 +115,13 @@ class _findClinicMainState extends State<findClinicMain> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: Colors.white,
-
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black45,
+                          offset: Offset(1, 1),
+                          blurRadius: 2,
+                        ),
+                      ],
                       // boxShadow: [
                       //   BoxShadow(
                       //       color: Colors.black45,
@@ -142,20 +147,18 @@ class _findClinicMainState extends State<findClinicMain> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: Colors.white,
-                      // boxShadow: [
-                      //   BoxShadow(
-                      //       color: Colors.black45,
-                      //       offset: Offset(2, 2),
-                      //       blurRadius: 4
-                      //       // changes position of shadow
-                      //       ),
-                      // ],
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.black45,
+                            offset: Offset(1, 1),
+                            blurRadius: 2),
+                      ],
                     ),
                   ))),
 
           Expanded(
               child: Container(
-            padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+            padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
             child: showclinicdetail(),
           )),
         ],

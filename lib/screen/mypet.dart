@@ -62,7 +62,6 @@ class _mainPetState extends State<mainPet> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      height: size.height,
       color: Colors.grey[100],
       child: Column(
         children: [
@@ -70,93 +69,132 @@ class _mainPetState extends State<mainPet> {
               child: ListView(
             children: [
               Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                      margin: EdgeInsets.only(
-                        top: 20,
-                      ),
                       child: Column(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.only(top: 10, bottom: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                InkWell(
-                                  splashColor: Colors.red.shade100,
-                                  onTap: () {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                Page_SelectPet()));
-                                  },
-                                  child: Container(
-                                    child: PetCard(
-                                      child: Column(
-                                        children: [PetCardInfo(petname: 'A')],
-                                      ),
-                                    ),
+                    children: [
+                      Container(
+                        padding: EdgeInsets.only(
+                          top: size.height * 0.03,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            InkWell(
+                              splashColor: Colors.red.shade100,
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => Page_SelectPet()));
+                              },
+                              child: Container(
+                                child: PetCard(
+                                  child: Column(
+                                    children: [PetCardInfo(petname: 'A')],
                                   ),
                                 ),
-                                InkWell(
-                                  splashColor: Colors.red.shade100,
-                                  onTap: () {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                Page_SelectPet()));
-                                  },
-                                  child: Container(
-                                    child: PetCard(
-                                      child: Column(
-                                        children: [],
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              ],
+                              ),
                             ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.only(top: 10, bottom: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                InkWell(
-                                  splashColor: Colors.red.shade100,
-                                  // onTap: () {
-                                  //   Navigator.of(context)
-                                  //       .push(MaterialPageRoute());
-                                  // },
-                                  child: Container(
-                                    child: PetCard(
-                                      child: Column(
-                                        children: [],
-                                      ),
-                                    ),
+                            InkWell(
+                              splashColor: Colors.red.shade100,
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => Page_SelectPet()));
+                              },
+                              child: Container(
+                                child: PetCard(
+                                  child: Column(
+                                    children: [],
                                   ),
                                 ),
-                                InkWell(
-                                  splashColor: Colors.red.shade100,
-                                  // onTap: () {
-                                  //   Navigator.of(context)
-                                  //       .push(MaterialPageRoute());
-                                  // },
-                                  child: Container(
-                                    child: PetCard(
-                                      child: Column(
-                                        children: [],
-                                      ),
-                                    ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(
+                          top: size.height * 0.03,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            InkWell(
+                              splashColor: Colors.red.shade100,
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => Page_SelectPet()));
+                              },
+                              child: Container(
+                                child: PetCard(
+                                  child: Column(
+                                    children: [PetCardInfo(petname: 'A')],
                                   ),
-                                )
-                              ],
+                                ),
+                              ),
                             ),
-                          ),
-                        ],
-                      )),
+                            InkWell(
+                              splashColor: Colors.red.shade100,
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => Page_SelectPet()));
+                              },
+                              child: Container(
+                                child: PetCard(
+                                  child: Column(
+                                    children: [],
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(
+                          top: size.height * 0.03,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            InkWell(
+                              splashColor: Colors.red.shade100,
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => Page_SelectPet()));
+                              },
+                              child: Container(
+                                child: PetCard(
+                                  child: Column(
+                                    children: [PetCardInfo(petname: 'A')],
+                                  ),
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              splashColor: Colors.red.shade100,
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => Page_SelectPet()));
+                              },
+                              child: Container(
+                                child: PetCard(
+                                  child: Column(
+                                    children: [],
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  )),
                 ],
               ),
+              SizedBox(
+                height: size.height * 0.05,
+              )
             ],
           )),
         ],

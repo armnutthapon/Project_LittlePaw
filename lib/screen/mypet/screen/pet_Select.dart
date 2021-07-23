@@ -41,8 +41,8 @@ class Page_SelectPetState extends State<Page_SelectPet> {
             ),
 
             backgroundColor:
-                Colors.white.withOpacity(0), //You can make this transparent
-            elevation: 0.0, //No shadow
+                Colors.white.withOpacity(1), //You can make this transparent
+            elevation: 10.0, //No shadow
           ),
         ),
       ]),
@@ -61,12 +61,11 @@ class _selectedPetState extends State<selectedPet> {
     Size size = MediaQuery.of(context).size;
     return Container(
       alignment: Alignment.center,
-      height: size.height,
       color: Colors.grey[100],
       child: Column(
         children: <Widget>[
           SizedBox(
-            height: size.height * 0.05,
+            height: size.height * 0.1,
           ),
           Container(
             margin: EdgeInsets.only(top: 50),
