@@ -8,6 +8,9 @@ import 'package:little_paw/screen/authentication/google_signin.dart';
 import 'package:little_paw/screen/authentication/reset_password.dart';
 import 'package:little_paw/services/authentication/auth__service.dart';
 import 'package:provider/provider.dart';
+import 'package:little_paw/screen/authentication/component/background.dart';
+
+import 'component/background.dart';
 
 class Login extends StatefulWidget {
   final Function toggleScreen;
@@ -52,12 +55,7 @@ class _LoginState extends State<Login> {
         backgroundColor: Colors.red.shade400,
         body: Stack(
           children: [
-            ClipPath(
-                clipper: MyClipper(),
-                child: Container(
-                  height: 450,
-                  color: Colors.white,
-                )),
+            BackgroundPage(),
             SafeArea(
               child: Form(
                 key: _formkey,
@@ -305,26 +303,5 @@ class _LoginState extends State<Login> {
   navigateToResetPasswordPage(BuildContext context) {
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => MyResetPasswordPage()));
-  }
-}
-
-class MyClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    Path path = Path();
-    path.lineTo(0, size.height - 50);
-    var controllPoint = Offset(50, size.height);
-    var endPoint = Offset(size.width / 2, size.height);
-    path.quadraticBezierTo(
-        controllPoint.dx, controllPoint.dy, endPoint.dx, endPoint.dy);
-    path.lineTo(size.width, size.height);
-    path.lineTo(size.width, 0);
-
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) {
-    return false;
   }
 }

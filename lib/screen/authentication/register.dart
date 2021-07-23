@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:little_paw/screen/authentication/component/background.dart';
 import 'package:little_paw/services/authentication/auth__service.dart';
 import 'package:provider/provider.dart';
 import 'package:little_paw/screen/authentication/login.dart';
@@ -54,12 +55,7 @@ class _RegisterState extends State<Register> {
         backgroundColor: Colors.red.shade400,
         body: Stack(
           children: [
-            ClipPath(
-                clipper: MyClipper(),
-                child: Container(
-                  height: 450,
-                  color: Colors.white,
-                )),
+            BackgroundPage(),
             SafeArea(
               child: Form(
                 key: _formkey,
@@ -331,26 +327,5 @@ class _RegisterState extends State<Register> {
             )
           ],
         ));
-  }
-}
-
-class MyClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    Path path = Path();
-    path.lineTo(0, size.height - 50);
-    var controllPoint = Offset(50, size.height);
-    var endPoint = Offset(size.width / 2, size.height);
-    path.quadraticBezierTo(
-        controllPoint.dx, controllPoint.dy, endPoint.dx, endPoint.dy);
-    path.lineTo(size.width, size.height);
-    path.lineTo(size.width, 0);
-
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) {
-    return false;
   }
 }
