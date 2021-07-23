@@ -5,8 +5,8 @@ class InputText extends StatelessWidget {
   final ValueChanged<String> onChanged;
   const InputText({
     Key key,
-    @required this.hintText,
-    @required this.onChanged,
+    this.hintText,
+    this.onChanged,
   }) : super(key: key);
 
   @override

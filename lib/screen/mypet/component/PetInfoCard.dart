@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 class PetInfoCard extends StatefulWidget {
   final String text;
   final String textdetail;
-  const PetInfoCard({Key key, @required this.text, this.textdetail})
-      : super(key: key);
+  const PetInfoCard({Key key, this.text, this.textdetail}) : super(key: key);
 
   @override
   _PetInfoCardState createState() => _PetInfoCardState();
@@ -20,8 +19,7 @@ class _PetInfoCardState extends State<PetInfoCard> {
 class TextInfo extends StatelessWidget {
   final String text;
   final String textdetail;
-  const TextInfo({Key key, @required this.text, this.textdetail})
-      : super(key: key);
+  const TextInfo({Key key, this.text, this.textdetail}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

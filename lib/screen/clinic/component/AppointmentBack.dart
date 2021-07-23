@@ -6,8 +6,8 @@ class Appointment_Back extends StatefulWidget {
   final Function press;
   const Appointment_Back({
     Key key,
-    @required this.text,
-    @required this.press,
+    this.text,
+    this.press,
   }) : super(key: key);
 
   @override

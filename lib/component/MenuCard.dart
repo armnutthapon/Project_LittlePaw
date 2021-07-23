@@ -5,7 +5,7 @@ class MenuCard extends StatefulWidget {
   @override
   final Widget child;
 
-  MenuCard({Key key, @required this.child}) : super(key: key);
+  MenuCard({Key key, this.child}) : super(key: key);
   _MenuCardState createState() => _MenuCardState();
 }
 

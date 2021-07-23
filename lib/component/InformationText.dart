@@ -5,7 +5,7 @@ class InformationText extends StatefulWidget {
   @override
   final Widget child;
 
-  InformationText({Key key, @required this.child}) : super(key: key);
+  InformationText({Key key, this.child}) : super(key: key);
   _InformationTextState createState() => _InformationTextState();
 }
 

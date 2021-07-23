@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 class PetInfo extends StatelessWidget {
   final String text;
   final String textdetail;
-  const PetInfo({Key key, @required this.text, this.textdetail})
-      : super(key: key);
+  const PetInfo({Key key, this.text, this.textdetail}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

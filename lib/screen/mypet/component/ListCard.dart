@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class List extends StatefulWidget {
   final String icon;
   final String text;
-  List({Key key, @required this.icon, this.text}) : super(key: key);
+  List({Key key, this.icon, this.text}) : super(key: key);
 
   @override
   _ListState createState() => _ListState();

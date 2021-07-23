@@ -80,7 +80,7 @@ class PetMedical extends StatelessWidget {
   final String clinicname;
   final String details;
   const PetMedical(
-      {Key key, @required this.date, this.title, this.clinicname, this.details})
+      {Key key, this.date, this.title, this.clinicname, this.details})
       : super(key: key);
 
   @override

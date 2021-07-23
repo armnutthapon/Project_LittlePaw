@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class PetCardInfo extends StatelessWidget {
   final String petname;
-  const PetCardInfo({Key key, @required this.petname}) : super(key: key);
+  const PetCardInfo({Key key, this.petname}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

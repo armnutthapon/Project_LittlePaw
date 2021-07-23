@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ShowAddress extends StatelessWidget {
   final String text;
-  const ShowAddress({Key key, @required this.text}) : super(key: key);
+  const ShowAddress({Key key, this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

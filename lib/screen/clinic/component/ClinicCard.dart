@@ -8,11 +8,7 @@ class ClinicCard extends StatelessWidget {
   final String location;
   final String time;
   const ClinicCard(
-      {Key key,
-      @required this.clinicname,
-      this.distance,
-      this.location,
-      this.time})
+      {Key key, this.clinicname, this.distance, this.location, this.time})
       : super(key: key);
 
   @override

@@ -7,7 +7,7 @@ import 'package:little_paw/screen/mypet/component/PetCardInfo.dart';
 
 class PetCard extends StatefulWidget {
   @override
-  const PetCard({Key key, @required this.child}) : super(key: key);
+  const PetCard({Key key, this.child}) : super(key: key);
 
   final Widget child;
   _PetCardState createState() => _PetCardState();

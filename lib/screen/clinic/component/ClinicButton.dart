@@ -7,8 +7,8 @@ class ClinicButton extends StatelessWidget {
   final Function press;
   const ClinicButton({
     Key key,
-    @required this.text,
-    @required this.press,
+    this.text,
+    this.press,
   }) : super(key: key);
 
   @override
@@ -51,8 +51,8 @@ class ClinicButtonAppointment extends StatelessWidget {
   final Function press;
   const ClinicButtonAppointment({
     Key key,
-    @required this.text,
-    @required this.press,
+    this.text,
+    this.press,
   }) : super(key: key);
 
   @override
