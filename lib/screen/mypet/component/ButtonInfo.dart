@@ -13,7 +13,7 @@ class ButtonInfo extends StatelessWidget {
         splashColor: Colors.red.shade100,
         child: Container(
           child: Container(
-            margin: EdgeInsets.fromLTRB(15, 2, 15, 2),
+            margin: EdgeInsets.fromLTRB(0, 2, 0, 2),
             height: 120,
             width: 150,
             decoration: BoxDecoration(

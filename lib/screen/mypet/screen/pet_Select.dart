@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:little_paw/screen/clinic/component/MedicalCard.dart';
+import 'package:little_paw/screen/mypet/component/guidelines.dart';
 import 'package:little_paw/screen/mypet/screen/pet_Medical.dart';
 import 'package:little_paw/screen/mypet/screen/pet_Information.dart';
 import 'package:little_paw/screen/mypet/component/ButtonInfo.dart';
@@ -138,8 +139,8 @@ class _selectedPetState extends State<selectedPet> {
                 InkWell(
                   splashColor: Colors.red.shade100,
                   onTap: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => MedicalCard()));
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => GuideLinesPage()));
                   },
                   child: Container(
                     child: ButtonInfo(

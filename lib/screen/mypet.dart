@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:little_paw/component/PetInfo.dart';
@@ -112,6 +110,44 @@ class _mainPetState extends State<mainPet> {
                                   child: Container(
                                     child: PetList(
                                       petname: "แฟนต้า",
+                                      //
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(top: 10, bottom: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                InkWell(
+                                  splashColor: Colors.red.shade100,
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                Page_SelectPet()));
+                                  },
+                                  child: Container(
+                                    child: PetList(
+                                      petname: "โอเลี้ยง",
+                                      //
+                                    ),
+                                  ),
+                                ),
+                                InkWell(
+                                  splashColor: Colors.red.shade100,
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                Page_SelectPet()));
+                                  },
+                                  child: Container(
+                                    child: PetList(
+                                      petname: "เฉาก๊วย",
                                       //
                                     ),
                                   ),

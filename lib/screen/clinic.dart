@@ -89,6 +89,7 @@ class _mainClinicState extends State<mainClinic> {
                 children: [
                   Container(
                     margin: new EdgeInsets.all(10),
+                    // child: Row(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -100,7 +101,7 @@ class _mainClinicState extends State<mainClinic> {
                           },
                           child: Container(
                             child: ButtonInfo(
-                              icon: FontAwesomeIcons.search,
+                              icon: Icons.search,
                               text: "ค้นหาคลินิค",
                             ),
                           ),

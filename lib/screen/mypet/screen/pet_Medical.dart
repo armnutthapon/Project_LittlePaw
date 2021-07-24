@@ -23,7 +23,7 @@ class _Page_PetMedicalState extends State<Page_PetMedical> {
           left: 0.0,
           right: 0.0,
           child: AppBar(
-            centerTitle: true,
+            centerTitle: false,
             title: Text(
               "ประวัติการรักษา",
               style: TextStyle(
@@ -65,7 +65,7 @@ class _petMedicalState extends State<petMedical> {
       child: Column(
         children: [
           SizedBox(
-            height: size.height * 0.05,
+            height: size.height * 0.02,
           ),
           Expanded(
               child: Container(
@@ -89,78 +89,79 @@ class ShowMedicalDetail extends StatefulWidget {
 class _ShowMedicalDetailState extends State<ShowMedicalDetail> {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: 5,
-        itemBuilder: (context, index) {
-          return Container(
-            padding: EdgeInsets.only(left: 20, right: 20),
-            child: Row(
+    return ListView.builder(itemBuilder: (context, index) {
+      return Container(
+        padding: EdgeInsets.only(left: 20, right: 20),
+        child: Row(
+          children: [
+            Column(
               children: [
-                Column(
-                  children: [
-                    Container(
-                      width: 2,
-                      height: 70,
-                      color: Colors.red.shade100,
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(left: 15, right: 15),
-                      padding: EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                          color: Colors.red.shade400,
-                          borderRadius: BorderRadius.circular(50)),
-                      child: Icon(
-                        Icons.check,
-                        size: 20,
-                        color: Colors.white,
-                      ),
-                    ),
-                    Container(
-                      width: 2,
-                      height: 70,
-                      color: Colors.red.shade100,
-                    )
-                  ],
+                Container(
+                  width: 2,
+                  height: 70,
+                  color: Colors.green.shade400,
                 ),
-                Expanded(
-                    child: Container(
-                        height: 150,
-                        child: Padding(
-                          padding: EdgeInsets.fromLTRB(10, 15, 15, 10),
-                          child: Card(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  PetMedical(
-                                    date: "AA",
-                                    title: "DD",
-                                    details: "DD",
-                                    clinicname: "SS",
-                                  ),
-                                  Text('dfsfdsf'),
-                                ],
-                              ),
-                            ),
-                          ),
-                          // child: Row(
-                          //   children: [
-                          //     Row(
-                          //       mainAxisAlignment: MainAxisAlignment.start,
-                          //     ),
-                          //     PetMedical(
-                          //       date: "02/02/2020",
-                          //       title: "ฉีดยา",
-                          //       clinicname: "คลินิคหมอตู่",
-                          //       details: "วัคซีน ABC",
-                          //     ),
-                          //   ],
-                          // ),
-                        )))
+                Container(
+                  margin: EdgeInsets.only(left: 15, right: 15),
+                  padding: EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                      color: Colors.green.shade400,
+                      borderRadius: BorderRadius.circular(50)),
+                  child: Icon(
+                    Icons.check,
+                    size: 20,
+                    color: Colors.white,
+                  ),
+                ),
+                Container(
+                  width: 2,
+                  height: 70,
+                  color: Colors.green.shade400,
+                )
               ],
             ),
-          );
-        });
+            Expanded(
+                child: Container(
+                    height: 150,
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(10, 15, 15, 10),
+                      child: Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Column(
+                                children: [
+                                  PetMedical(
+                                    title: "AA",
+                                    date: "BB",
+                                    details: "QQQ",
+                                    clinicname: "AAA",
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      // child: Row(
+                      //   children: [
+                      //     Row(
+                      //       mainAxisAlignment: MainAxisAlignment.start,
+                      //     ),
+                      //     PetMedical(
+                      //       date: "02/02/2020",
+                      //       title: "ฉีดยา",
+                      //       clinicname: "คลินิคหมอตู่",
+                      //       details: "วัคซีน ABC",
+                      //     ),
+                      //   ],
+                      // ),
+                    )))
+          ],
+        ),
+      );
+    });
   }
 }
