@@ -12,6 +12,25 @@
                         "endColumns": "65",
                         "endOffsets": "116"
                     }
+                },
+                {
+                    "source": "C:\\Users\\66910\\.gradle\\caches\\transforms-2\\files-2.1\\0475476a2ef44fe8bae231c7cece565c\\appcompat-1.0.2\\res\\values-v16\\values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "223"
+                    },
+                    "to": {
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "121",
+                        "endLines": "6",
+                        "endColumns": "12",
+                        "endOffsets": "289"
+                    }
                 }
             ]
         }

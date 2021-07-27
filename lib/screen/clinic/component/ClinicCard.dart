@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:little_paw/screen/clinic/screen/clinic_detail.dart';
 
 class ClinicCard extends StatelessWidget {
   final String clinicname;
@@ -16,10 +17,16 @@ class ClinicCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.fromLTRB(10, 2, 10, 2),
       child: InkWell(
+        onTap: () {
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => Page_ClinicDetail()));
+        },
         borderRadius: BorderRadius.circular(10),
         splashColor: Colors.red.shade100,
         child: Card(
+          elevation: 5,
           margin: EdgeInsets.all(10),
           child: Container(
             margin: EdgeInsets.fromLTRB(15, 2, 15, 2),

@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:little_paw/app.dart';
 import 'package:little_paw/screen/clinic/component/ButtonInfo.dart';
+import 'package:little_paw/screen/clinic/screen/clinic_appointments.dart';
 // import '../component/MenuCard.dart';
 // import './clinic/find_Clinic.dart';
 import 'package:little_paw/screen/clinic/screen/find_Clinic.dart';
@@ -110,7 +111,7 @@ class _mainClinicState extends State<mainClinic> {
                           splashColor: Colors.red.shade100,
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => Page_FindClinic()));
+                                builder: (context) => Page_Appointment()));
                           },
                           child: Container(
                             child: ButtonInfo(
