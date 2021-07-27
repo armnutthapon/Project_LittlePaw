@@ -6,38 +6,18 @@ class Newfeed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Stack(
-        children: [
-          ClipPath(
-              clipper: MyClipper(),
-              child: Container(
-                color: Colors.red.shade400,
-              )),
-          Container(
-            color: Colors.amber,
-            child: Text("sssss"),
-          )
-        ],
+      appBar: AppBar(
+        title: Text(
+          "ข่าว",
+          style: TextStyle(
+              fontSize: 22,
+              color: Colors.black,
+              fontWeight: FontWeight.w500,
+              fontFamily: 'Mitr'),
+        ),
+        backgroundColor: Colors.white.withOpacity(1),
+        elevation: 10.0,
       ),
     );
-  }
-}
-
-class MyClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    Path path = Path();
-    path.lineTo(0, size.height);
-    path.quadraticBezierTo(
-        size.width / 2, size.height - 100, size.width, size.height);
-    path.lineTo(size.width, 0);
-
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) {
-    return false;
   }
 }

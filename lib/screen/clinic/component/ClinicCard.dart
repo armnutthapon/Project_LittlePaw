@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:little_paw/screen/clinic/screen/clinic_detail.dart';
-import 'package:little_paw/screen/clinic/screen/filter.dart';
 
 class ClinicCard extends StatelessWidget {
   final String clinicname;
@@ -18,6 +17,7 @@ class ClinicCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.fromLTRB(10, 2, 10, 2),
       child: InkWell(
         onTap: () {
           Navigator.of(context).push(
@@ -25,22 +25,13 @@ class ClinicCard extends StatelessWidget {
         },
         borderRadius: BorderRadius.circular(10),
         splashColor: Colors.red.shade100,
-        child: Container(
+        child: Card(
+          elevation: 5,
+          margin: EdgeInsets.all(10),
           child: Container(
             margin: EdgeInsets.fromLTRB(15, 2, 15, 2),
             height: 150,
             width: 250,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.white,
-                border: Border.all(width: 1.0, color: Colors.grey[200])
-                // boxShadow: [
-                //   BoxShadow(
-                //       color: Colors.black45, offset: Offset(2, 2), blurRadius: 4
-                //       // changes position of shadow
-                //       ),
-                // ],
-                ),
             padding: EdgeInsets.fromLTRB(10, 10, 20, 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -75,7 +66,7 @@ class ClinicCard extends StatelessWidget {
                         distance,
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: 12,
+                            fontSize: 14,
                             fontWeight: FontWeight.w400,
                             fontFamily: 'Mitr'),
                       ),
@@ -83,7 +74,7 @@ class ClinicCard extends StatelessWidget {
                         location,
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: 12,
+                            fontSize: 14,
                             fontWeight: FontWeight.w400,
                             fontFamily: 'Mitr'),
                       ),
@@ -91,7 +82,7 @@ class ClinicCard extends StatelessWidget {
                         time,
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: 12,
+                            fontSize: 14,
                             fontWeight: FontWeight.w400,
                             fontFamily: 'Mitr'),
                       )

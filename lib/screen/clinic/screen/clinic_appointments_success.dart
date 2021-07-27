@@ -66,7 +66,7 @@ class AppointmentSuccess extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(height: size.height * 0.14),
+              SizedBox(height: size.height * 0.15),
               Container(
                 child: Column(
                   children: [

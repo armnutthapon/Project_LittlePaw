@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-// import 'filter.dart';
 import 'package:little_paw/screen/clinic/screen/filter.dart';
 import 'package:little_paw/screen/clinic/component/ClinicCard.dart';
 
@@ -39,9 +38,8 @@ class _Page_FindClinicState extends State<Page_FindClinic> {
               icon: new Icon(Icons.arrow_back_ios, color: Colors.black),
               onPressed: () => Navigator.of(context).pop(),
             ),
-            backgroundColor:
-                Colors.red.withOpacity(0.0), //You can make this transparent
-            elevation: 0.0, //No shadow
+            backgroundColor: Colors.white.withOpacity(1),
+            elevation: 10.0,
           ),
         ),
       ]),
@@ -65,18 +63,9 @@ class _findClinicMainState extends State<findClinicMain> {
       child: Column(
         children: [
           SizedBox(
-            height: size.height * 0.1,
+            height: size.height * 0.15,
             //  height: size.height * 0.05,
           ),
-          // Container(
-          //     child: Column(
-          //   children: [
-          //     Padding(
-          //       padding: EdgeInsets.only(left: 40),
-          //       child: ListTile(),
-          //     )
-          //   ],
-          // )),
           Container(
               // color: Colors.amber,
               padding: EdgeInsets.fromLTRB(0, 10, 10, 0),
@@ -116,6 +105,13 @@ class _findClinicMainState extends State<findClinicMain> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black45,
+                          offset: Offset(2, 2),
+                          blurRadius: 4,
+                        ),
+                      ],
 
                       // boxShadow: [
                       //   BoxShadow(
@@ -142,17 +138,15 @@ class _findClinicMainState extends State<findClinicMain> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: Colors.white,
-                      // boxShadow: [
-                      //   BoxShadow(
-                      //       color: Colors.black45,
-                      //       offset: Offset(2, 2),
-                      //       blurRadius: 4
-                      //       // changes position of shadow
-                      //       ),
-                      // ],
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black45,
+                          offset: Offset(2, 2),
+                          blurRadius: 4,
+                        ),
+                      ],
                     ),
                   ))),
-
           Expanded(
               child: Container(
             padding: EdgeInsets.fromLTRB(0, 5, 0, 0),

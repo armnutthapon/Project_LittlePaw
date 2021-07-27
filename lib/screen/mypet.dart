@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:little_paw/component/PetInfo.dart';
+import 'package:little_paw/screen/mypet/component/PetList.dart';
 import 'package:little_paw/screen/mypet/screen/pet_Addpet.dart';
 import 'package:little_paw/screen/mypet/component/PetCard.dart';
 import 'package:little_paw/screen/mypet/screen/pet_Select.dart';
+import 'package:little_paw/screen/mypet/component/PetCard.dart';
 
 // import 'mypet/component/PetCard.dart';
 // import './mypet/screen/pet_Select.dart';
@@ -33,7 +35,7 @@ class _MyPetState extends State<MyPet> {
             margin: EdgeInsets.only(right: 20),
             child: IconButton(
               icon: Icon(
-                FontAwesomeIcons.plusCircle,
+                FontAwesomeIcons.plus,
                 color: Colors.red.shade400,
                 size: 30,
               ),
@@ -41,13 +43,13 @@ class _MyPetState extends State<MyPet> {
               onPressed: () {
                 Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => Page_Addpet()));
-                setState(() {});
+                // setState(() {});
               },
             ),
           ),
         ],
-        backgroundColor: Colors.white, //You can make this transparent
-        elevation: 10.0, //No shadow
+        backgroundColor: Colors.white.withOpacity(1),
+        elevation: 10.0,
       ),
     );
   }
@@ -61,106 +63,22 @@ class mainPet extends StatefulWidget {
 class _mainPetState extends State<mainPet> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Container(
-      height: size.height,
-      color: Colors.grey[100],
-      child: Column(
-        children: [
-          Expanded(
-              child: ListView(
-            children: [
-              Column(
-                children: [
-                  Container(
-                      margin: EdgeInsets.only(
-                        top: 20,
-                      ),
-                      child: Column(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.only(top: 10, bottom: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                InkWell(
-                                  splashColor: Colors.red.shade100,
-                                  onTap: () {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                Page_SelectPet()));
-                                  },
-                                  child: Container(
-                                    child: PetCard(
-                                      child: Column(
-                                        children: [PetCardInfo(petname: 'A')],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                InkWell(
-                                  splashColor: Colors.red.shade100,
-                                  onTap: () {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                Page_SelectPet()));
-                                  },
-                                  child: Container(
-                                    child: PetCard(
-                                      child: Column(
-                                        children: [],
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.only(top: 10, bottom: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                InkWell(
-                                  splashColor: Colors.red.shade100,
-                                  // onTap: () {
-                                  //   Navigator.of(context)
-                                  //       .push(MaterialPageRoute());
-                                  // },
-                                  child: Container(
-                                    child: PetCard(
-                                      child: Column(
-                                        children: [],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                InkWell(
-                                  splashColor: Colors.red.shade100,
-                                  // onTap: () {
-                                  //   Navigator.of(context)
-                                  //       .push(MaterialPageRoute());
-                                  // },
-                                  child: Container(
-                                    child: PetCard(
-                                      child: Column(
-                                        children: [],
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
-                      )),
-                ],
-              ),
-            ],
-          )),
+    return Scaffold(
+      body: Center(
+          child: GridView.extent(
+        primary: false,
+        padding: const EdgeInsets.all(20),
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+        maxCrossAxisExtent: 200.0,
+        children: <Widget>[
+          PetList(petname: "ปีโป้"),
+          PetList(petname: "ป๊อปปี้"),
+          PetList(petname: "ซีซ่า"),
+          PetList(petname: "จัมโบ้"),
+          PetList(petname: "โอรีโอ้"),
         ],
-      ),
+      )),
     );
   }
 }

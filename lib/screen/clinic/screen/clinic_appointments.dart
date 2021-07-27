@@ -39,8 +39,8 @@ class _Page_AppointmentState extends State<Page_Appointment> {
               icon: new Icon(Icons.arrow_back_ios, color: Colors.black),
               onPressed: () => Navigator.of(context).pop(),
             ),
-            backgroundColor: Colors.white.withOpacity(1.0),
-            elevation: 10,
+            backgroundColor: Colors.white.withOpacity(1),
+            elevation: 10.0,
           ),
         ),
       ]),
@@ -60,7 +60,7 @@ class Appointment extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(height: size.height * 0.14),
+              SizedBox(height: size.height * 0.15),
               Container(
                 child: Column(
                   children: [

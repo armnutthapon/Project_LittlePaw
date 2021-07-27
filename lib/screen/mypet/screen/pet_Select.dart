@@ -33,16 +33,13 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                     color: Colors.black,
                     fontWeight: FontWeight.w500,
                     fontFamily: 'Mitr')),
-
             leading: new IconButton(
               padding: EdgeInsets.only(top: 0),
               icon: new Icon(Icons.arrow_back_ios, color: Colors.black),
               onPressed: () => Navigator.of(context).pop(),
             ),
-
-            backgroundColor:
-                Colors.white.withOpacity(0), //You can make this transparent
-            elevation: 0.0, //No shadow
+            backgroundColor: Colors.white.withOpacity(1),
+            elevation: 10.0,
           ),
         ),
       ]),
@@ -66,7 +63,7 @@ class _selectedPetState extends State<selectedPet> {
       child: Column(
         children: <Widget>[
           SizedBox(
-            height: size.height * 0.05,
+            height: size.height * 0.1,
           ),
           Container(
             margin: EdgeInsets.only(top: 50),

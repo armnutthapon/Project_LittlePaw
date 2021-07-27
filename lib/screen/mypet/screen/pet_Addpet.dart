@@ -39,8 +39,7 @@ class _Page_AddpetState extends State<Page_Addpet> {
               icon: new Icon(Icons.arrow_back_ios, color: Colors.black),
               onPressed: () => Navigator.of(context).pop(),
             ),
-            backgroundColor:
-                Colors.white.withOpacity(1), //You can make this transparent
+            backgroundColor: Colors.white.withOpacity(1),
             elevation: 10.0, //No shadow
           ),
         ),
