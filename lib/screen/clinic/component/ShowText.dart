@@ -15,13 +15,6 @@ class ShowText extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
         color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black45,
-            offset: Offset(2, 2),
-            blurRadius: 4,
-          ),
-        ],
       ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),

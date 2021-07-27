@@ -63,13 +63,16 @@ class mainPet extends StatefulWidget {
 class _mainPetState extends State<mainPet> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
+
     return Scaffold(
       body: Center(
           child: GridView.extent(
+        childAspectRatio: mediaQueryData.size.height / 900,
         primary: false,
         padding: const EdgeInsets.all(20),
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
+        crossAxisSpacing: 20,
+        mainAxisSpacing: 20,
         maxCrossAxisExtent: 200.0,
         children: <Widget>[
           PetList(petname: "ปีโป้"),
