@@ -26,7 +26,6 @@ class _Page_ClinicDetailState extends State<Page_ClinicDetail> {
           left: 0.0,
           right: 0.0,
           child: AppBar(
-            centerTitle: true,
             title: Text("ข้อมูลคลินิก",
                 style: TextStyle(
                     fontSize: 22,
@@ -93,13 +92,14 @@ class ClinicDetail extends StatelessWidget {
                       ),
                     ),
                     ShowAddress(
-                        text:
-                            "ที่อยู่ : 109 ม.8 ต.คุระ อ.คุระบุรี จ.พังงา 82150"),
-                    ShowText(text: "แพทย์ : ดร.ศรวิทย์ ทองสง"),
-                    ShowText(text: "เวลาทำการ : 08:00 - 18:00 น."),
-                    ShowText(text: "วันหยุด : ทุกวันอาทิตย์ "),
+                        topic: "ที่อยู่ : ",
+                        detail: " 109 ม.8 ต.คุระ อ.คุระบุรี จ.พังงา 82150"),
+                    ShowText(topic: "แพทย์ : ", detail: "ดร.ศรวิทย์ ทองสง"),
+                    ShowText(topic: "เวลาทำการ : ", detail: "08:00 - 18:00 น."),
+                    ShowText(topic: "วันหยุด : ", detail: "ทุกวันอาทิตย์ "),
                     ShowText(
-                      text: "เบอร์โทรศัพท์ : 0951716431",
+                      topic: "เบอร์โทรศัพท์ : ",
+                      detail: "0951716431",
                     ),
                     ClinicButton(
                       text: "จองคิว",

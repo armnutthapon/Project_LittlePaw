@@ -81,7 +81,7 @@ class AppointmentSuccess extends StatelessWidget {
                         color: Colors.white,
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black45,
+                            color: Colors.grey.withOpacity(0.5),
                             offset: Offset(2, 2),
                             blurRadius: 4,
                           ),
@@ -99,9 +99,13 @@ class AppointmentSuccess extends StatelessWidget {
                             ),
                             SizedBox(height: size.height * 0.1),
                             Text(
-                              "รอการตอบรับจากคลีนิก",
+                              "รอการตอบรับจากคลินิก",
                               style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
+                                fontFamily: 'Mitr',
+                                fontSize: 22,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ],
                         ),

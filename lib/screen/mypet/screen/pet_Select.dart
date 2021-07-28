@@ -19,10 +19,6 @@ class Page_SelectPetState extends State<Page_SelectPet> {
     return Scaffold(
       body: Stack(children: <Widget>[
         selectedPet(),
-        SingleChildScrollView(
-            child: Column(children: <Widget>[
-          Container(height: 70.0),
-        ])),
         new Positioned(
           top: 0.0,
           left: 0.0,
@@ -99,36 +95,51 @@ class _selectedPetState extends State<selectedPet> {
                       mainAxisSpacing: 25,
                       maxCrossAxisExtent: 200.0,
                       children: <Widget>[
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => Page_PetInformations()));
-                          },
-                          child: ButtonInfo(
-                            text: "ข้อมูลสัตว์เลี้ยง",
-                            icon: FontAwesomeIcons.stethoscope,
+                        Card(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          elevation: 5,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) =>
+                                      Page_PetInformations()));
+                            },
+                            child: ButtonInfo(
+                              text: "ข้อมูลสัตว์เลี้ยง",
+                              icon: FontAwesomeIcons.stethoscope,
+                            ),
                           ),
                         ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => Page_PetMedical()));
-                          },
-                          child: ButtonInfo(
-                            text: "ประวัติการรักษา",
-                            icon: FontAwesomeIcons.heartbeat,
+                        Card(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          elevation: 5,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => Page_PetMedical()));
+                            },
+                            child: ButtonInfo(
+                              text: "ประวัติการรักษา",
+                              icon: FontAwesomeIcons.heartbeat,
+                            ),
                           ),
                         ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => Page_PetMedical()));
-                          },
-                          child: ButtonInfo(
-                            text: "ข้อมูลวัคซีน",
-                            icon: FontAwesomeIcons.syringe,
-                          ),
-                        )
+                        Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            elevation: 5,
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => Page_PetMedical()));
+                              },
+                              child: ButtonInfo(
+                                text: "ข้อมูลวัคซีน",
+                                icon: FontAwesomeIcons.syringe,
+                              ),
+                            )),
                       ],
                     ))
               ],

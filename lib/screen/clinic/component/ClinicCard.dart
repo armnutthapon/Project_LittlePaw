@@ -26,7 +26,10 @@ class ClinicCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         splashColor: Colors.red.shade100,
         child: Card(
-          elevation: 5,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          elevation: 10,
           margin: EdgeInsets.all(10),
           child: Container(
             margin: EdgeInsets.fromLTRB(15, 2, 15, 2),

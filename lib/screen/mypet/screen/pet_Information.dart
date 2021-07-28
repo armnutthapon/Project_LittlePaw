@@ -13,6 +13,7 @@ class Page_PetInformations extends StatefulWidget {
 class _Page_PetInformationsState extends State<Page_PetInformations> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Stack(children: <Widget>[
         petInformation(),
@@ -44,7 +45,9 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
                     size: 30,
                   ),
                   tooltip: 'แชร์ข้อมูล',
-                  onPressed: () {},
+                  onPressed: () {
+                    shareID(context);
+                  },
                 ),
               )
             ],
@@ -60,6 +63,47 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
         ),
       ]),
     );
+  }
+
+  void shareID(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    var pid = AlertDialog(
+      actions: [
+        Container(
+          height: size.height * 0.1,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              RichText(
+                text: TextSpan(
+                  text: 'ID : ',
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w300,
+                      fontFamily: 'Mitr'),
+                  children: const <TextSpan>[
+                    TextSpan(
+                      text: 'TUU007',
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: 'Mitr'),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        )
+      ],
+    );
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return pid;
+        });
   }
 }
 

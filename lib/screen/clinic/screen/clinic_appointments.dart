@@ -49,6 +49,8 @@ class _Page_AppointmentState extends State<Page_Appointment> {
 }
 
 class Appointment extends StatelessWidget {
+  var appointment_time;
+  var appointment_symptom;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -95,10 +97,48 @@ class Appointment extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 25, right: 25),
-                      child: InputText(
-                        hintText: 'ระบุช่วงเวลา',
-                        onChanged: (String value) {},
+                      child: Container(
+                        padding: EdgeInsets.only(left: 15),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          color: Colors.white,
+                          border:
+                              Border.all(width: 1.0, color: Colors.grey[200]),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 2,
+                              offset:
+                                  Offset(2, 2), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        child: TextFormField(
+                          controller: appointment_time,
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: 'Mitr'),
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            hintText: "ระบุช่วงเวลา",
+                          ),
+                          onSaved: (String value) {},
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'กรุณาระบุช่วงเวลา';
+                            }
+                            return null;
+                          },
+                        ),
                       ),
+                      // child: InputText(
+                      //   hintText: 'ระบุช่วงเวลา',
+                      //   onChanged: (String value) {},
+                      // ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 15),
@@ -116,9 +156,43 @@ class Appointment extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 25, right: 25),
-                      child: InputText(
-                        hintText: 'ระบุอาการ',
-                        onChanged: (String value) {},
+                      child: Container(
+                        padding: EdgeInsets.only(left: 15),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          color: Colors.white,
+                          border:
+                              Border.all(width: 1.0, color: Colors.grey[200]),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 2,
+                              offset:
+                                  Offset(2, 2), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        child: TextFormField(
+                          controller: appointment_symptom,
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: 'Mitr'),
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            hintText: "ระบุอาการ",
+                          ),
+                          onSaved: (String value) {},
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'กรุณาระบุอาการ';
+                            }
+                            return null;
+                          },
+                        ),
                       ),
                     ),
                     ClinicButtonAppointment(text: "ยืนยัน", press: () {})

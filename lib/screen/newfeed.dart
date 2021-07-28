@@ -8,7 +8,7 @@ class Newfeed extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "ข่าว",
+          "ข่าว นะจ๊ะ",
           style: TextStyle(
               fontSize: 22,
               color: Colors.black,

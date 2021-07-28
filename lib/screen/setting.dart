@@ -17,7 +17,14 @@ class _SettingState extends State<Setting> {
     final loginProvider = Provider.of<AuthServices>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Log Out"),
+        title: Text(
+          "Log Out นะจ๊ะ",
+          style: TextStyle(
+              fontSize: 22,
+              color: Colors.white,
+              fontWeight: FontWeight.w500,
+              fontFamily: 'Mitr'),
+        ),
         actions: [
           IconButton(
               onPressed: () async => await loginProvider.logout(),

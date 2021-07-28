@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ShowAddress extends StatelessWidget {
-  final String text;
-  const ShowAddress({Key key, @required this.text}) : super(key: key);
+  final String topic, detail;
+  const ShowAddress({Key key, @required this.topic, this.detail})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,16 +18,30 @@ class ShowAddress extends StatelessWidget {
         color: Colors.white,
       ),
       child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            text,
+        padding: const EdgeInsets.all(8.0),
+        child: RichText(
+          text: TextSpan(
+            text: topic,
             style: TextStyle(
               fontFamily: 'Mitr',
               fontSize: 14,
               color: Colors.black,
               fontWeight: FontWeight.w500,
             ),
-          )),
+            children: <TextSpan>[
+              TextSpan(
+                text: detail,
+                style: TextStyle(
+                  fontFamily: 'Mitr',
+                  fontSize: 14,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

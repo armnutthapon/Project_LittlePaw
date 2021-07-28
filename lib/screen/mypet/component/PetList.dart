@@ -37,7 +37,7 @@ class PetList extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 5.0),
+              padding: const EdgeInsets.only(top: 10),
               child: Text(
                 petname,
                 style: TextStyle(
