@@ -16,6 +16,7 @@ class _SettingState extends State<Setting> {
   Widget build(BuildContext context) {
     final loginProvider = Provider.of<AuthServices>(context);
     return Scaffold(
+      backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
         title: Text(
           "Log Out นะจ๊ะ",

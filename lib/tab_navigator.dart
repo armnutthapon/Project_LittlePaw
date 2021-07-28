@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:little_paw/screen/newfeed.dart';
-import 'package:little_paw/screen/notifications.dart';
-import 'package:little_paw/screen/setting.dart';
-import './screen/mypet.dart';
-import './screen/clinic.dart';
+import 'package:little_paw/screen/Newsfeed.dart';
+import 'package:little_paw/screen/Notifications.dart';
+import 'package:little_paw/screen/Setting.dart';
+import 'screen/Mypet.dart';
+import 'screen/Clinic.dart';
 import 'package:little_paw/app.dart';
 import 'package:little_paw/bottom_navigation.dart';
 

@@ -1,15 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:little_paw/component/PetInfo.dart';
-import 'package:little_paw/screen/mypet/component/PetList.dart';
-import 'package:little_paw/screen/mypet/screen/pet_Addpet.dart';
-import 'package:little_paw/screen/mypet/component/PetCard.dart';
-import 'package:little_paw/screen/mypet/screen/pet_Select.dart';
-import 'package:little_paw/screen/mypet/component/PetCard.dart';
-
-// import 'mypet/component/PetCard.dart';
-// import './mypet/screen/pet_Select.dart';
-import 'mypet/component/PetCardInfo.dart';
+import 'package:little_paw/screen/mypet/component/mypet_petList.dart';
+import 'package:little_paw/screen/mypet/screen/Mypet_Addpet.dart';
 
 class MyPet extends StatefulWidget {
   const MyPet({Key key}) : super(key: key);
@@ -66,6 +58,7 @@ class _mainPetState extends State<mainPet> {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
 
     return Scaffold(
+      backgroundColor: Colors.grey.shade100,
       body: Center(
           child: GridView.extent(
         childAspectRatio: mediaQueryData.size.height / 900,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:little_paw/screen/clinic/component/ClinicButton.dart';
-import 'package:little_paw/screen/clinic/component/ShowAddress.dart';
-import 'package:little_paw/screen/clinic/component/ShowText.dart';
+import 'package:little_paw/screen/clinic/component/clinic_clinicButton.dart';
+import 'package:little_paw/screen/clinic/component/clinic_showAddress.dart';
+import 'package:little_paw/screen/clinic/component/clinic_showText.dart';
 
 class Page_ClinicDetail extends StatefulWidget {
   const Page_ClinicDetail({Key key}) : super(key: key);
@@ -17,10 +17,6 @@ class _Page_ClinicDetailState extends State<Page_ClinicDetail> {
     return Scaffold(
       body: Stack(children: <Widget>[
         ClinicDetail(),
-        SingleChildScrollView(
-            child: Column(children: <Widget>[
-          Container(height: 70.0),
-        ])),
         new Positioned(
           top: 0.0,
           left: 0.0,
@@ -51,6 +47,7 @@ class ClinicDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.grey.shade100,
       body: Container(
         color: Colors.grey.shade100,
         width: double.infinity,

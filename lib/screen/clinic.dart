@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:little_paw/app.dart';
-import 'package:little_paw/screen/clinic/component/ButtonInfo.dart';
-// import '../component/MenuCard.dart';
-// import './clinic/find_Clinic.dart';
-import 'package:little_paw/screen/clinic/screen/find_Clinic.dart';
+import 'package:little_paw/screen/clinic/component/clinic_buttonInfo.dart';
+import 'package:little_paw/screen/clinic/screen/Clinic_FindClinic.dart';
 
 class Clinic extends StatefulWidget {
   const Clinic({Key key}) : super(key: key);
@@ -47,6 +45,7 @@ class _mainClinicState extends State<mainClinic> {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
 
     return Scaffold(
+      backgroundColor: Colors.grey.shade100,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
@@ -97,24 +96,34 @@ class _mainClinicState extends State<mainClinic> {
                       mainAxisSpacing: 25,
                       maxCrossAxisExtent: 200.0,
                       children: <Widget>[
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => Page_FindClinic()));
-                          },
-                          child: ButtonInfo(
-                            icon: FontAwesomeIcons.search,
-                            text: "ค้นหาคลินิค",
+                        Card(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          elevation: 5,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => Page_FindClinic()));
+                            },
+                            child: ButtonInfo(
+                              text: "ค้นหาคลินิค",
+                              icon: FontAwesomeIcons.search,
+                            ),
                           ),
                         ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => Page_FindClinic()));
-                          },
-                          child: ButtonInfo(
-                            icon: FontAwesomeIcons.calendar,
-                            text: "การนัดหมาย",
+                        Card(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          elevation: 5,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => Page_FindClinic()));
+                            },
+                            child: ButtonInfo(
+                              text: "การนัดหมาย",
+                              icon: FontAwesomeIcons.calendar,
+                            ),
                           ),
                         ),
                       ],

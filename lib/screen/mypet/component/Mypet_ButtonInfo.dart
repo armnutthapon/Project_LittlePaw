@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class ButtonInfo extends StatelessWidget {
+class Mypet_ButtonInfo extends StatelessWidget {
   final String text;
   final IconData icon;
-  const ButtonInfo({Key key, @required this.text, this.icon}) : super(key: key);
+  const Mypet_ButtonInfo({Key key, @required this.text, this.icon})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
     return Container(
       height: 20,
       margin: EdgeInsets.fromLTRB(0, 2, 0, 2),
