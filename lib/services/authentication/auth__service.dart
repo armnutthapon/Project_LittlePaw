@@ -31,6 +31,7 @@ class AuthServices with ChangeNotifier {
           .createUserWithEmailAndPassword(email: email, password: password);
       User user = authResult.user;
       setLoadingRegist(false);
+
       return user;
     } on SocketException {
       setMessageRegist("No internet");
@@ -62,6 +63,7 @@ class AuthServices with ChangeNotifier {
       UserCredential authResult = await firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
       User user = authResult.user;
+
       setLoading(false);
       return user;
     } on FirebaseAuthException catch (e) {
