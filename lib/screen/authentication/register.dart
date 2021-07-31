@@ -19,6 +19,8 @@ class _RegisterState extends State<Register> {
   var _emailController = TextEditingController();
   var _passwordController = TextEditingController();
   var _confirmPasswordController = TextEditingController();
+  var _name = TextEditingController();
+
   final _formkey = GlobalKey<FormState>();
 
   bool _obscureText = true;
@@ -34,6 +36,7 @@ class _RegisterState extends State<Register> {
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
     _confirmPasswordController = TextEditingController();
+    _name = TextEditingController();
 
     super.initState();
   }
@@ -43,7 +46,7 @@ class _RegisterState extends State<Register> {
     _emailController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
-
+    _name.dispose();
     super.dispose();
   }
 
@@ -200,6 +203,32 @@ class _RegisterState extends State<Register> {
                                           return null;
                                         },
                                       ),
+                                      TextFormField(
+                                        controller: _name,
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w400,
+                                            fontFamily: 'Mitr'),
+                                        decoration: InputDecoration(
+                                          icon: Icon(
+                                            FontAwesomeIcons.key,
+                                          ),
+                                          labelText: 'ชื่อ',
+                                          labelStyle: TextStyle(
+                                              fontSize: 18,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w400,
+                                              fontFamily: 'Mitr'),
+                                        ),
+                                        // The validator receives the text that the user has entered.
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'กรุณาระบุชื่อ';
+                                          }
+                                          return null;
+                                        },
+                                      ),
                                     ]),
                                     Container(
                                       margin: EdgeInsets.only(top: 40),
@@ -218,14 +247,16 @@ class _RegisterState extends State<Register> {
                                                   _emailController.text.trim(),
                                                   _passwordController.text
                                                       .trim(),
+                                                  _name.text.trim(),
                                                 );
 
                                               print(
                                                   "Email : ${_emailController.text}");
                                               print(
-                                                  "Email : ${_passwordController.text}");
+                                                  "Password : ${_passwordController.text}");
                                               print(
-                                                  "Email : ${_confirmPasswordController.text}");
+                                                  "C_password : ${_confirmPasswordController.text}");
+                                              print("ชื่อ : ${_name.text}");
                                             },
                                             child: Center(
                                               child: loginProvider

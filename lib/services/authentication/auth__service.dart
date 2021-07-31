@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:little_paw/services/authentication/add_user.dart';
 
 class AuthServices with ChangeNotifier {
   bool _isLoading = false;
@@ -24,13 +26,20 @@ class AuthServices with ChangeNotifier {
 
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
-  Future register(String email, String password) async {
+  Future register(String email, String password, String name) async {
     try {
       setLoadingRegist(true);
-      UserCredential authResult = await firebaseAuth
-          .createUserWithEmailAndPassword(email: email, password: password);
+      UserCredential authResult =
+          await firebaseAuth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
       User user = authResult.user;
       setLoadingRegist(false);
+      user.updateDisplayName(name);
+      await DatabaseManager()
+          .createUserData(name, user.uid)
+          .then((value) => print("call"));
 
       return user;
     } on SocketException {
