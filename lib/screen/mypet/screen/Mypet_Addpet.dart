@@ -1,5 +1,8 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:little_paw/database/database.dart';
+import 'package:http/http.dart' as http;
 
 class Page_Addpet extends StatefulWidget {
   const Page_Addpet({Key key}) : super(key: key);
@@ -57,14 +60,18 @@ class Addpet extends StatefulWidget {
 class _AddpetState extends State<Addpet> {
   final _formkey = GlobalKey<FormState>();
 
-  var _addPetName;
-  var _addPetGender;
+  final _addPetName = TextEditingController();
+  var _addPetGender ;
   var _addPetCategory;
-  var _addPetColor;
-  var _addPetBreed;
-  var _addPetAge;
+  final _addPetColor = TextEditingController();
+  final _addPetBreed = TextEditingController();
+  final _addPetAge = TextEditingController();
   var _addPetSterilize;
-  var _addPetCharacteristics;
+  final _addPetCharacteristics = TextEditingController();
+  final _addCongenitalDisease = TextEditingController();
+  final _addVaccine = TextEditingController();
+
+  bool sterilize = false;
 
   String valueGender;
   String valueCategory;
@@ -76,6 +83,57 @@ class _AddpetState extends State<Addpet> {
     'ทำหมันแล้ว',
     'ยังไม่ทำหมัน',
   ];
+
+  var pet_name;
+  var type;
+  var sex;
+  var color;
+  var breed;
+  var dob;
+  var characteristics;
+  var sterilization;
+  var congenital_disease;
+  var vaccine;
+  var data , total;
+  setData() {
+    pet_name = _addPetName.text;
+
+    sex = _addPetGender;
+    type = _addPetCategory;
+    sterilization = _addPetSterilize;
+
+    color = _addPetColor.text;
+    breed = _addPetBreed.text;
+    dob = _addPetAge.text;
+    characteristics = _addPetCharacteristics.text;
+    congenital_disease = "Kuy Tuu";
+    vaccine = "Where is Moderna";
+    // print(pet_name + " " + sex + " " + type  + " " + color  + " " + breed  + " ");
+  }
+
+  getPetID() async {
+    http.Response response = await http.get(Uri.parse('$Url/petDetail'));
+    setState(() {
+      var resBody = json.decode(response.body);
+      data = resBody as List;
+      total = resBody.length;
+    });
+    print(data[total-1]['_id']);
+  }
+
+  addPetOwner() async {
+    http.Response response = await http.post(Uri.parse('$Url/'));
+  }
+
+  addPetDetail() async {
+    // await setData();
+    // http.Response response = await http.post(Uri.parse(
+    //     '$Url/petDetail/add/$pet_name/$type/$sex/$color/$breed/$dob/$characteristics/$sterilization/$congenital_disease/$vaccine'));
+    // print(pet_name + " " + sex + " " + type  + " " + color  + " " + breed  + " " + dob  + " " + sterilization + " " + characteristics + " " + congenital_disease + " " + vaccine);
+    // print("Success");
+    getPetID();
+
+  }
 
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -164,8 +222,9 @@ class _AddpetState extends State<Addpet> {
                                     onChanged: (newValue) {
                                       setState(() {
                                         valueGender = newValue;
-                                        newValue = _addPetBreed;
+                                        _addPetGender = newValue;
                                       });
+                                      print(_addPetGender);
                                     },
                                     items: listGender.map((valueItem) {
                                       return DropdownMenuItem(
@@ -207,8 +266,9 @@ class _AddpetState extends State<Addpet> {
                                     onChanged: (newValue) {
                                       setState(() {
                                         valueCategory = newValue;
-                                        newValue = _addPetCategory;
+                                        _addPetCategory = newValue;
                                       });
+                                      print(_addPetCategory);
                                     },
                                     items: listCategory.map((valueItem) {
                                       return DropdownMenuItem(
@@ -406,8 +466,9 @@ class _AddpetState extends State<Addpet> {
                                     onChanged: (newValue) {
                                       setState(() {
                                         valueSterilize = newValue;
-                                        newValue = _addPetSterilize;
+                                        _addPetSterilize = newValue;
                                       });
+                                      print(_addPetSterilize);
                                     },
                                     items: listSterilize.map((valueItem) {
                                       return DropdownMenuItem(
@@ -428,6 +489,16 @@ class _AddpetState extends State<Addpet> {
                               height: 40.0,
                               onPressed: () {
                                 if (_formkey.currentState.validate()) ;
+                                if (_addPetSterilize == "ทำหมันแล้ว") {
+                                  setState(() {
+                                    _addPetSterilize = "true";
+                                  });
+                                  print(_addPetSterilize);
+                                } else {
+                                  _addPetSterilize = "false";
+                                   print(_addPetSterilize);
+                                }
+                                addPetDetail();
                               },
                               child: Center(
                                 child: Text(

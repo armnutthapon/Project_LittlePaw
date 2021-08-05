@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:little_paw/database/database.dart';
 import 'package:little_paw/screen/mypet/component/mypet_petList.dart';
 import 'package:little_paw/screen/mypet/screen/Mypet_Addpet.dart';
+// import 'package:http/http.dart' as http;
 
 class MyPet extends StatefulWidget {
   const MyPet({Key key}) : super(key: key);
@@ -11,6 +14,22 @@ class MyPet extends StatefulWidget {
 }
 
 class _MyPetState extends State<MyPet> {
+  // void insertData() async {
+  //   final FirebaseAuth auth = FirebaseAuth.instance;
+  //   final User userId = auth.currentUser;
+  //   final String uid = userId.uid;
+  //   final String email = userId.email;
+  //   http.Response response =
+  //       await http.post(Uri.parse('$Url/owner/insert/$uid/$email'));
+  //   print("UserID : " + uid);
+  // }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   insertData();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

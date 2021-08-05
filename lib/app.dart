@@ -1,9 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:little_paw/database/database.dart';
 import 'package:little_paw/services/authentication/auth__service.dart';
 import 'package:little_paw/tab_navigator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 
 class App extends StatefulWidget {
   @override
@@ -11,6 +14,23 @@ class App extends StatefulWidget {
 }
 
 class AppState extends State<App> {
+   void insertData() async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User userId = auth.currentUser;
+    final String uid = userId.uid;
+    final String email = userId.email;
+    http.Response response =
+        await http.post(Uri.parse('$Url/owner/insert/$uid/$email'));
+    print("UserID : " + uid);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    insertData();
+  }
+
+  @override
   String _currentPage = "MyPet";
   List<String> pageKeys = [
     "Newfeed",
@@ -39,6 +59,7 @@ class AppState extends State<App> {
     }
   }
 
+  
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -48,7 +69,7 @@ class AppState extends State<App> {
         if (isFirstRouteInCurrentTab) {
           if (_currentPage != "MyPet") {
             _selectTab("MyPet", 1);
-
+            
             return false;
           }
         }
