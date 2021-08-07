@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -36,11 +35,6 @@ class AuthServices with ChangeNotifier {
       );
       User user = authResult.user;
       setLoadingRegist(false);
-      user.updateDisplayName(name);
-      await DatabaseManager()
-          .createUserData(name, user.uid)
-          .then((value) => print("call"));
-
       return user;
     } on SocketException {
       setMessageRegist("No internet");

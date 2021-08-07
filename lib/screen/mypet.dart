@@ -19,7 +19,7 @@ class _MyPetState extends State<MyPet> {
         title: Text("สัตว์เลี้ยงของฉัน",
             style: TextStyle(
                 fontSize: 22,
-                color: Colors.black,
+                color: Colors.white,
                 fontWeight: FontWeight.w500,
                 fontFamily: 'Mitr')),
         actions: <Widget>[
@@ -28,7 +28,7 @@ class _MyPetState extends State<MyPet> {
             child: IconButton(
               icon: Icon(
                 FontAwesomeIcons.plus,
-                color: Colors.red.shade400,
+                color: Colors.pink.shade400,
                 size: 30,
               ),
               tooltip: 'เพิ่มสัตว์เลี้ยง',
@@ -40,7 +40,7 @@ class _MyPetState extends State<MyPet> {
             ),
           ),
         ],
-        backgroundColor: Colors.white.withOpacity(1),
+        backgroundColor: Colors.pinkAccent.shade100.withOpacity(1),
         elevation: 10.0,
       ),
     );

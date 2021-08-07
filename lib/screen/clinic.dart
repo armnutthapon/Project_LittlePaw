@@ -22,11 +22,11 @@ class _ClinicState extends State<Clinic> {
           "คลินิก",
           style: TextStyle(
               fontSize: 22,
-              color: Colors.black,
+              color: Colors.white,
               fontWeight: FontWeight.w500,
               fontFamily: 'Mitr'),
         ),
-        backgroundColor: Colors.white.withOpacity(1),
+        backgroundColor: Colors.pinkAccent.shade100.withOpacity(1),
         elevation: 10.0,
       ),
     );
