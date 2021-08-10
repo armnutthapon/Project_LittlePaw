@@ -1,8 +1,13 @@
+import 'dart:async';
+import 'dart:convert';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:little_paw/screen/clinic/screen/Clinic_Detail.dart';
 import 'package:little_paw/screen/clinic/screen/Clinic_Filter.dart';
 import 'package:little_paw/screen/clinic/component/clinic_clinicCard.dart';
+import 'package:http/http.dart' as http;
+import 'package:little_paw/database/database.dart';
 
 class Page_FindClinic extends StatefulWidget {
   const Page_FindClinic({Key key}) : super(key: key);
@@ -144,10 +149,14 @@ class _findClinicMainState extends State<findClinicMain> {
                         ],
                       ),
                     ))),
-            Expanded(
-                child: Container(
-              padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-              child: showclinicdetail(),
+            SingleChildScrollView(
+                child: Column(
+              children: [
+                Container(
+                  height: size.height * 0.6,
+                  child: showclinicdetail(),
+                ),
+              ],
             )),
           ],
         ),
@@ -164,67 +173,171 @@ class showclinicdetail extends StatefulWidget {
 }
 
 class _showclinicdetailState extends State<showclinicdetail> {
+  List data;
+
+  getClinic() async {
+    http.Response response = await http.get(Uri.parse('$Url/clinic'));
+
+    this.setState(() {
+      data = json.decode(response.body);
+    });
+
+    return data;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getClinic();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: EdgeInsets.all(10),
-      children: [
-        InkWell(
-          onTap: () {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => Page_ClinicDetail()));
-          },
-          child: ClinicCard(
-              clinicname: "คลินิคหมอตู่",
-              distance: "3.5 กิโลเมตร",
-              location: "ป่าตอง",
-              time: "เปิด 07.00 - 15.00 น."),
-        ),
-        InkWell(
-          onTap: () {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => Page_ClinicDetail()));
-          },
-          child: ClinicCard(
-              clinicname: "คลินิคหมอประวิทย์",
-              distance: "0.1 กิโลเมตร",
-              location: "กะทู้",
-              time: "เปิด 09.00 - 12.00 น."),
-        ),
-        InkWell(
-          onTap: () {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => Page_ClinicDetail()));
-          },
-          child: ClinicCard(
-              clinicname: "รักษาสัตว์หมอนัส",
-              distance: "2.5 กิโลเมตร",
-              location: "บางลา",
-              time: "เปิด 10.00 - 12.00 น."),
-        ),
-        InkWell(
-          onTap: () {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => Page_ClinicDetail()));
-          },
-          child: ClinicCard(
-              clinicname: "รักษาสัตว์หมอนัส",
-              distance: "2.5 กิโลเมตร",
-              location: "บางลา",
-              time: "เปิด 10.00 - 12.00 น."),
-        ),
-        InkWell(
-          onTap: () {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => Page_ClinicDetail()));
-          },
-          child: ClinicCard(
-              clinicname: "รักษาสัตว์หมอนัส",
-              distance: "2.5 กิโลเมตร",
-              location: "บางลา",
-              time: "เปิด 10.00 - 12.00 น."),
-        ),
-      ],
-    );
+    return ListView.builder(
+        itemCount: data == null ? 0 : data.length,
+        itemBuilder: (BuildContext context, int index) {
+          print(data[index]);
+          return InkWell(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => Page_ClinicDetail()));
+              },
+              child: Card(
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+                margin: EdgeInsets.fromLTRB(5, 8, 5, 8),
+                child: Container(
+                  child: Container(
+                    margin: EdgeInsets.fromLTRB(15, 2, 15, 2),
+                    padding: EdgeInsets.fromLTRB(10, 10, 20, 10),
+                    height: 150,
+                    width: 250,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          // padding: EdgeInsets.all(5),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.asset(
+                              'assets/images/1.jpg',
+                              height: 120,
+                              width: 120,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                data[index]['clinic_name'],
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: 'Mitr'),
+                              ),
+                              Text(
+                                "3.5 กิโลเมตร",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Mitr'),
+                              ),
+                              Text(
+                                data[index]['address'][0]['city'],
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Mitr'),
+                              ),
+                              Text(
+                                data[index]['opening_time'],
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Mitr'),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              )
+              // ClinicCard(
+              //         clinicname: data[index]['clinic_name'],
+              //         distance: "3.5 กิโลเมตร",
+              //         location: data[index]['address'][0]['city'],
+              //         time: data[index]['opening_time']),
+              );
+        });
+    // padding: EdgeInsets.all(10),
+    // children: [
+    //   InkWell(
+    //     onTap: () {
+    //       Navigator.of(context).push(
+    //           MaterialPageRoute(builder: (context) => Page_ClinicDetail()));
+    //     },
+    //     child: ClinicCard(
+    //         clinicname: "คลินิคหมอตู่",
+    //         distance: "3.5 กิโลเมตร",
+    //         location: "ป่าตอง",
+    //         time: "เปิด 07.00 - 15.00 น."),
+    //   ),
+    //   InkWell(
+    //     onTap: () {
+    //       Navigator.of(context).push(
+    //           MaterialPageRoute(builder: (context) => Page_ClinicDetail()));
+    //     },
+    //     child: ClinicCard(
+    //         clinicname: "คลินิคหมอประวิทย์",
+    //         distance: "0.1 กิโลเมตร",
+    //         location: "กะทู้",
+    //         time: "เปิด 09.00 - 12.00 น."),
+    //   ),
+    //   InkWell(
+    //     onTap: () {
+    //       Navigator.of(context).push(
+    //           MaterialPageRoute(builder: (context) => Page_ClinicDetail()));
+    //     },
+    //     child: ClinicCard(
+    //         clinicname: "รักษาสัตว์หมอนัส",
+    //         distance: "2.5 กิโลเมตร",
+    //         location: "บางลา",
+    //         time: "เปิด 10.00 - 12.00 น."),
+    //   ),
+    //   InkWell(
+    //     onTap: () {
+    //       Navigator.of(context).push(
+    //           MaterialPageRoute(builder: (context) => Page_ClinicDetail()));
+    //     },
+    //     child: ClinicCard(
+    //         clinicname: "รักษาสัตว์หมอนัส",
+    //         distance: "2.5 กิโลเมตร",
+    //         location: "บางลา",
+    //         time: "เปิด 10.00 - 12.00 น."),
+    //   ),
+    //   InkWell(
+    //     onTap: () {
+    //       Navigator.of(context).push(
+    //           MaterialPageRoute(builder: (context) => Page_ClinicDetail()));
+    //     },
+    //     child: ClinicCard(
+    //         clinicname: "รักษาสัตว์หมอนัส",
+    //         distance: "2.5 กิโลเมตร",
+    //         location: "บางลา",
+    //         time: "เปิด 10.00 - 12.00 น."),
+    //   ),
+    // ],
   }
 }

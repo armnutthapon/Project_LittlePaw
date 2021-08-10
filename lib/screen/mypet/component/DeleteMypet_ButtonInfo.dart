@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class Mypet_ButtonInfo extends StatelessWidget {
+class DeleteMypet_ButtonInfo extends StatelessWidget {
   final String text;
   final IconData icon;
-  const Mypet_ButtonInfo({Key key, @required this.text, this.icon})
+  const DeleteMypet_ButtonInfo({Key key, @required this.text, this.icon})
       : super(key: key);
 
   @override

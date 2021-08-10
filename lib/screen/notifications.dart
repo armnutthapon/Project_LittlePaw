@@ -88,7 +88,6 @@ class _ShowNotificationState extends State<ShowNotification> {
         }
 
         if (data[index]['status'] != "Waiting") {
-          print("true");
           return Container(
             height: size.height * 0.17,
             child: Container(
