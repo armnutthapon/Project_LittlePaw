@@ -1,11 +1,19 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:little_paw/screen/mypet.dart';
+import 'package:little_paw/screen/mypet/component/DeleteMypet_ButtonInfo.dart';
 import 'package:little_paw/screen/mypet/component/mypet_buttoninfo.dart';
 import 'package:little_paw/screen/mypet/screen/Mypet_Medical.dart';
 import 'package:little_paw/screen/mypet/screen/Mypet_Information.dart';
 
 class Page_SelectPet extends StatefulWidget {
-  const Page_SelectPet({Key key}) : super(key: key);
+  final String pid;
+  const Page_SelectPet({
+    Key key,
+    this.pid,
+  }) : super(key: key);
 
   @override
   Page_SelectPetState createState() => Page_SelectPetState();
@@ -14,6 +22,7 @@ class Page_SelectPet extends StatefulWidget {
 class Page_SelectPetState extends State<Page_SelectPet> {
   @override
   Widget build(BuildContext context) {
+    print("2 Page :${widget.pid}");
     return Scaffold(
       body: Stack(children: <Widget>[
         selectedPet(),
@@ -22,10 +31,10 @@ class Page_SelectPetState extends State<Page_SelectPet> {
           left: 0.0,
           right: 0.0,
           child: AppBar(
-            title: Text("ปีโป้",
+            title: Text("${widget.pid}",
                 style: TextStyle(
                     fontSize: 22,
-                    color: Colors.black,
+                    color: Colors.white,
                     fontWeight: FontWeight.w500,
                     fontFamily: 'Mitr')),
             leading: new IconButton(
@@ -33,7 +42,7 @@ class Page_SelectPetState extends State<Page_SelectPet> {
               icon: new Icon(Icons.arrow_back_ios, color: Colors.black),
               onPressed: () => Navigator.of(context).pop(),
             ),
-            backgroundColor: Colors.white.withOpacity(1),
+            backgroundColor: Colors.pink.withOpacity(1),
             elevation: 10.0,
           ),
         ),
@@ -48,13 +57,62 @@ class selectedPet extends StatefulWidget {
 }
 
 class _selectedPetState extends State<selectedPet> {
+  deletePet(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            title: Text(
+              "ลบข้อมูลสัตว์เลี้ยง",
+              style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w400,
+                  fontFamily: 'Mitr'),
+            ),
+            actions: [
+              FlatButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0)),
+                  color: Colors.green,
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: Text(
+                    'ยืนยัน',
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                        fontFamily: 'Mitr'),
+                  )),
+              FlatButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0)),
+                color: Colors.red,
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text(
+                  'ยกเลิก',
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w400,
+                      fontFamily: 'Mitr'),
+                ),
+              )
+            ],
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     MediaQueryData mediaQueryData = MediaQuery.of(context);
 
     return Scaffold(
-      backgroundColor: Colors.grey.shade100,
+      backgroundColor: Colors.grey.shade800,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
@@ -95,6 +153,7 @@ class _selectedPetState extends State<selectedPet> {
                       maxCrossAxisExtent: 200.0,
                       children: <Widget>[
                         Card(
+                          color: Colors.lightBlue.shade200,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)),
                           elevation: 5,
@@ -111,6 +170,7 @@ class _selectedPetState extends State<selectedPet> {
                           ),
                         ),
                         Card(
+                          color: Colors.lightBlue.shade200,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)),
                           elevation: 5,
@@ -126,6 +186,7 @@ class _selectedPetState extends State<selectedPet> {
                           ),
                         ),
                         Card(
+                          color: Colors.lightBlue.shade200,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)),
                           elevation: 5,
@@ -137,6 +198,21 @@ class _selectedPetState extends State<selectedPet> {
                             child: Mypet_ButtonInfo(
                               text: "ข้อมูลวัคซีน",
                               icon: FontAwesomeIcons.search,
+                            ),
+                          ),
+                        ),
+                        Card(
+                          color: Colors.red.shade400,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          elevation: 5,
+                          child: InkWell(
+                            onTap: () {
+                              deletePet(context);
+                            },
+                            child: DeleteMypet_ButtonInfo(
+                              text: "ลบข้อมูลสัตว์เลี้ยง",
+                              icon: FontAwesomeIcons.trash,
                             ),
                           ),
                         ),
