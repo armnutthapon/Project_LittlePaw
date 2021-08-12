@@ -24,18 +24,28 @@ class Page_ClinicDetail extends StatefulWidget {
 class _Page_ClinicDetailState extends State<Page_ClinicDetail> {
   var data;
 
-  Future<String> getClinicDetail() async {
+  // Future<String> getClinicDetail() async {
+  //   print("TESTTTT : : ${widget.cid}");
+
+  //   http.Response response =
+  //       await http.get(Uri.parse('$Url/clinic/showByID/${widget.cid}'));
+  //   setState(() {
+  //     data = json.decode(response.body);
+  //   });
+  //   //print(data);
+
+  //   return data;
+  // }
+
+  getClinic() async {
     http.Response response =
         await http.get(Uri.parse('$Url/clinic/showByID/${widget.cid}'));
 
     setState(() {
       data = json.decode(response.body);
-
-      // data = resBody as List;
     });
     print(data);
-
-    return "Success";
+    return data;
   }
 
   // getClinicDetail() async {
@@ -60,12 +70,14 @@ class _Page_ClinicDetailState extends State<Page_ClinicDetail> {
   @override
   void initState() {
     super.initState();
-    getClinicDetail();
+    getClinic();
   }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    print("AAAAAA:   $data");
+    print(data['doctor_name']);
 
     return Scaffold(
       body: Stack(children: <Widget>[
@@ -84,19 +96,17 @@ class _Page_ClinicDetailState extends State<Page_ClinicDetail> {
                       Padding(
                         padding: const EdgeInsets.only(left: 10),
                         child: ListTile(
-                          title:
-                              //  data == null
-                              //     ? ""
-                              //     :
-                              Text(
-                            "sss",
-                            style: TextStyle(
-                              fontFamily: 'Mitr',
-                              fontSize: 18,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
+                          title: data == null
+                              ? ""
+                              : Text(
+                                  "data['clinic_name']",
+                                  style: TextStyle(
+                                    fontFamily: 'Mitr',
+                                    fontSize: 18,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
                           trailing: Icon(
                             FontAwesomeIcons.mapMarkerAlt,
                             color: Colors.red.shade300,
@@ -117,7 +127,7 @@ class _Page_ClinicDetailState extends State<Page_ClinicDetail> {
                       ShowAddress(
                           topic: "ที่อยู่ : ",
                           detail: " 109 ม.8 ต.คุระ อ.คุระบุรี จ.พังงา 82150"),
-                      ShowText(topic: "แพทย์ : ", detail: "ดร.ศรวิทย์ ทองสง"),
+                      ShowText(topic: "แพทย์ : ", detail: data['doctor_name']),
                       ShowText(
                           topic: "เวลาทำการ : ", detail: "08:00 - 18:00 น."),
                       ShowText(topic: "วันหยุด : ", detail: "ทุกวันอาทิตย์ "),

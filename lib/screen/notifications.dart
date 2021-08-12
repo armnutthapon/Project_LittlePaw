@@ -52,25 +52,28 @@ class _ShowNotificationState extends State<ShowNotification> {
   List data;
   CalendarFormat format = CalendarFormat.month;
   String formattedDate;
-  DateTime selectedDay = DateTime.now();
   DateTime focusedDay = DateTime.now();
+
   getNotificationByID() async {
     final FirebaseAuth auth = await FirebaseAuth.instance;
     final User userId = await auth.currentUser;
     final String uid = await userId.uid;
 
-    http.Response response =
-        await http.get(Uri.parse('$Url/appointment/notificationByID/$uid'));
+    http.Response response = await http.get(Uri.parse(
+        '$Url/appointment/notificationByID/EYJwhgDVqPRQJnoWu7PnWg8nWJs1'));
 
     this.setState(() {
       data = json.decode(response.body);
 
-      formattedDate = DateFormat('dd-MM-yyyy').format(focusedDay);
-      print(formattedDate);
+      // formattedDate = DateFormat('yyyy-MM-dd – kk:mm')
+      //     .format(data[data.length - 1]['time_notification']);
+
       // aa =  DateFormat("dd-M-yyyy hh:mm:ss").parse(formattedDate);
 
       // aa =  DateFormat("dd-M-yyyy hh:mm:ss").parse(formattedDate);
     });
+    print(focusedDay);
+    print(data[data.length - 1]['time_notification']);
     return data;
   }
 
@@ -92,114 +95,124 @@ class _ShowNotificationState extends State<ShowNotification> {
           if (data[index]['status'] == "Waiting") {
             return Colors.amber;
           } else if (data[index]['status'] == "Confirmed") {
+            setState(() {
+              formattedDate = DateFormat('dd-MM-yyyy')
+                  .format(data[data.length - 1]['time_notification']);
+            });
             return Colors.green;
           } else if (data[index]['status'] == "Denided") {
+            setState(() {
+              formattedDate = DateFormat('dd-MM-yyyy')
+                  .format(data[data.length - 1]['time_notification']);
+            });
             return Colors.red;
           }
         }
 
-        if (data[index]['status'] != "Waiting") {
-          return Container(
-            height: size.height * 0.17,
-            child: Container(
-              padding: const EdgeInsets.all(20.0),
-              margin: const EdgeInsets.all(10.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 3,
-                    blurRadius: 8,
-                    offset: Offset(2, 2), // changes position of shadow
-                  ),
-                ],
-              ),
-              child: Stack(
-                children: <Widget>[
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      data[index]['cid'],
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: 'Mitr'),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      data[index]['symptom'],
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w300,
-                          fontFamily: 'Mitr'),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomLeft,
-                    child: RichText(
-                      text: TextSpan(
-                        text: 'สถานะ  :  ',
-                        style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w300,
-                            fontFamily: 'Mitr'),
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: data[index]['status'],
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: getColor(),
-                                fontWeight: FontWeight.w500,
-                                fontFamily: 'Mitr'),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.topRight,
-                    child:
-                        Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
-                      Text(
-                        formattedDate,
-                        style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w400,
-                            fontFamily: 'Mitr'),
-                      ),
-                      SizedBox(
-                        width: size.width * 0.01,
-                      ),
-                      Text(
-                        data[index]['time_appointment'],
-                        style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w400,
-                            fontFamily: 'Mitr'),
-                      ),
-                      SizedBox(
-                        width: size.width * 0.01,
-                      ),
-                      Icon(
-                        FontAwesomeIcons.clock,
-                        color: Colors.blue.shade800,
-                      )
-                    ]),
-                  ),
-                ],
-              ),
-            ),
-          );
-        }
+        return Text("");
+
+        // if (data[index]['status'] != "Waiting") {
+        //   return Container(
+        //     height: size.height * 0.17,
+        //     child: Container(
+        //       padding: const EdgeInsets.all(20.0),
+        //       margin: const EdgeInsets.all(10.0),
+        //       decoration: BoxDecoration(
+        //         borderRadius: BorderRadius.all(Radius.circular(10.0)),
+        //         color: Colors.white,
+        //         boxShadow: [
+        //           BoxShadow(
+        //             color: Colors.grey.withOpacity(0.5),
+        //             spreadRadius: 3,
+        //             blurRadius: 8,
+        //             offset: Offset(2, 2), // changes position of shadow
+        //           ),
+        //         ],
+        //       ),
+        //       child: Stack(
+        //         children: <Widget>[
+        //           Align(
+        //             alignment: Alignment.topLeft,
+        //             child: Text(
+        //               data[index]['cid'],
+        //               style: TextStyle(
+        //                   fontSize: 16,
+        //                   color: Colors.black,
+        //                   fontWeight: FontWeight.w500,
+        //                   fontFamily: 'Mitr'),
+        //             ),
+        //           ),
+        //           Align(
+        //             alignment: Alignment.centerLeft,
+        //             child: Text(
+        //               data[index]['symptom'],
+        //               style: TextStyle(
+        //                   fontSize: 16,
+        //                   color: Colors.black,
+        //                   fontWeight: FontWeight.w300,
+        //                   fontFamily: 'Mitr'),
+        //             ),
+        //           ),
+        //           Align(
+        //             alignment: Alignment.bottomLeft,
+        //             child: RichText(
+        //               text: TextSpan(
+        //                 text: 'สถานะ  :  ',
+        //                 style: TextStyle(
+        //                     fontSize: 16,
+        //                     color: Colors.black,
+        //                     fontWeight: FontWeight.w300,
+        //                     fontFamily: 'Mitr'),
+        //                 children: <TextSpan>[
+        //                   TextSpan(
+        //                     text: data[index]['status'],
+        //                     style: TextStyle(
+        //                         fontSize: 16,
+        //                         color: getColor(),
+        //                         fontWeight: FontWeight.w500,
+        //                         fontFamily: 'Mitr'),
+        //                   ),
+        //                 ],
+        //               ),
+        //             ),
+        //           ),
+        //           Align(
+        //             alignment: Alignment.topRight,
+        //             child:
+        //                 Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
+        //               Text(
+        //               data[index]['symptom'],
+        //                 style: TextStyle(
+        //                     fontSize: 14,
+        //                     color: Colors.black,
+        //                     fontWeight: FontWeight.w400,
+        //                     fontFamily: 'Mitr'),
+        //               ),
+        //               SizedBox(
+        //                 width: size.width * 0.01,
+        //               ),
+        //               Text(
+        //                 data[index]['time_appointment'],
+        //                 style: TextStyle(
+        //                     fontSize: 14,
+        //                     color: Colors.black,
+        //                     fontWeight: FontWeight.w400,
+        //                     fontFamily: 'Mitr'),
+        //               ),
+        //               SizedBox(
+        //                 width: size.width * 0.01,
+        //               ),
+        //               Icon(
+        //                 FontAwesomeIcons.clock,
+        //                 color: Colors.blue.shade800,
+        //               )
+        //             ]),
+        //           ),
+        //         ],
+        //       ),
+        //     ),
+        //   );
+        // }
       },
     );
   }

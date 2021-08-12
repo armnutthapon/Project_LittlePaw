@@ -75,7 +75,6 @@ class _MainPetState extends State<MainPet> {
     final String uid = await userId.uid;
     print(uid);
     print(Url + "   " + "   " + "    " + uid);
-
     http.Response response =
         await http.get(Uri.parse('$Url/petDetail/showByID/$uid'));
     setState(() {

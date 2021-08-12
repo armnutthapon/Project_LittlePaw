@@ -176,10 +176,7 @@ class showclinicdetail extends StatefulWidget {
 
 class _showclinicdetailState extends State<showclinicdetail> {
   List data;
-
   var cid;
-  var clinic_name;
-  var doctor_name;
   // var building;
   // var alley;
   // var street;
@@ -192,10 +189,10 @@ class _showclinicdetailState extends State<showclinicdetail> {
   getClinic() async {
     http.Response response = await http.get(Uri.parse('$Url/clinic'));
 
-    this.setState(() {
+    setState(() {
       data = json.decode(response.body);
     });
-
+    print(data);
     return data;
   }
 
@@ -219,11 +216,12 @@ class _showclinicdetailState extends State<showclinicdetail> {
 
                 var cid_sendRoute = new MaterialPageRoute(
                     builder: (BuildContext context) => Page_ClinicDetail(
-                          cid: data[index]['_id'],
-                          // clinic_name: data[index]['clinic_name'],
-                          // doctor_name: data[index]['doctor_name'],
+                        cid: cid // clinic_name: data[index]['clinic_name'],
+                        // doctor_name: data[index]['doctor_name'],
                         ));
-
+                // print(
+                //   data[index]['_id'],
+                // );
                 Navigator.of(context).push(cid_sendRoute).then((value) {
                   setState(() {});
                 });
