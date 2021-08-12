@@ -67,6 +67,8 @@ class _MainPetState extends State<MainPet> {
 
   final String id = "";
 
+  var arr = [];
+
   getPetList() async {
     final FirebaseAuth auth = await FirebaseAuth.instance;
     final User userId = await auth.currentUser;
@@ -74,9 +76,8 @@ class _MainPetState extends State<MainPet> {
     print(uid);
     print(Url + "   " + "   " + "    " + uid);
 
-    http.Response response = await http
-        .get(Uri.parse('$Url/petDetail/showByID/EYJwhgDVqPRQJnoWu7PnWg8nWJs1'));
-
+    http.Response response =
+        await http.get(Uri.parse('$Url/petDetail/showByID/$uid'));
     setState(() {
       data = json.decode(response.body);
     });
