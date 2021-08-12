@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:little_paw/database/database.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -71,43 +72,35 @@ class _AppointmentState extends State<Appointment> {
   String formattedDate;
   DateTime aa;
 
-  List data;
-  Future<String> getAppointment() async {
-    http.Response response = await http.get(Uri.parse('$Url/clinic'));
+  // List data;
+  // Future<String> getAppointment() async {
+  //   http.Response response = await http.get(Uri.parse('$Url/clinic'));
 
-    setState(() {
-      var resBody = json.decode(response.body);
-      data = resBody;
-    });
-    print(data[0]);
-    return "Success";
+  //   setState(() {
+  //     var resBody = json.decode(response.body);
+  //     data = resBody;
+  //   });
+  //   print(data[0]);
+  //   return "Success";
+  // }
+
+  // var cid = data[0]["cid"]
+  createAppointment() async {
+    final FirebaseAuth auth = await FirebaseAuth.instance;
+    final User userId = await auth.currentUser;
+    final String uid = await userId.uid;
+    http.Response response = await http.post(Uri.parse('$Url/appointment/add/$cid/$uid/$formattedDate/${time_appointment.text}/${symptom.text}/$clinic_name/$doctor_name'));
+    print("Success");
+    startTime();
+    
   }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    this.getAppointment();
   }
-  // getAppointment() async{
-  //   http.Response response = await http.get(Uri.parse('$Url/clinic'));
-  //   this.setState(() {
-  //      data = json.decode(response.body);
-  //   });
-  //   print(data[0]['cid']);
-  //   return data;
-  // }
 
-  // List _data;
-  // @override
-  // void initState()  {
-  //     if(getAppointment() == null){
-  //       super.initState();
-  //     }else{
-  //       super.initState();
-  //       _data = getAppointment();
-  //     }
-  // }
 
   void getData(String time_appointment, String symptom, DateTime date) async {
     // createAppointment(time_appointment, symptom, date);
@@ -249,7 +242,7 @@ class _AppointmentState extends State<Appointment> {
                       padding: const EdgeInsets.only(left: 15),
                       child: ListTile(
                         title: Text(
-                          data == null ? "" : data[0]['doctor_name'],
+                          "ระบุอาการ",
                           style: TextStyle(
                             fontFamily: 'Mitr',
                             fontSize: 16,
@@ -291,12 +284,11 @@ class _AppointmentState extends State<Appointment> {
                               setState(() {
                                 formattedDate =
                                     DateFormat('dd-MM-yyyy').format(focusedDay);
-                                aa =  DateFormat("dd-M-yyyy hh:mm:ss").parse(formattedDate);
+                                // aa =  DateFormat("dd-M-yyyy hh:mm:ss").parse(formattedDate);
                               });
                               print(formattedDate);
-                              print(aa);
-                              getData(time_appointment.text, symptom.text,
-                                  focusedDay);
+                              // print(aa);
+                              createAppointment();
                             },
                             child: Text(
                               "ยืนยัน",
