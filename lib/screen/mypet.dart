@@ -60,7 +60,11 @@ class MainPet extends StatefulWidget {
 
 class _MainPetState extends State<MainPet> {
   List data;
+  List<Function> sendPetDetail = [];
+
   var pid;
+  var pet_name;
+
   final String id = "";
 
   getPetList() async {
@@ -112,8 +116,9 @@ class _MainPetState extends State<MainPet> {
                 print("PID :    " + pid);
 
                 var homeRounte = new MaterialPageRoute(
-                    builder: (BuildContext context) =>
-                        Page_SelectPet(pid: data[index]['_id']));
+                    builder: (BuildContext context) => Page_SelectPet(
+                        pid: data[index]['_id'],
+                        pet_name: data[index]['pet_name']));
 
                 Navigator.of(context).push(homeRounte).then((value) {
                   setState(() {

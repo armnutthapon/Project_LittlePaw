@@ -59,106 +59,108 @@ class _findClinicMainState extends State<findClinicMain> {
 
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
-      body: Container(
-        alignment: Alignment.center,
-        height: size.height,
-        child: Column(
-          children: [
-            SizedBox(
-              height: size.height * 0.15,
-              //  height: size.height * 0.05,
-            ),
-            Container(
-                // color: Colors.amber,
-                padding: EdgeInsets.fromLTRB(0, 10, 10, 0),
-                child: ListTile(
-                    title: Container(
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: TextFormField(
-                              cursorColor: Colors.red.shade400,
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w300,
-                                  fontFamily: 'Mitr'),
-                              decoration: new InputDecoration(
-                                border: InputBorder.none,
-                                focusedBorder: InputBorder.none,
-                                enabledBorder: InputBorder.none,
-                                errorBorder: InputBorder.none,
-                                disabledBorder: InputBorder.none,
-                                contentPadding: EdgeInsets.only(
-                                    left: 20, bottom: 11, top: 11, right: 0),
-                                hintText: "ค้นหาคลินิก",
-                                prefixIcon: IconButton(
-                                    icon: Icon(
-                                      Icons.search,
-                                      size: 20,
-                                      color: Colors.red.shade400,
-                                    ),
-                                    onPressed: () {}),
+      body: SingleChildScrollView(
+        child: Container(
+          alignment: Alignment.center,
+          height: size.height,
+          child: Column(
+            children: [
+              SizedBox(
+                height: size.height * 0.15,
+                //  height: size.height * 0.05,
+              ),
+              Container(
+                  // color: Colors.amber,
+                  padding: EdgeInsets.fromLTRB(0, 10, 10, 0),
+                  child: ListTile(
+                      title: Container(
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: TextFormField(
+                                cursorColor: Colors.red.shade400,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w300,
+                                    fontFamily: 'Mitr'),
+                                decoration: new InputDecoration(
+                                  border: InputBorder.none,
+                                  focusedBorder: InputBorder.none,
+                                  enabledBorder: InputBorder.none,
+                                  errorBorder: InputBorder.none,
+                                  disabledBorder: InputBorder.none,
+                                  contentPadding: EdgeInsets.only(
+                                      left: 20, bottom: 11, top: 11, right: 0),
+                                  hintText: "ค้นหาคลินิก",
+                                  prefixIcon: IconButton(
+                                      icon: Icon(
+                                        Icons.search,
+                                        size: 20,
+                                        color: Colors.red.shade400,
+                                      ),
+                                      onPressed: () {}),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black45,
-                            offset: Offset(2, 2),
-                            blurRadius: 4,
-                          ),
-                        ],
-
-                        // boxShadow: [
-                        //   BoxShadow(
-                        //       color: Colors.black45,
-                        //       offset: Offset(2, 2),
-                        //       blurRadius: 4
-                        //       // changes position of shadow
-                        //       ),
-                        // ],
-                      ),
-                    ),
-                    trailing: Container(
-                      child: IconButton(
-                        icon: new Icon(
-                          FontAwesomeIcons.filter,
-                          size: 20,
+                          ],
                         ),
-                        color: Colors.red.shade400,
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => Page_FilterClinic()));
-                        },
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black45,
+                              offset: Offset(2, 2),
+                              blurRadius: 4,
+                            ),
+                          ],
+
+                          // boxShadow: [
+                          //   BoxShadow(
+                          //       color: Colors.black45,
+                          //       offset: Offset(2, 2),
+                          //       blurRadius: 4
+                          //       // changes position of shadow
+                          //       ),
+                          // ],
+                        ),
                       ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black45,
-                            offset: Offset(2, 2),
-                            blurRadius: 4,
+                      trailing: Container(
+                        child: IconButton(
+                          icon: new Icon(
+                            FontAwesomeIcons.filter,
+                            size: 20,
                           ),
-                        ],
-                      ),
-                    ))),
-            SingleChildScrollView(
-                child: Column(
-              children: [
-                Container(
-                  height: size.height * 0.6,
-                  child: showclinicdetail(),
-                ),
-              ],
-            )),
-          ],
+                          color: Colors.red.shade400,
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => Page_FilterClinic()));
+                          },
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black45,
+                              offset: Offset(2, 2),
+                              blurRadius: 4,
+                            ),
+                          ],
+                        ),
+                      ))),
+              SingleChildScrollView(
+                  child: Column(
+                children: [
+                  Container(
+                    height: size.height * 0.6,
+                    child: showclinicdetail(),
+                  ),
+                ],
+              )),
+            ],
+          ),
         ),
       ),
     );
@@ -196,7 +198,6 @@ class _showclinicdetailState extends State<showclinicdetail> {
     return ListView.builder(
         itemCount: data == null ? 0 : data.length,
         itemBuilder: (BuildContext context, int index) {
-          print(data[index]);
           return InkWell(
               onTap: () {
                 Navigator.of(context).push(MaterialPageRoute(

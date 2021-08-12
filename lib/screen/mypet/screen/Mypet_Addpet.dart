@@ -1,5 +1,8 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:little_paw/database/database.dart';
+import 'package:http/http.dart' as http;
 
 class Page_Addpet extends StatefulWidget {
   const Page_Addpet({Key key}) : super(key: key);
@@ -57,14 +60,18 @@ class Addpet extends StatefulWidget {
 class _AddpetState extends State<Addpet> {
   final _formkey = GlobalKey<FormState>();
 
-  var _addPetName;
+  final _addPetName = TextEditingController();
   var _addPetGender;
   var _addPetCategory;
-  var _addPetColor;
-  var _addPetBreed;
-  var _addPetDOB;
+  final _addPetColor = TextEditingController();
+  final _addPetBreed = TextEditingController();
+  final _addPetAge = TextEditingController();
   var _addPetSterilize;
-  var _addPetCharacteristics;
+  final _addPetCharacteristics = TextEditingController();
+  final _addCongenitalDisease = TextEditingController();
+  final _addVaccine = TextEditingController();
+
+  bool sterilize = false;
 
   String valueGender;
   String valueCategory;
@@ -77,7 +84,55 @@ class _AddpetState extends State<Addpet> {
     'ยังไม่ทำหมัน',
   ];
 
-  String formatDate;
+  var pet_name;
+  var type;
+  var sex;
+  var color;
+  var breed;
+  var dob;
+  var characteristics;
+  var sterilization;
+  var congenital_disease;
+  var vaccine;
+  var data, total;
+  setData() {
+    pet_name = _addPetName.text;
+
+    sex = _addPetGender;
+    type = _addPetCategory;
+    sterilization = _addPetSterilize;
+
+    color = _addPetColor.text;
+    breed = _addPetBreed.text;
+    dob = _addPetAge.text;
+    characteristics = _addPetCharacteristics.text;
+    congenital_disease = "Kuy Tuu";
+    vaccine = "Where is Moderna";
+    // print(pet_name + " " + sex + " " + type  + " " + color  + " " + breed  + " ");
+  }
+
+  getPetID() async {
+    http.Response response = await http.get(Uri.parse('$Url/petDetail'));
+    setState(() {
+      var resBody = json.decode(response.body);
+      data = resBody as List;
+      total = resBody.length;
+    });
+    print(data[total - 1]['_id']);
+  }
+
+  addPetOwner() async {
+    http.Response response = await http.post(Uri.parse('$Url/'));
+  }
+
+  addPetDetail() async {
+    await setData();
+    http.Response response = await http.post(Uri.parse(
+        '$Url/petDetail/add/$pet_name/$type/$sex/$color/$breed/$dob/$characteristics/$sterilization/$congenital_disease/$vaccine'));
+    //print(pet_name + " " + sex + " " + type  + " " + color  + " " + breed  + " " + dob  + " " + sterilization + " " + characteristics + " " + congenital_disease + " " + vaccine);
+    print("add pet Success");
+    getPetID();
+  }
 
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -118,8 +173,8 @@ class _AddpetState extends State<Addpet> {
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   focusedBorder: InputBorder.none,
-                                  hintText: "ชื่อสัตว์เลี้ยง",
-                                  hintStyle: TextStyle(
+                                  labelText: "ชื่อสัตว์เลี้ยง",
+                                  labelStyle: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w300,
                                       fontFamily: 'Mitr'),
@@ -128,8 +183,6 @@ class _AddpetState extends State<Addpet> {
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'กรุณาใส่ชื่อสัตว์เลี้ยง';
-                                  } else if (value.isEmpty) {
-                                    return "";
                                   }
                                   return null;
                                 },
@@ -168,8 +221,9 @@ class _AddpetState extends State<Addpet> {
                                     onChanged: (newValue) {
                                       setState(() {
                                         valueGender = newValue;
-                                        newValue = _addPetGender;
+                                        _addPetGender = newValue;
                                       });
+                                      print(_addPetGender);
                                     },
                                     items: listGender.map((valueItem) {
                                       return DropdownMenuItem(
@@ -202,7 +256,7 @@ class _AddpetState extends State<Addpet> {
                                             fontWeight: FontWeight.w300,
                                             fontFamily: 'Mitr')),
                                     dropdownColor: Colors.white,
-                                    value: listCategory[0],
+                                    value: valueCategory,
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 18,
@@ -211,9 +265,9 @@ class _AddpetState extends State<Addpet> {
                                     onChanged: (newValue) {
                                       setState(() {
                                         valueCategory = newValue;
-
-                                        newValue = _addPetCategory;
+                                        _addPetCategory = newValue;
                                       });
+                                      print(_addPetCategory);
                                     },
                                     items: listCategory.map((valueItem) {
                                       return DropdownMenuItem(
@@ -248,8 +302,8 @@ class _AddpetState extends State<Addpet> {
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   focusedBorder: InputBorder.none,
-                                  hintText: "สีของสัตว์เลี้ยง",
-                                  hintStyle: TextStyle(
+                                  labelText: "สีของสัตว์เลี้ยง",
+                                  labelStyle: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w300,
                                       fontFamily: 'Mitr'),
@@ -258,8 +312,6 @@ class _AddpetState extends State<Addpet> {
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'กรุณาใส่สีของสัตว์เลี้ยง';
-                                  } else if (value.isEmpty) {
-                                    return "";
                                   }
                                   return null;
                                 },
@@ -289,8 +341,8 @@ class _AddpetState extends State<Addpet> {
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   focusedBorder: InputBorder.none,
-                                  hintText: "สายพันธุ์",
-                                  hintStyle: TextStyle(
+                                  labelText: "สายพันธุ์",
+                                  labelStyle: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w300,
                                       fontFamily: 'Mitr'),
@@ -299,8 +351,6 @@ class _AddpetState extends State<Addpet> {
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'กรุณาใส่สายพันธุ์';
-                                  } else if (value.isEmpty) {
-                                    return "";
                                   }
                                   return null;
                                 },
@@ -330,8 +380,8 @@ class _AddpetState extends State<Addpet> {
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   focusedBorder: InputBorder.none,
-                                  hintText: "ลักษณะเฉพาะ",
-                                  hintStyle: TextStyle(
+                                  labelText: "ลักษณะเฉพาะ",
+                                  labelStyle: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w300,
                                       fontFamily: 'Mitr'),
@@ -340,8 +390,6 @@ class _AddpetState extends State<Addpet> {
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'กรุณาใส่ลักษณะเฉพาะ';
-                                  } else if (value.isEmpty) {
-                                    return "";
                                   }
                                   return null;
                                 },
@@ -362,7 +410,7 @@ class _AddpetState extends State<Addpet> {
                               height: size.height * 0.08,
                               padding: EdgeInsets.only(left: 20, right: 20),
                               child: TextFormField(
-                                controller: _addPetDOB,
+                                controller: _addPetAge,
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 18,
@@ -371,18 +419,16 @@ class _AddpetState extends State<Addpet> {
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   focusedBorder: InputBorder.none,
-                                  hintText: "วันที่รับเลี้ยง (วัน-เดือน-ปี)",
-                                  hintStyle: TextStyle(
+                                  labelText: "อายุ",
+                                  labelStyle: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w300,
                                       fontFamily: 'Mitr'),
                                 ),
                                 onSaved: (String value) {},
                                 validator: (value) {
-                                  if (value.trim() == null || value.isEmpty) {
+                                  if (value == null || value.isEmpty) {
                                     return 'กรุณาใส่อายุของสัตว์เลี้ยง';
-                                  } else if (value.isNotEmpty) {
-                                    return "";
                                   }
                                   return null;
                                 },
@@ -410,7 +456,7 @@ class _AddpetState extends State<Addpet> {
                                             fontWeight: FontWeight.w300,
                                             fontFamily: 'Mitr')),
                                     dropdownColor: Colors.white,
-                                    value: listSterilize[0],
+                                    value: valueSterilize,
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 18,
@@ -418,8 +464,10 @@ class _AddpetState extends State<Addpet> {
                                         fontFamily: 'Mitr'),
                                     onChanged: (newValue) {
                                       setState(() {
-                                        newValue = _addPetSterilize;
+                                        valueSterilize = newValue;
+                                        _addPetSterilize = newValue;
                                       });
+                                      print(_addPetSterilize);
                                     },
                                     items: listSterilize.map((valueItem) {
                                       return DropdownMenuItem(
@@ -440,6 +488,16 @@ class _AddpetState extends State<Addpet> {
                               height: 40.0,
                               onPressed: () {
                                 if (_formkey.currentState.validate()) ;
+                                if (_addPetSterilize == "ทำหมันแล้ว") {
+                                  setState(() {
+                                    _addPetSterilize = "true";
+                                  });
+                                  print(_addPetSterilize);
+                                } else {
+                                  _addPetSterilize = "false";
+                                  print(_addPetSterilize);
+                                }
+                                addPetDetail();
                               },
                               child: Center(
                                 child: Text(

@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:little_paw/database/database.dart';
+import 'package:table_calendar/table_calendar.dart';
+import 'package:intl/intl.dart';
 
 class NotificationFeed extends StatefulWidget {
   static const routeName = '/notification';
@@ -48,7 +50,10 @@ class ShowNotification extends StatefulWidget {
 
 class _ShowNotificationState extends State<ShowNotification> {
   List data;
-
+  CalendarFormat format = CalendarFormat.month;
+  String formattedDate;
+  DateTime selectedDay = DateTime.now();
+  DateTime focusedDay = DateTime.now();
   getNotificationByID() async {
     final FirebaseAuth auth = await FirebaseAuth.instance;
     final User userId = await auth.currentUser;
@@ -59,6 +64,12 @@ class _ShowNotificationState extends State<ShowNotification> {
 
     this.setState(() {
       data = json.decode(response.body);
+
+      formattedDate = DateFormat('dd-MM-yyyy').format(focusedDay);
+      print(formattedDate);
+      // aa =  DateFormat("dd-M-yyyy hh:mm:ss").parse(formattedDate);
+
+      // aa =  DateFormat("dd-M-yyyy hh:mm:ss").parse(formattedDate);
     });
     return data;
   }
@@ -157,7 +168,7 @@ class _ShowNotificationState extends State<ShowNotification> {
                     child:
                         Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
                       Text(
-                        data[index]['date'],
+                        formattedDate,
                         style: TextStyle(
                             fontSize: 14,
                             color: Colors.black,

@@ -13,9 +13,11 @@ import 'package:little_paw/database/database.dart';
 
 class Page_SelectPet extends StatefulWidget {
   final String pid;
+  final String pet_name;
   const Page_SelectPet({
     Key key,
     this.pid,
+    this.pet_name,
   }) : super(key: key);
 
   @override
@@ -25,10 +27,25 @@ class Page_SelectPet extends StatefulWidget {
 class Page_SelectPetState extends State<Page_SelectPet> {
   List data;
 
+  // getPetDetail() async {
+  //   http.Response response =
+  //       await http.get(Uri.parse('$Url/appointment/notificationByID/$uid'));
+
+  //   this.setState(() {
+  //     data = json.decode(response.body);
+  //   });
+  //   return data;
+  // }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   getPetDetail();
+  // }
+
   deletePetByID(pid) async {
     http.Response response =
         await http.delete(Uri.parse('$Url/petDetail/deletePet/$pid'));
-
     print("Succes");
   }
 
@@ -93,7 +110,6 @@ class Page_SelectPetState extends State<Page_SelectPet> {
     Size size = MediaQuery.of(context).size;
     MediaQueryData mediaQueryData = MediaQuery.of(context);
 
-    print("2 Page :${widget.pid}");
     return Scaffold(
       body: Stack(children: <Widget>[
         Scaffold(
@@ -216,7 +232,7 @@ class Page_SelectPetState extends State<Page_SelectPet> {
           left: 0.0,
           right: 0.0,
           child: AppBar(
-            title: Text("aa",
+            title: Text(widget.pet_name,
                 style: TextStyle(
                     fontSize: 22,
                     color: Colors.white,
