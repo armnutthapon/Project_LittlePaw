@@ -29,7 +29,6 @@ class Page_SelectPetState extends State<Page_SelectPet> {
     http.Response response =
         await http.delete(Uri.parse('$Url/petDetail/deletePet/$pid'));
 
-    Navigator.of(context).pop();
     print("Succes");
   }
 
@@ -74,7 +73,7 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0)),
                 color: Colors.red,
-                onPressed: () => Navigator.of(context).pop(),
+                onPressed: () => Navigator.of(context).pop(context),
                 child: Text(
                   'ยกเลิก',
                   style: TextStyle(

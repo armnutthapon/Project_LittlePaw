@@ -62,7 +62,7 @@ class _AddpetState extends State<Addpet> {
   var _addPetCategory;
   var _addPetColor;
   var _addPetBreed;
-  var _addPetAge;
+  var _addPetDOB;
   var _addPetSterilize;
   var _addPetCharacteristics;
 
@@ -76,6 +76,8 @@ class _AddpetState extends State<Addpet> {
     'ทำหมันแล้ว',
     'ยังไม่ทำหมัน',
   ];
+
+  String formatDate;
 
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -126,6 +128,8 @@ class _AddpetState extends State<Addpet> {
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'กรุณาใส่ชื่อสัตว์เลี้ยง';
+                                  } else if (value.isEmpty) {
+                                    return "";
                                   }
                                   return null;
                                 },
@@ -164,7 +168,7 @@ class _AddpetState extends State<Addpet> {
                                     onChanged: (newValue) {
                                       setState(() {
                                         valueGender = newValue;
-                                        newValue = _addPetBreed;
+                                        newValue = _addPetGender;
                                       });
                                     },
                                     items: listGender.map((valueItem) {
@@ -198,7 +202,7 @@ class _AddpetState extends State<Addpet> {
                                             fontWeight: FontWeight.w300,
                                             fontFamily: 'Mitr')),
                                     dropdownColor: Colors.white,
-                                    value: valueCategory,
+                                    value: listCategory[0],
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 18,
@@ -207,6 +211,7 @@ class _AddpetState extends State<Addpet> {
                                     onChanged: (newValue) {
                                       setState(() {
                                         valueCategory = newValue;
+
                                         newValue = _addPetCategory;
                                       });
                                     },
@@ -253,6 +258,8 @@ class _AddpetState extends State<Addpet> {
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'กรุณาใส่สีของสัตว์เลี้ยง';
+                                  } else if (value.isEmpty) {
+                                    return "";
                                   }
                                   return null;
                                 },
@@ -292,6 +299,8 @@ class _AddpetState extends State<Addpet> {
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'กรุณาใส่สายพันธุ์';
+                                  } else if (value.isEmpty) {
+                                    return "";
                                   }
                                   return null;
                                 },
@@ -331,6 +340,8 @@ class _AddpetState extends State<Addpet> {
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'กรุณาใส่ลักษณะเฉพาะ';
+                                  } else if (value.isEmpty) {
+                                    return "";
                                   }
                                   return null;
                                 },
@@ -351,7 +362,7 @@ class _AddpetState extends State<Addpet> {
                               height: size.height * 0.08,
                               padding: EdgeInsets.only(left: 20, right: 20),
                               child: TextFormField(
-                                controller: _addPetAge,
+                                controller: _addPetDOB,
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 18,
@@ -360,7 +371,7 @@ class _AddpetState extends State<Addpet> {
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   focusedBorder: InputBorder.none,
-                                  hintText: "อายุ",
+                                  hintText: "วันที่รับเลี้ยง (วัน-เดือน-ปี)",
                                   hintStyle: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w300,
@@ -368,8 +379,10 @@ class _AddpetState extends State<Addpet> {
                                 ),
                                 onSaved: (String value) {},
                                 validator: (value) {
-                                  if (value == null || value.isEmpty) {
+                                  if (value.trim() == null || value.isEmpty) {
                                     return 'กรุณาใส่อายุของสัตว์เลี้ยง';
+                                  } else if (value.isNotEmpty) {
+                                    return "";
                                   }
                                   return null;
                                 },
@@ -397,7 +410,7 @@ class _AddpetState extends State<Addpet> {
                                             fontWeight: FontWeight.w300,
                                             fontFamily: 'Mitr')),
                                     dropdownColor: Colors.white,
-                                    value: valueSterilize,
+                                    value: listSterilize[0],
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 18,
@@ -405,7 +418,6 @@ class _AddpetState extends State<Addpet> {
                                         fontFamily: 'Mitr'),
                                     onChanged: (newValue) {
                                       setState(() {
-                                        valueSterilize = newValue;
                                         newValue = _addPetSterilize;
                                       });
                                     },

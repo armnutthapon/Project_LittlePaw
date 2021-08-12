@@ -62,6 +62,7 @@ class _MainPetState extends State<MainPet> {
   List data;
   var pid;
   final String id = "";
+
   getPetList() async {
     http.Response response = await http.get(Uri.parse('$Url/petDetail'));
 
@@ -114,7 +115,11 @@ class _MainPetState extends State<MainPet> {
                     builder: (BuildContext context) =>
                         Page_SelectPet(pid: data[index]['_id']));
 
-                Navigator.of(context).push(homeRounte);
+                Navigator.of(context).push(homeRounte).then((value) {
+                  setState(() {
+                    print("set state complete");
+                  });
+                });
               },
               child: Center(
                   child: Column(
