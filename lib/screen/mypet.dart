@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:little_paw/screen/mypet/component/mypet_petList.dart';
@@ -59,21 +60,27 @@ class MainPet extends StatefulWidget {
 }
 
 class _MainPetState extends State<MainPet> {
-  List data;
+  var data;
   List<Function> sendPetDetail = [];
-
   var pid;
   var pet_name;
 
   final String id = "";
 
   getPetList() async {
-    http.Response response = await http.get(Uri.parse('$Url/petDetail'));
+    final FirebaseAuth auth = await FirebaseAuth.instance;
+    final User userId = await auth.currentUser;
+    final String uid = await userId.uid;
+    print(uid);
+    print(Url + "   " + "   " + "    " + uid);
 
-    this.setState(() {
+    http.Response response = await http
+        .get(Uri.parse('$Url/petDetail/showByID/EYJwhgDVqPRQJnoWu7PnWg8nWJs1'));
+
+    setState(() {
       data = json.decode(response.body);
     });
-
+    print(data);
     return data;
   }
 
@@ -115,15 +122,13 @@ class _MainPetState extends State<MainPet> {
                 });
                 print("PID :    " + pid);
 
-                var homeRounte = new MaterialPageRoute(
+                var pid_sendRoute = new MaterialPageRoute(
                     builder: (BuildContext context) => Page_SelectPet(
                         pid: data[index]['_id'],
                         pet_name: data[index]['pet_name']));
 
-                Navigator.of(context).push(homeRounte).then((value) {
-                  setState(() {
-                    print("set state complete");
-                  });
+                Navigator.of(context).push(pid_sendRoute).then((value) {
+                  setState(() {});
                 });
               },
               child: Center(
@@ -133,24 +138,28 @@ class _MainPetState extends State<MainPet> {
                     padding: const EdgeInsets.only(top: 10.0),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
-                      child: Image.asset(
-                        'assets/images/1.jpg',
-                        height: 120.0,
-                        width: 120.0,
-                        fit: BoxFit.cover,
-                      ),
+                      child: data == null
+                          ? ''
+                          : Image.asset(
+                              'assets/images/1.jpg',
+                              height: 120.0,
+                              width: 120.0,
+                              fit: BoxFit.cover,
+                            ),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 10),
-                    child: Text(
-                      data[index]['pet_name'],
-                      style: TextStyle(
-                          color: Colors.red.shade400,
-                          fontSize: 16,
-                          fontWeight: FontWeight.normal,
-                          fontFamily: 'Mitr'),
-                    ),
+                    child: data == null
+                        ? ''
+                        : Text(
+                            data[index]['pet_name'],
+                            style: TextStyle(
+                                color: Colors.red.shade400,
+                                fontSize: 16,
+                                fontWeight: FontWeight.normal,
+                                fontFamily: 'Mitr'),
+                          ),
                   ),
                 ],
               )),

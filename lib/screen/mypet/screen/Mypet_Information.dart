@@ -21,7 +21,6 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
           left: 0.0,
           right: 0.0,
           child: AppBar(
-            centerTitle: true,
             title: Text(
               "ข้อมูลสัตว์เลี้ยง",
               style: TextStyle(

@@ -26,9 +26,7 @@ class ClinicButton extends StatelessWidget {
           child: FlatButton(
             color: Colors.red.shade400,
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return Page_Appointment();
-              }));
+              Navigator.push(context, MaterialPageRoute(builder: (context) {}));
             },
             child: Text(
               text,

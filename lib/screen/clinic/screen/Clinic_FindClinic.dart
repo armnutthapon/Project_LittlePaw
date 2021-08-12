@@ -177,6 +177,18 @@ class showclinicdetail extends StatefulWidget {
 class _showclinicdetailState extends State<showclinicdetail> {
   List data;
 
+  var cid;
+  var clinic_name;
+  var doctor_name;
+  // var building;
+  // var alley;
+  // var street;
+  // var city;
+  // var province;
+  // var opening_time;
+  // var closed;
+  // var phone_number;
+
   getClinic() async {
     http.Response response = await http.get(Uri.parse('$Url/clinic'));
 
@@ -200,9 +212,26 @@ class _showclinicdetailState extends State<showclinicdetail> {
         itemBuilder: (BuildContext context, int index) {
           return InkWell(
               onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => Page_ClinicDetail()));
+                setState(() {
+                  cid = data[index]['_id'];
+                });
+                print("cid :    " + cid);
+
+                var cid_sendRoute = new MaterialPageRoute(
+                    builder: (BuildContext context) => Page_ClinicDetail(
+                          cid: data[index]['_id'],
+                          // clinic_name: data[index]['clinic_name'],
+                          // doctor_name: data[index]['doctor_name'],
+                        ));
+
+                Navigator.of(context).push(cid_sendRoute).then((value) {
+                  setState(() {});
+                });
               },
+              // onTap: () {
+              //   Navigator.of(context).push(MaterialPageRoute(
+              //       builder: (context) => Page_ClinicDetail()));
+              // },
               child: Card(
                 elevation: 5,
                 shape: RoundedRectangleBorder(

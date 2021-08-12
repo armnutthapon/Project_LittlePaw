@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:little_paw/database/database.dart';
@@ -121,14 +122,14 @@ class _AddpetState extends State<Addpet> {
     print(data[total - 1]['_id']);
   }
 
-  addPetOwner() async {
-    http.Response response = await http.post(Uri.parse('$Url/'));
-  }
-
   addPetDetail() async {
     await setData();
+    final FirebaseAuth auth = await FirebaseAuth.instance;
+    final User userId = await auth.currentUser;
+    final String uid = await userId.uid;
+    await setData();
     http.Response response = await http.post(Uri.parse(
-        '$Url/petDetail/add/$pet_name/$type/$sex/$color/$breed/$dob/$characteristics/$sterilization/$congenital_disease/$vaccine'));
+        '$Url/petDetail/add/$pet_name/$type/$sex/$color/$breed/$dob/$characteristics/$sterilization/$congenital_disease/$vaccine/$uid'));
     //print(pet_name + " " + sex + " " + type  + " " + color  + " " + breed  + " " + dob  + " " + sterilization + " " + characteristics + " " + congenital_disease + " " + vaccine);
     print("add pet Success");
     getPetID();

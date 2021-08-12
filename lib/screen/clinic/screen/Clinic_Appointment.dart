@@ -11,7 +11,12 @@ import 'package:intl/intl.dart';
 
 // Calendar
 class Page_Appointment extends StatefulWidget {
-  const Page_Appointment({Key key}) : super(key: key);
+  final String cid;
+
+  const Page_Appointment({
+    Key key,
+    this.cid,
+  }) : super(key: key);
 
   @override
   _Page_AppointmentState createState() => _Page_AppointmentState();
@@ -67,6 +72,11 @@ class _AppointmentState extends State<Appointment> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final time_appointment = TextEditingController();
   final symptom = TextEditingController();
+
+  var cid;
+  var clinic_name;
+  var doctor_name;
+
   CalendarFormat format = CalendarFormat.month;
   DateTime selectedDay = DateTime.now();
   DateTime focusedDay = DateTime.now();
@@ -90,8 +100,8 @@ class _AppointmentState extends State<Appointment> {
     final FirebaseAuth auth = await FirebaseAuth.instance;
     final User userId = await auth.currentUser;
     final String uid = await userId.uid;
-    // http.Response response = await http.post(Uri.parse(
-    //     '$Url/appointment/add/$uid/$formattedDate/${time_appointment.text}/${symptom.text}'));
+    http.Response response = await http.post(Uri.parse(
+        '$Url/appointment/add/$uid/$formattedDate/${time_appointment.text}/${symptom.text}'));
     // http.Response response = await http.post(Uri.parse(
     //     '$Url/appointment/add/$cid/$uid/$formattedDate/${time_appointment.text}/${symptom.text}/$clinic_name/$doctor_name'));
     // print("Success");
@@ -101,6 +111,9 @@ class _AppointmentState extends State<Appointment> {
   @override
   void initState() {
     // TODO: implement initState
+    print("CID :" + cid);
+    print("CLINIC :" + clinic_name);
+    print("DOCTOR :" + doctor_name);
     super.initState();
   }
 
