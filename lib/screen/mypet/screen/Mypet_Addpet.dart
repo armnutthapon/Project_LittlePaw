@@ -112,15 +112,15 @@ class _AddpetState extends State<Addpet> {
     // print(pet_name + " " + sex + " " + type  + " " + color  + " " + breed  + " ");
   }
 
-  getPetID() async {
-    http.Response response = await http.get(Uri.parse('$Url/petDetail'));
-    setState(() {
-      var resBody = json.decode(response.body);
-      data = resBody as List;
-      total = resBody.length;
-    });
-    print(data[total - 1]['_id']);
-  }
+  // getPetID() async {
+  //   http.Response response = await http.get(Uri.parse('$Url/petDetail'));
+  //   setState(() {
+  //     var resBody = json.decode(response.body);
+  //     data = resBody as List;
+  //     total = resBody.length;
+  //   });
+  //   print(data[total - 1]['_id']);
+  // }
 
   addPetDetail() async {
     await setData();
@@ -128,11 +128,15 @@ class _AddpetState extends State<Addpet> {
     final User userId = await auth.currentUser;
     final String uid = await userId.uid;
     await setData();
-    http.Response response = await http.post(Uri.parse(
-        '$Url/petDetail/add/$pet_name/$type/$sex/$color/$breed/$dob/$characteristics/$sterilization/$congenital_disease/$vaccine/$uid'));
+    http.Response response = await http
+        .post(Uri.parse(
+            '$Url/petDetail/add/$pet_name/$type/$sex/$color/$breed/$dob/$characteristics/$sterilization/$congenital_disease/$vaccine/$uid'))
+        .then((value) {
+      print("success");
+    });
     //print(pet_name + " " + sex + " " + type  + " " + color  + " " + breed  + " " + dob  + " " + sterilization + " " + characteristics + " " + congenital_disease + " " + vaccine);
     print("add pet Success");
-    getPetID();
+    //getPetID();
   }
 
   Widget build(BuildContext context) {

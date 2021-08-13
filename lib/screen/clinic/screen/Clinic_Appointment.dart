@@ -34,19 +34,27 @@ class _Page_AppointmentState extends State<Page_Appointment> {
   DateTime aa;
 
   createAppointment() async {
-    print(widget.cid);
-    print(widget.doctor_name);
-    print(widget.cid);
-
     final FirebaseAuth auth = await FirebaseAuth.instance;
     final User userId = await auth.currentUser;
     final String uid = await userId.uid;
     print(uid);
 
-    http.Response response = await http.post(Uri.parse(
-        '$Url/appointment/add/${widget.cid}/$uid/$formattedDate/${time_appointment.text}/${symptom.text}/${widget.clinic_name}/${widget.doctor_name}'));
+    http.Response response = await http
+        .post(Uri.parse(
+            '$Url/appointment/add/${widget.cid}/$uid/$formattedDate/${time_appointment.text}/${symptom.text}/${widget.clinic_name}/${widget.doctor_name}'))
+        .then((value) {
+      print("success");
+    });
 
-    print("Success");
+    print("cid : " + widget.cid);
+    print("Clinic Nmae : " + widget.clinic_name);
+    print("Doctor Nmae : " + widget.doctor_name);
+
+    print("uid : " + uid);
+    print("Date : " + formattedDate);
+    print("time : " + time_appointment.text);
+    print("symptom : " + symptom.text);
+
     startTime();
   }
 
@@ -64,7 +72,7 @@ class _Page_AppointmentState extends State<Page_Appointment> {
   }
 
   startTime() async {
-    var duration = new Duration(seconds: 1);
+    var duration = new Duration(seconds: 3);
     return new Timer(duration, route);
   }
 

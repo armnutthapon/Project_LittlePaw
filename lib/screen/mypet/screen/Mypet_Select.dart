@@ -232,6 +232,22 @@ class Page_SelectPetState extends State<Page_SelectPet> {
           left: 0.0,
           right: 0.0,
           child: AppBar(
+            actions: <Widget>[
+              Container(
+                margin: EdgeInsets.only(right: 20),
+                child: IconButton(
+                  icon: Icon(
+                    FontAwesomeIcons.trash,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                  tooltip: 'แชร์ข้อมูล',
+                  onPressed: () {
+                    deletePet(widget.pid);
+                  },
+                ),
+              )
+            ],
             title: Text(widget.pet_name,
                 style: TextStyle(
                     fontSize: 22,

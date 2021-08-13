@@ -59,8 +59,8 @@ class _ShowNotificationState extends State<ShowNotification> {
     final User userId = await auth.currentUser;
     final String uid = await userId.uid;
 
-    http.Response response = await http.get(Uri.parse(
-        '$Url/appointment/notificationByID/EYJwhgDVqPRQJnoWu7PnWg8nWJs1'));
+    http.Response response =
+        await http.get(Uri.parse('$Url/appointment/notificationByID/$uid'));
 
     this.setState(() {
       data = json.decode(response.body);
@@ -73,7 +73,7 @@ class _ShowNotificationState extends State<ShowNotification> {
       // aa =  DateFormat("dd-M-yyyy hh:mm:ss").parse(formattedDate);
     });
     print(focusedDay);
-    print(data[data.length - 1]['time_notification']);
+    // print(data[data.length - 1]['time_notification']);
     return data;
   }
 
