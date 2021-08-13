@@ -54,6 +54,25 @@ class findClinicMain extends StatefulWidget {
 }
 
 class _findClinicMainState extends State<findClinicMain> {
+  List data;
+  var cid;
+
+  getClinic() async {
+    http.Response response = await http.get(Uri.parse('$Url/clinic'));
+
+    setState(() {
+      data = json.decode(response.body);
+    });
+    print(data);
+    return data;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getClinic();
+  }
+
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
@@ -153,10 +172,121 @@ class _findClinicMainState extends State<findClinicMain> {
               SingleChildScrollView(
                   child: Column(
                 children: [
-                  Container(
-                    height: size.height * 0.6,
-                    child: showclinicdetail(),
-                  ),
+                  data != null
+                      ? Container(
+                          height: size.height * 0.6,
+                          child: ListView.builder(
+                              itemCount: data == null ? 0 : data.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        cid = data[index]['_id'];
+                                      });
+
+                                      var cid_sendRoute = new MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              Page_ClinicDetail(cid: cid));
+
+                                      Navigator.of(context)
+                                          .push(cid_sendRoute)
+                                          .then((value) {
+                                        setState(() {});
+                                      });
+                                    },
+                                    // onTap: () {
+                                    //   Navigator.of(context).push(MaterialPageRoute(
+                                    //       builder: (context) => Page_ClinicDetail()));
+                                    // },
+                                    child: Card(
+                                      elevation: 5,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      margin: EdgeInsets.fromLTRB(5, 8, 5, 8),
+                                      child: Container(
+                                        child: Container(
+                                          margin:
+                                              EdgeInsets.fromLTRB(15, 2, 15, 2),
+                                          padding: EdgeInsets.fromLTRB(
+                                              10, 10, 20, 10),
+                                          height: 150,
+                                          width: 250,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                // padding: EdgeInsets.all(5),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  child: Image.asset(
+                                                    'assets/images/1.jpg',
+                                                    height: 120,
+                                                    width: 120,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                padding: EdgeInsets.fromLTRB(
+                                                    15, 0, 0, 0),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      data[index]
+                                                          ['clinic_name'],
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontFamily: 'Mitr'),
+                                                    ),
+                                                    Text(
+                                                      "3.5 กิโลเมตร",
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontFamily: 'Mitr'),
+                                                    ),
+                                                    Text(
+                                                      data[index]['address'][0]
+                                                          ['city'],
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontFamily: 'Mitr'),
+                                                    ),
+                                                    Text(
+                                                      data[index]
+                                                          ['opening_time'],
+                                                      style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontFamily: 'Mitr'),
+                                                    )
+                                                  ],
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ));
+                              }))
+                      : Center(child: CircularProgressIndicator())
                 ],
               )),
             ],
@@ -164,208 +294,5 @@ class _findClinicMainState extends State<findClinicMain> {
         ),
       ),
     );
-  }
-}
-
-class showclinicdetail extends StatefulWidget {
-  showclinicdetail({Key key}) : super(key: key);
-
-  @override
-  _showclinicdetailState createState() => _showclinicdetailState();
-}
-
-class _showclinicdetailState extends State<showclinicdetail> {
-  List data;
-  var cid;
-  // var building;
-  // var alley;
-  // var street;
-  // var city;
-  // var province;
-  // var opening_time;
-  // var closed;
-  // var phone_number;
-
-  getClinic() async {
-    http.Response response = await http.get(Uri.parse('$Url/clinic'));
-
-    setState(() {
-      data = json.decode(response.body);
-    });
-    print(data);
-    return data;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getClinic();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: data == null ? 0 : data.length,
-        itemBuilder: (BuildContext context, int index) {
-          return InkWell(
-              onTap: () {
-                setState(() {
-                  cid = data[index]['_id'];
-                });
-                print("cid :    " + cid);
-
-                var cid_sendRoute = new MaterialPageRoute(
-                    builder: (BuildContext context) => Page_ClinicDetail(
-                        cid: cid // clinic_name: data[index]['clinic_name'],
-                        // doctor_name: data[index]['doctor_name'],
-                        ));
-                // print(
-                //   data[index]['_id'],
-                // );
-                Navigator.of(context).push(cid_sendRoute).then((value) {
-                  setState(() {});
-                });
-              },
-              // onTap: () {
-              //   Navigator.of(context).push(MaterialPageRoute(
-              //       builder: (context) => Page_ClinicDetail()));
-              // },
-              child: Card(
-                elevation: 5,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
-                margin: EdgeInsets.fromLTRB(5, 8, 5, 8),
-                child: Container(
-                  child: Container(
-                    margin: EdgeInsets.fromLTRB(15, 2, 15, 2),
-                    padding: EdgeInsets.fromLTRB(10, 10, 20, 10),
-                    height: 150,
-                    width: 250,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          // padding: EdgeInsets.all(5),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.asset(
-                              'assets/images/1.jpg',
-                              height: 120,
-                              width: 120,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                data[index]['clinic_name'],
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily: 'Mitr'),
-                              ),
-                              Text(
-                                "3.5 กิโลเมตร",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                    fontFamily: 'Mitr'),
-                              ),
-                              Text(
-                                data[index]['address'][0]['city'],
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                    fontFamily: 'Mitr'),
-                              ),
-                              Text(
-                                data[index]['opening_time'],
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                    fontFamily: 'Mitr'),
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              )
-              // ClinicCard(
-              //         clinicname: data[index]['clinic_name'],
-              //         distance: "3.5 กิโลเมตร",
-              //         location: data[index]['address'][0]['city'],
-              //         time: data[index]['opening_time']),
-              );
-        });
-    // padding: EdgeInsets.all(10),
-    // children: [
-    //   InkWell(
-    //     onTap: () {
-    //       Navigator.of(context).push(
-    //           MaterialPageRoute(builder: (context) => Page_ClinicDetail()));
-    //     },
-    //     child: ClinicCard(
-    //         clinicname: "คลินิคหมอตู่",
-    //         distance: "3.5 กิโลเมตร",
-    //         location: "ป่าตอง",
-    //         time: "เปิด 07.00 - 15.00 น."),
-    //   ),
-    //   InkWell(
-    //     onTap: () {
-    //       Navigator.of(context).push(
-    //           MaterialPageRoute(builder: (context) => Page_ClinicDetail()));
-    //     },
-    //     child: ClinicCard(
-    //         clinicname: "คลินิคหมอประวิทย์",
-    //         distance: "0.1 กิโลเมตร",
-    //         location: "กะทู้",
-    //         time: "เปิด 09.00 - 12.00 น."),
-    //   ),
-    //   InkWell(
-    //     onTap: () {
-    //       Navigator.of(context).push(
-    //           MaterialPageRoute(builder: (context) => Page_ClinicDetail()));
-    //     },
-    //     child: ClinicCard(
-    //         clinicname: "รักษาสัตว์หมอนัส",
-    //         distance: "2.5 กิโลเมตร",
-    //         location: "บางลา",
-    //         time: "เปิด 10.00 - 12.00 น."),
-    //   ),
-    //   InkWell(
-    //     onTap: () {
-    //       Navigator.of(context).push(
-    //           MaterialPageRoute(builder: (context) => Page_ClinicDetail()));
-    //     },
-    //     child: ClinicCard(
-    //         clinicname: "รักษาสัตว์หมอนัส",
-    //         distance: "2.5 กิโลเมตร",
-    //         location: "บางลา",
-    //         time: "เปิด 10.00 - 12.00 น."),
-    //   ),
-    //   InkWell(
-    //     onTap: () {
-    //       Navigator.of(context).push(
-    //           MaterialPageRoute(builder: (context) => Page_ClinicDetail()));
-    //     },
-    //     child: ClinicCard(
-    //         clinicname: "รักษาสัตว์หมอนัส",
-    //         distance: "2.5 กิโลเมตร",
-    //         location: "บางลา",
-    //         time: "เปิด 10.00 - 12.00 น."),
-    //   ),
-    // ],
   }
 }

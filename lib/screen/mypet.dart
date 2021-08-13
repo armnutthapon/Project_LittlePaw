@@ -95,78 +95,78 @@ class _MainPetState extends State<MainPet> {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
 
     return Scaffold(
-      backgroundColor: Colors.grey.shade100,
-      body: Center(
-          child: GridView.builder(
-        primary: false,
-        padding: const EdgeInsets.all(20),
-        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-          childAspectRatio: mediaQueryData.size.height / 900,
-          crossAxisSpacing: 20,
-          mainAxisSpacing: 20,
-          maxCrossAxisExtent: 200.0,
-        ),
-        itemCount: data == null ? 0 : data.length,
-        itemBuilder: (BuildContext context, int index) {
-          //print(data[index]);
-          return Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            color: Colors.white,
-            elevation: 5,
-            child: InkWell(
-              onTap: () {
-                setState(() {
-                  pid = data[index]['_id'];
-                });
-                print("PID :    " + pid);
-
-                var pid_sendRoute = new MaterialPageRoute(
-                    builder: (BuildContext context) => Page_SelectPet(
-                        pid: data[index]['_id'],
-                        pet_name: data[index]['pet_name']));
-
-                Navigator.of(context).push(pid_sendRoute).then((value) {
-                  setState(() {});
-                });
-              },
-              child: Center(
-                  child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10.0),
-                    child: ClipRRect(
+        backgroundColor: Colors.grey.shade100,
+        body: data != null
+            ? Center(
+                child: GridView.builder(
+                primary: false,
+                padding: const EdgeInsets.all(20),
+                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                  childAspectRatio: mediaQueryData.size.height / 900,
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 20,
+                  maxCrossAxisExtent: 200.0,
+                ),
+                itemCount: data == null ? 0 : data.length,
+                itemBuilder: (BuildContext context, int index) {
+                  //print(data[index]);
+                  return Card(
+                    shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
-                      child: data == null
-                          ? ''
-                          : Image.asset(
-                              'assets/images/1.jpg',
-                              height: 120.0,
-                              width: 120.0,
-                              fit: BoxFit.cover,
-                            ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10),
-                    child: data == null
-                        ? ''
-                        : Text(
-                            data[index]['pet_name'],
-                            style: TextStyle(
-                                color: Colors.red.shade400,
-                                fontSize: 16,
-                                fontWeight: FontWeight.normal,
-                                fontFamily: 'Mitr'),
+                    color: Colors.white,
+                    elevation: 5,
+                    child: InkWell(
+                      onTap: () {
+                        setState(() {
+                          pid = data[index]['_id'];
+                        });
+
+                        var pid_sendRoute = new MaterialPageRoute(
+                            builder: (BuildContext context) => Page_SelectPet(
+                                pid: data[index]['_id'],
+                                pet_name: data[index]['pet_name']));
+
+                        Navigator.of(context).push(pid_sendRoute).then((value) {
+                          setState(() {});
+                        });
+                      },
+                      child: Center(
+                          child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10.0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: data == null
+                                  ? ''
+                                  : Image.asset(
+                                      'assets/images/1.jpg',
+                                      height: 120.0,
+                                      width: 120.0,
+                                      fit: BoxFit.cover,
+                                    ),
+                            ),
                           ),
-                  ),
-                ],
-              )),
-            ),
-          );
-        },
-      )),
-    );
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: data == null
+                                ? ''
+                                : Text(
+                                    data[index]['pet_name'],
+                                    style: TextStyle(
+                                        color: Colors.red.shade400,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily: 'Mitr'),
+                                  ),
+                          ),
+                        ],
+                      )),
+                    ),
+                  );
+                },
+              ))
+            : Center(child: CircularProgressIndicator()));
   }
 }
