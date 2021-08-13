@@ -221,8 +221,8 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                                   deletePet(widget.pid);
                                 },
                                 child: DeleteMypet_ButtonInfo(
-                                  text: "ลบข้อมูลสัตว์เลี้ยง",
-                                  icon: FontAwesomeIcons.trash,
+                                  text: "แชร์",
+                                  icon: FontAwesomeIcons.share,
                                 ),
                               ),
                             ),
