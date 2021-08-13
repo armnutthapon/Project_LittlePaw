@@ -27,21 +27,17 @@ class Page_SelectPet extends StatefulWidget {
 class Page_SelectPetState extends State<Page_SelectPet> {
   List data;
 
-  // getPetDetail() async {
-  //   http.Response response =
-  //       await http.get(Uri.parse('$Url/appointment/notificationByID/$uid'));
+  var send_pid;
 
-  //   this.setState(() {
-  //     data = json.decode(response.body);
-  //   });
-  //   return data;
-  // }
+  getPetDetail() async {
+    http.Response response =
+        await http.get(Uri.parse('$Url/petDetail/showByID/${widget.pid}'));
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   getPetDetail();
-  // }
+    this.setState(() {
+      data = json.decode(response.body);
+    });
+    return data;
+  }
 
   deletePetByID(pid) async {
     http.Response response =
@@ -52,6 +48,7 @@ class Page_SelectPetState extends State<Page_SelectPet> {
   @override
   void initState() {
     super.initState();
+    getPetDetail();
   }
 
   deletePet(pid) {
@@ -160,9 +157,19 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                               elevation: 5,
                               child: InkWell(
                                 onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) =>
-                                          Page_PetInformations()));
+                                  setState(() {
+                                    send_pid = widget.pid;
+                                  });
+
+                                  var cid_sendRoute = new MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          Page_PetInformations(pid: send_pid));
+
+                                  Navigator.of(context)
+                                      .push(cid_sendRoute)
+                                      .then((value) {
+                                    setState(() {});
+                                  });
                                 },
                                 child: Mypet_ButtonInfo(
                                   text: "ข้อมูลสัตว์เลี้ยง",
@@ -267,202 +274,3 @@ class Page_SelectPetState extends State<Page_SelectPet> {
     );
   }
 }
-
-// class selectedPet extends StatefulWidget {
-//   final String pid;
-//   const selectedPet({
-//     Key key,
-//     this.pid,
-//   }) : super(key: key);
-
-//   @override
-//   _selectedPetState createState() => _selectedPetState();
-// }
-
-// class _selectedPetState extends State<selectedPet> {
-//   List data;
-
-//   deletePetByID() async {
-//     http.Response response =
-//         await http.delete(Uri.parse('$Url/petDetail/deletePet/$pid'));
-
-//     Navigator.of(context).pop();
-//     print("Succes");
-//   }
-
-//   @override
-//   void initState() {
-//     super.initState();
-//   }
-
-//   deletePet(BuildContext context) {
-//     return showDialog(
-//         context: context,
-//         builder: (BuildContext context) {
-//           return AlertDialog(
-//             shape: RoundedRectangleBorder(
-//               borderRadius: BorderRadius.circular(10),
-//             ),
-//             title: Text(
-//               "ลบข้อมูลสัตว์เลี้ยง",
-//               style: TextStyle(
-//                   fontSize: 18,
-//                   color: Colors.black,
-//                   fontWeight: FontWeight.w400,
-//                   fontFamily: 'Mitr'),
-//             ),
-//             actions: [
-//               FlatButton(
-//                   shape: RoundedRectangleBorder(
-//                       borderRadius: BorderRadius.circular(10.0)),
-//                   color: Colors.green,
-//                   onPressed: () {
-//                     deletePetByID();
-//                   },
-//                   child: Text(
-//                     'ยืนยัน',
-//                     style: TextStyle(
-//                         fontSize: 18,
-//                         color: Colors.white,
-//                         fontWeight: FontWeight.w400,
-//                         fontFamily: 'Mitr'),
-//                   )),
-//               FlatButton(
-//                 shape: RoundedRectangleBorder(
-//                     borderRadius: BorderRadius.circular(10.0)),
-//                 color: Colors.red,
-//                 onPressed: () => Navigator.of(context).pop(),
-//                 child: Text(
-//                   'ยกเลิก',
-//                   style: TextStyle(
-//                       fontSize: 18,
-//                       color: Colors.white,
-//                       fontWeight: FontWeight.w400,
-//                       fontFamily: 'Mitr'),
-//                 ),
-//               )
-//             ],
-//           );
-//         });
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     Size size = MediaQuery.of(context).size;
-//     MediaQueryData mediaQueryData = MediaQuery.of(context);
-
-//     return Scaffold(
-//       backgroundColor: Colors.grey.shade800,
-//       body: SafeArea(
-//         child: SingleChildScrollView(
-//           child: Container(
-//             child: Column(
-//               children: <Widget>[
-//                 SizedBox(
-//                   height: size.height * 0.05,
-//                 ),
-//                 Container(
-//                   margin: EdgeInsets.only(top: 50),
-//                   child: Column(
-//                     children: <Widget>[
-//                       Container(
-//                         child: Container(
-//                           padding: EdgeInsets.all(10),
-//                           child: ClipRRect(
-//                             borderRadius: BorderRadius.circular(10),
-//                             child: Image.asset(
-//                               'assets/images/1.jpg',
-//                               height: 140,
-//                               width: 140,
-//                               fit: BoxFit.fill,
-//                             ),
-//                           ),
-//                         ),
-//                       ),
-//                     ],
-//                   ),
-//                 ),
-//                 Container(
-//                     height: size.height * 0.5,
-//                     child: GridView.extent(
-//                       childAspectRatio: mediaQueryData.size.height / 700,
-//                       primary: false,
-//                       padding: const EdgeInsets.all(30),
-//                       crossAxisSpacing: 25,
-//                       mainAxisSpacing: 25,
-//                       maxCrossAxisExtent: 200.0,
-//                       children: <Widget>[
-//                         Card(
-//                           color: Colors.lightBlue.shade200,
-//                           shape: RoundedRectangleBorder(
-//                               borderRadius: BorderRadius.circular(10)),
-//                           elevation: 5,
-//                           child: InkWell(
-//                             onTap: () {
-//                               Navigator.of(context).push(MaterialPageRoute(
-//                                   builder: (context) =>
-//                                       Page_PetInformations()));
-//                             },
-//                             child: Mypet_ButtonInfo(
-//                               text: "ข้อมูลสัตว์เลี้ยง",
-//                               icon: FontAwesomeIcons.stethoscope,
-//                             ),
-//                           ),
-//                         ),
-//                         Card(
-//                           color: Colors.lightBlue.shade200,
-//                           shape: RoundedRectangleBorder(
-//                               borderRadius: BorderRadius.circular(10)),
-//                           elevation: 5,
-//                           child: InkWell(
-//                             onTap: () {
-//                               Navigator.of(context).push(MaterialPageRoute(
-//                                   builder: (context) => Page_PetMedical()));
-//                             },
-//                             child: Mypet_ButtonInfo(
-//                               text: "ประวัติการรักษา",
-//                               icon: FontAwesomeIcons.heartbeat,
-//                             ),
-//                           ),
-//                         ),
-//                         Card(
-//                           color: Colors.lightBlue.shade200,
-//                           shape: RoundedRectangleBorder(
-//                               borderRadius: BorderRadius.circular(10)),
-//                           elevation: 5,
-//                           child: InkWell(
-//                             onTap: () {
-//                               Navigator.of(context).push(MaterialPageRoute(
-//                                   builder: (context) => Page_PetMedical()));
-//                             },
-//                             child: Mypet_ButtonInfo(
-//                               text: "ข้อมูลวัคซีน",
-//                               icon: FontAwesomeIcons.search,
-//                             ),
-//                           ),
-//                         ),
-//                         Card(
-//                           color: Colors.red.shade400,
-//                           shape: RoundedRectangleBorder(
-//                               borderRadius: BorderRadius.circular(10)),
-//                           elevation: 5,
-//                           child: InkWell(
-//                             onTap: () {
-//                               deletePet(context);
-//                             },
-//                             child: DeleteMypet_ButtonInfo(
-//                               text: "ลบข้อมูลสัตว์เลี้ยง",
-//                               icon: FontAwesomeIcons.trash,
-//                             ),
-//                           ),
-//                         ),
-//                       ],
-//                     ))
-//               ],
-//             ),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }

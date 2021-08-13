@@ -110,61 +110,66 @@ class _MainPetState extends State<MainPet> {
                 itemCount: data == null ? 0 : data.length,
                 itemBuilder: (BuildContext context, int index) {
                   //print(data[index]);
-                  return Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    color: Colors.white,
-                    elevation: 5,
-                    child: InkWell(
-                      onTap: () {
-                        setState(() {
-                          pid = data[index]['_id'];
-                        });
-
-                        var pid_sendRoute = new MaterialPageRoute(
-                            builder: (BuildContext context) => Page_SelectPet(
-                                pid: data[index]['_id'],
-                                pet_name: data[index]['pet_name']));
-
-                        Navigator.of(context).push(pid_sendRoute).then((value) {
-                          setState(() {});
-                        });
-                      },
-                      child: Center(
-                          child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10.0),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: data == null
-                                  ? ''
-                                  : Image.asset(
-                                      'assets/images/1.jpg',
-                                      height: 120.0,
-                                      width: 120.0,
-                                      fit: BoxFit.cover,
-                                    ),
-                            ),
+                  return data == null
+                      ? 0
+                      : Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10),
-                            child: data == null
-                                ? ''
-                                : Text(
-                                    data[index]['pet_name'],
-                                    style: TextStyle(
-                                        color: Colors.red.shade400,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.normal,
-                                        fontFamily: 'Mitr'),
+                          color: Colors.white,
+                          elevation: 5,
+                          child: InkWell(
+                            onTap: () {
+                              setState(() {
+                                pid = data[index]['_id'];
+                              });
+
+                              var pid_sendRoute = new MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      Page_SelectPet(
+                                          pid: data[index]['_id'],
+                                          pet_name: data[index]['pet_name']));
+
+                              Navigator.of(context)
+                                  .push(pid_sendRoute)
+                                  .then((value) {
+                                setState(() {});
+                              });
+                            },
+                            child: Center(
+                                child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 10.0),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: data == null
+                                        ? null
+                                        : Image.asset(
+                                            'assets/images/1.jpg',
+                                            height: 120.0,
+                                            width: 120.0,
+                                            fit: BoxFit.cover,
+                                          ),
                                   ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 10),
+                                  child: data == null
+                                      ? null
+                                      : Text(
+                                          data[index]['pet_name'],
+                                          style: TextStyle(
+                                              color: Colors.red.shade400,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.normal,
+                                              fontFamily: 'Mitr'),
+                                        ),
+                                ),
+                              ],
+                            )),
                           ),
-                        ],
-                      )),
-                    ),
-                  );
+                        );
                 },
               ))
             : Center(child: CircularProgressIndicator()));

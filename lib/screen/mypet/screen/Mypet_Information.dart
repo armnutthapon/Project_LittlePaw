@@ -3,7 +3,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:little_paw/screen/mypet/component/mypet_petInfo.dart';
 
 class Page_PetInformations extends StatefulWidget {
-  const Page_PetInformations({Key key}) : super(key: key);
+  final String pid;
+
+  const Page_PetInformations({Key key, this.pid}) : super(key: key);
 
   @override
   _Page_PetInformationsState createState() => _Page_PetInformationsState();
@@ -81,7 +83,7 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
                       fontFamily: 'Mitr'),
                   children: const <TextSpan>[
                     TextSpan(
-                      text: 'TUU007',
+                      text: " widget.pid",
                       style: TextStyle(
                           fontSize: 18,
                           color: Colors.black,
