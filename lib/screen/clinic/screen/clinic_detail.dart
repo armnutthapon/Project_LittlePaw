@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:little_paw/screen/clinic.dart';
 import 'package:little_paw/screen/clinic/component/clinic_clinicButton.dart';
 import 'package:little_paw/screen/clinic/component/clinic_showAddress.dart';
 import 'package:little_paw/screen/clinic/component/clinic_showText.dart';
@@ -24,8 +25,11 @@ class Page_ClinicDetail extends StatefulWidget {
 class _Page_ClinicDetailState extends State<Page_ClinicDetail> {
   var data;
 
-  var doctor_name = '';
-  getClinic() async {
+  var send_cid;
+  var send_doctor_name;
+  var send_clinic_name;
+
+  getClinicDetail() async {
     http.Response response =
         await http.get(Uri.parse('$Url/clinic/showByID/${widget.cid}'));
 
@@ -38,7 +42,7 @@ class _Page_ClinicDetailState extends State<Page_ClinicDetail> {
   @override
   void initState() {
     super.initState();
-    getClinic();
+    getClinicDetail();
   }
 
   @override
@@ -119,29 +123,24 @@ class _Page_ClinicDetailState extends State<Page_ClinicDetail> {
                                   color: Colors.red.shade400,
                                   onPressed: () {
                                     setState(() {
-                                      // print(widget.cid);
-                                      // print(widget.clinic_name);
-                                      // print(widget.doctor_name);
+                                      send_cid = data['_id'];
+                                      send_doctor_name = data['doctor_name'];
+                                      send_clinic_name = data['clinic_name'];
                                     });
 
-                                    var homeRounte = new MaterialPageRoute(
+                                    var cid_sendRoute = new MaterialPageRoute(
                                         builder: (BuildContext context) =>
-                                            Page_Appointment());
+                                            Page_Appointment(
+                                                cid: send_cid,
+                                                doctor_name: send_doctor_name,
+                                                clinic_name: send_clinic_name));
 
                                     Navigator.of(context)
-                                        .push(homeRounte)
+                                        .push(cid_sendRoute)
                                         .then((value) {
-                                      setState(() {
-                                        print("set state complete");
-                                      });
+                                      setState(() {});
                                     });
                                   },
-                                  // onPressed: () {
-                                  //   Navigator.push(context,
-                                  //       MaterialPageRoute(builder: (context) {
-                                  //     return Page_Appointment();
-                                  //   }));
-                                  // },
                                   child: Text(
                                     "จองคิว",
                                     style: TextStyle(
