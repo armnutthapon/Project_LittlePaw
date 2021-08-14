@@ -78,220 +78,182 @@ class _findClinicMainState extends State<findClinicMain> {
 
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
-      body: SingleChildScrollView(
-        child: Container(
-          alignment: Alignment.center,
-          height: size.height,
-          child: Column(
-            children: [
-              SizedBox(
-                height: size.height * 0.15,
-                //  height: size.height * 0.05,
-              ),
-              Container(
-                  // color: Colors.amber,
-                  padding: EdgeInsets.fromLTRB(0, 10, 10, 0),
-                  child: ListTile(
-                      title: Container(
-                        child: Row(
-                          children: <Widget>[
-                            Expanded(
-                              child: TextFormField(
-                                cursorColor: Colors.red.shade400,
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w300,
-                                    fontFamily: 'Mitr'),
-                                decoration: new InputDecoration(
-                                  border: InputBorder.none,
-                                  focusedBorder: InputBorder.none,
-                                  enabledBorder: InputBorder.none,
-                                  errorBorder: InputBorder.none,
-                                  disabledBorder: InputBorder.none,
-                                  contentPadding: EdgeInsets.only(
-                                      left: 20, bottom: 11, top: 11, right: 0),
-                                  hintText: "ค้นหาคลินิก",
-                                  prefixIcon: IconButton(
-                                      icon: Icon(
-                                        Icons.search,
-                                        size: 20,
-                                        color: Colors.red.shade400,
+      body: Column(
+        children: [
+          SizedBox(
+            height: size.height * 0.15,
+            //  height: size.height * 0.05,
+          ),
+          Container(
+              // color: Colors.amber,
+              padding: EdgeInsets.fromLTRB(0, 10, 10, 0),
+              child: ListTile(
+                  title: Container(
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: TextFormField(
+                            cursorColor: Colors.red.shade400,
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w300,
+                                fontFamily: 'Mitr'),
+                            decoration: new InputDecoration(
+                              border: InputBorder.none,
+                              focusedBorder: InputBorder.none,
+                              enabledBorder: InputBorder.none,
+                              errorBorder: InputBorder.none,
+                              disabledBorder: InputBorder.none,
+                              contentPadding: EdgeInsets.only(
+                                  left: 20, bottom: 11, top: 11, right: 0),
+                              hintText: "ค้นหาคลินิก",
+                              prefixIcon: IconButton(
+                                  icon: Icon(
+                                    Icons.search,
+                                    size: 20,
+                                    color: Colors.red.shade400,
+                                  ),
+                                  onPressed: () {}),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black45,
+                          offset: Offset(2, 2),
+                          blurRadius: 4,
+                        ),
+                      ],
+                    ),
+                  ),
+                  trailing: Container(
+                    child: IconButton(
+                      icon: new Icon(
+                        FontAwesomeIcons.filter,
+                        size: 20,
+                      ),
+                      color: Colors.red.shade400,
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => Page_FilterClinic()));
+                      },
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black45,
+                          offset: Offset(2, 2),
+                          blurRadius: 4,
+                        ),
+                      ],
+                    ),
+                  ))),
+          data != null
+              ? Expanded(
+                  child: ListView.builder(
+                      padding: EdgeInsets.zero,
+                      itemCount: data == null ? 0 : data.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return InkWell(
+                          onTap: () {
+                            setState(() {
+                              cid = data[index]['_id'];
+                            });
+
+                            var cid_sendRoute = new MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    Page_ClinicDetail(cid: cid));
+
+                            Navigator.of(context)
+                                .push(cid_sendRoute)
+                                .then((value) {
+                              setState(() {});
+                            });
+                          },
+                          child: Card(
+                            elevation: 5,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            margin: EdgeInsets.fromLTRB(5, 8, 5, 8),
+                            child: Container(
+                              margin: EdgeInsets.fromLTRB(15, 2, 15, 2),
+                              padding: EdgeInsets.fromLTRB(10, 10, 20, 10),
+                              height: 150,
+                              width: 250,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    // padding: EdgeInsets.all(5),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Image.asset(
+                                        'assets/images/1.jpg',
+                                        height: 120,
+                                        width: 120,
+                                        fit: BoxFit.cover,
                                       ),
-                                      onPressed: () {}),
-                                ),
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          data[index]['clinic_name'],
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                              fontFamily: 'Mitr'),
+                                        ),
+                                        Text(
+                                          "3.5 กิโลเมตร",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w400,
+                                              fontFamily: 'Mitr'),
+                                        ),
+                                        Text(
+                                          data[index]['address'][0]['city'],
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w400,
+                                              fontFamily: 'Mitr'),
+                                        ),
+                                        Text(
+                                          data[index]['opening_time'],
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w400,
+                                              fontFamily: 'Mitr'),
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                ],
                               ),
                             ),
-                          ],
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black45,
-                              offset: Offset(2, 2),
-                              blurRadius: 4,
-                            ),
-                          ],
-
-                          // boxShadow: [
-                          //   BoxShadow(
-                          //       color: Colors.black45,
-                          //       offset: Offset(2, 2),
-                          //       blurRadius: 4
-                          //       // changes position of shadow
-                          //       ),
-                          // ],
-                        ),
-                      ),
-                      trailing: Container(
-                        child: IconButton(
-                          icon: new Icon(
-                            FontAwesomeIcons.filter,
-                            size: 20,
                           ),
-                          color: Colors.red.shade400,
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => Page_FilterClinic()));
-                          },
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black45,
-                              offset: Offset(2, 2),
-                              blurRadius: 4,
-                            ),
-                          ],
-                        ),
-                      ))),
-              SingleChildScrollView(
-                  child: Column(
-                children: [
-                  data != null
-                      ? Container(
-                          height: size.height * 0.6,
-                          child: ListView.builder(
-                              itemCount: data == null ? 0 : data.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        cid = data[index]['_id'];
-                                      });
-
-                                      var cid_sendRoute = new MaterialPageRoute(
-                                          builder: (BuildContext context) =>
-                                              Page_ClinicDetail(cid: cid));
-
-                                      Navigator.of(context)
-                                          .push(cid_sendRoute)
-                                          .then((value) {
-                                        setState(() {});
-                                      });
-                                    },
-                                    // onTap: () {
-                                    //   Navigator.of(context).push(MaterialPageRoute(
-                                    //       builder: (context) => Page_ClinicDetail()));
-                                    // },
-                                    child: Card(
-                                      elevation: 5,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      margin: EdgeInsets.fromLTRB(5, 8, 5, 8),
-                                      child: Container(
-                                        child: Container(
-                                          margin:
-                                              EdgeInsets.fromLTRB(15, 2, 15, 2),
-                                          padding: EdgeInsets.fromLTRB(
-                                              10, 10, 20, 10),
-                                          height: 150,
-                                          width: 250,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                // padding: EdgeInsets.all(5),
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  child: Image.asset(
-                                                    'assets/images/1.jpg',
-                                                    height: 120,
-                                                    width: 120,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                              Container(
-                                                padding: EdgeInsets.fromLTRB(
-                                                    15, 0, 0, 0),
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      data[index]
-                                                          ['clinic_name'],
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontFamily: 'Mitr'),
-                                                    ),
-                                                    Text(
-                                                      "3.5 กิโลเมตร",
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontFamily: 'Mitr'),
-                                                    ),
-                                                    Text(
-                                                      data[index]['address'][0]
-                                                          ['city'],
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontFamily: 'Mitr'),
-                                                    ),
-                                                    Text(
-                                                      data[index]
-                                                          ['opening_time'],
-                                                      style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontFamily: 'Mitr'),
-                                                    )
-                                                  ],
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ));
-                              }))
-                      : Center(child: CircularProgressIndicator())
-                ],
-              )),
-            ],
-          ),
-        ),
+                        );
+                      }))
+              : Center(child: CircularProgressIndicator())
+        ],
       ),
     );
   }

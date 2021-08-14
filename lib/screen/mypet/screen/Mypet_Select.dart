@@ -33,8 +33,7 @@ class Page_SelectPetState extends State<Page_SelectPet> {
   getPetDetail() async {
     http.Response response =
         await http.get(Uri.parse('$Url/petDetail/showByID/${widget.pid}'));
-
-    this.setState(() {
+    setState(() {
       data = json.decode(response.body);
     });
     return data;

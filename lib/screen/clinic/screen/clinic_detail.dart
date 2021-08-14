@@ -32,7 +32,7 @@ class _Page_ClinicDetailState extends State<Page_ClinicDetail> {
   getClinicDetail() async {
     http.Response response =
         await http.get(Uri.parse('$Url/clinic/showByID/${widget.cid}'));
-
+    print("CID :: :" + widget.cid);
     setState(() {
       data = json.decode(response.body);
     });
