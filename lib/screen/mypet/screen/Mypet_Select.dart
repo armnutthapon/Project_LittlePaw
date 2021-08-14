@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:little_paw/screen/mypet.dart';
@@ -40,8 +41,12 @@ class Page_SelectPetState extends State<Page_SelectPet> {
   }
 
   deletePetByID(pid) async {
+    final FirebaseAuth auth = await FirebaseAuth.instance;
+    final User userId = await auth.currentUser;
+    final String uid = await userId.uid;
+    print(uid);
     http.Response response =
-        await http.delete(Uri.parse('$Url/petDetail/deletePet/$pid'));
+        await http.delete(Uri.parse('$Url/petDetail/deletePet/$pid/$uid'));
     print("Succes");
   }
 
@@ -49,6 +54,50 @@ class Page_SelectPetState extends State<Page_SelectPet> {
   void initState() {
     super.initState();
     getPetDetail();
+  }
+
+  void shareID(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    var pid = AlertDialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      actions: [
+        Container(
+          height: size.height * 0.1,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              RichText(
+                text: TextSpan(
+                  text: 'ID : ',
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w300,
+                      fontFamily: 'Mitr'),
+                  children: const <TextSpan>[
+                    TextSpan(
+                      text: " widget.pid",
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: 'Mitr'),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        )
+      ],
+    );
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return pid;
+        });
   }
 
   deletePet(pid) {
@@ -110,7 +159,7 @@ class Page_SelectPetState extends State<Page_SelectPet> {
     return Scaffold(
       body: Stack(children: <Widget>[
         Scaffold(
-          backgroundColor: Colors.grey.shade800,
+          backgroundColor: Colors.grey.shade100,
           body: SafeArea(
             child: SingleChildScrollView(
               child: Container(
@@ -210,15 +259,13 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                               ),
                             ),
                             Card(
-                              color: Colors.red.shade400,
+                              color: Colors.green.shade400,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10)),
                               elevation: 5,
                               child: InkWell(
                                 onTap: () {
-                                  print(widget.pid);
-
-                                  deletePet(widget.pid);
+                                  shareID(context);
                                 },
                                 child: DeleteMypet_ButtonInfo(
                                   text: "แชร์",
