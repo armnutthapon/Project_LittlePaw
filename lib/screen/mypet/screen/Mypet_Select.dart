@@ -30,34 +30,29 @@ class Page_SelectPetState extends State<Page_SelectPet> {
 
   var send_pid;
 
-  getPetDetail() async {
-    http.Response response =
-        await http.get(Uri.parse('$Url/petDetail/showByID/${widget.pid}'));
-    setState(() {
-      data = json.decode(response.body);
-    });
-    return data;
-  }
-
   deletePetByID(pid) async {
     final FirebaseAuth auth = await FirebaseAuth.instance;
     final User userId = await auth.currentUser;
     final String uid = await userId.uid;
     print(uid);
-    http.Response response =
-        await http.delete(Uri.parse('$Url/petDetail/deletePet/$pid/$uid'));
-    print("Succes");
+    print(pid);
+    http.Response response = await http
+        .delete(Uri.parse('$Url/petDetail/deletePet/$uid/$pid'))
+        .then((value) {
+      print("DeleteSuccess");
+    });
+    Route route = MaterialPageRoute(builder: (context) => MyPet());
+    Navigator.push(context, route);
   }
 
   @override
   void initState() {
     super.initState();
-    getPetDetail();
   }
 
   void shareID(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    var pid = AlertDialog(
+    var QR = AlertDialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
@@ -77,7 +72,7 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                       fontFamily: 'Mitr'),
                   children: const <TextSpan>[
                     TextSpan(
-                      text: " widget.pid",
+                      text: "dd",
                       style: TextStyle(
                           fontSize: 18,
                           color: Colors.black,
@@ -95,7 +90,7 @@ class Page_SelectPetState extends State<Page_SelectPet> {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return pid;
+          return QR;
         });
   }
 
@@ -122,6 +117,15 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                   color: Colors.green,
                   onPressed: () {
                     deletePetByID(pid);
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => MyPet()),
+                        ModalRoute.withName('/MyPet'));
+                    // Navigator.of(context)
+                    //     .popUntil(ModalRoute.withName('/MyPet'));
+
+                    //Navigator.pop(context);
                   },
                   child: Text(
                     'ยืนยัน',
@@ -266,7 +270,7 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                                 onTap: () {
                                   shareID(context);
                                 },
-                                child: DeleteMypet_ButtonInfo(
+                                child: Share_ButtonInfo(
                                   text: "แชร์",
                                   icon: FontAwesomeIcons.share,
                                 ),
@@ -294,7 +298,7 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                     color: Colors.white,
                     size: 30,
                   ),
-                  tooltip: 'แชร์ข้อมูล',
+                  tooltip: 'ลบข้อมูล',
                   onPressed: () {
                     deletePet(widget.pid);
                   },

@@ -64,99 +64,72 @@ class _petInformationState extends State<petInformation> {
             height: size.height * 0.1,
           ),
           Container(
-            child: Container(child: showimage()),
+            child: Container(
+                child: Container(
+              margin: EdgeInsets.only(
+                top: 10,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(bottom: 10, top: 50),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.asset(
+                        'assets/images/1.jpg',
+                        height: 140,
+                        width: 140,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            )),
           ),
           Expanded(
               child: Container(
-            child: showpet(),
+            child: ListView(
+              padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+              children: [
+                PetInfo(
+                  text: "ชื่อ",
+                  textdetail: "ปีโป้",
+                ),
+                PetInfo(
+                  text: "ประเภท",
+                  textdetail: "สุนัข",
+                ),
+                PetInfo(
+                  text: "เพศ",
+                  textdetail: "ผู้",
+                ),
+                PetInfo(
+                  text: "สี",
+                  textdetail: "น้ำตาล-ขาว",
+                ),
+                PetInfo(
+                  text: "สายพันธุ์",
+                  textdetail: "บางแก้ว",
+                ),
+                PetInfo(
+                  text: "ลักษณะเฉพาะ",
+                  textdetail: "-",
+                ),
+                PetInfo(
+                  text: "อายุ",
+                  textdetail: "1 ปี",
+                ),
+                PetInfo(
+                  text: "ทำหมัน",
+                  textdetail: "ใช่",
+                ),
+              ],
+            ),
           ))
         ],
       ),
-    );
-  }
-}
-
-class showimage extends StatefulWidget {
-  showimage({Key key}) : super(key: key);
-
-  @override
-  _showimageState createState() => _showimageState();
-}
-
-class _showimageState extends State<showimage> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(
-        top: 10,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            padding: EdgeInsets.only(bottom: 10, top: 50),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.asset(
-                'assets/images/1.jpg',
-                height: 140,
-                width: 140,
-                fit: BoxFit.fill,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class showpet extends StatefulWidget {
-  const showpet({Key key}) : super(key: key);
-
-  @override
-  _showpetState createState() => _showpetState();
-}
-
-class _showpetState extends State<showpet> {
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
-      children: [
-        PetInfo(
-          text: "ชื่อ",
-          textdetail: "ปีโป้",
-        ),
-        PetInfo(
-          text: "ประเภท",
-          textdetail: "สุนัข",
-        ),
-        PetInfo(
-          text: "เพศ",
-          textdetail: "ผู้",
-        ),
-        PetInfo(
-          text: "สี",
-          textdetail: "น้ำตาล-ขาว",
-        ),
-        PetInfo(
-          text: "สายพันธุ์",
-          textdetail: "บางแก้ว",
-        ),
-        PetInfo(
-          text: "ลักษณะเฉพาะ",
-          textdetail: "-",
-        ),
-        PetInfo(
-          text: "อายุ",
-          textdetail: "1 ปี",
-        ),
-        PetInfo(
-          text: "ทำหมัน",
-          textdetail: "ใช่",
-        ),
-      ],
     );
   }
 }

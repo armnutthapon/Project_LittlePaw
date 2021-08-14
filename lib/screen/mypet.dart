@@ -18,6 +18,8 @@ class MyPet extends StatefulWidget {
 }
 
 class _MyPetState extends State<MyPet> {
+  static const routeName = '/MyPet';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,9 +42,14 @@ class _MyPetState extends State<MyPet> {
               ),
               tooltip: 'เพิ่มสัตว์เลี้ยง',
               onPressed: () {
+                // Navigator.pushNamed(context, '/Pagh').then((_) {
+                //   // This block runs when you have returned back to the 1st Page from 2nd.
+                //   setState(() {
+                //     // Call setState to refresh the page.
+                //   });
+                // });
                 Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => Page_Addpet()));
-                // setState(() {});
               },
             ),
           ),
@@ -63,7 +70,6 @@ class _MainPetState extends State<MainPet> {
   var data;
   List<Function> sendPetDetail = [];
   var pid;
-  var pet_name;
 
   final String id = "";
 
@@ -132,8 +138,10 @@ class _MainPetState extends State<MainPet> {
 
                               Navigator.of(context)
                                   .push(pid_sendRoute)
-                                  .then((value) {
-                                setState(() {});
+                                  .then((_) {
+                                setState(() {
+                                  MyPet();
+                                });
                               });
                             },
                             child: Center(

@@ -315,31 +315,6 @@ class _RegisterState extends State<Register> {
                                         ],
                                       ),
                                     ),
-                                    SizedBox(height: 20),
-                                    if (loginProvider.errorMessageRegist !=
-                                        null)
-                                      Container(
-                                        padding: EdgeInsets.all(1),
-                                        color: Colors.amber,
-                                        child: ListTile(
-                                          title: Text(
-                                              loginProvider.errorMessageRegist,
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.w400,
-                                                  fontFamily: 'Mitr')),
-                                          leading: Icon(Icons.error),
-                                          trailing: IconButton(
-                                              onPressed: () {
-                                                loginProvider
-                                                    .setMessageRegist(null);
-                                                loginProvider
-                                                    .setLoadingRegist(false);
-                                              },
-                                              icon: Icon(Icons.close)),
-                                        ),
-                                      ),
                                   ],
                                 ),
                               ),
@@ -355,7 +330,29 @@ class _RegisterState extends State<Register> {
                   ),
                 ),
               ),
-            )
+            ),
+            if (loginProvider.errorMessageRegist != null)
+              AlertDialog(
+                backgroundColor: Colors.white,
+                content: SingleChildScrollView(
+                  child: ListTile(
+                    title: Text(loginProvider.errorMessageRegist,
+                        style: TextStyle(
+                            fontSize: 13,
+                            color: Colors.red,
+                            fontWeight: FontWeight.w400,
+                            fontFamily: 'Mitr')),
+                    trailing: IconButton(
+                        color: Colors.red,
+                        iconSize: 24,
+                        onPressed: () {
+                          loginProvider.setMessageRegist(null);
+                          loginProvider.setLoadingRegist(false);
+                        },
+                        icon: Icon(Icons.close)),
+                  ),
+                ),
+              ),
           ],
         ));
   }
