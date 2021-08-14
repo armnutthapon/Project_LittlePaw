@@ -96,6 +96,9 @@ class _AddpetState extends State<Addpet> {
   var congenital_disease;
   var vaccine;
   var data, total;
+
+  bool _clicked = false;
+
   setData() {
     pet_name = _addPetName.text;
 
@@ -205,40 +208,49 @@ class _AddpetState extends State<Addpet> {
                                   width: 1.0, color: Colors.grey[200]),
                             ),
                             child: Container(
-                                height: size.height * 0.08,
-                                padding: EdgeInsets.only(left: 20, right: 20),
-                                child: DropdownButtonHideUnderline(
-                                  child: DropdownButton(
-                                    hint: Text(
-                                      "เพศ",
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w300,
-                                          fontFamily: 'Mitr'),
-                                    ),
-                                    dropdownColor: Colors.white,
-                                    value: valueGender,
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w400,
-                                        fontFamily: 'Mitr'),
-                                    onChanged: (newValue) {
-                                      setState(() {
-                                        valueGender = newValue;
-                                        _addPetGender = newValue;
-                                      });
-                                      print(_addPetGender);
-                                    },
-                                    items: listGender.map((valueItem) {
-                                      return DropdownMenuItem(
-                                          value: valueItem,
-                                          child: Text(
-                                            valueItem,
-                                          ));
-                                    }).toList(),
-                                  ),
-                                ))),
+                              alignment: Alignment.center,
+                              height: size.height * 0.08,
+                              padding: EdgeInsets.only(left: 20, right: 20),
+                              child: DropdownButtonFormField(
+                                hint: Text(
+                                  "เพศ",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w300,
+                                      fontFamily: 'Mitr'),
+                                ),
+                                isDense: false,
+                                decoration:
+                                    InputDecoration.collapsed(hintText: ''),
+                                dropdownColor: Colors.white,
+                                value: valueGender,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Mitr'),
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    valueGender = newValue;
+                                    _addPetGender = newValue;
+                                  });
+                                  print(_addPetGender);
+                                },
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'กรุณาระบุเพศ';
+                                  }
+                                  return null;
+                                },
+                                items: listGender.map((valueItem) {
+                                  return DropdownMenuItem(
+                                      value: valueItem,
+                                      child: Text(
+                                        valueItem,
+                                      ));
+                                }).toList(),
+                              ),
+                            )),
                       ),
                       Padding(
                         padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
@@ -251,38 +263,41 @@ class _AddpetState extends State<Addpet> {
                                   width: 1.0, color: Colors.grey[200]),
                             ),
                             child: Container(
-                                height: size.height * 0.08,
-                                padding: EdgeInsets.only(left: 20, right: 20),
-                                child: DropdownButtonHideUnderline(
-                                  child: DropdownButton(
-                                    hint: Text("ประเภท",
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w300,
-                                            fontFamily: 'Mitr')),
-                                    dropdownColor: Colors.white,
-                                    value: valueCategory,
+                              alignment: Alignment.center,
+                              height: size.height * 0.08,
+                              padding: EdgeInsets.only(left: 20, right: 20),
+                              child: DropdownButtonFormField(
+                                isDense: false,
+                                decoration:
+                                    InputDecoration.collapsed(hintText: ''),
+                                hint: Text("ประเภท",
                                     style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w400,
-                                        fontFamily: 'Mitr'),
-                                    onChanged: (newValue) {
-                                      setState(() {
-                                        valueCategory = newValue;
-                                        _addPetCategory = newValue;
-                                      });
-                                      print(_addPetCategory);
-                                    },
-                                    items: listCategory.map((valueItem) {
-                                      return DropdownMenuItem(
-                                          value: valueItem,
-                                          child: Text(
-                                            valueItem,
-                                          ));
-                                    }).toList(),
-                                  ),
-                                ))),
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w300,
+                                        fontFamily: 'Mitr')),
+                                dropdownColor: Colors.white,
+                                value: valueCategory,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Mitr'),
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    valueCategory = newValue;
+                                    _addPetCategory = newValue;
+                                  });
+                                  print(_addPetCategory);
+                                },
+                                items: listCategory.map((valueItem) {
+                                  return DropdownMenuItem(
+                                      value: valueItem,
+                                      child: Text(
+                                        valueItem,
+                                      ));
+                                }).toList(),
+                              ),
+                            )),
                       ),
                       Padding(
                         padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
@@ -451,38 +466,41 @@ class _AddpetState extends State<Addpet> {
                                   width: 1.0, color: Colors.grey[200]),
                             ),
                             child: Container(
-                                height: size.height * 0.08,
-                                padding: EdgeInsets.only(left: 20, right: 20),
-                                child: DropdownButtonHideUnderline(
-                                  child: DropdownButton(
-                                    hint: Text("การทำหมัน",
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w300,
-                                            fontFamily: 'Mitr')),
-                                    dropdownColor: Colors.white,
-                                    value: valueSterilize,
+                              alignment: Alignment.center,
+                              height: size.height * 0.08,
+                              padding: EdgeInsets.only(left: 20, right: 20),
+                              child: DropdownButtonFormField(
+                                isDense: false,
+                                decoration:
+                                    InputDecoration.collapsed(hintText: ''),
+                                hint: Text("การทำหมัน",
                                     style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w400,
-                                        fontFamily: 'Mitr'),
-                                    onChanged: (newValue) {
-                                      setState(() {
-                                        valueSterilize = newValue;
-                                        _addPetSterilize = newValue;
-                                      });
-                                      print(_addPetSterilize);
-                                    },
-                                    items: listSterilize.map((valueItem) {
-                                      return DropdownMenuItem(
-                                          value: valueItem,
-                                          child: Text(
-                                            valueItem,
-                                          ));
-                                    }).toList(),
-                                  ),
-                                ))),
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w300,
+                                        fontFamily: 'Mitr')),
+                                dropdownColor: Colors.white,
+                                value: valueSterilize,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Mitr'),
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    valueSterilize = newValue;
+                                    _addPetSterilize = newValue;
+                                  });
+                                  print(_addPetSterilize);
+                                },
+                                items: listSterilize.map((valueItem) {
+                                  return DropdownMenuItem(
+                                      value: valueItem,
+                                      child: Text(
+                                        valueItem,
+                                      ));
+                                }).toList(),
+                              ),
+                            )),
                       ),
                       Container(
                         margin: EdgeInsets.only(top: 10, bottom: 20),
@@ -491,19 +509,24 @@ class _AddpetState extends State<Addpet> {
                           children: [
                             MaterialButton(
                               height: 40.0,
-                              onPressed: () {
-                                if (_formkey.currentState.validate()) ;
-                                if (_addPetSterilize == "ทำหมันแล้ว") {
-                                  setState(() {
-                                    _addPetSterilize = "true";
-                                  });
-                                  print(_addPetSterilize);
-                                } else {
-                                  _addPetSterilize = "false";
-                                  print(_addPetSterilize);
-                                }
-                                addPetDetail();
-                              },
+                              onPressed: _clicked
+                                  ? null
+                                  : () {
+                                      if (_formkey.currentState.validate()) {
+                                        _clicked = true;
+                                        if (_addPetSterilize == "ทำหมันแล้ว") {
+                                          setState(() {
+                                            _addPetSterilize = "true";
+                                          });
+                                          print(_addPetSterilize);
+                                        } else {
+                                          _addPetSterilize = "false";
+                                          print(_addPetSterilize);
+                                        }
+                                        addPetDetail();
+                                      }
+                                      ;
+                                    },
                               child: Center(
                                 child: Text(
                                   'เพิ่มสัตว์เลี้ยง',

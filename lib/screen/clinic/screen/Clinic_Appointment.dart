@@ -36,6 +36,8 @@ class _Page_AppointmentState extends State<Page_Appointment> {
 
   String _selectedTime;
 
+  bool _clicked = false;
+
   createAppointment() async {
     final FirebaseAuth auth = await FirebaseAuth.instance;
     final User userId = await auth.currentUser;
@@ -313,23 +315,28 @@ class _Page_AppointmentState extends State<Page_Appointment> {
                             child: SizedBox(
                               width: 150,
                               height: 50,
-                              child: FlatButton(
+                              child: MaterialButton(
                                 color: Colors.red.shade400,
-                                onPressed: () {
-                                  if (_formkey.currentState.validate()) {
-                                    setState(() {
-                                      formattedDate = DateFormat('dd-MM-yyyy')
-                                          .format(focusedDay);
-                                      // aa =  DateFormat("dd-M-yyyy hh:mm:ss").parse(formattedDate);
-                                    });
-                                    print(formattedDate);
-                                    // print(aa);
-                                    createAppointment();
-                                  }
-                                  ;
+                                onPressed: _clicked
+                                    ? null
+                                    : () {
+                                        if (_formkey.currentState.validate()) {
+                                          _clicked = true;
 
-                                  // getAppointment();
-                                },
+                                          setState(() {
+                                            formattedDate =
+                                                DateFormat('dd-MM-yyyy')
+                                                    .format(focusedDay);
+                                            // aa =  DateFormat("dd-M-yyyy hh:mm:ss").parse(formattedDate);
+                                          });
+                                          print(formattedDate);
+                                          // print(aa);
+                                          createAppointment();
+                                        }
+                                        ;
+
+                                        // getAppointment();
+                                      },
                                 child: Text(
                                   "ยืนยัน",
                                   style: TextStyle(
