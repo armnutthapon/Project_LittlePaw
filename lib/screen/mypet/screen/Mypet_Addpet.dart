@@ -178,8 +178,8 @@ class _AddpetState extends State<Addpet> {
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   focusedBorder: InputBorder.none,
-                                  labelText: "ชื่อสัตว์เลี้ยง",
-                                  labelStyle: TextStyle(
+                                  hintText: "ชื่อสัตว์เลี้ยง",
+                                  hintStyle: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w300,
                                       fontFamily: 'Mitr'),
@@ -307,8 +307,8 @@ class _AddpetState extends State<Addpet> {
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   focusedBorder: InputBorder.none,
-                                  labelText: "สีของสัตว์เลี้ยง",
-                                  labelStyle: TextStyle(
+                                  hintText: "สีของสัตว์เลี้ยง",
+                                  hintStyle: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w300,
                                       fontFamily: 'Mitr'),
@@ -346,8 +346,8 @@ class _AddpetState extends State<Addpet> {
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   focusedBorder: InputBorder.none,
-                                  labelText: "สายพันธุ์",
-                                  labelStyle: TextStyle(
+                                  hintText: "สายพันธุ์",
+                                  hintStyle: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w300,
                                       fontFamily: 'Mitr'),
@@ -385,8 +385,8 @@ class _AddpetState extends State<Addpet> {
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   focusedBorder: InputBorder.none,
-                                  labelText: "ลักษณะเฉพาะ",
-                                  labelStyle: TextStyle(
+                                  hintText: "ลักษณะเฉพาะ",
+                                  hintStyle: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w300,
                                       fontFamily: 'Mitr'),
@@ -424,8 +424,8 @@ class _AddpetState extends State<Addpet> {
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   focusedBorder: InputBorder.none,
-                                  labelText: "อายุ",
-                                  labelStyle: TextStyle(
+                                  hintText: "อายุ",
+                                  hintStyle: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w300,
                                       fontFamily: 'Mitr'),

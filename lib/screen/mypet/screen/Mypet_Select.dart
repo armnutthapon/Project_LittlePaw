@@ -209,13 +209,11 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                               elevation: 5,
                               child: InkWell(
                                 onTap: () {
-                                  setState(() {
-                                    send_pid = widget.pid;
-                                  });
-
                                   var cid_sendRoute = new MaterialPageRoute(
                                       builder: (BuildContext context) =>
-                                          Page_PetInformations(pid: send_pid));
+                                          Page_PetInformations(
+                                              pid: widget.pid));
+                                  print(widget.pid);
 
                                   Navigator.of(context)
                                       .push(cid_sendRoute)
