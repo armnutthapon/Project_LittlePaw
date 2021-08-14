@@ -72,7 +72,7 @@ class _Page_AppointmentState extends State<Page_Appointment> {
   }
 
   startTime() async {
-    var duration = new Duration(seconds: 3);
+    var duration = new Duration(seconds: 1);
     return new Timer(duration, route);
   }
 
