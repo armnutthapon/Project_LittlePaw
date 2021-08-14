@@ -31,22 +31,6 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
                   fontWeight: FontWeight.w500,
                   fontFamily: 'Mitr'),
             ),
-            actions: <Widget>[
-              Container(
-                margin: EdgeInsets.only(right: 20),
-                child: IconButton(
-                  icon: Icon(
-                    FontAwesomeIcons.share,
-                    color: Colors.red.shade400,
-                    size: 30,
-                  ),
-                  tooltip: 'แชร์ข้อมูล',
-                  onPressed: () {
-                    shareID(context);
-                  },
-                ),
-              )
-            ],
 
             // You can add title here
             leading: new IconButton(
@@ -59,50 +43,6 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
         ),
       ]),
     );
-  }
-
-  void shareID(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    var pid = AlertDialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-      actions: [
-        Container(
-          height: size.height * 0.1,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              RichText(
-                text: TextSpan(
-                  text: 'ID : ',
-                  style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w300,
-                      fontFamily: 'Mitr'),
-                  children: const <TextSpan>[
-                    TextSpan(
-                      text: " widget.pid",
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: 'Mitr'),
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
-        )
-      ],
-    );
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return pid;
-        });
   }
 }
 
