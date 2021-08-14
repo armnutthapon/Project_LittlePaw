@@ -44,7 +44,7 @@ class _Page_AppointmentState extends State<Page_Appointment> {
 
     http.Response response = await http
         .post(Uri.parse(
-            '$Url/appointment/add/${widget.cid}/$uid/$formattedDate/${_selectedTime}/${symptom.text}/${widget.clinic_name}/${widget.doctor_name}'))
+            '$Url/appointment/add/${widget.cid}/$uid/$formattedDate/${time_appointment.text}/${symptom.text}/${widget.clinic_name}/${widget.doctor_name}'))
         .then((value) {
       print("success");
     });
@@ -55,7 +55,7 @@ class _Page_AppointmentState extends State<Page_Appointment> {
 
     print("uid : " + uid);
     print("Date : " + formattedDate);
-    print("time : " + _selectedTime);
+    print("time : " + time_appointment.text);
     print("symptom : " + symptom.text);
 
     startTime();
@@ -100,9 +100,9 @@ class _Page_AppointmentState extends State<Page_Appointment> {
 
     if (result != null) {
       setState(() {
-        _selectedTime = result.format(context);
+        time_appointment.text = result.format(context);
       });
-      print(_selectedTime);
+      print(time_appointment);
     }
   }
 
@@ -214,27 +214,55 @@ class _Page_AppointmentState extends State<Page_Appointment> {
                           ),
                         ),
                         Padding(
-                            padding: const EdgeInsets.only(left: 30),
-                            // child: InputText(
-                            //   hintText: 'ระบุอาการ',
-                            //   onChanged: (String value) {},
-                            // ),
-                            child: InkWell(
-                              onTap: _show,
-                              child: Container(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  _selectedTime != null
-                                      ? _selectedTime
-                                      : "ระบุช่วงเวลา",
-                                  style: TextStyle(
+                          padding: const EdgeInsets.only(left: 30),
+                          // child: InputText(
+                          //   hintText: 'ระบุอาการ',
+                          //   onChanged: (String value) {},
+                          // ),
+                          child: InkWell(
+                            onTap: () {
+                              _show(); // Call Function that has showDatePicker()
+                            },
+                            child: IgnorePointer(
+                              child: TextFormField(
+                                controller: time_appointment,
+                                textAlign: TextAlign.left,
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'ระบุช่วงเวลา',
+                                  hintStyle: TextStyle(
                                       fontSize: 14,
                                       color: Colors.black,
                                       fontWeight: FontWeight.w300,
                                       fontFamily: 'Mitr'),
                                 ),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'กรุณาระบุช่วงเวลา';
+                                  }
+                                  return null;
+                                },
                               ),
-                            )),
+                            ),
+                          ),
+
+                          //     InkWell(
+                          //   onTap: _show,
+                          //   child: Container(
+                          //     alignment: Alignment.centerLeft,
+                          //     child: Text(
+                          //       _selectedTime != null
+                          //           ? _selectedTime
+                          //           : "ระบุช่วงเวลา",
+                          //       style: TextStyle(
+                          //           fontSize: 14,
+                          //           color: Colors.black,
+                          //           fontWeight: FontWeight.w300,
+                          //           fontFamily: 'Mitr'),
+                          //     ),
+                          //   ),
+                          // )
+                        ),
                         Padding(
                           padding: const EdgeInsets.only(left: 15),
                           child: ListTile(
@@ -288,15 +316,19 @@ class _Page_AppointmentState extends State<Page_Appointment> {
                               child: FlatButton(
                                 color: Colors.red.shade400,
                                 onPressed: () {
+                                  if (_formkey.currentState.validate()) {
+                                    setState(() {
+                                      formattedDate = DateFormat('dd-MM-yyyy')
+                                          .format(focusedDay);
+                                      // aa =  DateFormat("dd-M-yyyy hh:mm:ss").parse(formattedDate);
+                                    });
+                                    print(formattedDate);
+                                    // print(aa);
+                                    createAppointment();
+                                  }
+                                  ;
+
                                   // getAppointment();
-                                  setState(() {
-                                    formattedDate = DateFormat('dd-MM-yyyy')
-                                        .format(focusedDay);
-                                    // aa =  DateFormat("dd-M-yyyy hh:mm:ss").parse(formattedDate);
-                                  });
-                                  print(formattedDate);
-                                  // print(aa);
-                                  createAppointment();
                                 },
                                 child: Text(
                                   "ยืนยัน",

@@ -18,36 +18,62 @@ class Page_PetInformations extends StatefulWidget {
 
 class _Page_PetInformationsState extends State<Page_PetInformations> {
   var data;
+  String sterilization = "";
+  // getPetDetail() async {
+  //   http.Response response =
+  //       await http.get(Uri.parse('$Url/petDetail/showPetByPID/${widget.pid}'));
+  //   setState(() {
+  //     data = json.decode(response.body);
+  //   });
+  //   return data;
+  // }
 
   getPetDetail() async {
     http.Response response =
         await http.get(Uri.parse('$Url/petDetail/showPetByPID/${widget.pid}'));
+    print("CID :: :" + widget.pid);
     setState(() {
       data = json.decode(response.body);
     });
     return data;
   }
 
-  getPetDetail2() async {
-    http.Response response =
-        await http.get(Uri.parse('$Url/petDetail/showPetByPID/${widget.pid}'));
-    if (!mounted) return;
-    setState(() {
-      data = json.encode(response.body);
-    });
-    // var data= await json.decode(json.encode(response.databody);
-
-    print("Pid :: :" + widget.pid);
-    print(data);
-
-    return data;
-  }
-
   @override
   void initState() {
     super.initState();
-    getPetDetail2();
+    getPetDetail();
   }
+
+  getSterilization() {
+    if (data['status'] == "Waiting") {
+      return Colors.amber;
+    } else if (data['sterilization'] == true) {
+      return sterilization = "ทำหมันแล้ว";
+    } else {
+      return sterilization = "ยังไม่ทำหมัน";
+    }
+  }
+
+  // getPetDetail2() async {
+  //   http.Response response =
+  //       await http.get(Uri.parse('$Url/petDetail/showPetByPID/${widget.pid}'));
+  //   if (!mounted) return;
+  //   setState(() {
+  //     data = json.encode(response.body);
+  //   });
+  //   // var data= await json.decode(json.encode(response.databody);
+
+  //   print("Pid :: :" + widget.pid);
+  //   print(data);
+
+  //   return data;
+  // }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   getPetDetail2();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -110,8 +136,10 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
             data != null
                 ? Expanded(
                     child: Container(
+                    margin: EdgeInsets.only(top: 10),
                     child: ListView(
-                      padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+                      // padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+                      padding: EdgeInsets.zero,
                       children: [
                         PetInfo(
                           text: "ชื่อ",
@@ -119,31 +147,31 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
                         ),
                         PetInfo(
                           text: "ประเภท",
-                          textdetail: "สุนัข",
+                          textdetail: data['type'],
                         ),
                         PetInfo(
                           text: "เพศ",
-                          textdetail: "ผู้",
+                          textdetail: data['sex'],
                         ),
                         PetInfo(
                           text: "สี",
-                          textdetail: "น้ำตาล-ขาว",
+                          textdetail: data['color'],
                         ),
                         PetInfo(
                           text: "สายพันธุ์",
-                          textdetail: "บางแก้ว",
+                          textdetail: data['breed'],
                         ),
                         PetInfo(
                           text: "ลักษณะเฉพาะ",
-                          textdetail: "-",
+                          textdetail: data['characteristics'],
                         ),
                         PetInfo(
                           text: "อายุ",
-                          textdetail: "1 ปี",
+                          textdetail: data['dob'],
                         ),
                         PetInfo(
                           text: "ทำหมัน",
-                          textdetail: "ใช่",
+                          textdetail: getSterilization(),
                         ),
                       ],
                     ),

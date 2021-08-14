@@ -43,7 +43,7 @@ class PetInfo extends StatelessWidget {
                           style: TextStyle(
                               color: Colors.red.shade400,
                               fontSize: 14,
-                              fontWeight: FontWeight.w300,
+                              fontWeight: FontWeight.w400,
                               fontFamily: 'Mitr'),
                         ),
                         // IconButton(
