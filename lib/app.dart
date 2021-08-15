@@ -104,7 +104,35 @@ class AppState extends State<App> {
               title: new Text(''),
             ),
             BottomNavigationBarItem(
-              icon: new Icon(FontAwesomeIcons.solidBell),
+              icon: new Stack(
+                children: <Widget>[
+                  new Icon(Icons.notifications),
+                  new Positioned(
+                    right: 0,
+                    left: 10,
+                    bottom: 10,
+                    child: new Container(
+                      decoration: new BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      constraints: BoxConstraints(
+                        minWidth: 12,
+                        minHeight: 12,
+                      ),
+                      child: new Text(
+                        '',
+                        style: new TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              // icon: new Icon(FontAwesomeIcons.solidBell),
               title: new Text(''),
             ),
             BottomNavigationBarItem(
