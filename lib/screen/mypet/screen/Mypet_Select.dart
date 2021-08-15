@@ -34,7 +34,7 @@ class Page_SelectPetState extends State<Page_SelectPet> {
     final FirebaseAuth auth = await FirebaseAuth.instance;
     final User userId = await auth.currentUser;
     final String uid = await userId.uid;
-    print(uid);
+
     print(pid);
     http.Response response = await http
         .delete(Uri.parse('$Url/petDetail/deletePet/$uid/$pid'))

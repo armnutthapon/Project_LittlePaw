@@ -23,6 +23,12 @@ class Page_ClinicDetail extends StatefulWidget {
 }
 
 class _Page_ClinicDetailState extends State<Page_ClinicDetail> {
+  List<String> address = <String>[];
+
+  var split;
+  List splitList;
+
+  final Map<int, String> values = {};
   var data;
 
   var send_cid;
@@ -35,7 +41,23 @@ class _Page_ClinicDetailState extends State<Page_ClinicDetail> {
     print("CID :: :" + widget.cid);
     setState(() {
       data = json.decode(response.body);
+      address.add(data['address'][0]['building']);
+      address.add(data['address'][0]['alley']);
+      address.add(data['address'][0]['street']);
+      address.add(data['address'][0]['city']);
+      address.add(data['address'][0]['province']);
     });
+    print(address.join(' '));
+
+    // for (var i = 0; i < address.length; i += 2) {
+    //   address.add(
+    //       address.sublist(i, i + 2 > letters.length ? letters.length : i + 2));
+    // }
+    // split = address.split(',');
+    // for (int i = 0; i < address.length; i++) {
+    //   splitList.add(address[i]);
+    // }
+
     return data;
   }
 
@@ -95,10 +117,13 @@ class _Page_ClinicDetailState extends State<Page_ClinicDetail> {
                                       'assets/images/clinic_pet.jpg')),
                             ),
                           ),
-                          ShowAddress(
-                              topic: "ที่อยู่ : ",
-                              detail:
-                                  " 109 ม.8 ต.คุระ อ.คุระบุรี จ.พังงา 82150"),
+                          Wrap(
+                            children: [
+                              ShowAddress(
+                                  topic: "ที่อยู่ : ",
+                                  detail: address.join(' '))
+                            ],
+                          ),
                           ShowText(
                               topic: "แพทย์ : ", detail: data['doctor_name']),
                           ShowText(
@@ -129,11 +154,12 @@ class _Page_ClinicDetailState extends State<Page_ClinicDetail> {
                                     });
 
                                     var cid_sendRoute = new MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            Page_Appointment(
-                                                cid: send_cid,
-                                                doctor_name: send_doctor_name,
-                                                clinic_name: send_clinic_name));
+                                      builder: (BuildContext context) =>
+                                          Page_Appointment(
+                                              cid: send_cid,
+                                              doctor_name: send_doctor_name,
+                                              clinic_name: send_clinic_name),
+                                    );
 
                                     Navigator.of(context)
                                         .push(cid_sendRoute)

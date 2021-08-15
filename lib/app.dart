@@ -108,7 +108,7 @@ class AppState extends State<App> {
               title: new Text(''),
             ),
             BottomNavigationBarItem(
-              icon: new Icon(FontAwesomeIcons.cog),
+              icon: new Icon(FontAwesomeIcons.userAlt),
               title: new Text(''),
             ),
           ],

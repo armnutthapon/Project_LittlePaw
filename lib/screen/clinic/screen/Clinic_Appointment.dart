@@ -44,12 +44,12 @@ class _Page_AppointmentState extends State<Page_Appointment> {
     final String uid = await userId.uid;
     print(uid);
 
-    http.Response response = await http
-        .post(Uri.parse(
-            '$Url/appointment/add/${widget.cid}/$uid/$formattedDate/${time_appointment.text}/${symptom.text}/${widget.clinic_name}/${widget.doctor_name}'))
-        .then((value) {
-      print("success");
-    });
+    // http.Response response = await http
+    //     .post(Uri.parse(
+    //         '$Url/appointment/add/${widget.cid}/$uid/$formattedDate/${time_appointment.text}/${symptom.text}/${widget.clinic_name}/${widget.doctor_name}'))
+    //     .then((value) {
+    //   print("success");
+    // });
 
     print("cid : " + widget.cid);
     print("Clinic Nmae : " + widget.clinic_name);
