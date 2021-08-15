@@ -23,7 +23,7 @@ class _Appointment_BackState extends State<Appointment_Back> {
       width: size.width * 1,
       height: size.height * 0.06,
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: BorderRadius.circular(10),
         child: SizedBox(
           width: 150,
           height: 50,

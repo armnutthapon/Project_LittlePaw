@@ -49,15 +49,6 @@ class _Page_ClinicDetailState extends State<Page_ClinicDetail> {
     });
     print(address.join(' '));
 
-    // for (var i = 0; i < address.length; i += 2) {
-    //   address.add(
-    //       address.sublist(i, i + 2 > letters.length ? letters.length : i + 2));
-    // }
-    // split = address.split(',');
-    // for (int i = 0; i < address.length; i++) {
-    //   splitList.add(address[i]);
-    // }
-
     return data;
   }
 
@@ -140,7 +131,7 @@ class _Page_ClinicDetailState extends State<Page_ClinicDetail> {
                             width: size.width * 1,
                             height: size.height * 0.06,
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(30),
+                              borderRadius: BorderRadius.circular(10),
                               child: SizedBox(
                                 width: 150,
                                 height: 50,
@@ -187,7 +178,9 @@ class _Page_ClinicDetailState extends State<Page_ClinicDetail> {
                 ),
               ),
             )
-          : Center(child: CircularProgressIndicator()),
+          : Center(
+              child: CircularProgressIndicator(),
+            ),
       new Positioned(
         top: 0.0,
         left: 0.0,

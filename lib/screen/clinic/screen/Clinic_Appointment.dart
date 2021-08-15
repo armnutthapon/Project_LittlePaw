@@ -39,17 +39,12 @@ class _Page_AppointmentState extends State<Page_Appointment> {
   bool _clicked = false;
 
   createAppointment() async {
-    final FirebaseAuth auth = await FirebaseAuth.instance;
-    final User userId = await auth.currentUser;
-    final String uid = await userId.uid;
-    print(uid);
-
-    // http.Response response = await http
-    //     .post(Uri.parse(
-    //         '$Url/appointment/add/${widget.cid}/$uid/$formattedDate/${time_appointment.text}/${symptom.text}/${widget.clinic_name}/${widget.doctor_name}'))
-    //     .then((value) {
-    //   print("success");
-    // });
+    http.Response response = await http
+        .post(Uri.parse(
+            '$Url/appointment/add/${widget.cid}/$uid/$formattedDate/${time_appointment.text}/${symptom.text}/${widget.clinic_name}/${widget.doctor_name}'))
+        .then((value) {
+      print("success");
+    });
 
     print("cid : " + widget.cid);
     print("Clinic Nmae : " + widget.clinic_name);
@@ -216,60 +211,56 @@ class _Page_AppointmentState extends State<Page_Appointment> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 30),
-                          // child: InputText(
-                          //   hintText: 'ระบุอาการ',
-                          //   onChanged: (String value) {},
-                          // ),
-                          child: InkWell(
-                            onTap: () {
-                              _show(); // Call Function that has showDatePicker()
-                            },
-                            child: IgnorePointer(
-                              child: TextFormField(
-                                controller: time_appointment,
-                                textAlign: TextAlign.left,
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: 'ระบุช่วงเวลา',
-                                  hintStyle: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w300,
-                                      fontFamily: 'Mitr'),
-                                ),
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'กรุณาระบุช่วงเวลา';
-                                  }
-                                  return null;
-                                },
+                          padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
+                          child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                                color: Colors.white,
+                                border: Border.all(
+                                    width: 1.0, color: Colors.grey[200]),
                               ),
-                            ),
-                          ),
-
-                          //     InkWell(
-                          //   onTap: _show,
-                          //   child: Container(
-                          //     alignment: Alignment.centerLeft,
-                          //     child: Text(
-                          //       _selectedTime != null
-                          //           ? _selectedTime
-                          //           : "ระบุช่วงเวลา",
-                          //       style: TextStyle(
-                          //           fontSize: 14,
-                          //           color: Colors.black,
-                          //           fontWeight: FontWeight.w300,
-                          //           fontFamily: 'Mitr'),
-                          //     ),
-                          //   ),
-                          // )
+                              child: Container(
+                                height: size.height * 0.07,
+                                padding: EdgeInsets.only(left: 20, right: 20),
+                                child: InkWell(
+                                  onTap: () {
+                                    _show(); // Call Function that has showDatePicker()
+                                  },
+                                  child: IgnorePointer(
+                                    child: TextFormField(
+                                      controller: time_appointment,
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: 'Mitr'),
+                                      decoration: InputDecoration(
+                                        border: InputBorder.none,
+                                        focusedBorder: InputBorder.none,
+                                        hintText: "ระบุช่วงเวลา",
+                                        hintStyle: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w300,
+                                            fontFamily: 'Mitr'),
+                                      ),
+                                      onSaved: (String value) {},
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'กรุณาระบุช่วงเวลา';
+                                        }
+                                        return null;
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              )),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 15),
                           child: ListTile(
                             title: Text(
-                              "ระบุอาการ",
+                              "อาการเบื้องต้น",
                               style: TextStyle(
                                 fontFamily: 'Mitr',
                                 fontSize: 16,
@@ -280,30 +271,43 @@ class _Page_AppointmentState extends State<Page_Appointment> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 30),
-                          // child: InputText(
-                          //   hintText: 'ระบุอาการ',
-                          //   onChanged: (String value) {},
-                          // ),
-                          child: TextFormField(
-                            controller: symptom,
-                            textAlign: TextAlign.left,
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: 'ระบุอาการ',
-                              hintStyle: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w300,
-                                  fontFamily: 'Mitr'),
-                            ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'กรุณาระบุอาการ';
-                              }
-                              return null;
-                            },
-                          ),
+                          padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
+                          child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                                color: Colors.white,
+                                border: Border.all(
+                                    width: 1.0, color: Colors.grey[200]),
+                              ),
+                              child: Container(
+                                height: size.height * 0.07,
+                                padding: EdgeInsets.only(left: 20, right: 20),
+                                child: TextFormField(
+                                  controller: symptom,
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400,
+                                      fontFamily: 'Mitr'),
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    focusedBorder: InputBorder.none,
+                                    hintText: "ระบุอาการ",
+                                    hintStyle: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w300,
+                                        fontFamily: 'Mitr'),
+                                  ),
+                                  onSaved: (String value) {},
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'กรุณาระบุอาการ';
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              )),
                         ),
                         Container(
                           margin: EdgeInsets.symmetric(
@@ -311,7 +315,7 @@ class _Page_AppointmentState extends State<Page_Appointment> {
                           width: size.width * 1,
                           height: size.height * 0.06,
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(30),
+                            borderRadius: BorderRadius.circular(10),
                             child: SizedBox(
                               width: 150,
                               height: 50,

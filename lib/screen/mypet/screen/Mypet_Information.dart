@@ -176,7 +176,10 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
                       ],
                     ),
                   ))
-                : Center(child: CircularProgressIndicator())
+                : Expanded(
+                    child: Container(
+                        child: Center(child: CircularProgressIndicator())),
+                  )
           ],
         ),
       ]),
