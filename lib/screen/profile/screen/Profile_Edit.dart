@@ -22,28 +22,30 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
   var data;
   final _formkey = GlobalKey<FormState>();
 
-  var user_name;
-  var user_email;
-  var user_contact;
-  var user_gender;
+  final user_name = TextEditingController();
+  final user_contact = TextEditingController();
+  final user_gender = TextEditingController();
 
-  final _edit_user_email = TextEditingController();
+
 
   getUserInformation() async {
     http.Response response =
         await http.get(Uri.parse('$Url/owner/showByID/$uid'));
     if (response.statusCode == 200) {
-      Map<String, dynamic> data = jsonDecode(response.body);
       this.setState(() {
-        this.data = data;
+        this.data = jsonDecode(response.body);
       });
     }
-    print(data['contact']);
-    setData();
-    // setState(() {
-    //   data = json.decode(response.body);
-    // });
+    showUserProfile();
     return data;
+  }
+
+  updateUserProfile() async {
+    await setData();
+    http.Response response = await http.post(Uri.parse('$Url/owner/editUserProfile/$uid/${user_name.text}/${user_contact.text}/${user_gender.text}')).then((value) {
+print("Update success");
+    });
+    
   }
 
   @override
@@ -53,33 +55,34 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
     getUserInformation();
   }
 
-  setData() {
+  setData(){
+    if(user_name.text != data['name']){
+      user_name.text = user_name.text;
+    }else{
+      user_name.text = data['name'];
+    }
+
+    if(user_contact.text != data['contact']){
+      user_contact.text = user_contact.text;
+    }else{
+      user_contact.text = data['contact'];
+    }
+
+    if(user_gender.text != data['sex']){
+      user_gender.text = user_gender.text;
+    }else{
+      user_gender.text = data['sex'];
+    }
+  }
+  showUserProfile() {
     setState(() {
-      user_name = data['userID'];
-      user_email = data['email'];
-      if (data['contact']?.isEmpty) {
-        setState(() {
-          user_contact = "-";
-        });
-      }
-      //user_contact = data['contact'][0];
-      user_gender = data['contact'];
+      user_name.text = data['name'];
+      user_contact.text = data['contact'];
+      user_gender.text = data['sex'];
     });
-    print(user_contact);
-    print(user_gender);
+
   }
 
-  clear(clearState) {
-    setState(() {
-      if (clearState == data['email']) {
-        this.user_email = "";
-
-        print("Clear");
-      }
-    });
-
-    print(user_email);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +101,10 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                 fontFamily: 'Mitr'),
           ),
           actions: [
-            IconButton(onPressed: () {}, icon: Icon(FontAwesomeIcons.userEdit))
+            IconButton(onPressed: () async {
+              await updateUserProfile();
+              Navigator.pop(context,true);
+            }, icon: Icon(FontAwesomeIcons.check , color: Colors.greenAccent,))
             // icon: Icon(Icons.exit_to_app))
           ],
         ),
@@ -162,7 +168,7 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                                       title: Align(
                                         alignment: Alignment.center,
                                         child: TextFormField(
-                                          controller: _edit_user_email,
+                                          controller: user_name,
                                           textAlign: TextAlign.right,
                                           style: TextStyle(
                                               color: Colors.red,
@@ -186,7 +192,7 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                                       ),
                                       trailing: IconButton(
                                           onPressed: () {
-                                            _edit_user_email.clear();
+                                            user_name.clear();
                                           },
                                           icon: Icon(
                                             FontAwesomeIcons.solidTimesCircle,
@@ -194,61 +200,7 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                                             color: Colors.grey,
                                           ))))),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 5),
-                          child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                                color: Colors.white,
-                                border: Border.all(
-                                    width: 1.0, color: Colors.grey[200]),
-                              ),
-                              child: Container(
-                                  height: size.height * 0.06,
-                                  child: ListTile(
-                                      leading: Text(
-                                        "อีเมล :",
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w400,
-                                            fontFamily: 'Mitr'),
-                                      ),
-                                      title: Align(
-                                        alignment: Alignment.center,
-                                        child: TextFormField(
-                                          initialValue: user_email,
-                                          textAlign: TextAlign.right,
-                                          style: TextStyle(
-                                              color: Colors.red,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w400,
-                                              fontFamily: 'Mitr'),
-                                          decoration: InputDecoration(
-                                            contentPadding: EdgeInsets.zero,
-                                            border: InputBorder.none,
-                                            focusedBorder: InputBorder.none,
-                                          ),
-                                          onSaved: (String value) {},
-                                          validator: (value) {
-                                            if (value == null ||
-                                                value.isEmpty) {
-                                              return 'กรุณาใส่อายุของสัตว์เลี้ยง';
-                                            }
-                                            return null;
-                                          },
-                                        ),
-                                      ),
-                                      trailing: IconButton(
-                                          onPressed: () {},
-                                          icon: Icon(
-                                            FontAwesomeIcons.solidTimesCircle,
-                                            size: 16,
-                                            color: Colors.grey,
-                                          ))))),
-                        ),
+                        
                         Padding(
                           padding: EdgeInsets.only(top: 5),
                           child: Container(
@@ -274,7 +226,7 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                                       title: Align(
                                         alignment: Alignment.center,
                                         child: TextFormField(
-                                          initialValue: user_contact,
+                                          controller: user_contact,
                                           textAlign: TextAlign.right,
                                           style: TextStyle(
                                               color: Colors.black,
@@ -297,7 +249,9 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                                         ),
                                       ),
                                       trailing: IconButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            user_contact.clear();
+                                          },
                                           icon: Icon(
                                             FontAwesomeIcons.solidTimesCircle,
                                             size: 16,
@@ -329,6 +283,7 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                                       title: Align(
                                         alignment: Alignment.center,
                                         child: TextFormField(
+                                          controller: user_gender,
                                           textAlign: TextAlign.right,
                                           style: TextStyle(
                                               color: Colors.black,
@@ -339,7 +294,6 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                                             contentPadding: EdgeInsets.zero,
                                             border: InputBorder.none,
                                             focusedBorder: InputBorder.none,
-                                            hintText: "0123465789",
                                             hintStyle: TextStyle(
                                                 color: Colors.red,
                                                 fontSize: 14,
@@ -357,7 +311,9 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                                         ),
                                       ),
                                       trailing: IconButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            user_gender.clear();
+                                          },
                                           icon: Icon(
                                             FontAwesomeIcons.solidTimesCircle,
                                             size: 16,

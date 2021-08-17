@@ -19,11 +19,116 @@ class MyPet extends StatefulWidget {
 
 class _MyPetState extends State<MyPet> {
   static const routeName = '/MyPet';
+  var data;
+  var arr = [];
+  var pid;
+  List<Function> sendPetDetail = [];
+  
+  // final String id = "";
+  
+
+  getPetList() async {
+    http.Response response =
+        await http.get(Uri.parse('$Url/petDetail/showByID/$uid'));
+    setState(() {
+      data = json.decode(response.body);
+    });
+    return data;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getPetList();
+  }
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    MediaQueryData mediaQueryData = MediaQuery.of(context);
     return Scaffold(
-      body: MainPet(),
+      body: Scaffold(
+          backgroundColor: Colors.grey.shade100,
+          body: data != null
+              ? Center(
+                  child: GridView.builder(
+                  primary: false,
+                  padding: const EdgeInsets.all(20),
+                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                    childAspectRatio: mediaQueryData.size.height / 900,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 20,
+                    maxCrossAxisExtent: 200.0,
+                  ),
+                  itemCount: data == null ? 0 : data.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    //print(data[index]);
+                    return data == null
+                        ? 0
+                        : Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            color: Colors.white,
+                            elevation: 5,
+                            child: InkWell(
+                              onTap: () {
+                                setState(() {
+                                  pid = data[index]['_id'];
+                                });
+
+                                var pid_sendRoute = new MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        Page_SelectPet(
+                                            pid: data[index]['_id'],
+                                            pet_name: data[index]['pet_name']));
+
+                                Navigator.of(context)
+                                    .push(pid_sendRoute)
+                                    .then((_) {
+                                  getPetList();
+                                  // setState(() {
+                                  //   MyPet();
+                                  // });
+                                });
+                              },
+                              child: Center(
+                                  child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 10.0),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: data == null
+                                          ? null
+                                          : Image.asset(
+                                              'assets/images/1.jpg',
+                                              height: 120.0,
+                                              width: 120.0,
+                                              fit: BoxFit.cover,
+                                            ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 10),
+                                    child: data == null
+                                        ? null
+                                        : Text(
+                                            data[index]['pet_name'],
+                                            style: TextStyle(
+                                                color: Colors.red.shade400,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.normal,
+                                                fontFamily: 'Mitr'),
+                                          ),
+                                  ),
+                                ],
+                              )),
+                            ),
+                          );
+                  },
+                ))
+              : Center(child: CircularProgressIndicator())),
       appBar: AppBar(
         title: Text("สัตว์เลี้ยงของฉัน",
             style: TextStyle(
@@ -48,8 +153,10 @@ class _MyPetState extends State<MyPet> {
                 //     // Call setState to refresh the page.
                 //   });
                 // });
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => Page_Addpet()));
+                Navigator.of(context)
+                    .push(
+                        MaterialPageRoute(builder: (context) => Page_Addpet()))
+                    .then((value) => {getPetList()});
               },
             ),
           ),
@@ -61,123 +168,125 @@ class _MyPetState extends State<MyPet> {
   }
 }
 
-class MainPet extends StatefulWidget {
-  @override
-  _MainPetState createState() => _MainPetState();
-}
+// class MainPet extends StatefulWidget {
+//   @override
+//   _MainPetState createState() => _MainPetState();
+// }
 
-class _MainPetState extends State<MainPet> {
-  var data;
-  List<Function> sendPetDetail = [];
-  var pid;
+// class _MainPetState extends State<MainPet> {
+  
+//   var data;
+//   List<Function> sendPetDetail = [];
+//   var pid;
 
-  final String id = "";
+//   final String id = "";
 
-  var arr = [];
+//   var arr = [];
 
-  getPetList() async {
-    final FirebaseAuth auth = await FirebaseAuth.instance;
-    final User userId = await auth.currentUser;
-    final String uid = await userId.uid;
+//   getPetList() async {
+//     final FirebaseAuth auth = await FirebaseAuth.instance;
+//     final User userId = await auth.currentUser;
+//     final String uid = await userId.uid;
 
-    http.Response response =
-        await http.get(Uri.parse('$Url/petDetail/showByID/$uid'));
-    setState(() {
-      data = json.decode(response.body);
-    });
-    return data;
-  }
+//     http.Response response =
+//         await http.get(Uri.parse('$Url/petDetail/showByID/$uid'));
+//     setState(() {
+//       data = json.decode(response.body);
+//     });
+//     return data;
+//   }
 
-  @override
-  void initState() {
-    super.initState();
-    getPetList();
-  }
+//   @override
+//   void initState() {
+//     super.initState();
+//     getPetList();
+//   }
 
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    MediaQueryData mediaQueryData = MediaQuery.of(context);
+//   Widget build(BuildContext context) {
+//     Size size = MediaQuery.of(context).size;
+//     MediaQueryData mediaQueryData = MediaQuery.of(context);
 
-    return Scaffold(
-        backgroundColor: Colors.grey.shade100,
-        body: data != null
-            ? Center(
-                child: GridView.builder(
-                primary: false,
-                padding: const EdgeInsets.all(20),
-                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                  childAspectRatio: mediaQueryData.size.height / 900,
-                  crossAxisSpacing: 20,
-                  mainAxisSpacing: 20,
-                  maxCrossAxisExtent: 200.0,
-                ),
-                itemCount: data == null ? 0 : data.length,
-                itemBuilder: (BuildContext context, int index) {
-                  //print(data[index]);
-                  return data == null
-                      ? 0
-                      : Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          color: Colors.white,
-                          elevation: 5,
-                          child: InkWell(
-                            onTap: () {
-                              setState(() {
-                                pid = data[index]['_id'];
-                              });
+//     return Scaffold(
+//         backgroundColor: Colors.grey.shade100,
+//         body: data != null
+//             ? Center(
+//                 child: GridView.builder(
+//                 primary: false,
+//                 padding: const EdgeInsets.all(20),
+//                 gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+//                   childAspectRatio: mediaQueryData.size.height / 900,
+//                   crossAxisSpacing: 20,
+//                   mainAxisSpacing: 20,
+//                   maxCrossAxisExtent: 200.0,
+//                 ),
+//                 itemCount: data == null ? 0 : data.length,
+//                 itemBuilder: (BuildContext context, int index) {
+//                   //print(data[index]);
+//                   return data == null
+//                       ? 0
+//                       : Card(
+//                           shape: RoundedRectangleBorder(
+//                             borderRadius: BorderRadius.circular(10),
+//                           ),
+//                           color: Colors.white,
+//                           elevation: 5,
+//                           child: InkWell(
+//                             onTap: () {
+//                               setState(() {
+//                                 pid = data[index]['_id'];
+//                               });
 
-                              var pid_sendRoute = new MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      Page_SelectPet(
-                                          pid: data[index]['_id'],
-                                          pet_name: data[index]['pet_name']));
+//                               var pid_sendRoute = new MaterialPageRoute(
+//                                   builder: (BuildContext context) =>
+//                                       Page_SelectPet(
+//                                           pid: data[index]['_id'],
+//                                           pet_name: data[index]['pet_name']));
 
-                              Navigator.of(context)
-                                  .push(pid_sendRoute)
-                                  .then((_) {
-                                setState(() {
-                                  MyPet();
-                                });
-                              });
-                            },
-                            child: Center(
-                                child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 10.0),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: data == null
-                                        ? null
-                                        : Image.asset(
-                                            'assets/images/1.jpg',
-                                            height: 120.0,
-                                            width: 120.0,
-                                            fit: BoxFit.cover,
-                                          ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 10),
-                                  child: data == null
-                                      ? null
-                                      : Text(
-                                          data[index]['pet_name'],
-                                          style: TextStyle(
-                                              color: Colors.red.shade400,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.normal,
-                                              fontFamily: 'Mitr'),
-                                        ),
-                                ),
-                              ],
-                            )),
-                          ),
-                        );
-                },
-              ))
-            : Center(child: CircularProgressIndicator()));
-  }
-}
+//                               Navigator.of(context)
+//                                   .push(pid_sendRoute)
+//                                   .then((_) {
+//                                     getPetList();
+//                                 // setState(() {
+//                                 //   MyPet();
+//                                 // });
+//                               });
+//                             },
+//                             child: Center(
+//                                 child: Column(
+//                               children: [
+//                                 Padding(
+//                                   padding: const EdgeInsets.only(top: 10.0),
+//                                   child: ClipRRect(
+//                                     borderRadius: BorderRadius.circular(10),
+//                                     child: data == null
+//                                         ? null
+//                                         : Image.asset(
+//                                             'assets/images/1.jpg',
+//                                             height: 120.0,
+//                                             width: 120.0,
+//                                             fit: BoxFit.cover,
+//                                           ),
+//                                   ),
+//                                 ),
+//                                 Padding(
+//                                   padding: const EdgeInsets.only(top: 10),
+//                                   child: data == null
+//                                       ? null
+//                                       : Text(
+//                                           data[index]['pet_name'],
+//                                           style: TextStyle(
+//                                               color: Colors.red.shade400,
+//                                               fontSize: 16,
+//                                               fontWeight: FontWeight.normal,
+//                                               fontFamily: 'Mitr'),
+//                                         ),
+//                                 ),
+//                               ],
+//                             )),
+//                           ),
+//                         );
+//                 },
+//               ))
+//             : Center(child: CircularProgressIndicator()));
+//   }
+// }

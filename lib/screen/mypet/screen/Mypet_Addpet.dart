@@ -127,15 +127,12 @@ class _AddpetState extends State<Addpet> {
 
   addPetDetail() async {
     await setData();
-    final FirebaseAuth auth = await FirebaseAuth.instance;
-    final User userId = await auth.currentUser;
-    final String uid = await userId.uid;
-    await setData();
     http.Response response = await http
         .post(Uri.parse(
             '$Url/petDetail/add/$pet_name/$type/$sex/$color/$breed/$dob/$characteristics/$sterilization/$congenital_disease/$vaccine/$uid'))
-        .then((value) {
+        .then((response) {
       print("success");
+      Navigator.pop(context);
     });
     //print(pet_name + " " + sex + " " + type  + " " + color  + " " + breed  + " " + dob  + " " + sterilization + " " + characteristics + " " + congenital_disease + " " + vaccine);
     print("add pet Success");
@@ -525,7 +522,6 @@ class _AddpetState extends State<Addpet> {
                                         }
                                         addPetDetail();
                                       }
-                                      ;
                                     },
                               child: Center(
                                 child: Text(

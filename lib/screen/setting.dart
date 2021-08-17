@@ -20,6 +20,7 @@ class Setting extends StatefulWidget {
 }
 
 class _SettingState extends State<Setting> {
+  _getReload() async {}
   var data;
 
   getUserInformation() async {
@@ -31,6 +32,7 @@ class _SettingState extends State<Setting> {
         this.data = data;
       });
     }
+    print(data);
     // setState(() {
     //   data = json.decode(response.body);
     // });
@@ -63,8 +65,18 @@ class _SettingState extends State<Setting> {
           actions: [
             IconButton(
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => Page_EditProfile()));
+                  // Navigator.of(context).push(MaterialPageRoute(
+                  //     builder: (context) => Page_EditProfile()));
+                  Navigator.of(context)
+                      .push(
+                        new MaterialPageRoute(
+                            builder: (_) => new Page_EditProfile()),
+                      )
+                      .then((data) => {
+                        data ?  data != null ? getUserInformation() : null : Center(child: CircularProgressIndicator()),
+                        print("Reload" + data)
+                      });
+
                 },
                 icon: Icon(FontAwesomeIcons.userEdit))
             // icon: Icon(Icons.exit_to_app))
@@ -98,7 +110,7 @@ class _SettingState extends State<Setting> {
                       ),
                     )),
                   ),
-                  Expanded(
+                   Expanded(
                       child: Container(
                     margin: EdgeInsets.only(top: 10),
                     child: ListView(
@@ -107,7 +119,7 @@ class _SettingState extends State<Setting> {
                       children: [
                         OwnerInfo(
                           text: "ชื่อ :",
-                          textdetail: data['userID'],
+                          textdetail: data['name'],
                         ),
                         OwnerInfo(
                           text: "อีเมล :",
@@ -115,16 +127,19 @@ class _SettingState extends State<Setting> {
                         ),
                         OwnerInfo(
                           text: "เบอร์มือถือ :",
-                          textdetail: "data['contact']",
+                          textdetail: data['contact'],
                         ),
                         OwnerInfo(
                           text: "เพศ :",
-                          textdetail: "",
+                          textdetail: data['sex'],
                         ),
                         OwnerInfo(
                           text: "จำนวนสัตว์เลี้ยง :",
-                          textdetail: "1",
+                          textdetail: "${data['pet_id'].length} ตัว",
                         ),
+                        IconButton(
+                            onPressed: () async => await loginProvider.logout(),
+                            icon: Icon(Icons.exit_to_app))
                       ],
                     ),
                   ))

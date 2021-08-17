@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:little_paw/app.dart';
 import 'package:little_paw/screen/mypet.dart';
 import 'package:little_paw/screen/mypet/component/DeleteMypet_ButtonInfo.dart';
 import 'package:little_paw/screen/mypet/component/mypet_buttoninfo.dart';
@@ -11,6 +12,7 @@ import 'package:little_paw/screen/mypet/screen/Mypet_Medical.dart';
 import 'package:little_paw/screen/mypet/screen/Mypet_Information.dart';
 import 'package:http/http.dart' as http;
 import 'package:little_paw/database/database.dart';
+import 'package:little_paw/screen/wrapper.dart';
 
 class Page_SelectPet extends StatefulWidget {
   final String pid;
@@ -31,18 +33,15 @@ class Page_SelectPetState extends State<Page_SelectPet> {
   var send_pid;
 
   deletePetByID(pid) async {
-    final FirebaseAuth auth = await FirebaseAuth.instance;
-    final User userId = await auth.currentUser;
-    final String uid = await userId.uid;
-
     print(pid);
     http.Response response = await http
         .delete(Uri.parse('$Url/petDetail/deletePet/$uid/$pid'))
         .then((value) {
       print("DeleteSuccess");
     });
-    Route route = MaterialPageRoute(builder: (context) => MyPet());
-    Navigator.push(context, route);
+    // Route route = MaterialPageRoute(builder: (context) => MyPet());
+    // Navigator.pop(context);
+    
   }
 
   @override
@@ -116,16 +115,16 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                       borderRadius: BorderRadius.circular(10.0)),
                   color: Colors.green,
                   onPressed: () {
-                    deletePetByID(pid);
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) => MyPet()),
-                        ModalRoute.withName('/MyPet'));
+                     deletePetByID(pid);
+                    // Navigator.pushAndRemoveUntil(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (BuildContext context) => MyPet()),
+                    //     ModalRoute.withName('/MyPet'));
                     // Navigator.of(context)
                     //     .popUntil(ModalRoute.withName('/MyPet'));
-
-                    //Navigator.pop(context);
+                    // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: builder) => MyPet());
+                    
                   },
                   child: Text(
                     'ยืนยัน',
