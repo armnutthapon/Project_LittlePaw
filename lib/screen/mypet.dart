@@ -36,8 +36,8 @@ class _MyPetState extends State<MyPet> {
             margin: EdgeInsets.only(right: 20),
             child: IconButton(
               icon: Icon(
-                FontAwesomeIcons.plus,
-                color: Colors.pink.shade400,
+                FontAwesomeIcons.plusCircle,
+                color: Colors.white,
                 size: 30,
               ),
               tooltip: 'เพิ่มสัตว์เลี้ยง',

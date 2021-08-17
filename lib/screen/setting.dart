@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:little_paw/screen/profile/component/profile_informationCard.dart';
+import 'package:little_paw/screen/profile/screen/Profile_Edit.dart';
 import 'package:little_paw/services/authentication/auth__service.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -60,8 +62,12 @@ class _SettingState extends State<Setting> {
           ),
           actions: [
             IconButton(
-                onPressed: () async => await loginProvider.logout(),
-                icon: Icon(Icons.exit_to_app))
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => Page_EditProfile()));
+                },
+                icon: Icon(FontAwesomeIcons.userEdit))
+            // icon: Icon(Icons.exit_to_app))
           ],
         ),
         body: data != null
@@ -100,23 +106,23 @@ class _SettingState extends State<Setting> {
                       padding: EdgeInsets.zero,
                       children: [
                         OwnerInfo(
-                          text: "ชื่อ",
+                          text: "ชื่อ :",
                           textdetail: data['userID'],
                         ),
                         OwnerInfo(
-                          text: "อีเมล",
+                          text: "อีเมล :",
                           textdetail: data['email'],
                         ),
                         OwnerInfo(
-                          text: "เบอร์มือถือ",
+                          text: "เบอร์มือถือ :",
                           textdetail: "data['contact']",
                         ),
                         OwnerInfo(
-                          text: "เพศ",
+                          text: "เพศ :",
                           textdetail: "",
                         ),
                         OwnerInfo(
-                          text: "จำนวนสัตว์เลี้ยง",
+                          text: "จำนวนสัตว์เลี้ยง :",
                           textdetail: "1",
                         ),
                       ],

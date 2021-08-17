@@ -21,7 +21,7 @@ class OwnerInfo extends StatelessWidget {
           child: Align(
             alignment: Alignment.center,
             child: Padding(
-                padding: const EdgeInsets.fromLTRB(12, 5, 2, 5),
+                padding: const EdgeInsets.fromLTRB(12, 5, 20, 5),
                 // padding: const EdgeInsets.all(0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -54,10 +54,6 @@ class OwnerInfo extends StatelessWidget {
                         //         builder: (context) => MyPet()));
                         //   },
                         // ),
-                        Icon(
-                          Icons.arrow_right,
-                          size: 25,
-                        )
                       ],
                     )
                   ],
