@@ -140,9 +140,42 @@ class _SettingState extends State<Setting> {
                           text: "จำนวนสัตว์เลี้ยง :",
                           textdetail: "${data['pet_id'].length} ตัว",
                         ),
-                        IconButton(
-                            onPressed: () async => await loginProvider.logout(),
-                            icon: Icon(Icons.exit_to_app))
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TextButton(
+                              child: Text(
+                                "ออกจากระบบ",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Mitr'),
+                              ),
+                              onPressed: () {
+                                onPressed:
+                                () async => await loginProvider.logout();
+                              },
+                            ),
+                            IconButton(
+                                onPressed: () async =>
+                                    await loginProvider.logout(),
+                                icon: Icon(Icons.exit_to_app)),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "version : 1.2.10",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w200,
+                                  fontFamily: 'Mitr'),
+                            ),
+                          ],
+                        )
                       ],
                     ),
                   ))

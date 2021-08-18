@@ -75,8 +75,6 @@ class _AddpetState extends State<Addpet> {
   final _addVaccine = TextEditingController();
   final _addPetAge = TextEditingController();
 
-  bool sterilize = false;
-
   String valueGender;
   String valueCategory;
   String valueSterilize;
@@ -88,35 +86,7 @@ class _AddpetState extends State<Addpet> {
     'ยังไม่ทำหมัน',
   ];
 
-  var pet_name;
-  var type;
-  var sex;
-  var color;
-  var breed;
-  var dob;
-  var characteristics;
-  var sterilization;
-  var congenital_disease;
-  var vaccine;
-  var data, total;
-
   bool _clicked = false;
-
-  // setData() {
-  //   pet_name = _addPetName.text;
-
-  //   sex = _addPetGender;
-  //   type = _addPetCategory;
-  //   sterilization = _addPetSterilize;
-
-  //   color = _addPetColor.text;
-  //   breed = _addPetBreed.text;
-  //   dob = _addPetAge.text;
-  //   characteristics = _addPetCharacteristics.text;
-  //   congenital_disease = "Kuy Tuu";
-  //   vaccine = "Where is Moderna";
-  //   // print(pet_name + " " + sex + " " + type  + " " + color  + " " + breed  + " ");
-  // }
 
   addPetDetail() async {
     final FirebaseAuth auth = FirebaseAuth.instance;
@@ -128,18 +98,8 @@ class _AddpetState extends State<Addpet> {
             '$Url/petDetail/add/${_addPetName.text}/${_addPetCategory}/${_addPetGender}/${_addPetColor.text}/${_addPetBreed.text}/${_addPetAge.text}/${_addPetCharacteristics.text}/${_addPetSterilize}/${_addCongenitalDisease.text}/${_addVaccine.text}/$uid'))
         .then((response) {
       print("success");
-      print(pet_name);
-      print(type);
-      print(sex);
-      print(color);
-      print(breed);
-      print(dob);
-      print(characteristics);
-      print(sterilization);
-      print(uid);
       Navigator.pop(context);
     });
-    //print(pet_name + " " + sex + " " + type  + " " + color  + " " + breed  + " " + dob  + " " + sterilization + " " + characteristics + " " + congenital_disease + " " + vaccine);
     print("add pet Success");
     //getPetID();
   }

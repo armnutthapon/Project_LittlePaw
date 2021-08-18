@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:little_paw/screen/mypet/component/mypet_petInfo.dart';
 import 'package:http/http.dart' as http;
 import 'package:little_paw/database/database.dart';
+import 'package:little_paw/screen/mypet/screen/Mypet_Edit_Information.dart';
 
 class Page_PetInformations extends StatefulWidget {
   final String pid;
@@ -31,7 +32,6 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
   getPetDetail() async {
     http.Response response =
         await http.get(Uri.parse('$Url/petDetail/showPetByPID/${widget.pid}'));
-    print("CID :: :" + widget.pid);
     setState(() {
       data = json.decode(response.body);
     });
@@ -45,14 +45,28 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
   }
 
   getSterilization() {
-    if (data['status'] == "Waiting") {
-      return Colors.amber;
-    } else if (data['sterilization'] == true) {
+    if (data['sterilization'] == true) {
       return sterilization = "ทำหมันแล้ว";
     } else {
       return sterilization = "ยังไม่ทำหมัน";
     }
   }
+
+  // getPetInformation() async {
+  //   http.Response response =
+  //       await http.get(Uri.parse('$Url/petDetail/showByPID/$pid'));
+  //   if (response.statusCode == 200) {
+  //     Map<String, dynamic> data = jsonDecode(response.body);
+  //     this.setState(() {
+  //       this.data = data;
+  //     });
+  //   }
+  //   print(data);
+  //   // setState(() {
+  //   //   data = json.decode(response.body);
+  //   // });
+  //   return data;
+  // }
 
   // getPetDetail2() async {
   //   http.Response response =
@@ -93,7 +107,33 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
                   fontWeight: FontWeight.w500,
                   fontFamily: 'Mitr'),
             ),
-
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    // Navigator.of(context).push(MaterialPageRoute(
+                    //     builder: (context) => Page_EditProfile()));
+                    Navigator.of(context)
+                        .push(
+                          new MaterialPageRoute(
+                              builder: (_) => new Page_Edit_PetInformaition(
+                                    pid: widget.pid,
+                                  )),
+                        )
+                        .then((data) => {
+                              data
+                                  ? data != null
+                                      ? getPetDetail()
+                                      : null
+                                  : Center(child: CircularProgressIndicator()),
+                              print("Reload" + data)
+                            });
+                  },
+                  icon: Icon(
+                    FontAwesomeIcons.solidEdit,
+                    color: Colors.red,
+                  ))
+              // icon: Icon(Icons.exit_to_app))
+            ],
             // You can add title here
             leading: new IconButton(
               icon: new Icon(Icons.arrow_back_ios, color: Colors.black),
@@ -172,6 +212,14 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
                         PetInfo(
                           text: "ทำหมัน :",
                           textdetail: getSterilization(),
+                        ),
+                        PetInfo(
+                          text: "โรคประจำตัว :",
+                          textdetail: data['congenital_disease'],
+                        ),
+                        PetInfo(
+                          text: "วัคซีนที่ได้รับ :",
+                          textdetail: data['vaccine'][0],
                         ),
                       ],
                     ),

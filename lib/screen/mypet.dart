@@ -51,7 +51,7 @@ class _MyPetState extends State<MyPet> {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     return Scaffold(
       body: Scaffold(
-          backgroundColor: Colors.grey.shade100,
+          backgroundColor: Colors.cyan.shade300.withOpacity(0.15),
           body: data != null
               ? Center(
                   child: GridView.builder(
@@ -119,7 +119,7 @@ class _MyPetState extends State<MyPet> {
                                         : Text(
                                             data[index]['pet_name'],
                                             style: TextStyle(
-                                                color: Colors.red.shade400,
+                                                color: Colors.green,
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.normal,
                                                 fontFamily: 'Mitr'),
@@ -164,132 +164,9 @@ class _MyPetState extends State<MyPet> {
             ),
           ),
         ],
-        backgroundColor: Colors.pinkAccent.shade100.withOpacity(1),
+        backgroundColor: Colors.tealAccent.shade700.withOpacity(1),
         elevation: 10.0,
       ),
     );
   }
 }
-
-// class MainPet extends StatefulWidget {
-//   @override
-//   _MainPetState createState() => _MainPetState();
-// }
-
-// class _MainPetState extends State<MainPet> {
-  
-//   var data;
-//   List<Function> sendPetDetail = [];
-//   var pid;
-
-//   final String id = "";
-
-//   var arr = [];
-
-//   getPetList() async {
-//     final FirebaseAuth auth = await FirebaseAuth.instance;
-//     final User userId = await auth.currentUser;
-//     final String uid = await userId.uid;
-
-//     http.Response response =
-//         await http.get(Uri.parse('$Url/petDetail/showByID/$uid'));
-//     setState(() {
-//       data = json.decode(response.body);
-//     });
-//     return data;
-//   }
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     getPetList();
-//   }
-
-//   Widget build(BuildContext context) {
-//     Size size = MediaQuery.of(context).size;
-//     MediaQueryData mediaQueryData = MediaQuery.of(context);
-
-//     return Scaffold(
-//         backgroundColor: Colors.grey.shade100,
-//         body: data != null
-//             ? Center(
-//                 child: GridView.builder(
-//                 primary: false,
-//                 padding: const EdgeInsets.all(20),
-//                 gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-//                   childAspectRatio: mediaQueryData.size.height / 900,
-//                   crossAxisSpacing: 20,
-//                   mainAxisSpacing: 20,
-//                   maxCrossAxisExtent: 200.0,
-//                 ),
-//                 itemCount: data == null ? 0 : data.length,
-//                 itemBuilder: (BuildContext context, int index) {
-//                   //print(data[index]);
-//                   return data == null
-//                       ? 0
-//                       : Card(
-//                           shape: RoundedRectangleBorder(
-//                             borderRadius: BorderRadius.circular(10),
-//                           ),
-//                           color: Colors.white,
-//                           elevation: 5,
-//                           child: InkWell(
-//                             onTap: () {
-//                               setState(() {
-//                                 pid = data[index]['_id'];
-//                               });
-
-//                               var pid_sendRoute = new MaterialPageRoute(
-//                                   builder: (BuildContext context) =>
-//                                       Page_SelectPet(
-//                                           pid: data[index]['_id'],
-//                                           pet_name: data[index]['pet_name']));
-
-//                               Navigator.of(context)
-//                                   .push(pid_sendRoute)
-//                                   .then((_) {
-//                                     getPetList();
-//                                 // setState(() {
-//                                 //   MyPet();
-//                                 // });
-//                               });
-//                             },
-//                             child: Center(
-//                                 child: Column(
-//                               children: [
-//                                 Padding(
-//                                   padding: const EdgeInsets.only(top: 10.0),
-//                                   child: ClipRRect(
-//                                     borderRadius: BorderRadius.circular(10),
-//                                     child: data == null
-//                                         ? null
-//                                         : Image.asset(
-//                                             'assets/images/1.jpg',
-//                                             height: 120.0,
-//                                             width: 120.0,
-//                                             fit: BoxFit.cover,
-//                                           ),
-//                                   ),
-//                                 ),
-//                                 Padding(
-//                                   padding: const EdgeInsets.only(top: 10),
-//                                   child: data == null
-//                                       ? null
-//                                       : Text(
-//                                           data[index]['pet_name'],
-//                                           style: TextStyle(
-//                                               color: Colors.red.shade400,
-//                                               fontSize: 16,
-//                                               fontWeight: FontWeight.normal,
-//                                               fontFamily: 'Mitr'),
-//                                         ),
-//                                 ),
-//                               ],
-//                             )),
-//                           ),
-//                         );
-//                 },
-//               ))
-//             : Center(child: CircularProgressIndicator()));
-//   }
-// }

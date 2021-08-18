@@ -27,7 +27,7 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
   final user_contact = TextEditingController();
   var user_gender = TextEditingController();
 
-  List listGender = ["ชาย", "หญิง", "ไม่ระบุ"];
+  List listGender = ["ชาย", "หญิง", "เพศทางเลือก"];
 
   String valueGender;
 
@@ -326,7 +326,6 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return valueGender = user_gender.text;
-                                      ;
                                     }
                                     return valueGender = user_gender.text;
                                   },

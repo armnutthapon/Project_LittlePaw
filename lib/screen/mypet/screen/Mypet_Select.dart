@@ -32,21 +32,17 @@ class Page_SelectPetState extends State<Page_SelectPet> {
 
   var send_pid;
 
-  deletePetByID() async {
-    final FirebaseAuth auth = await FirebaseAuth.instance;
-    final User userId = await auth.currentUser;
-    final String uid = await userId.uid;
-    http.Response response = await http
-        .delete(Uri.parse('$Url/petDetail/deletePet/$uid/${widget.pid}'))
-        .then((value) {
-      print("DELETE SUCCESS");
-    });
-    Navigator.of(context).pop();
-  }
-
   @override
   void initState() {
     super.initState();
+  }
+
+  deletePetByID() async {
+    http.Response response = await http
+        .get(Uri.parse('$Url/petDetail/deletePet/$uid/${widget.pid}'))
+        .then((_) {
+      print("DELETE SUCCESS");
+    });
   }
 
   void shareID(BuildContext context) {
@@ -93,64 +89,64 @@ class Page_SelectPetState extends State<Page_SelectPet> {
         });
   }
 
-  deletePet(pid) {
-    return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            title: Text(
-              pid,
-              style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w400,
-                  fontFamily: 'Mitr'),
-            ),
-            actions: [
-              FlatButton(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0)),
-                  color: Colors.green,
-                  onPressed: () {
-                    deletePetByID();
-                    // Navigator.pushAndRemoveUntil(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (BuildContext context) => MyPet()),
-                    //     ModalRoute.withName('/MyPet'));
-                    // Navigator.of(context)
-                    //     .popUntil(ModalRoute.withName('/MyPet'));
-                    // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: builder) => MyPet());
-                  },
-                  child: Text(
-                    'ยืนยัน',
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w400,
-                        fontFamily: 'Mitr'),
-                  )),
-              FlatButton(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0)),
-                color: Colors.red,
-                onPressed: () => Navigator.of(context).pop(context),
-                child: Text(
-                  'ยกเลิก',
-                  style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: 'Mitr'),
-                ),
-              )
-            ],
-          );
-        });
-  }
+  // deletePet(pid) {
+  //   return showDialog(
+  //       context: context,
+  //       builder: (BuildContext context) {
+  //         return AlertDialog(
+  //           shape: RoundedRectangleBorder(
+  //             borderRadius: BorderRadius.circular(10),
+  //           ),
+  //           title: Text(
+  //             pid,
+  //             style: TextStyle(
+  //                 fontSize: 18,
+  //                 color: Colors.black,
+  //                 fontWeight: FontWeight.w400,
+  //                 fontFamily: 'Mitr'),
+  //           ),
+  //           actions: [
+  //             FlatButton(
+  //                 shape: RoundedRectangleBorder(
+  //                     borderRadius: BorderRadius.circular(10.0)),
+  //                 color: Colors.green,
+  //                 onPressed: () {
+  //                   deletePetByID();
+  //                   // Navigator.pushAndRemoveUntil(
+  //                   //     context,
+  //                   //     MaterialPageRoute(
+  //                   //         builder: (BuildContext context) => MyPet()),
+  //                   //     ModalRoute.withName('/MyPet'));
+  //                   // Navigator.of(context)
+  //                   //     .popUntil(ModalRoute.withName('/MyPet'));
+  //                   // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: builder) => MyPet());
+  //                 },
+  //                 child: Text(
+  //                   'ยืนยัน',
+  //                   style: TextStyle(
+  //                       fontSize: 18,
+  //                       color: Colors.white,
+  //                       fontWeight: FontWeight.w400,
+  //                       fontFamily: 'Mitr'),
+  //                 )),
+  //             FlatButton(
+  //               shape: RoundedRectangleBorder(
+  //                   borderRadius: BorderRadius.circular(10.0)),
+  //               color: Colors.red,
+  //               onPressed: () => Navigator.of(context).pop(context),
+  //               child: Text(
+  //                 'ยกเลิก',
+  //                 style: TextStyle(
+  //                     fontSize: 18,
+  //                     color: Colors.white,
+  //                     fontWeight: FontWeight.w400,
+  //                     fontFamily: 'Mitr'),
+  //               ),
+  //             )
+  //           ],
+  //         );
+  //       });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -221,7 +217,7 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                                 },
                                 child: Mypet_ButtonInfo(
                                   text: "ข้อมูลสัตว์เลี้ยง",
-                                  icon: FontAwesomeIcons.stethoscope,
+                                  icon: FontAwesomeIcons.search,
                                 ),
                               ),
                             ),
@@ -253,7 +249,7 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                                 },
                                 child: Mypet_ButtonInfo(
                                   text: "ข้อมูลวัคซีน",
-                                  icon: FontAwesomeIcons.search,
+                                  icon: FontAwesomeIcons.syringe,
                                 ),
                               ),
                             ),
@@ -295,9 +291,9 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                     size: 30,
                   ),
                   tooltip: 'ลบข้อมูล',
-                  onPressed: () {
-                    deletePetByID();
-
+                  onPressed: () async {
+                    await deletePetByID();
+                    Navigator.of(context).pop(context);
                     // deletePet(widget.pid);
                   },
                 ),
