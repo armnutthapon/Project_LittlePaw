@@ -24,7 +24,7 @@ class ShowText extends StatelessWidget {
             style: TextStyle(
               fontFamily: 'Mitr',
               fontSize: 14,
-              color: Colors.black,
+              color: Colors.red,
               fontWeight: FontWeight.w500,
             ),
             children: <TextSpan>[

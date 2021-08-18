@@ -32,16 +32,16 @@ class Page_SelectPetState extends State<Page_SelectPet> {
 
   var send_pid;
 
-  deletePetByID(pid) async {
-    print(pid);
+  deletePetByID() async {
+    final FirebaseAuth auth = await FirebaseAuth.instance;
+    final User userId = await auth.currentUser;
+    final String uid = await userId.uid;
     http.Response response = await http
-        .delete(Uri.parse('$Url/petDetail/deletePet/$uid/$pid'))
+        .delete(Uri.parse('$Url/petDetail/deletePet/$uid/${widget.pid}'))
         .then((value) {
-      print("DeleteSuccess");
+      print("DELETE SUCCESS");
     });
-    // Route route = MaterialPageRoute(builder: (context) => MyPet());
-    // Navigator.pop(context);
-    
+    Navigator.of(context).pop();
   }
 
   @override
@@ -115,7 +115,7 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                       borderRadius: BorderRadius.circular(10.0)),
                   color: Colors.green,
                   onPressed: () {
-                     deletePetByID(pid);
+                    deletePetByID();
                     // Navigator.pushAndRemoveUntil(
                     //     context,
                     //     MaterialPageRoute(
@@ -124,7 +124,6 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                     // Navigator.of(context)
                     //     .popUntil(ModalRoute.withName('/MyPet'));
                     // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: builder) => MyPet());
-                    
                   },
                   child: Text(
                     'ยืนยัน',
@@ -297,7 +296,9 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                   ),
                   tooltip: 'ลบข้อมูล',
                   onPressed: () {
-                    deletePet(widget.pid);
+                    deletePetByID();
+
+                    // deletePet(widget.pid);
                   },
                 ),
               )

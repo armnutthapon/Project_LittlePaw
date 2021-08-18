@@ -27,7 +27,7 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
   final user_contact = TextEditingController();
   var user_gender = TextEditingController();
 
-  List listGender = ["ผู้ชาย", "ผู้หญิง"];
+  List listGender = ["ชาย", "หญิง", "ไม่ระบุ"];
 
   String valueGender;
 
@@ -44,13 +44,27 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
   }
 
   updateUserProfile() async {
+    if (user_name == null || user_name.text.isEmpty) {
+      user_name.text = " ";
+      return user_name.text = " ";
+    }
+    if (valueGender == null) {
+      valueGender = "-";
+      return '-';
+    }
+    if (user_contact == null || user_contact.text.isEmpty) {
+      user_contact.text = "-";
+      return user_contact.text = "-";
+    }
     await setData();
+
     http.Response response = await http
         .post(Uri.parse(
             '$Url/owner/editUserProfile/$uid/${user_name.text}/${user_contact.text}/${valueGender}'))
-        .then((value) {
-      print("Update success");
-    });
+        .then((value) {});
+    print(
+        '$uid    ${user_name.text}/  ${user_contact.text}/     ${valueGender}');
+    print("Update success");
   }
 
   @override
@@ -188,9 +202,9 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                                     onSaved: (String value) {},
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
-                                        return 'กรุณาใส่อายุของสัตว์เลี้ยง';
+                                        return '-';
                                       }
-                                      return null;
+                                      return "-";
                                     },
                                   ),
                                   trailing: IconButton(
@@ -241,7 +255,8 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                                     onSaved: (String value) {},
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
-                                        return 'กรุณาใส่อายุของสัตว์เลี้ยง';
+                                        print("null");
+                                        return 'กรุณาระบุ';
                                       }
                                       return null;
                                     },
@@ -280,6 +295,11 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                                       fontFamily: 'Mitr'),
                                 ),
                                 subtitle: DropdownButtonFormField(
+                                  icon: Icon(
+                                    // Add this
+                                    Icons.arrow_drop_down, // Add this
+                                    color: Colors.grey.shade600, // Add this
+                                  ),
                                   hint: Text(user_gender.text,
                                       style: TextStyle(
                                           color: Colors.red.shade400,
@@ -292,7 +312,7 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                                   dropdownColor: Colors.white,
                                   value: valueGender,
                                   style: TextStyle(
-                                      color: Colors.grey,
+                                      color: Colors.red.shade400,
                                       fontSize: 16,
                                       fontWeight: FontWeight.w400,
                                       fontFamily: 'Mitr'),
@@ -301,13 +321,14 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                                       valueGender = newValue;
                                       user_gender = newValue;
                                     });
-                                    print(user_gender);
+                                    print("Sex : $valueGender");
                                   },
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
-                                      return 'กรุณาระบุเพศ';
+                                      return valueGender = user_gender.text;
+                                      ;
                                     }
-                                    return null;
+                                    return valueGender = user_gender.text;
                                   },
                                   items: listGender.map((valueItem) {
                                     return DropdownMenuItem(

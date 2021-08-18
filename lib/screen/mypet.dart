@@ -23,11 +23,14 @@ class _MyPetState extends State<MyPet> {
   var arr = [];
   var pid;
   List<Function> sendPetDetail = [];
-  
+
   // final String id = "";
-  
 
   getPetList() async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User userId = auth.currentUser;
+    final String uid = userId.uid;
+
     http.Response response =
         await http.get(Uri.parse('$Url/petDetail/showByID/$uid'));
     setState(() {

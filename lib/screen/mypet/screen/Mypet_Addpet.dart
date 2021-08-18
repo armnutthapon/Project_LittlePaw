@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:little_paw/database/database.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 class Page_Addpet extends StatefulWidget {
   const Page_Addpet({Key key}) : super(key: key);
@@ -61,16 +62,18 @@ class Addpet extends StatefulWidget {
 class _AddpetState extends State<Addpet> {
   final _formkey = GlobalKey<FormState>();
 
+  bool _autovalidate = false;
+
   final _addPetName = TextEditingController();
   var _addPetGender;
   var _addPetCategory;
   final _addPetColor = TextEditingController();
   final _addPetBreed = TextEditingController();
-  final _addPetAge = TextEditingController();
   var _addPetSterilize;
   final _addPetCharacteristics = TextEditingController();
   final _addCongenitalDisease = TextEditingController();
   final _addVaccine = TextEditingController();
+  final _addPetAge = TextEditingController();
 
   bool sterilize = false;
 
@@ -115,23 +118,26 @@ class _AddpetState extends State<Addpet> {
     // print(pet_name + " " + sex + " " + type  + " " + color  + " " + breed  + " ");
   }
 
-  // getPetID() async {
-  //   http.Response response = await http.get(Uri.parse('$Url/petDetail'));
-  //   setState(() {
-  //     var resBody = json.decode(response.body);
-  //     data = resBody as List;
-  //     total = resBody.length;
-  //   });
-  //   print(data[total - 1]['_id']);
-  // }
-
   addPetDetail() async {
     await setData();
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User userId = auth.currentUser;
+    final String uid = userId.uid;
+
     http.Response response = await http
         .post(Uri.parse(
-            '$Url/petDetail/add/$pet_name/$type/$sex/$color/$breed/$dob/$characteristics/$sterilization/$congenital_disease/$vaccine/$uid'))
+            '$Url/petDetail/add/${_addPetName.text}/${_addPetCategory}/${_addPetGender}/${_addPetColor.text}/${_addPetBreed.text}/${_addPetAge.text}/${_addPetCharacteristics.text}/${_addPetSterilize}/${_addCongenitalDisease.text}/${_addVaccine.text}/$uid'))
         .then((response) {
       print("success");
+      print(pet_name);
+      print(type);
+      print(sex);
+      print(color);
+      print(breed);
+      print(dob);
+      print(characteristics);
+      print(sterilization);
+      print(uid);
       Navigator.pop(context);
     });
     //print(pet_name + " " + sex + " " + type  + " " + color  + " " + breed  + " " + dob  + " " + sterilization + " " + characteristics + " " + congenital_disease + " " + vaccine);
@@ -139,11 +145,32 @@ class _AddpetState extends State<Addpet> {
     //getPetID();
   }
 
+  DateTime date;
+
+  DateTime selectedDate = DateTime.now();
+
+  Future<void> _selectDate(BuildContext context) async {
+    final now = DateTime.now();
+    final DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: date ?? now,
+        firstDate: DateTime(1970),
+        lastDate: now);
+    if (picked != null && picked != date) {
+      print('hello $picked');
+      setState(() {
+        _addPetAge.text = DateFormat('MM-dd-yyyy').format(picked);
+      });
+      print(_addPetAge.text);
+    }
+  }
+
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: Colors.grey.shade100,
         body: Form(
+          autovalidate: _autovalidate,
           key: _formkey,
           child: Column(
             children: [
@@ -152,65 +179,77 @@ class _AddpetState extends State<Addpet> {
               ),
               Expanded(
                 child: Container(
-                  padding: EdgeInsets.fromLTRB(30, 10, 30, 0),
+                  padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
                   child: ListView(
                     children: [
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                        child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              color: Colors.white,
-                              border: Border.all(
-                                  width: 1.0, color: Colors.grey[200]),
-                            ),
-                            child: Container(
-                              height: size.height * 0.08,
-                              padding: EdgeInsets.only(left: 20, right: 20),
-                              child: TextFormField(
-                                controller: _addPetName,
+                      Container(
+                        margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          color: Colors.white,
+                          border:
+                              Border.all(width: 1.0, color: Colors.grey[200]),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 10, bottom: 10),
+                          child: Container(
+                            child: ListTile(
+                              title: Text(
+                                "ชื่อ :",
+                                overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 18,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Mitr'),
+                              ),
+                              subtitle: TextFormField(
+                                controller: _addPetName,
+                                style: TextStyle(
+                                    color: Colors.red.shade400,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.w400,
                                     fontFamily: 'Mitr'),
                                 decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.zero,
                                   border: InputBorder.none,
                                   focusedBorder: InputBorder.none,
-                                  hintText: "ชื่อสัตว์เลี้ยง",
-                                  hintStyle: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w300,
-                                      fontFamily: 'Mitr'),
                                 ),
-                                onSaved: (String value) {},
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'กรุณาใส่ชื่อสัตว์เลี้ยง';
+                                    return 'กรุณาระบุชื่อสัตว์เลี้ยง';
                                   }
                                   return null;
                                 },
                               ),
-                            )),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                        child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              color: Colors.white,
-                              border: Border.all(
-                                  width: 1.0, color: Colors.grey[200]),
                             ),
-                            child: Container(
-                              alignment: Alignment.center,
-                              height: size.height * 0.08,
-                              padding: EdgeInsets.only(left: 20, right: 20),
-                              child: DropdownButtonFormField(
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          color: Colors.white,
+                          border:
+                              Border.all(width: 1.0, color: Colors.grey[200]),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 10, bottom: 10),
+                          child: Container(
+                            child: ListTile(
+                              title: Text(
+                                "เพศ :",
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Mitr'),
+                              ),
+                              subtitle: DropdownButtonFormField(
                                 hint: Text(
-                                  "เพศ",
+                                  "เพศของสัตว์เลี้ยง",
                                   style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w300,
@@ -222,8 +261,8 @@ class _AddpetState extends State<Addpet> {
                                 dropdownColor: Colors.white,
                                 value: valueGender,
                                 style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 18,
+                                    color: Colors.red.shade400,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.w400,
                                     fontFamily: 'Mitr'),
                                 onChanged: (newValue) {
@@ -247,36 +286,47 @@ class _AddpetState extends State<Addpet> {
                                       ));
                                 }).toList(),
                               ),
-                            )),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                        child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              color: Colors.white,
-                              border: Border.all(
-                                  width: 1.0, color: Colors.grey[200]),
                             ),
-                            child: Container(
-                              alignment: Alignment.center,
-                              height: size.height * 0.08,
-                              padding: EdgeInsets.only(left: 20, right: 20),
-                              child: DropdownButtonFormField(
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          color: Colors.white,
+                          border:
+                              Border.all(width: 1.0, color: Colors.grey[200]),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 10, bottom: 10),
+                          child: Container(
+                            child: ListTile(
+                              title: Text(
+                                "ประเภท :",
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Mitr'),
+                              ),
+                              subtitle: DropdownButtonFormField(
+                                hint: Text(
+                                  "ประเภทของสัตว์เลี้ยง",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w300,
+                                      fontFamily: 'Mitr'),
+                                ),
                                 isDense: false,
                                 decoration:
                                     InputDecoration.collapsed(hintText: ''),
-                                hint: Text("ประเภท",
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w300,
-                                        fontFamily: 'Mitr')),
                                 dropdownColor: Colors.white,
                                 value: valueCategory,
                                 style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 18,
+                                    color: Colors.red.shade400,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.w400,
                                     fontFamily: 'Mitr'),
                                 onChanged: (newValue) {
@@ -286,6 +336,12 @@ class _AddpetState extends State<Addpet> {
                                   });
                                   print(_addPetCategory);
                                 },
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'กรุณาระบุประเภท';
+                                  }
+                                  return null;
+                                },
                                 items: listCategory.map((valueItem) {
                                   return DropdownMenuItem(
                                       value: valueItem,
@@ -294,192 +350,233 @@ class _AddpetState extends State<Addpet> {
                                       ));
                                 }).toList(),
                               ),
-                            )),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                        child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              color: Colors.white,
-                              border: Border.all(
-                                  width: 1.0, color: Colors.grey[200]),
                             ),
-                            child: Container(
-                              height: size.height * 0.08,
-                              padding: EdgeInsets.only(left: 20, right: 20),
-                              child: TextFormField(
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          color: Colors.white,
+                          border:
+                              Border.all(width: 1.0, color: Colors.grey[200]),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 10, bottom: 10),
+                          child: Container(
+                            child: ListTile(
+                              title: Text(
+                                "สี :",
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Mitr'),
+                              ),
+                              subtitle: TextFormField(
                                 controller: _addPetColor,
                                 style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 18,
+                                    color: Colors.red.shade400,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.w400,
                                     fontFamily: 'Mitr'),
                                 decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.zero,
                                   border: InputBorder.none,
                                   focusedBorder: InputBorder.none,
-                                  hintText: "สีของสัตว์เลี้ยง",
-                                  hintStyle: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w300,
-                                      fontFamily: 'Mitr'),
                                 ),
-                                onSaved: (String value) {},
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'กรุณาใส่สีของสัตว์เลี้ยง';
+                                    return 'กรุณาระบุสีของสัตว์เลี้ยง';
                                   }
                                   return null;
                                 },
                               ),
-                            )),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                        child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              color: Colors.white,
-                              border: Border.all(
-                                  width: 1.0, color: Colors.grey[200]),
                             ),
-                            child: Container(
-                              height: size.height * 0.08,
-                              padding: EdgeInsets.only(left: 20, right: 20),
-                              child: TextFormField(
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          color: Colors.white,
+                          border:
+                              Border.all(width: 1.0, color: Colors.grey[200]),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 10, bottom: 10),
+                          child: Container(
+                            child: ListTile(
+                              title: Text(
+                                "สายพันธุ์ :",
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Mitr'),
+                              ),
+                              subtitle: TextFormField(
                                 controller: _addPetBreed,
                                 style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 18,
+                                    color: Colors.red.shade400,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.w400,
                                     fontFamily: 'Mitr'),
                                 decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.zero,
                                   border: InputBorder.none,
                                   focusedBorder: InputBorder.none,
-                                  hintText: "สายพันธุ์",
-                                  hintStyle: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w300,
-                                      fontFamily: 'Mitr'),
                                 ),
-                                onSaved: (String value) {},
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'กรุณาใส่สายพันธุ์';
+                                    return 'กรุณาระบุสายพันธุ์';
                                   }
                                   return null;
                                 },
                               ),
-                            )),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                        child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              color: Colors.white,
-                              border: Border.all(
-                                  width: 1.0, color: Colors.grey[200]),
                             ),
-                            child: Container(
-                              height: size.height * 0.08,
-                              padding: EdgeInsets.only(left: 20, right: 20),
-                              child: TextFormField(
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          color: Colors.white,
+                          border:
+                              Border.all(width: 1.0, color: Colors.grey[200]),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 10, bottom: 10),
+                          child: Container(
+                            child: ListTile(
+                              title: Text(
+                                "ลักษณะเฉพาะ :",
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Mitr'),
+                              ),
+                              subtitle: TextFormField(
                                 controller: _addPetCharacteristics,
                                 style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 18,
+                                    color: Colors.red.shade400,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.w400,
                                     fontFamily: 'Mitr'),
                                 decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.zero,
                                   border: InputBorder.none,
                                   focusedBorder: InputBorder.none,
-                                  hintText: "ลักษณะเฉพาะ",
-                                  hintStyle: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w300,
-                                      fontFamily: 'Mitr'),
                                 ),
-                                onSaved: (String value) {},
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'กรุณาใส่ลักษณะเฉพาะ';
+                                    return 'กรุณาระบุลักษณะเฉพาะ';
                                   }
                                   return null;
                                 },
                               ),
-                            )),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                        child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              color: Colors.white,
-                              border: Border.all(
-                                  width: 1.0, color: Colors.grey[200]),
                             ),
-                            child: Container(
-                              height: size.height * 0.08,
-                              padding: EdgeInsets.only(left: 20, right: 20),
-                              child: TextFormField(
-                                controller: _addPetAge,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          color: Colors.white,
+                          border:
+                              Border.all(width: 1.0, color: Colors.grey[200]),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 10, bottom: 10),
+                          child: Container(
+                            child: ListTile(
+                              title: Text(
+                                "วันเกิด / วันที่รับเลี้ยง :",
+                                overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 18,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Mitr'),
+                              ),
+                              subtitle: TextFormField(
+                                controller: _addPetAge,
+                                style: TextStyle(
+                                    color: Colors.red.shade400,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.w400,
                                     fontFamily: 'Mitr'),
                                 decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.zero,
                                   border: InputBorder.none,
                                   focusedBorder: InputBorder.none,
-                                  hintText: "อายุ",
-                                  hintStyle: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w300,
-                                      fontFamily: 'Mitr'),
                                 ),
-                                onSaved: (String value) {},
+                                onTap: () async {
+                                  // Below line stops keyboard from appearing
+                                  FocusScope.of(context)
+                                      .requestFocus(new FocusNode());
+                                  // Show Date Picker Here
+                                  await _selectDate(context);
+                                  // _addPetAge.text =
+                                  //     DateFormat('dd/MM/yyyy').format(date);
+                                  //setState(() {});
+                                },
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'กรุณาใส่อายุของสัตว์เลี้ยง';
+                                    return 'กรุณาระบุอายุสัตว์เลี้ยง';
                                   }
                                   return null;
                                 },
                               ),
-                            )),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                        child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              color: Colors.white,
-                              border: Border.all(
-                                  width: 1.0, color: Colors.grey[200]),
                             ),
-                            child: Container(
-                              alignment: Alignment.center,
-                              height: size.height * 0.08,
-                              padding: EdgeInsets.only(left: 20, right: 20),
-                              child: DropdownButtonFormField(
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          color: Colors.white,
+                          border:
+                              Border.all(width: 1.0, color: Colors.grey[200]),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 10, bottom: 10),
+                          child: Container(
+                            child: ListTile(
+                              title: Text(
+                                "การทำหมัน :",
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Mitr'),
+                              ),
+                              subtitle: DropdownButtonFormField(
+                                hint: Text(
+                                  "การทำหมัน",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w300,
+                                      fontFamily: 'Mitr'),
+                                ),
                                 isDense: false,
                                 decoration:
                                     InputDecoration.collapsed(hintText: ''),
-                                hint: Text("การทำหมัน",
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w300,
-                                        fontFamily: 'Mitr')),
                                 dropdownColor: Colors.white,
                                 value: valueSterilize,
                                 style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 18,
+                                    color: Colors.red.shade400,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.w400,
                                     fontFamily: 'Mitr'),
                                 onChanged: (newValue) {
@@ -487,7 +584,13 @@ class _AddpetState extends State<Addpet> {
                                     valueSterilize = newValue;
                                     _addPetSterilize = newValue;
                                   });
-                                  print(_addPetSterilize);
+                                  print(_addPetGender);
+                                },
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'กรุณาระบุการทำหมัน';
+                                  }
+                                  return null;
                                 },
                                 items: listSterilize.map((valueItem) {
                                   return DropdownMenuItem(
@@ -497,7 +600,97 @@ class _AddpetState extends State<Addpet> {
                                       ));
                                 }).toList(),
                               ),
-                            )),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          color: Colors.white,
+                          border:
+                              Border.all(width: 1.0, color: Colors.grey[200]),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 10, bottom: 10),
+                          child: Container(
+                            child: ListTile(
+                              title: Text(
+                                "โรคประจำตัว :",
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Mitr'),
+                              ),
+                              subtitle: TextFormField(
+                                controller: _addCongenitalDisease,
+                                style: TextStyle(
+                                    color: Colors.red.shade400,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Mitr'),
+                                decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.zero,
+                                  border: InputBorder.none,
+                                  focusedBorder: InputBorder.none,
+                                ),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'กรุณาระบุโรคประจำตัว';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          color: Colors.white,
+                          border:
+                              Border.all(width: 1.0, color: Colors.grey[200]),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 10, bottom: 10),
+                          child: Container(
+                            child: ListTile(
+                              title: Text(
+                                "วัคซีน :",
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Mitr'),
+                              ),
+                              subtitle: TextFormField(
+                                controller: _addVaccine,
+                                style: TextStyle(
+                                    color: Colors.red.shade400,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Mitr'),
+                                decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.zero,
+                                  border: InputBorder.none,
+                                  focusedBorder: InputBorder.none,
+                                ),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'กรุณาระบุวัคซีน';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                       Container(
                         margin: EdgeInsets.only(top: 10, bottom: 20),
@@ -521,6 +714,9 @@ class _AddpetState extends State<Addpet> {
                                           print(_addPetSterilize);
                                         }
                                         addPetDetail();
+                                      } else {
+                                        print('invalid');
+                                        setState(() => _autovalidate = true);
                                       }
                                     },
                               child: Center(
