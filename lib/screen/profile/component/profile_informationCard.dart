@@ -76,24 +76,37 @@ class OwnerInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return ListTile(
-      title: Text(
-        text,
-        overflow: TextOverflow.ellipsis,
-        style: TextStyle(
-            color: Colors.black,
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
-            fontFamily: 'Mitr'),
+    return Container(
+      margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+        color: Colors.white,
+        border: Border.all(width: 1.0, color: Colors.grey[200]),
       ),
-      subtitle: Text(
-        textdetail,
-        overflow: TextOverflow.ellipsis,
-        style: TextStyle(
-            color: Colors.red.shade400,
-            fontSize: 18,
-            fontWeight: FontWeight.w400,
-            fontFamily: 'Mitr'),
+      child: Padding(
+        padding: EdgeInsets.only(top: 5, bottom: 5),
+        child: Container(
+          child: ListTile(
+            title: Text(
+              text,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  fontFamily: 'Mitr'),
+            ),
+            subtitle: Text(
+              textdetail,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                  color: Colors.red.shade400,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  fontFamily: 'Mitr'),
+            ),
+          ),
+        ),
       ),
     );
   }

@@ -73,10 +73,13 @@ class _SettingState extends State<Setting> {
                             builder: (_) => new Page_EditProfile()),
                       )
                       .then((data) => {
-                        data ?  data != null ? getUserInformation() : null : Center(child: CircularProgressIndicator()),
-                        print("Reload" + data)
-                      });
-
+                            data
+                                ? data != null
+                                    ? getUserInformation()
+                                    : null
+                                : Center(child: CircularProgressIndicator()),
+                            print("Reload" + data)
+                          });
                 },
                 icon: Icon(FontAwesomeIcons.userEdit))
             // icon: Icon(Icons.exit_to_app))
@@ -110,7 +113,7 @@ class _SettingState extends State<Setting> {
                       ),
                     )),
                   ),
-                   Expanded(
+                  Expanded(
                       child: Container(
                     margin: EdgeInsets.only(top: 10),
                     child: ListView(
