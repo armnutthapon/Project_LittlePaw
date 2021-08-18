@@ -53,84 +53,100 @@ class _MyPetState extends State<MyPet> {
       body: Scaffold(
           backgroundColor: Colors.cyan.shade300.withOpacity(0.15),
           body: data != null
-              ? Center(
-                  child: GridView.builder(
-                  primary: false,
-                  padding: const EdgeInsets.all(20),
-                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                    childAspectRatio: mediaQueryData.size.height / 900,
-                    crossAxisSpacing: 20,
-                    mainAxisSpacing: 20,
-                    maxCrossAxisExtent: 200.0,
+              ? Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topRight,
+                      end: Alignment.bottomLeft,
+                      stops: [0.1, 0.5, 0.7, 0.9],
+                      colors: [
+                        Colors.red[500],
+                        Colors.yellow[500],
+                        Colors.green[500],
+                        Colors.blue[500],
+                      ],
+                    ),
                   ),
-                  itemCount: data == null ? 0 : data.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    //print(data[index]);
-                    return data == null
-                        ? 0
-                        : Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            color: Colors.white,
-                            elevation: 5,
-                            child: InkWell(
-                              onTap: () {
-                                setState(() {
-                                  pid = data[index]['_id'];
-                                });
+                  child: Center(
+                      child: GridView.builder(
+                    primary: false,
+                    padding: const EdgeInsets.all(20),
+                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                      childAspectRatio: mediaQueryData.size.height / 900,
+                      crossAxisSpacing: 20,
+                      mainAxisSpacing: 20,
+                      maxCrossAxisExtent: 200.0,
+                    ),
+                    itemCount: data == null ? 0 : data.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      //print(data[index]);
+                      return data == null
+                          ? 0
+                          : Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              color: Colors.white,
+                              elevation: 5,
+                              child: InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    pid = data[index]['_id'];
+                                  });
 
-                                var pid_sendRoute = new MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        Page_SelectPet(
-                                            pid: data[index]['_id'],
-                                            pet_name: data[index]['pet_name']));
+                                  var pid_sendRoute = new MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          Page_SelectPet(
+                                              pid: data[index]['_id'],
+                                              pet_name: data[index]
+                                                  ['pet_name']));
 
-                                Navigator.of(context)
-                                    .push(pid_sendRoute)
-                                    .then((_) {
-                                  getPetList();
-                                  // setState(() {
-                                  //   MyPet();
-                                  // });
-                                });
-                              },
-                              child: Center(
-                                  child: Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 10.0),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
+                                  Navigator.of(context)
+                                      .push(pid_sendRoute)
+                                      .then((_) {
+                                    getPetList();
+                                    // setState(() {
+                                    //   MyPet();
+                                    // });
+                                  });
+                                },
+                                child: Center(
+                                    child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 10.0),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: data == null
+                                            ? null
+                                            : Image.asset(
+                                                'assets/images/1.jpg',
+                                                height: 120.0,
+                                                width: 120.0,
+                                                fit: BoxFit.cover,
+                                              ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 10),
                                       child: data == null
                                           ? null
-                                          : Image.asset(
-                                              'assets/images/1.jpg',
-                                              height: 120.0,
-                                              width: 120.0,
-                                              fit: BoxFit.cover,
+                                          : Text(
+                                              data[index]['pet_name'],
+                                              style: TextStyle(
+                                                  color: Colors.green,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.normal,
+                                                  fontFamily: 'Mitr'),
                                             ),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 10),
-                                    child: data == null
-                                        ? null
-                                        : Text(
-                                            data[index]['pet_name'],
-                                            style: TextStyle(
-                                                color: Colors.green,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.normal,
-                                                fontFamily: 'Mitr'),
-                                          ),
-                                  ),
-                                ],
-                              )),
-                            ),
-                          );
-                  },
-                ))
+                                  ],
+                                )),
+                              ),
+                            );
+                    },
+                  )),
+                )
               : Center(child: CircularProgressIndicator())),
       appBar: AppBar(
         title: Text("สัตว์เลี้ยงของฉัน",
