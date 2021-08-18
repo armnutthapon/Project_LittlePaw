@@ -651,12 +651,17 @@ class _AddpetState extends State<Addpet> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(top: 10, bottom: 20),
-                        padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                        child: Column(
-                          children: [
-                            MaterialButton(
-                              height: 40.0,
+                        margin:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                        width: size.width * 1,
+                        height: size.height * 0.06,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: SizedBox(
+                            width: 150,
+                            height: 50,
+                            child: MaterialButton(
+                              color: Colors.red.shade400,
                               onPressed: _clicked
                                   ? null
                                   : () {
@@ -688,11 +693,7 @@ class _AddpetState extends State<Addpet> {
                                 ),
                               ),
                             ),
-                          ],
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.red.shade400,
-                          borderRadius: BorderRadius.circular(10.0),
+                          ),
                         ),
                       ),
                     ],
