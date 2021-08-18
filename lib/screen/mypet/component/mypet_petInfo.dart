@@ -10,58 +10,34 @@ class PetInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
+      margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+        color: Colors.white,
+        border: Border.all(width: 1.0, color: Colors.grey[200]),
+      ),
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(10, 2, 10, 2),
+        padding: EdgeInsets.only(top: 5, bottom: 5),
         child: Container(
-          height: 50,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              color: Colors.white,
-              border: Border.all(width: 1.0, color: Colors.grey[200])),
-          child: Align(
-            alignment: Alignment.center,
-            child: Padding(
-                padding: const EdgeInsets.fromLTRB(12, 5, 2, 5),
-                // padding: const EdgeInsets.all(0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      text,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          fontFamily: 'Mitr'),
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          textdetail,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              color: Colors.red.shade400,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                              fontFamily: 'Mitr'),
-                        ),
-                        // IconButton(
-                        //   icon: Icon(Icons.arrow_right),
-                        //   iconSize: 25,
-                        //   onPressed: () {
-                        //     Navigator.of(context).push(MaterialPageRoute(
-                        //         builder: (context) => MyPet()));
-                        //   },
-                        // ),
-                        Icon(
-                          Icons.arrow_right,
-                          size: 25,
-                        )
-                      ],
-                    )
-                  ],
-                )),
+          child: ListTile(
+            title: Text(
+              text,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  fontFamily: 'Mitr'),
+            ),
+            subtitle: Text(
+              textdetail,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                  color: Colors.red.shade400,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  fontFamily: 'Mitr'),
+            ),
           ),
         ),
       ),

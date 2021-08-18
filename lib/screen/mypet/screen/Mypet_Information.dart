@@ -142,35 +142,35 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
                       padding: EdgeInsets.zero,
                       children: [
                         PetInfo(
-                          text: "ชื่อ",
+                          text: "ชื่อ :",
                           textdetail: data['pet_name'],
                         ),
                         PetInfo(
-                          text: "ประเภท",
+                          text: "ประเภท :",
                           textdetail: data['type'],
                         ),
                         PetInfo(
-                          text: "เพศ",
+                          text: "เพศ :",
                           textdetail: data['sex'],
                         ),
                         PetInfo(
-                          text: "สี",
+                          text: "สี :",
                           textdetail: data['color'],
                         ),
                         PetInfo(
-                          text: "สายพันธุ์",
+                          text: "สายพันธุ์ :",
                           textdetail: data['breed'],
                         ),
                         PetInfo(
-                          text: "ลักษณะเฉพาะ",
+                          text: "ลักษณะเฉพาะ :",
                           textdetail: data['characteristics'],
                         ),
                         PetInfo(
-                          text: "อายุ",
+                          text: "อายุ :",
                           textdetail: data['dob'],
                         ),
                         PetInfo(
-                          text: "ทำหมัน",
+                          text: "ทำหมัน :",
                           textdetail: getSterilization(),
                         ),
                       ],

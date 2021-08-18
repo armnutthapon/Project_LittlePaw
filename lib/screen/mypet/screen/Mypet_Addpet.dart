@@ -102,24 +102,23 @@ class _AddpetState extends State<Addpet> {
 
   bool _clicked = false;
 
-  setData() {
-    pet_name = _addPetName.text;
+  // setData() {
+  //   pet_name = _addPetName.text;
 
-    sex = _addPetGender;
-    type = _addPetCategory;
-    sterilization = _addPetSterilize;
+  //   sex = _addPetGender;
+  //   type = _addPetCategory;
+  //   sterilization = _addPetSterilize;
 
-    color = _addPetColor.text;
-    breed = _addPetBreed.text;
-    dob = _addPetAge.text;
-    characteristics = _addPetCharacteristics.text;
-    congenital_disease = "Kuy Tuu";
-    vaccine = "Where is Moderna";
-    // print(pet_name + " " + sex + " " + type  + " " + color  + " " + breed  + " ");
-  }
+  //   color = _addPetColor.text;
+  //   breed = _addPetBreed.text;
+  //   dob = _addPetAge.text;
+  //   characteristics = _addPetCharacteristics.text;
+  //   congenital_disease = "Kuy Tuu";
+  //   vaccine = "Where is Moderna";
+  //   // print(pet_name + " " + sex + " " + type  + " " + color  + " " + breed  + " ");
+  // }
 
   addPetDetail() async {
-    await setData();
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User userId = auth.currentUser;
     final String uid = userId.uid;
@@ -157,7 +156,6 @@ class _AddpetState extends State<Addpet> {
         firstDate: DateTime(1970),
         lastDate: now);
     if (picked != null && picked != date) {
-      print('hello $picked');
       setState(() {
         _addPetAge.text = DateFormat('MM-dd-yyyy').format(picked);
       });
