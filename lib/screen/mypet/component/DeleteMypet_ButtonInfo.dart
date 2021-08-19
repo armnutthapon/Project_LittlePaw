@@ -21,13 +21,13 @@ class Share_ButtonInfo extends StatelessWidget {
               child: ClipRRect(
                   child: Icon(
                 icon,
-                color: Colors.white,
+                color: Colors.green,
                 size: 35,
               ))),
           Text(
             text,
             style: TextStyle(
-                color: Colors.white,
+                color: Colors.black54,
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
                 fontFamily: 'Mitr'),

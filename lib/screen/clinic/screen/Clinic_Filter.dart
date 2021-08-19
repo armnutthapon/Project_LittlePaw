@@ -23,16 +23,16 @@ class _Page_FilterClinicState extends State<Page_FilterClinic> {
               "กรองข้อมูล",
               style: TextStyle(
                   fontSize: 22,
-                  color: Colors.black,
+                  color: Colors.white,
                   fontWeight: FontWeight.w500,
                   fontFamily: 'Mitr'),
             ), // You can add title here
             leading: new IconButton(
               padding: EdgeInsets.only(top: 0),
-              icon: new Icon(Icons.arrow_back_ios, color: Colors.black),
+              icon: new Icon(Icons.arrow_back_ios, color: Colors.white),
               onPressed: () => Navigator.of(context).pop(),
             ),
-            backgroundColor: Colors.white.withOpacity(1),
+            backgroundColor: Colors.indigoAccent.withOpacity(1),
             elevation: 10.0,
           ),
         ),
@@ -57,7 +57,6 @@ class _selectFilterState extends State<selectFilter> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.grey.shade100,
       body: Container(
         alignment: Alignment.center,
         child: Column(
@@ -99,8 +98,8 @@ class _selectFilterState extends State<selectFilter> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                     child: RangeSlider(
-                        activeColor: Colors.red.shade400,
-                        inactiveColor: Colors.red.shade200,
+                        activeColor: Colors.orange.shade600,
+                        inactiveColor: Colors.orange.shade200,
                         values: _currentRangeValues,
                         min: 0,
                         max: 100,
@@ -140,89 +139,6 @@ class _selectFilterState extends State<selectFilter> {
                 ],
               ),
             ),
-            // Container(
-            //     child: Column(
-            //   children: [
-            //     Padding(
-            //         padding: EdgeInsets.only(left: 60),
-            //         child: Container(
-            //           child: Column(
-            //             children: <Widget>[
-            //               Column(
-            //                 children: <Widget>[
-            //                   Row(
-            //                     children: [
-            //                       Checkbox(
-            //                         value: A,
-            //                         onChanged: (bool value) {
-            //                           setState(() {
-            //                             A = value;
-            //                           });
-            //                         },
-            //                       ),
-            //                       Text("A"),
-            //                     ],
-            //                   ),
-            //                   Row(
-            //                     children: [
-            //                       Checkbox(
-            //                         value: B,
-            //                         onChanged: (bool value) {
-            //                           setState(() {
-            //                             B = value;
-            //                           });
-            //                         },
-            //                       ),
-            //                       Text("B"),
-            //                     ],
-            //                   ),
-            //                   Row(
-            //                     children: [
-            //                       Checkbox(
-            //                         value: C,
-            //                         onChanged: (bool value) {
-            //                           setState(() {
-            //                             C = value;
-            //                           });
-            //                         },
-            //                       ),
-            //                       Text("C"),
-            //                     ],
-            //                   ),
-            //                   Row(
-            //                     children: [
-            //                       Checkbox(
-            //                         value: D,
-            //                         onChanged: (bool value) {
-            //                           setState(() {
-            //                             D = value;
-            //                           });
-            //                         },
-            //                       ),
-            //                       Text("D"),
-            //                     ],
-            //                   ),
-            //                   Row(
-            //                     children: [
-            //                       Checkbox(
-            //                         value: E,
-            //                         onChanged: (bool value) {
-            //                           setState(() {
-            //                             E = value;
-            //                           });
-            //                         },
-            //                       ),
-            //                       Text("E"),
-            //                     ],
-            //                   ),
-            //                 ],
-            //               ),
-            //             ],
-            //           ),
-            //         ))
-            //   ],
-            // )),
-
             Expanded(
               child: Container(
                 child: ListView(

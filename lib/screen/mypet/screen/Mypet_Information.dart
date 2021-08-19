@@ -103,7 +103,7 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
               "ข้อมูลสัตว์เลี้ยง",
               style: TextStyle(
                   fontSize: 22,
-                  color: Colors.black,
+                  color: Colors.white,
                   fontWeight: FontWeight.w500,
                   fontFamily: 'Mitr'),
             ),
@@ -130,16 +130,16 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
                   },
                   icon: Icon(
                     FontAwesomeIcons.solidEdit,
-                    color: Colors.red,
+                    color: Colors.white,
                   ))
               // icon: Icon(Icons.exit_to_app))
             ],
             // You can add title here
             leading: new IconButton(
-              icon: new Icon(Icons.arrow_back_ios, color: Colors.black),
+              icon: new Icon(Icons.arrow_back_ios, color: Colors.white),
               onPressed: () => Navigator.of(context).pop(),
             ),
-            backgroundColor: Colors.white.withOpacity(1),
+            backgroundColor: Colors.indigo.withOpacity(1),
             elevation: 10.0,
           ),
         ),

@@ -23,11 +23,11 @@ class _ClinicState extends State<Clinic> {
           "คลินิก",
           style: TextStyle(
               fontSize: 22,
-              color: Colors.orange.shade600,
+              color: Colors.white,
               fontWeight: FontWeight.w500,
               fontFamily: 'Mitr'),
         ),
-        backgroundColor: Colors.indigo.shade800.withOpacity(1),
+        backgroundColor: Colors.indigoAccent,
         elevation: 10.0,
       ),
     );
@@ -46,11 +46,9 @@ class _mainClinicState extends State<mainClinic> {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
 
     return Scaffold(
-      backgroundColor: Colors.grey.shade100,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
-            color: Colors.grey.shade100,
             child: Column(
               children: <Widget>[
                 Container(
@@ -107,7 +105,7 @@ class _mainClinicState extends State<mainClinic> {
                                   builder: (context) => Page_FindClinic()));
                             },
                             child: ButtonInfo(
-                              text: "ค้นหาคลินิค",
+                              text: "ค้นหาคลินิก",
                               icon: FontAwesomeIcons.search,
                             ),
                           ),

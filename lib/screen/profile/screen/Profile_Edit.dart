@@ -126,7 +126,7 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                 },
                 icon: Icon(
                   FontAwesomeIcons.check,
-                  color: Colors.greenAccent,
+                  color: Colors.white,
                 ))
             // icon: Icon(Icons.exit_to_app))
           ],
@@ -182,7 +182,7 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                                     "ชื่อ :",
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                        color: Colors.black,
+                                        color: Colors.orange.shade600,
                                         fontSize: 14,
                                         fontWeight: FontWeight.w400,
                                         fontFamily: 'Mitr'),
@@ -190,7 +190,7 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                                   subtitle: TextFormField(
                                     controller: user_name,
                                     style: TextStyle(
-                                        color: Colors.red.shade400,
+                                        color: Colors.black,
                                         fontSize: 16,
                                         fontWeight: FontWeight.w400,
                                         fontFamily: 'Mitr'),
@@ -235,7 +235,7 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                                     "เบอร์มือถือ :",
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                        color: Colors.black,
+                                        color: Colors.orange.shade600,
                                         fontSize: 14,
                                         fontWeight: FontWeight.w400,
                                         fontFamily: 'Mitr'),
@@ -243,7 +243,7 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                                   subtitle: TextFormField(
                                     controller: user_contact,
                                     style: TextStyle(
-                                        color: Colors.red.shade400,
+                                        color: Colors.black,
                                         fontSize: 16,
                                         fontWeight: FontWeight.w400,
                                         fontFamily: 'Mitr'),
@@ -289,7 +289,7 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                                   "เพศ :",
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
-                                      color: Colors.black,
+                                      color: Colors.orange.shade600,
                                       fontSize: 14,
                                       fontWeight: FontWeight.w400,
                                       fontFamily: 'Mitr'),
@@ -302,7 +302,7 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                                   ),
                                   hint: Text(user_gender.text,
                                       style: TextStyle(
-                                          color: Colors.red.shade400,
+                                          color: Colors.black,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w400,
                                           fontFamily: 'Mitr')),
@@ -312,7 +312,7 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                                   dropdownColor: Colors.white,
                                   value: valueGender,
                                   style: TextStyle(
-                                      color: Colors.red.shade400,
+                                      color: Colors.black,
                                       fontSize: 16,
                                       fontWeight: FontWeight.w400,
                                       fontFamily: 'Mitr'),

@@ -21,13 +21,13 @@ class ButtonInfo extends StatelessWidget {
               child: ClipRRect(
                   child: Icon(
                 icon,
-                color: Colors.lightBlue.shade400,
+                color: Colors.orange.shade600,
                 size: 35,
               ))),
           Text(
             text,
             style: TextStyle(
-                color: Colors.black,
+                color: Colors.black54,
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
                 fontFamily: 'Mitr'),

@@ -26,12 +26,12 @@ class _Page_AppointmentSuccessState extends State<Page_AppointmentSuccess> {
               "การนัดหมาย",
               style: TextStyle(
                   fontSize: 22,
-                  color: Colors.black,
+                  color: Colors.white,
                   fontWeight: FontWeight.w500,
                   fontFamily: 'Mitr'),
             ), // You can add title here
             leading: new IconButton(
-              icon: new Icon(Icons.arrow_back_ios, color: Colors.black),
+              icon: new Icon(Icons.arrow_back_ios, color: Colors.white),
               onPressed: () => Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
@@ -39,7 +39,7 @@ class _Page_AppointmentSuccessState extends State<Page_AppointmentSuccess> {
                   ),
                   (route) => false),
             ),
-            backgroundColor: Colors.white.withOpacity(1.0),
+            backgroundColor: Colors.indigoAccent.withOpacity(1.0),
             elevation: 10,
           ),
         ),
@@ -55,7 +55,6 @@ class AppointmentSuccess extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.grey.shade100,
       body: Container(
         width: double.infinity,
         height: size.height,

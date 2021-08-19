@@ -57,7 +57,6 @@ class _NotificationFeedState extends State<NotificationFeed> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-        backgroundColor: Colors.grey.shade100,
         appBar: AppBar(
           title: Text(
             "แจ้งเตือน นะจ๊ะ",
@@ -67,7 +66,7 @@ class _NotificationFeedState extends State<NotificationFeed> {
                 fontWeight: FontWeight.w500,
                 fontFamily: 'Mitr'),
           ),
-          backgroundColor: Colors.pinkAccent.shade100.withOpacity(1),
+          backgroundColor: Colors.indigoAccent.withOpacity(1),
           elevation: 10.0,
         ),
         body: data != null

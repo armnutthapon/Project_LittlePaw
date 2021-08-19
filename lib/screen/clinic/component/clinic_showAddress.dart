@@ -25,7 +25,7 @@ class ShowAddress extends StatelessWidget {
             style: TextStyle(
               fontFamily: 'Mitr',
               fontSize: 14,
-              color: Colors.red,
+              color: Colors.orange.shade600,
               fontWeight: FontWeight.w500,
             ),
             children: <TextSpan>[

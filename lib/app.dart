@@ -84,7 +84,7 @@ class AppState extends State<App> {
           _buildOffstageNavigator("Setting"),
         ]),
         bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: Colors.teal,
+          selectedItemColor: Colors.orange.shade600,
           onTap: (int index) {
             _selectTab(pageKeys[index], index);
           },

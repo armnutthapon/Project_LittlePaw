@@ -31,15 +31,15 @@ class _Page_FindClinicState extends State<Page_FindClinic> {
               "ค้นหาคลินิก",
               style: TextStyle(
                   fontSize: 22,
-                  color: Colors.black,
+                  color: Colors.white,
                   fontWeight: FontWeight.w500,
                   fontFamily: 'Mitr'),
             ), // You can add title here
             leading: new IconButton(
-              icon: new Icon(Icons.arrow_back_ios, color: Colors.black),
+              icon: new Icon(Icons.arrow_back_ios, color: Colors.white),
               onPressed: () => Navigator.of(context).pop(),
             ),
-            backgroundColor: Colors.white.withOpacity(1),
+            backgroundColor: Colors.indigoAccent,
             elevation: 10.0,
           ),
         ),
@@ -77,7 +77,6 @@ class _findClinicMainState extends State<findClinicMain> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: Colors.grey.shade100,
       body: Column(
         children: [
           SizedBox(
@@ -86,14 +85,14 @@ class _findClinicMainState extends State<findClinicMain> {
           ),
           Container(
               // color: Colors.amber,
-              padding: EdgeInsets.fromLTRB(0, 10, 10, 0),
+              padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
               child: ListTile(
                   title: Container(
                     child: Row(
                       children: <Widget>[
                         Expanded(
                           child: TextFormField(
-                            cursorColor: Colors.red.shade400,
+                            cursorColor: Colors.orange.shade600,
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 16,
@@ -112,7 +111,7 @@ class _findClinicMainState extends State<findClinicMain> {
                                   icon: Icon(
                                     Icons.search,
                                     size: 20,
-                                    color: Colors.red.shade400,
+                                    color: Colors.orange.shade600,
                                   ),
                                   onPressed: () {}),
                             ),
@@ -138,7 +137,7 @@ class _findClinicMainState extends State<findClinicMain> {
                         FontAwesomeIcons.filter,
                         size: 20,
                       ),
-                      color: Colors.red.shade400,
+                      color: Colors.white,
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => Page_FilterClinic()));
@@ -146,7 +145,7 @@ class _findClinicMainState extends State<findClinicMain> {
                     ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
+                      color: Colors.orange.shade600,
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black45,

@@ -51,22 +51,9 @@ class _MyPetState extends State<MyPet> {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     return Scaffold(
       body: Scaffold(
-          backgroundColor: Colors.cyan.shade300.withOpacity(0.15),
+          backgroundColor: Colors.white.withOpacity(1),
           body: data != null
               ? Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topRight,
-                      end: Alignment.bottomLeft,
-                      stops: [0.1, 0.5, 0.7, 0.9],
-                      colors: [
-                        Colors.teal[100],
-                        Colors.teal[200],
-                        Colors.teal[300],
-                        Colors.teal[400],
-                      ],
-                    ),
-                  ),
                   child: Center(
                       child: GridView.builder(
                     primary: false,
@@ -134,7 +121,7 @@ class _MyPetState extends State<MyPet> {
                                           : Text(
                                               data[index]['pet_name'],
                                               style: TextStyle(
-                                                  color: Colors.green,
+                                                  color: Colors.black54,
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.normal,
                                                   fontFamily: 'Mitr'),
@@ -180,7 +167,7 @@ class _MyPetState extends State<MyPet> {
             ),
           ),
         ],
-        backgroundColor: Colors.tealAccent.shade700.withOpacity(1),
+        backgroundColor: Colors.indigoAccent,
         elevation: 10.0,
       ),
     );

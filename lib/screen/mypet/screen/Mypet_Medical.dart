@@ -50,7 +50,6 @@ class _petMedicalState extends State<petMedical> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.grey.shade100,
       body: Container(
         alignment: Alignment.center,
         child: Column(

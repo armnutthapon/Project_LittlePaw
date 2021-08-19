@@ -66,7 +66,6 @@ class _Page_ClinicDetailState extends State<Page_ClinicDetail> {
         body: Stack(children: <Widget>[
       data != null
           ? Container(
-              color: Colors.grey.shade100,
               width: double.infinity,
               height: size.height,
               alignment: Alignment.topLeft,
@@ -80,20 +79,18 @@ class _Page_ClinicDetailState extends State<Page_ClinicDetail> {
                           Padding(
                             padding: const EdgeInsets.only(left: 10),
                             child: ListTile(
-                              title: data == null
-                                  ? ""
-                                  : Text(
-                                      data['clinic_name'],
-                                      style: TextStyle(
-                                        fontFamily: 'Mitr',
-                                        fontSize: 18,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
+                              title: Text(
+                                data['clinic_name'],
+                                style: TextStyle(
+                                  fontFamily: 'Mitr',
+                                  fontSize: 18,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
                               trailing: Icon(
                                 FontAwesomeIcons.mapMarkerAlt,
-                                color: Colors.red.shade300,
+                                color: Colors.orange.shade600,
                                 size: 30,
                               ),
                             ),
@@ -136,7 +133,7 @@ class _Page_ClinicDetailState extends State<Page_ClinicDetail> {
                                 width: 150,
                                 height: 50,
                                 child: FlatButton(
-                                  color: Colors.red.shade400,
+                                  color: Colors.green,
                                   onPressed: () {
                                     setState(() {
                                       send_cid = data['_id'];
@@ -189,15 +186,15 @@ class _Page_ClinicDetailState extends State<Page_ClinicDetail> {
           title: Text("ข้อมูลคลินิก",
               style: TextStyle(
                   fontSize: 22,
-                  color: Colors.black,
+                  color: Colors.white,
                   fontWeight: FontWeight.w500,
                   fontFamily: 'Mitr')),
           leading: new IconButton(
             padding: EdgeInsets.only(top: 0),
-            icon: new Icon(Icons.arrow_back_ios, color: Colors.black),
+            icon: new Icon(Icons.arrow_back_ios, color: Colors.white),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          backgroundColor: Colors.white.withOpacity(1),
+          backgroundColor: Colors.indigoAccent,
           elevation: 10.0,
         ),
       ),

@@ -167,7 +167,7 @@ class _Page_AppointmentState extends State<Page_Appointment> {
                               calendarStyle: CalendarStyle(
                                 isTodayHighlighted: true,
                                 selectedDecoration: BoxDecoration(
-                                  color: Colors.red.shade400,
+                                  color: Colors.orange.shade600,
                                   shape: BoxShape.circle,
                                 ),
                                 todayDecoration: BoxDecoration(
@@ -185,7 +185,7 @@ class _Page_AppointmentState extends State<Page_Appointment> {
                                   titleCentered: true,
                                   formatButtonShowsNext: true,
                                   formatButtonDecoration: BoxDecoration(
-                                      color: Colors.red.shade300,
+                                      color: Colors.orange.shade600,
                                       borderRadius: BorderRadius.circular(5.0)),
                                   formatButtonTextStyle:
                                       TextStyle(color: Colors.white),
@@ -320,7 +320,7 @@ class _Page_AppointmentState extends State<Page_Appointment> {
                               width: 150,
                               height: 50,
                               child: MaterialButton(
-                                color: Colors.red.shade400,
+                                color: Colors.green,
                                 onPressed: _clicked
                                     ? null
                                     : () {
@@ -374,15 +374,15 @@ class _Page_AppointmentState extends State<Page_Appointment> {
                 "การนัดหมาย",
                 style: TextStyle(
                     fontSize: 22,
-                    color: Colors.black,
+                    color: Colors.white,
                     fontWeight: FontWeight.w500,
                     fontFamily: 'Mitr'),
               ), // You can add title here
               leading: new IconButton(
-                icon: new Icon(Icons.arrow_back_ios, color: Colors.black),
+                icon: new Icon(Icons.arrow_back_ios, color: Colors.white),
                 onPressed: () => Navigator.of(context).pop(),
               ),
-              backgroundColor: Colors.white.withOpacity(1.0),
+              backgroundColor: Colors.indigoAccent,
               elevation: 10,
             ),
           ),

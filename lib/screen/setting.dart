@@ -52,7 +52,6 @@ class _SettingState extends State<Setting> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-        backgroundColor: Colors.grey.shade100,
         appBar: AppBar(
           title: Text(
             "โปรไฟล์",
