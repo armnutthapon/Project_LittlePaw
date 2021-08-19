@@ -24,9 +24,10 @@ class _NotificationFeedState extends State<NotificationFeed> {
   DateTime focusedDay = DateTime.now();
 
   getNotificationByID() async {
-    final FirebaseAuth auth = await FirebaseAuth.instance;
-    final User userId = await auth.currentUser;
-    final String uid = await userId.uid;
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User userId = auth.currentUser;
+    final String uid = userId.uid;
+    print("UID : ${uid}");
 
     http.Response response =
         await http.get(Uri.parse('$Url/appointment/notificationByID/$uid'));
@@ -41,7 +42,6 @@ class _NotificationFeedState extends State<NotificationFeed> {
 
       // aa =  DateFormat("dd-M-yyyy hh:mm:ss").parse(formattedDate);
     });
-    print(focusedDay);
     // print(data[data.length - 1]['time_notification']);
     return data;
   }

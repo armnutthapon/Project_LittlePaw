@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:little_paw/app.dart';
 import 'package:little_paw/screen/clinic/component/clinic_buttonInfo.dart';
 import 'package:little_paw/screen/clinic/screen/Clinic_FindClinic.dart';
+import 'package:little_paw/screen/clinic/screen/Clinic_MyAppointment.dart';
 
 class Clinic extends StatefulWidget {
   const Clinic({Key key}) : super(key: key);
@@ -118,7 +119,7 @@ class _mainClinicState extends State<mainClinic> {
                           child: InkWell(
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => Page_FindClinic()));
+                                  builder: (context) => Page_MyAppointment()));
                             },
                             child: ButtonInfo(
                               text: "การนัดหมาย",
