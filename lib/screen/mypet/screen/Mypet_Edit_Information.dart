@@ -24,8 +24,8 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
   final _formkey = GlobalKey<FormState>();
 
   final editPetName = TextEditingController();
-  var editPetGender = TextEditingController();
-  var editPetCategory = TextEditingController();
+  var editPetGender;
+  var editPetCategory;
   final editPetColor = TextEditingController();
   final editPetBreed = TextEditingController();
   var editPetSterilize;
@@ -33,7 +33,6 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
   final editCongenitalDisease = TextEditingController();
   final editVaccine = TextEditingController();
   final editPetAge = TextEditingController();
-  String sterilization = "";
   List listCategory = ["สุนัข", "แมว"];
   List listGender = ["เพศผู้", "เพศเมีย"];
   List listSterilize = [
@@ -58,21 +57,26 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
 
   updatePetInformation() async {
     await setData();
-    if (editPetSterilize == "ทำหมันแล้ว") {
-      setState(() {
-        editPetSterilize = "true";
-      });
-      print(editPetSterilize);
-    } else {
-      editPetSterilize = "false";
-      print(editPetSterilize);
-    }
+
     http.Response response = await http
         .post(Uri.parse(
-            '$Url/pet_detail/editPetDetail/$pid/${editPetName.text}/${editPetCategory}/${editPetGender}/${editPetColor.text}/${editPetBreed.text}/${editPetAge.text}/${editPetCharacteristics.text}/${editPetSterilize}/${editCongenitalDisease.text}/${editVaccine.text}'))
+            // 'https://littlepaw.herokuapp.com/petDetail/editPetDetail/${widget.pid}/${editPetName.text}/${editPetCategory}/male/white/shisu/12-08-2020/fat/false/ttt/sinovac'))
+            '$Url/petDetail/editPetDetail/${widget.pid}/${editPetName.text}/${editPetCategory}/${editPetGender}/${editPetColor.text}/${editPetBreed.text}/${editPetAge.text}/${editPetCharacteristics.text}/${editPetSterilize}/${editCongenitalDisease.text}/${editVaccine.text}'))
         .then((value) {
       print("Update success");
     });
+    Navigator.pop(context, true);
+
+    print("name " + editPetName.text);
+    print("type " + editPetCategory);
+    print("sex " + editPetGender);
+    print("color " + editPetColor.text);
+    print("breed " + editPetBreed.text);
+    print("age " + editPetAge.text);
+    print("char " + editPetCharacteristics.text);
+    print("sterlize " + editPetSterilize);
+    print("dis " + editCongenitalDisease.text);
+    print("vaccine " + editVaccine.text);
   }
 
   @override
@@ -88,15 +92,15 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
     } else {
       editPetName.text = data['pet_name'];
     }
-    if (editPetCategory.text != data['type']) {
-      editPetCategory.text = editPetCategory.text;
+    if (editPetCategory != data['type']) {
+      editPetCategory = editPetCategory;
     } else {
-      editPetCategory.text = data['type'];
+      editPetCategory = data['type'];
     }
-    if (editPetGender.text != data['sex']) {
-      editPetGender.text = editPetGender.text;
+    if (editPetGender != data['sex']) {
+      editPetGender = editPetGender;
     } else {
-      editPetGender.text = data['sex'];
+      editPetGender = data['sex'];
     }
     if (editPetColor.text != data['color']) {
       editPetColor.text = editPetColor.text;
@@ -118,10 +122,11 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
     } else {
       editPetAge.text = data['dob'];
     }
-    if (editPetSterilize.text != data['sterilization']) {
-      editPetSterilize.text = editPetSterilize.text;
+    if (editPetSterilize != data['sterilization']) {
+      editPetSterilize = editPetSterilize;
+      print(editPetSterilize);
     } else {
-      editPetSterilize.text = data['sterilization'];
+      editPetSterilize = data['sterilization'];
     }
     if (editCongenitalDisease.text != data['congenital_disease']) {
       editCongenitalDisease.text = editCongenitalDisease.text;
@@ -138,8 +143,8 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
   showPetInformation() {
     setState(() {
       editPetName.text = data['pet_name'];
-      editPetCategory.text = data['type'];
-      editPetGender.text = data['sex'];
+      editPetCategory = data['type'];
+      editPetGender = data['sex'];
       editPetColor.text = data['color'];
       editPetBreed.text = data['breed'];
       editPetCharacteristics.text = data['characteristics'];
@@ -191,9 +196,17 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
           ),
           actions: [
             IconButton(
-                onPressed: () async {
-                  await updatePetInformation();
-                  Navigator.pop(context, true);
+                onPressed: () {
+                  if (editPetSterilize == "ทำหมันแล้ว") {
+                    setState(() {
+                      editPetSterilize = "true";
+                    });
+                  } else {
+                    setState(() {
+                      editPetSterilize = "false";
+                    });
+                  }
+                  updatePetInformation();
                 },
                 icon: Icon(
                   FontAwesomeIcons.check,
@@ -317,7 +330,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                     Icons.arrow_drop_down, // Add this
                                     color: Colors.grey.shade600, // Add this
                                   ),
-                                  hint: Text(editPetCategory.text,
+                                  hint: Text(editPetCategory,
                                       style: TextStyle(
                                           color: Colors.teal.shade600,
                                           fontSize: 16,
@@ -335,10 +348,10 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                       fontFamily: 'Mitr'),
                                   onChanged: (newValue) {
                                     setState(() {
-                                      valueGender = newValue;
+                                      valueCategory = newValue;
                                       editPetCategory = newValue;
                                     });
-                                    print("Sex : $valueGender");
+                                    print(editPetCategory);
                                   },
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
@@ -386,7 +399,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                     Icons.arrow_drop_down, // Add this
                                     color: Colors.grey.shade600, // Add this
                                   ),
-                                  hint: Text(editPetGender.text,
+                                  hint: Text(editPetGender,
                                       style: TextStyle(
                                           color: Colors.teal.shade600,
                                           fontSize: 16,
@@ -680,12 +693,13 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                       editPetSterilize = newValue;
 
                                       if (editPetSterilize == "ทำหมันแล้ว") {
-                                        editPetSterilize = true;
+                                        editPetSterilize = "true";
                                       } else {
-                                        editPetSterilize = false;
+                                        editPetSterilize = "false";
                                       }
                                     });
-                                    print(editPetSterilize);
+
+                                    print("การทำหมัน :  " + editPetSterilize);
                                   },
                                   items: listSterilize.map((valueItem) {
                                     return DropdownMenuItem(

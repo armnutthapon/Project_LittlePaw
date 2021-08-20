@@ -125,7 +125,7 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
                                       ? getPetDetail()
                                       : null
                                   : Center(child: CircularProgressIndicator()),
-                              print("Reload" + data)
+                              // print("Reload" + data)
                             });
                   },
                   icon: Icon(

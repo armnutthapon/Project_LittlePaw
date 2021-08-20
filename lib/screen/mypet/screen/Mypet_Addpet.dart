@@ -101,6 +101,17 @@ class _AddpetState extends State<Addpet> {
       Navigator.pop(context);
     });
     print("add pet Success");
+
+    print("name " + _addPetName.text);
+    print("type " + _addPetCategory);
+    print("sex " + _addPetGender);
+    print("color " + _addPetColor.text);
+    print("breed " + _addPetBreed.text);
+    print("age " + _addPetAge.text);
+    print("char " + _addPetCharacteristics.text);
+    print("sterlize " + _addPetSterilize);
+    print("dis " + _addCongenitalDisease.text);
+    print("vaccine " + _addVaccine.text);
     //getPetID();
   }
 
@@ -473,6 +484,7 @@ class _AddpetState extends State<Addpet> {
                                   .requestFocus(new FocusNode());
                               // Show Date Picker Here
                               await _selectDate(context);
+                              print(_addPetAge);
                               // _addPetAge.text =
                               //     DateFormat('dd/MM/yyyy').format(date);
                               //setState(() {});
