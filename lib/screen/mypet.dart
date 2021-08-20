@@ -51,7 +51,7 @@ class _MyPetState extends State<MyPet> {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     return Scaffold(
       body: Scaffold(
-        backgroundColor: Colors.deepPurple.shade100,
+        backgroundColor: Colors.white,
           body: data != null
               ? Container(
                   child: Center(
@@ -73,7 +73,7 @@ class _MyPetState extends State<MyPet> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              color: Colors.white,
+                              color: Colors.deepPurple.shade100,
                               elevation: 5,
                               child: InkWell(
                                 onTap: () {
@@ -102,16 +102,22 @@ class _MyPetState extends State<MyPet> {
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.only(top: 10.0),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(10),
+                                      child: Container(decoration: BoxDecoration(
+	                                        border: Border.all(color: Colors.white,
+	                                        width: 5,
+	                                        ),borderRadius: BorderRadius.circular(10)
+                                          ),
                                         child: data == null
                                             ? null
-                                            : Image.asset(
-                                                'assets/images/1.jpg',
-                                                height: 120.0,
-                                                width: 120.0,
-                                                fit: BoxFit.cover,
-                                              ),
+                                            : ClipRRect(    borderRadius: BorderRadius.circular(5),
+
+                                              child: Image.asset(
+                                                  'assets/images/1.jpg',
+                                                  height: 120.0,
+                                                  width: 120.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                            ),
                                       ),
                                     ),
                                     Padding(
@@ -121,9 +127,9 @@ class _MyPetState extends State<MyPet> {
                                           : Text(
                                               data[index]['pet_name'],
                                               style: TextStyle(
-                                                  color: Colors.black,
+                                                  color: Colors.white,
                                                   fontSize: 16,
-                                                  fontWeight: FontWeight.normal,
+                                                  fontWeight: FontWeight.w500,
                                                   fontFamily: 'Mitr'),
                                             ),
                                     ),
@@ -167,7 +173,7 @@ class _MyPetState extends State<MyPet> {
             ),
           ),
         ],elevation: 0,
-        backgroundColor: Colors.deepPurple.shade100,
+        backgroundColor: Colors.white,
       ),
     );
   }
