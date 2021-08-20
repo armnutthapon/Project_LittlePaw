@@ -167,7 +167,7 @@ class _MyPetState extends State<MyPet> {
             ),
           ),
         ],
-        backgroundColor: Colors.indigoAccent,
+        backgroundColor: Colors.deepPurpleAccent,
         elevation: 10.0,
       ),
     );
