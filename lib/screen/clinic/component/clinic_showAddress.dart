@@ -13,7 +13,14 @@ class ShowAddress extends StatelessWidget {
       height: size.height * 0.1,
       margin:
           const EdgeInsets.only(left: 20.0, right: 20.0, top: 10, bottom: 5),
-      decoration: BoxDecoration(
+      decoration: BoxDecoration( boxShadow: [
+      BoxShadow(
+        color: Colors.grey.withOpacity(0.5),
+        spreadRadius: 1,
+        blurRadius: 2,
+        offset: Offset(0, 3), // changes position of shadow
+      ),
+    ],
         borderRadius: BorderRadius.circular(10.0),
         color: Colors.white,
       ),

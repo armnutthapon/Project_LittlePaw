@@ -51,7 +51,7 @@ class _MyPetState extends State<MyPet> {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     return Scaffold(
       body: Scaffold(
-          backgroundColor: Colors.white.withOpacity(1),
+        backgroundColor: Colors.deepPurple.shade100,
           body: data != null
               ? Container(
                   child: Center(
@@ -121,7 +121,7 @@ class _MyPetState extends State<MyPet> {
                                           : Text(
                                               data[index]['pet_name'],
                                               style: TextStyle(
-                                                  color: Colors.black54,
+                                                  color: Colors.black,
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.normal,
                                                   fontFamily: 'Mitr'),
@@ -139,7 +139,7 @@ class _MyPetState extends State<MyPet> {
         title: Text("สัตว์เลี้ยงของฉัน",
             style: TextStyle(
                 fontSize: 22,
-                color: Colors.white,
+                color: Colors.deepPurple.shade600,
                 fontWeight: FontWeight.w500,
                 fontFamily: 'Mitr')),
         actions: <Widget>[
@@ -148,7 +148,7 @@ class _MyPetState extends State<MyPet> {
             child: IconButton(
               icon: Icon(
                 FontAwesomeIcons.plusCircle,
-                color: Colors.white,
+                color: Colors.pink.shade400,
                 size: 30,
               ),
               tooltip: 'เพิ่มสัตว์เลี้ยง',
@@ -166,9 +166,8 @@ class _MyPetState extends State<MyPet> {
               },
             ),
           ),
-        ],
-        backgroundColor: Colors.deepPurpleAccent,
-        elevation: 10.0,
+        ],elevation: 0,
+        backgroundColor: Colors.deepPurple.shade100,
       ),
     );
   }
