@@ -99,7 +99,7 @@ class _SettingState extends State<Setting> {
                           Container(
                             padding: EdgeInsets.only(bottom: 10, top: 10),
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(100),
                               child: Image.asset(
                                 'assets/images/1.jpg',
                                 height: 140,

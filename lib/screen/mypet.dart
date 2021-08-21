@@ -50,8 +50,43 @@ class _MyPetState extends State<MyPet> {
     Size size = MediaQuery.of(context).size;
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     return Scaffold(
-      body: Scaffold(
+      appBar: AppBar(
+        title: Text("สัตว์เลี้ยงของฉัน",
+            style: TextStyle(
+                fontSize: 22,
+                color: Colors.red.shade300,
+                fontWeight: FontWeight.w400,
+                fontFamily: 'Mitr')),
+        actions: <Widget>[
+          Container(
+            margin: EdgeInsets.only(right: 20),
+            child: IconButton(
+              icon: Icon(
+                FontAwesomeIcons.plusCircle,
+                color: Colors.red.shade300,
+                size: 30,
+              ),
+              tooltip: 'เพิ่มสัตว์เลี้ยง',
+              onPressed: () {
+                // Navigator.pushNamed(context, '/Pagh').then((_) {
+                //   // This block runs when you have returned back to the 1st Page from 2nd.
+                //   setState(() {
+                //     // Call setState to refresh the page.
+                //   });
+                // });
+                Navigator.of(context)
+                    .push(
+                        MaterialPageRoute(builder: (context) => Page_Addpet()))
+                    .then((value) => {getPetList()});
+              },
+            ),
+          ),
+        ],
+        elevation: 0,
         backgroundColor: Colors.white,
+      ),
+      body: Scaffold(
+          backgroundColor: Colors.white,
           body: data != null
               ? Container(
                   child: Center(
@@ -70,11 +105,11 @@ class _MyPetState extends State<MyPet> {
                       return data == null
                           ? 0
                           : Card(
+                              color: Colors.white,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              color: Colors.deepPurple.shade100,
-                              elevation: 5,
+                              elevation: 10,
                               child: InkWell(
                                 onTap: () {
                                   setState(() {
@@ -102,22 +137,19 @@ class _MyPetState extends State<MyPet> {
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.only(top: 10.0),
-                                      child: Container(decoration: BoxDecoration(
-	                                        border: Border.all(color: Colors.white,
-	                                        width: 5,
-	                                        ),borderRadius: BorderRadius.circular(10)
-                                          ),
+                                      child: Container(
                                         child: data == null
                                             ? null
-                                            : ClipRRect(    borderRadius: BorderRadius.circular(5),
-
-                                              child: Image.asset(
+                                            : ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(100),
+                                                child: Image.asset(
                                                   'assets/images/1.jpg',
                                                   height: 120.0,
                                                   width: 120.0,
                                                   fit: BoxFit.cover,
                                                 ),
-                                            ),
+                                              ),
                                       ),
                                     ),
                                     Padding(
@@ -127,9 +159,9 @@ class _MyPetState extends State<MyPet> {
                                           : Text(
                                               data[index]['pet_name'],
                                               style: TextStyle(
-                                                  color: Colors.white,
+                                                  color: Colors.black54,
                                                   fontSize: 16,
-                                                  fontWeight: FontWeight.w500,
+                                                  fontWeight: FontWeight.w300,
                                                   fontFamily: 'Mitr'),
                                             ),
                                     ),
@@ -141,40 +173,6 @@ class _MyPetState extends State<MyPet> {
                   )),
                 )
               : Center(child: CircularProgressIndicator())),
-      appBar: AppBar(
-        title: Text("สัตว์เลี้ยงของฉัน",
-            style: TextStyle(
-                fontSize: 22,
-                color: Colors.deepPurple.shade600,
-                fontWeight: FontWeight.w500,
-                fontFamily: 'Mitr')),
-        actions: <Widget>[
-          Container(
-            margin: EdgeInsets.only(right: 20),
-            child: IconButton(
-              icon: Icon(
-                FontAwesomeIcons.plusCircle,
-                color: Colors.pink.shade400,
-                size: 30,
-              ),
-              tooltip: 'เพิ่มสัตว์เลี้ยง',
-              onPressed: () {
-                // Navigator.pushNamed(context, '/Pagh').then((_) {
-                //   // This block runs when you have returned back to the 1st Page from 2nd.
-                //   setState(() {
-                //     // Call setState to refresh the page.
-                //   });
-                // });
-                Navigator.of(context)
-                    .push(
-                        MaterialPageRoute(builder: (context) => Page_Addpet()))
-                    .then((value) => {getPetList()});
-              },
-            ),
-          ),
-        ],elevation: 0,
-        backgroundColor: Colors.white,
-      ),
     );
   }
 }

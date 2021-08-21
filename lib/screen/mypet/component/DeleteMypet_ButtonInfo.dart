@@ -29,7 +29,7 @@ class Share_ButtonInfo extends StatelessWidget {
             style: TextStyle(
                 color: Colors.black54,
                 fontSize: 16,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w300,
                 fontFamily: 'Mitr'),
           ),
         ],

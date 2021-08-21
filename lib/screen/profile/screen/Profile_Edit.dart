@@ -108,244 +108,288 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-        backgroundColor: Colors.grey.shade100,
-        appBar: AppBar(
-          title: Text(
-            "แก้ไขโปรไฟล์",
-            style: TextStyle(
-                fontSize: 22,
-                color: Colors.white,
-                fontWeight: FontWeight.w500,
-                fontFamily: 'Mitr'),
-          ),
-          actions: [
-            IconButton(
-                onPressed: () async {
-                  await updateUserProfile();
-                  Navigator.pop(context, true);
-                },
-                icon: Icon(
-                  FontAwesomeIcons.check,
-                  color: Colors.white,
-                ))
-            // icon: Icon(Icons.exit_to_app))
-          ],
-        ),
-        body: data != null
-            ? Column(
-                children: <Widget>[
-                  Container(
-                    child: Container(
-                        child: Container(
-                      margin: EdgeInsets.only(
-                        top: 10,
+        backgroundColor: Colors.white,
+        body: Stack(
+          children: <Widget>[
+            new Positioned(
+              top: 0.0,
+              left: 0.0,
+              right: 0.0,
+              child: AppBar(
+                title: Text(
+                  "แก้ไขโปรไฟล์",
+                  style: TextStyle(
+                      fontSize: 22,
+                      color: Colors.red.shade300,
+                      fontWeight: FontWeight.w400,
+                      fontFamily: 'Mitr'),
+                ), // You can add title here
+                actions: [
+                  IconButton(
+                      onPressed: () async {
+                        await updateUserProfile();
+                        Navigator.pop(context, true);
+                      },
+                      icon: Icon(
+                        FontAwesomeIcons.solidCheckCircle,
+                        color: Colors.red.shade300,
+                      ))
+                  // icon: Icon(Icons.exit_to_app))
+                ],
+                leading: new IconButton(
+                  icon: new Icon(Icons.arrow_back_ios,
+                      color: Colors.red.shade300),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+                backgroundColor: Colors.white,
+                elevation: 0,
+              ),
+            ),
+            // AppBar(
+            //   title: Text(
+            //     "แก้ไขโปรไฟล์",
+            //     style: TextStyle(
+            //         fontSize: 22,
+            //         color: Colors.white,
+            //         fontWeight: FontWeight.w500,
+            //         fontFamily: 'Mitr'),
+            //   ),
+            //   actions: [
+            //     IconButton(
+            //         onPressed: () async {
+            //           await updateUserProfile();
+            //           Navigator.pop(context, true);
+            //         },
+            //         icon: Icon(
+            //           FontAwesomeIcons.check,
+            //           color: Colors.white,
+            //         ))
+            //     // icon: Icon(Icons.exit_to_app))
+            //   ],
+            // ),
+            data != null
+                ? Column(
+                    children: <Widget>[
+                      SizedBox(
+                        height: size.height * 0.1,
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            padding: EdgeInsets.only(bottom: 10, top: 10),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: Image.asset(
-                                'assets/images/1.jpg',
-                                height: 140,
-                                width: 140,
-                                fit: BoxFit.fill,
+                      Container(
+                        child: Container(
+                            child: Container(
+                          margin: EdgeInsets.only(
+                            top: 10,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                padding: EdgeInsets.only(bottom: 10, top: 30),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(100),
+                                  child: Image.asset(
+                                    'assets/images/1.jpg',
+                                    height: 140,
+                                    width: 140,
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )),
+                      ),
+                      Expanded(
+                          child: Container(
+                        // margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
+                        child: ListView(
+                          // padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+                          padding: EdgeInsets.zero,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                                color: Colors.white,
+                                border: Border.all(
+                                    width: 1.0, color: Colors.grey[200]),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 10, bottom: 10),
+                                child: Container(
+                                  child: ListTile(
+                                      title: Text(
+                                        "ชื่อ :",
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                            color: Colors.orange.shade600,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                            fontFamily: 'Mitr'),
+                                      ),
+                                      subtitle: TextFormField(
+                                        controller: user_name,
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                            fontFamily: 'Mitr'),
+                                        decoration: InputDecoration(
+                                          contentPadding: EdgeInsets.zero,
+                                          border: InputBorder.none,
+                                          focusedBorder: InputBorder.none,
+                                        ),
+                                        onSaved: (String value) {},
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return '-';
+                                          }
+                                          return "-";
+                                        },
+                                      ),
+                                      trailing: IconButton(
+                                          onPressed: () {
+                                            user_name.clear();
+                                          },
+                                          icon: Icon(
+                                            FontAwesomeIcons.solidTimesCircle,
+                                            size: 16,
+                                            color: Colors.grey,
+                                          ))),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    )),
-                  ),
-                  Expanded(
-                      child: Container(
-                    // margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                    child: ListView(
-                      // padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
-                      padding: EdgeInsets.zero,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            color: Colors.white,
-                            border:
-                                Border.all(width: 1.0, color: Colors.grey[200]),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.only(top: 10, bottom: 10),
-                            child: Container(
-                              child: ListTile(
-                                  title: Text(
-                                    "ชื่อ :",
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        color: Colors.orange.shade600,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w400,
-                                        fontFamily: 'Mitr'),
-                                  ),
-                                  subtitle: TextFormField(
-                                    controller: user_name,
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w400,
-                                        fontFamily: 'Mitr'),
-                                    decoration: InputDecoration(
-                                      contentPadding: EdgeInsets.zero,
-                                      border: InputBorder.none,
-                                      focusedBorder: InputBorder.none,
-                                    ),
-                                    onSaved: (String value) {},
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return '-';
-                                      }
-                                      return "-";
-                                    },
-                                  ),
-                                  trailing: IconButton(
-                                      onPressed: () {
-                                        user_name.clear();
-                                      },
-                                      icon: Icon(
-                                        FontAwesomeIcons.solidTimesCircle,
-                                        size: 16,
-                                        color: Colors.grey,
-                                      ))),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            color: Colors.white,
-                            border:
-                                Border.all(width: 1.0, color: Colors.grey[200]),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.only(top: 10, bottom: 10),
-                            child: Container(
-                              child: ListTile(
-                                  title: Text(
-                                    "เบอร์มือถือ :",
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        color: Colors.orange.shade600,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w400,
-                                        fontFamily: 'Mitr'),
-                                  ),
-                                  subtitle: TextFormField(
-                                    controller: user_contact,
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w400,
-                                        fontFamily: 'Mitr'),
-                                    decoration: InputDecoration(
-                                      contentPadding: EdgeInsets.zero,
-                                      border: InputBorder.none,
-                                      focusedBorder: InputBorder.none,
-                                    ),
-                                    onSaved: (String value) {},
-                                    validator: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        print("null");
-                                        return 'กรุณาระบุ';
-                                      }
-                                      return null;
-                                    },
-                                  ),
-                                  trailing: IconButton(
-                                      onPressed: () {
-                                        user_contact.clear();
-                                      },
-                                      icon: Icon(
-                                        FontAwesomeIcons.solidTimesCircle,
-                                        size: 16,
-                                        color: Colors.grey,
-                                      ))),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            color: Colors.white,
-                            border:
-                                Border.all(width: 1.0, color: Colors.grey[200]),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.only(top: 10, bottom: 10),
-                            child: Container(
-                              child: ListTile(
-                                title: Text(
-                                  "เพศ :",
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                      color: Colors.orange.shade600,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w400,
-                                      fontFamily: 'Mitr'),
+                            Container(
+                              margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                                color: Colors.white,
+                                border: Border.all(
+                                    width: 1.0, color: Colors.grey[200]),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 10, bottom: 10),
+                                child: Container(
+                                  child: ListTile(
+                                      title: Text(
+                                        "เบอร์มือถือ :",
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                            color: Colors.orange.shade600,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                            fontFamily: 'Mitr'),
+                                      ),
+                                      subtitle: TextFormField(
+                                        controller: user_contact,
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                            fontFamily: 'Mitr'),
+                                        decoration: InputDecoration(
+                                          contentPadding: EdgeInsets.zero,
+                                          border: InputBorder.none,
+                                          focusedBorder: InputBorder.none,
+                                        ),
+                                        onSaved: (String value) {},
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            print("null");
+                                            return 'กรุณาระบุ';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      trailing: IconButton(
+                                          onPressed: () {
+                                            user_contact.clear();
+                                          },
+                                          icon: Icon(
+                                            FontAwesomeIcons.solidTimesCircle,
+                                            size: 16,
+                                            color: Colors.grey,
+                                          ))),
                                 ),
-                                subtitle: DropdownButtonFormField(
-                                  icon: Icon(
-                                    // Add this
-                                    Icons.arrow_drop_down, // Add this
-                                    color: Colors.grey.shade600, // Add this
-                                  ),
-                                  hint: Text(user_gender.text,
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                                color: Colors.white,
+                                border: Border.all(
+                                    width: 1.0, color: Colors.grey[200]),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 10, bottom: 10),
+                                child: Container(
+                                  child: ListTile(
+                                    title: Text(
+                                      "เพศ :",
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          color: Colors.orange.shade600,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: 'Mitr'),
+                                    ),
+                                    subtitle: DropdownButtonFormField(
+                                      icon: Icon(
+                                        // Add this
+                                        Icons.arrow_drop_down, // Add this
+                                        color: Colors.grey.shade600, // Add this
+                                      ),
+                                      hint: Text(user_gender.text,
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w400,
+                                              fontFamily: 'Mitr')),
+                                      isDense: false,
+                                      decoration: InputDecoration.collapsed(
+                                          hintText: ''),
+                                      dropdownColor: Colors.white,
+                                      value: valueGender,
                                       style: TextStyle(
                                           color: Colors.black,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w400,
-                                          fontFamily: 'Mitr')),
-                                  isDense: false,
-                                  decoration:
-                                      InputDecoration.collapsed(hintText: ''),
-                                  dropdownColor: Colors.white,
-                                  value: valueGender,
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400,
-                                      fontFamily: 'Mitr'),
-                                  onChanged: (newValue) {
-                                    setState(() {
-                                      valueGender = newValue;
-                                      user_gender = newValue;
-                                    });
-                                    print("Sex : $valueGender");
-                                  },
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return valueGender = user_gender.text;
-                                    }
-                                    return valueGender = user_gender.text;
-                                  },
-                                  items: listGender.map((valueItem) {
-                                    return DropdownMenuItem(
-                                        value: valueItem,
-                                        child: Text(
-                                          valueItem,
-                                        ));
-                                  }).toList(),
+                                          fontFamily: 'Mitr'),
+                                      onChanged: (newValue) {
+                                        setState(() {
+                                          valueGender = newValue;
+                                          user_gender = newValue;
+                                        });
+                                        print("Sex : $valueGender");
+                                      },
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return valueGender = user_gender.text;
+                                        }
+                                        return valueGender = user_gender.text;
+                                      },
+                                      items: listGender.map((valueItem) {
+                                        return DropdownMenuItem(
+                                            value: valueItem,
+                                            child: Text(
+                                              valueItem,
+                                            ));
+                                      }).toList(),
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ))
-                ],
-              )
-            : Center(child: CircularProgressIndicator()));
+                      ))
+                    ],
+                  )
+                : Center(child: CircularProgressIndicator())
+          ],
+        ));
   }
 }

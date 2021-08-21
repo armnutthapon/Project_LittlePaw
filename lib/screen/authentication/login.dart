@@ -96,7 +96,7 @@ class _LoginState extends State<Login> {
     final loginProvider = Provider.of<AuthServices>(context);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.red.shade400,
+      backgroundColor: Colors.deepPurple.shade200,
       body: Stack(
         children: [
           BackgroundPage(),

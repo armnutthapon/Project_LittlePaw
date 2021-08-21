@@ -112,7 +112,6 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                   color: Colors.green,
                   onPressed: () async {
                     await deletePetByID();
-                    Navigator.of(context).pop(context);
 
                     // Navigator.pushAndRemoveUntil(
                     //     context,
@@ -135,7 +134,9 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0)),
                 color: Colors.red,
-                onPressed: () => Navigator.of(context).pop(context),
+                onPressed: () {
+                  Navigator.of(context).pop(context);
+                },
                 child: Text(
                   'ยกเลิก',
                   style: TextStyle(
@@ -158,13 +159,14 @@ class Page_SelectPetState extends State<Page_SelectPet> {
     return Scaffold(
       body: Stack(children: <Widget>[
         Scaffold(
+          backgroundColor: Colors.white,
           body: SafeArea(
             child: SingleChildScrollView(
               child: Container(
                 child: Column(
                   children: <Widget>[
                     SizedBox(
-                      height: size.height * 0.05,
+                      height: size.height * 0.02,
                     ),
                     Container(
                       margin: EdgeInsets.only(top: 50),
@@ -174,7 +176,7 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                             child: Container(
                               padding: EdgeInsets.all(10),
                               child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.circular(100),
                                 child: Image.asset(
                                   'assets/images/1.jpg',
                                   height: 140,
@@ -259,7 +261,7 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                                 onTap: () {
                                   shareID(context);
                                 },
-                                child: Share_ButtonInfo(
+                                child: Mypet_ButtonInfo(
                                   text: "แชร์",
                                   icon: FontAwesomeIcons.share,
                                 ),
@@ -284,14 +286,14 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                 child: IconButton(
                   icon: Icon(
                     FontAwesomeIcons.trash,
-                    color: Colors.white,
+                    color: Colors.red.shade300,
                     size: 24,
                   ),
                   tooltip: 'ลบข้อมูล',
                   onPressed: () async {
                     await deletePet(widget.pid);
-                    Navigator.of(context).pop(context);
                     // deletePet(widget.pid);
+                    Navigator.of(context).pop(context);
                   },
                 ),
               )
@@ -299,16 +301,16 @@ class Page_SelectPetState extends State<Page_SelectPet> {
             title: Text(widget.pet_name,
                 style: TextStyle(
                     fontSize: 22,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
+                    color: Colors.red.shade300,
+                    fontWeight: FontWeight.w400,
                     fontFamily: 'Mitr')),
             leading: new IconButton(
               padding: EdgeInsets.only(top: 0),
-              icon: new Icon(Icons.arrow_back_ios, color: Colors.white),
+              icon: new Icon(Icons.arrow_back_ios, color: Colors.red.shade300),
               onPressed: () => Navigator.of(context).pop(),
             ),
-            backgroundColor: Colors.indigoAccent.withOpacity(1),
-            elevation: 10.0,
+            backgroundColor: Colors.white,
+            elevation: 0.0,
           ),
         ),
       ]),

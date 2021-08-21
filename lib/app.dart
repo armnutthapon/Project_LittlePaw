@@ -61,6 +61,8 @@ class AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return WillPopScope(
       onWillPop: () async {
         final isFirstRouteInCurrentTab =
@@ -76,6 +78,7 @@ class AppState extends State<App> {
         return isFirstRouteInCurrentTab;
       },
       child: Scaffold(
+        extendBody: true,
         body: Stack(children: <Widget>[
           _buildOffstageNavigator("Newfeed"),
           _buildOffstageNavigator("Clinic"),
@@ -83,37 +86,47 @@ class AppState extends State<App> {
           _buildOffstageNavigator("NotificationFeed"),
           _buildOffstageNavigator("Setting"),
         ]),
-        bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: Colors.pinkAccent,
-          onTap: (int index) {
-            _selectTab(pageKeys[index], index);
-          },
-          currentIndex: _selectedIndex,
-          items: [
-            BottomNavigationBarItem(
-              icon: new Icon(FontAwesomeIcons.solidNewspaper),
-              title: new Text(
-                '',
-              ),
+        bottomNavigationBar: SizedBox(
+          height: size.height * 0.08,
+          child: ClipRRect(
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(30),
+              topLeft: Radius.circular(30),
             ),
-            BottomNavigationBarItem(
-              icon: new Icon(FontAwesomeIcons.stethoscope),
-              title: new Text(''),
+            child: BottomNavigationBar(
+              backgroundColor: Colors.white,
+              selectedItemColor: Colors.red.shade300,
+              onTap: (int index) {
+                _selectTab(pageKeys[index], index);
+              },
+              currentIndex: _selectedIndex,
+              items: [
+                BottomNavigationBarItem(
+                  icon: new Icon(FontAwesomeIcons.solidNewspaper),
+                  title: new Text(
+                    '',
+                  ),
+                ),
+                BottomNavigationBarItem(
+                  icon: new Icon(FontAwesomeIcons.stethoscope),
+                  title: new Text(''),
+                ),
+                BottomNavigationBarItem(
+                  icon: new Icon(FontAwesomeIcons.paw),
+                  title: new Text(''),
+                ),
+                BottomNavigationBarItem(
+                  icon: new Icon(FontAwesomeIcons.solidBell),
+                  title: new Text(''),
+                ),
+                BottomNavigationBarItem(
+                  icon: new Icon(FontAwesomeIcons.userAlt),
+                  title: new Text(''),
+                ),
+              ],
+              type: BottomNavigationBarType.fixed,
             ),
-            BottomNavigationBarItem(
-              icon: new Icon(FontAwesomeIcons.paw),
-              title: new Text(''),
-            ),
-            BottomNavigationBarItem(
-              icon: new Icon(FontAwesomeIcons.solidBell),
-              title: new Text(''),
-            ),
-            BottomNavigationBarItem(
-              icon: new Icon(FontAwesomeIcons.userAlt),
-              title: new Text(''),
-            ),
-          ],
-          type: BottomNavigationBarType.fixed,
+          ),
         ),
       ),
     );

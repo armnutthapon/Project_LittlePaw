@@ -93,6 +93,7 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Stack(children: <Widget>[
         new Positioned(
           top: 0.0,
@@ -103,7 +104,7 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
               "ข้อมูลสัตว์เลี้ยง",
               style: TextStyle(
                   fontSize: 22,
-                  color: Colors.white,
+                  color: Colors.red.shade300,
                   fontWeight: FontWeight.w500,
                   fontFamily: 'Mitr'),
             ),
@@ -130,17 +131,17 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
                   },
                   icon: Icon(
                     FontAwesomeIcons.solidEdit,
-                    color: Colors.white,
+                    color: Colors.red.shade300,
                   ))
               // icon: Icon(Icons.exit_to_app))
             ],
             // You can add title here
             leading: new IconButton(
-              icon: new Icon(Icons.arrow_back_ios, color: Colors.white),
+              icon: new Icon(Icons.arrow_back_ios, color: Colors.red.shade300),
               onPressed: () => Navigator.of(context).pop(),
             ),
-            backgroundColor: Colors.indigo.withOpacity(1),
-            elevation: 10.0,
+            backgroundColor: Colors.white,
+            elevation: 0.0,
           ),
         ),
         Column(
@@ -158,9 +159,9 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      padding: EdgeInsets.only(bottom: 10, top: 50),
+                      padding: EdgeInsets.only(bottom: 10, top: 30),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(100),
                         child: Image.asset(
                           'assets/images/1.jpg',
                           height: 140,
@@ -176,6 +177,7 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
             data != null
                 ? Expanded(
                     child: Container(
+                    color: Colors.white,
                     margin: EdgeInsets.only(top: 10),
                     child: ListView(
                       // padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
