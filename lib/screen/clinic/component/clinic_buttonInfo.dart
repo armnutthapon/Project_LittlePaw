@@ -21,7 +21,7 @@ class ButtonInfo extends StatelessWidget {
               child: ClipRRect(
                   child: Icon(
                 icon,
-                color: Colors.orange.shade600,
+                color: Colors.red.shade300,
                 size: 35,
               ))),
           Text(
@@ -29,7 +29,7 @@ class ButtonInfo extends StatelessWidget {
             style: TextStyle(
                 color: Colors.black54,
                 fontSize: 16,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w300,
                 fontFamily: 'Mitr'),
           ),
         ],

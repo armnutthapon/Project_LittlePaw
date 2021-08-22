@@ -91,7 +91,7 @@ class OwnerInfo extends StatelessWidget {
               text,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                  color: Colors.orange.shade600,
+                  color: Colors.black54,
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   fontFamily: 'Mitr'),
@@ -100,7 +100,7 @@ class OwnerInfo extends StatelessWidget {
               textdetail,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.red.shade300,
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
                   fontFamily: 'Mitr'),

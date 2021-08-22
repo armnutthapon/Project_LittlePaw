@@ -31,16 +31,16 @@ class _Page_FindClinicState extends State<Page_FindClinic> {
               "ค้นหาคลินิก",
               style: TextStyle(
                   fontSize: 22,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
+                  color: Colors.red.shade300,
+                  fontWeight: FontWeight.w400,
                   fontFamily: 'Mitr'),
             ), // You can add title here
             leading: new IconButton(
-              icon: new Icon(Icons.arrow_back_ios, color: Colors.white),
+              icon: new Icon(Icons.arrow_back_ios, color: Colors.red.shade300),
               onPressed: () => Navigator.of(context).pop(),
             ),
-            backgroundColor: Colors.indigoAccent,
-            elevation: 10.0,
+            backgroundColor: Colors.white,
+            elevation: 0.0,
           ),
         ),
       ]),
@@ -92,9 +92,9 @@ class _findClinicMainState extends State<findClinicMain> {
                       children: <Widget>[
                         Expanded(
                           child: TextFormField(
-                            cursorColor: Colors.orange.shade600,
+                            cursorColor: Colors.red.shade300,
                             style: TextStyle(
-                                color: Colors.black,
+                                color: Colors.red.shade300,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w300,
                                 fontFamily: 'Mitr'),
@@ -111,7 +111,7 @@ class _findClinicMainState extends State<findClinicMain> {
                                   icon: Icon(
                                     Icons.search,
                                     size: 20,
-                                    color: Colors.orange.shade600,
+                                    color: Colors.red.shade300,
                                   ),
                                   onPressed: () {}),
                             ),
@@ -145,7 +145,7 @@ class _findClinicMainState extends State<findClinicMain> {
                     ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Colors.orange.shade600,
+                      color: Colors.red.shade300,
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black45,
@@ -195,7 +195,8 @@ class _findClinicMainState extends State<findClinicMain> {
                                     Container(
                                       // padding: EdgeInsets.all(5),
                                       child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(10),
+                                        borderRadius:
+                                            BorderRadius.circular(100),
                                         child: Image.asset(
                                           'assets/images/1.jpg',
                                           height: 120,
@@ -215,33 +216,33 @@ class _findClinicMainState extends State<findClinicMain> {
                                           Text(
                                             data[index]['clinic_name'],
                                             style: TextStyle(
-                                                color: Colors.black,
+                                                color: Colors.black54,
                                                 fontSize: 16,
-                                                fontWeight: FontWeight.w500,
+                                                fontWeight: FontWeight.w400,
                                                 fontFamily: 'Mitr'),
                                           ),
                                           Text(
                                             "3.5 กิโลเมตร",
                                             style: TextStyle(
-                                                color: Colors.black,
+                                                color: Colors.black54,
                                                 fontSize: 14,
-                                                fontWeight: FontWeight.w400,
+                                                fontWeight: FontWeight.w300,
                                                 fontFamily: 'Mitr'),
                                           ),
                                           Text(
                                             data[index]['address'][0]['city'],
                                             style: TextStyle(
-                                                color: Colors.black,
+                                                color: Colors.black54,
                                                 fontSize: 14,
-                                                fontWeight: FontWeight.w400,
+                                                fontWeight: FontWeight.w300,
                                                 fontFamily: 'Mitr'),
                                           ),
                                           Text(
                                             data[index]['opening_time'],
                                             style: TextStyle(
-                                                color: Colors.black,
+                                                color: Colors.black54,
                                                 fontSize: 14,
-                                                fontWeight: FontWeight.w400,
+                                                fontWeight: FontWeight.w300,
                                                 fontFamily: 'Mitr'),
                                           )
                                         ],

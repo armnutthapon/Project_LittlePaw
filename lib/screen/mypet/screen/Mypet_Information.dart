@@ -105,7 +105,7 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
               style: TextStyle(
                   fontSize: 22,
                   color: Colors.red.shade300,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                   fontFamily: 'Mitr'),
             ),
             actions: [
@@ -219,9 +219,12 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
                           text: "โรคประจำตัว :",
                           textdetail: data['congenital_disease'],
                         ),
-                        PetInfo(
-                          text: "วัคซีนที่ได้รับ :",
-                          textdetail: data['vaccine'][0],
+                        Container(
+                          margin: EdgeInsets.only(bottom: size.height * 0.1),
+                          child: PetInfo(
+                            text: "วัคซีนที่ได้รับ :",
+                            textdetail: data['vaccine'][0],
+                          ),
                         ),
                       ],
                     ),

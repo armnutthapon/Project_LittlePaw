@@ -37,8 +37,8 @@ class MyApp extends StatelessWidget {
                 return MaterialApp(
                   debugShowCheckedModeBanner: false,
                   theme: ThemeData(
-                    primaryColor: Colors.pink,
-                    primarySwatch: Colors.pink,
+                    primaryColor: Colors.redAccent,
+                    primarySwatch: Colors.red,
                   ),
                   home: Wrapper(),
                 );

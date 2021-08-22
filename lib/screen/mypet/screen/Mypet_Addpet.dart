@@ -33,18 +33,18 @@ class _Page_AddpetState extends State<Page_Addpet> {
               "เพิ่มสัตว์เลี้ยง",
               style: TextStyle(
                   fontSize: 22,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
+                  color: Colors.red.shade300,
+                  fontWeight: FontWeight.w400,
                   fontFamily: 'Mitr'),
             ),
 
             // You can add title here
             leading: new IconButton(
-              icon: new Icon(Icons.arrow_back_ios, color: Colors.white),
+              icon: new Icon(Icons.arrow_back_ios, color: Colors.red.shade300),
               onPressed: () => Navigator.of(context).pop(),
             ),
-            backgroundColor: Colors.indigoAccent.withOpacity(1),
-            elevation: 10.0, //No shadow
+            backgroundColor: Colors.white,
+            elevation: 0.0, //No shadow
           ),
         ),
       ]),
@@ -165,7 +165,7 @@ class _AddpetState extends State<Addpet> {
                             "ชื่อ :",
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                                color: Colors.orange.shade600,
+                                color: Colors.black54,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Mitr'),
@@ -173,7 +173,7 @@ class _AddpetState extends State<Addpet> {
                           subtitle: TextFormField(
                             controller: _addPetName,
                             style: TextStyle(
-                                color: Colors.black,
+                                color: Colors.red.shade300,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Mitr'),
@@ -208,7 +208,7 @@ class _AddpetState extends State<Addpet> {
                             "เพศ :",
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                                color: Colors.orange.shade600,
+                                color: Colors.black54,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Mitr'),
@@ -226,7 +226,7 @@ class _AddpetState extends State<Addpet> {
                             dropdownColor: Colors.white,
                             value: valueGender,
                             style: TextStyle(
-                                color: Colors.black,
+                                color: Colors.red.shade300,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Mitr'),
@@ -270,7 +270,7 @@ class _AddpetState extends State<Addpet> {
                             "ประเภท :",
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                                color: Colors.orange.shade600,
+                                color: Colors.black54,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Mitr'),
@@ -288,7 +288,7 @@ class _AddpetState extends State<Addpet> {
                             dropdownColor: Colors.white,
                             value: valueCategory,
                             style: TextStyle(
-                                color: Colors.black,
+                                color: Colors.red.shade300,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Mitr'),
@@ -332,7 +332,7 @@ class _AddpetState extends State<Addpet> {
                             "สี :",
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                                color: Colors.orange.shade600,
+                                color: Colors.black54,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Mitr'),
@@ -340,7 +340,7 @@ class _AddpetState extends State<Addpet> {
                           subtitle: TextFormField(
                             controller: _addPetColor,
                             style: TextStyle(
-                                color: Colors.black,
+                                color: Colors.red.shade300,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Mitr'),
@@ -375,7 +375,7 @@ class _AddpetState extends State<Addpet> {
                             "สายพันธุ์ :",
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                                color: Colors.orange.shade600,
+                                color: Colors.black54,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Mitr'),
@@ -383,7 +383,7 @@ class _AddpetState extends State<Addpet> {
                           subtitle: TextFormField(
                             controller: _addPetBreed,
                             style: TextStyle(
-                                color: Colors.black,
+                                color: Colors.red.shade300,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Mitr'),
@@ -418,7 +418,7 @@ class _AddpetState extends State<Addpet> {
                             "ลักษณะเฉพาะ :",
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                                color: Colors.orange.shade600,
+                                color: Colors.black54,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Mitr'),
@@ -426,7 +426,7 @@ class _AddpetState extends State<Addpet> {
                           subtitle: TextFormField(
                             controller: _addPetCharacteristics,
                             style: TextStyle(
-                                color: Colors.black,
+                                color: Colors.red.shade300,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Mitr'),
@@ -461,7 +461,7 @@ class _AddpetState extends State<Addpet> {
                             "วันเกิด / วันที่รับเลี้ยง :",
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                                color: Colors.orange.shade600,
+                                color: Colors.black54,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Mitr'),
@@ -469,7 +469,7 @@ class _AddpetState extends State<Addpet> {
                           subtitle: TextFormField(
                             controller: _addPetAge,
                             style: TextStyle(
-                                color: Colors.black,
+                                color: Colors.red.shade300,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Mitr'),
@@ -515,7 +515,7 @@ class _AddpetState extends State<Addpet> {
                             "การทำหมัน :",
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                                color: Colors.orange.shade600,
+                                color: Colors.black54,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Mitr'),
@@ -533,7 +533,7 @@ class _AddpetState extends State<Addpet> {
                             dropdownColor: Colors.white,
                             value: valueSterilize,
                             style: TextStyle(
-                                color: Colors.black,
+                                color: Colors.black54,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Mitr'),
@@ -577,7 +577,7 @@ class _AddpetState extends State<Addpet> {
                             "โรคประจำตัว :",
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                                color: Colors.orange.shade600,
+                                color: Colors.black54,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Mitr'),
@@ -585,7 +585,7 @@ class _AddpetState extends State<Addpet> {
                           subtitle: TextFormField(
                             controller: _addCongenitalDisease,
                             style: TextStyle(
-                                color: Colors.black,
+                                color: Colors.red.shade300,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Mitr'),
@@ -620,7 +620,7 @@ class _AddpetState extends State<Addpet> {
                             "วัคซีน :",
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                                color: Colors.orange.shade600,
+                                color: Colors.black54,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Mitr'),
@@ -628,7 +628,7 @@ class _AddpetState extends State<Addpet> {
                           subtitle: TextFormField(
                             controller: _addVaccine,
                             style: TextStyle(
-                                color: Colors.black,
+                                color: Colors.red.shade300,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Mitr'),
@@ -658,7 +658,7 @@ class _AddpetState extends State<Addpet> {
                         width: 150,
                         height: 50,
                         child: MaterialButton(
-                          color: Colors.green,
+                          color: Colors.red.shade300,
                           onPressed: _clicked
                               ? null
                               : () {

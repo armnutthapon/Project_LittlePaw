@@ -57,8 +57,8 @@ class _SettingState extends State<Setting> {
             "โปรไฟล์",
             style: TextStyle(
                 fontSize: 22,
-                color: Colors.white,
-                fontWeight: FontWeight.w500,
+                color: Colors.red.shade300,
+                fontWeight: FontWeight.w400,
                 fontFamily: 'Mitr'),
           ),
           actions: [
@@ -80,9 +80,14 @@ class _SettingState extends State<Setting> {
                             print("Reload" + data)
                           });
                 },
-                icon: Icon(FontAwesomeIcons.userEdit))
+                icon: Icon(
+                  FontAwesomeIcons.userEdit,
+                  color: Colors.red.shade300,
+                ))
             // icon: Icon(Icons.exit_to_app))
           ],
+          backgroundColor: Colors.white,
+          elevation: 0,
         ),
         body: data != null
             ? Column(

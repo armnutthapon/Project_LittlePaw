@@ -23,17 +23,20 @@ class _Page_FilterClinicState extends State<Page_FilterClinic> {
               "กรองข้อมูล",
               style: TextStyle(
                   fontSize: 22,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
+                  color: Colors.red.shade300,
+                  fontWeight: FontWeight.w400,
                   fontFamily: 'Mitr'),
             ), // You can add title here
             leading: new IconButton(
               padding: EdgeInsets.only(top: 0),
-              icon: new Icon(Icons.arrow_back_ios, color: Colors.white),
+              icon: new Icon(
+                Icons.arrow_back_ios,
+                color: Colors.red.shade300,
+              ),
               onPressed: () => Navigator.of(context).pop(),
             ),
-            backgroundColor: Colors.indigoAccent.withOpacity(1),
-            elevation: 10.0,
+            backgroundColor: Colors.white,
+            elevation: 0.0,
           ),
         ),
       ]),
@@ -98,8 +101,8 @@ class _selectFilterState extends State<selectFilter> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                     child: RangeSlider(
-                        activeColor: Colors.orange.shade600,
-                        inactiveColor: Colors.orange.shade200,
+                        activeColor: Colors.red.shade400,
+                        inactiveColor: Colors.red.shade100,
                         values: _currentRangeValues,
                         min: 0,
                         max: 100,

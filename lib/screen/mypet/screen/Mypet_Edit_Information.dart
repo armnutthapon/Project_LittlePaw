@@ -21,18 +21,21 @@ class Page_Edit_PetInformaition extends StatefulWidget {
 class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
   var data;
 
-  final _formkey = GlobalKey<FormState>();
-
-  final editPetName = TextEditingController();
+  var editPetSterilize;
   var editPetGender;
   var editPetCategory;
+
+  DateTime petAgeFormat;
+  DateTime tempDate;
+  final _formkey = GlobalKey<FormState>();
+  final editPetName = TextEditingController();
   final editPetColor = TextEditingController();
   final editPetBreed = TextEditingController();
-  var editPetSterilize;
   final editPetCharacteristics = TextEditingController();
   final editCongenitalDisease = TextEditingController();
   final editVaccine = TextEditingController();
   final editPetAge = TextEditingController();
+
   List listCategory = ["สุนัข", "แมว"];
   List listGender = ["เพศผู้", "เพศเมีย"];
   List listSterilize = [
@@ -121,6 +124,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
       editPetAge.text = editPetAge.text;
     } else {
       editPetAge.text = data['dob'];
+      print(editPetAge.text);
     }
     if (editPetSterilize != data['sterilization']) {
       editPetSterilize = editPetSterilize;
@@ -162,7 +166,6 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
   }
 
   DateTime date;
-  DateTime selectedDate = DateTime.now();
   Future<void> _selectDate(BuildContext context) async {
     final now = DateTime.now();
     final DateTime picked = await showDatePicker(
@@ -197,7 +200,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                   style: TextStyle(
                       fontSize: 22,
                       color: Colors.red.shade300,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w400,
                       fontFamily: 'Mitr'),
                 ),
                 actions: [
@@ -215,7 +218,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                         updatePetInformation();
                       },
                       icon: Icon(
-                        FontAwesomeIcons.check,
+                        FontAwesomeIcons.solidCheckCircle,
                         color: Colors.red.shade300,
                       ))
                   // icon: Icon(Icons.exit_to_app))
@@ -304,7 +307,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                         "ชื่อ :",
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
-                                            color: Colors.red.shade300,
+                                            color: Colors.black54,
                                             fontSize: 14,
                                             fontWeight: FontWeight.w400,
                                             fontFamily: 'Mitr'),
@@ -312,7 +315,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                       subtitle: TextFormField(
                                         controller: editPetName,
                                         style: TextStyle(
-                                            color: Colors.black54,
+                                            color: Colors.red.shade300,
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400,
                                             fontFamily: 'Mitr'),
@@ -358,7 +361,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                       "ประเภท :",
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
-                                          color: Colors.red.shade300,
+                                          color: Colors.black54,
                                           fontSize: 14,
                                           fontWeight: FontWeight.w400,
                                           fontFamily: 'Mitr'),
@@ -371,7 +374,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                       ),
                                       hint: Text(editPetCategory,
                                           style: TextStyle(
-                                              color: Colors.black,
+                                              color: Colors.red.shade300,
                                               fontSize: 16,
                                               fontWeight: FontWeight.w400,
                                               fontFamily: 'Mitr')),
@@ -381,7 +384,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                       dropdownColor: Colors.white,
                                       value: valueCategory,
                                       style: TextStyle(
-                                          color: Colors.black,
+                                          color: Colors.red.shade300,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w400,
                                           fontFamily: 'Mitr'),
@@ -429,7 +432,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                       "เพศ :",
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
-                                          color: Colors.black,
+                                          color: Colors.black54,
                                           fontSize: 14,
                                           fontWeight: FontWeight.w400,
                                           fontFamily: 'Mitr'),
@@ -442,7 +445,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                       ),
                                       hint: Text(editPetGender,
                                           style: TextStyle(
-                                              color: Colors.black54,
+                                              color: Colors.red.shade300,
                                               fontSize: 16,
                                               fontWeight: FontWeight.w400,
                                               fontFamily: 'Mitr')),
@@ -452,7 +455,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                       dropdownColor: Colors.white,
                                       value: valueGender,
                                       style: TextStyle(
-                                          color: Colors.black54,
+                                          color: Colors.red.shade300,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w400,
                                           fontFamily: 'Mitr'),
@@ -499,7 +502,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                         "สี :",
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
-                                            color: Colors.black,
+                                            color: Colors.black54,
                                             fontSize: 14,
                                             fontWeight: FontWeight.w400,
                                             fontFamily: 'Mitr'),
@@ -507,7 +510,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                       subtitle: TextFormField(
                                         controller: editPetColor,
                                         style: TextStyle(
-                                            color: Colors.black54,
+                                            color: Colors.red.shade300,
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400,
                                             fontFamily: 'Mitr'),
@@ -553,7 +556,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                         "สายพันธุ์ :",
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
-                                            color: Colors.black,
+                                            color: Colors.black54,
                                             fontSize: 14,
                                             fontWeight: FontWeight.w400,
                                             fontFamily: 'Mitr'),
@@ -561,7 +564,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                       subtitle: TextFormField(
                                         controller: editPetBreed,
                                         style: TextStyle(
-                                            color: Colors.black54,
+                                            color: Colors.red.shade300,
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400,
                                             fontFamily: 'Mitr'),
@@ -607,7 +610,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                         "ลักษณะเฉพาะ :",
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
-                                            color: Colors.black,
+                                            color: Colors.black54,
                                             fontSize: 14,
                                             fontWeight: FontWeight.w400,
                                             fontFamily: 'Mitr'),
@@ -615,7 +618,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                       subtitle: TextFormField(
                                         controller: editPetCharacteristics,
                                         style: TextStyle(
-                                            color: Colors.black54,
+                                            color: Colors.red.shade300,
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400,
                                             fontFamily: 'Mitr'),
@@ -661,7 +664,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                       "วันเกิด / วันที่รับเลี้ยง :",
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
-                                          color: Colors.black,
+                                          color: Colors.black54,
                                           fontSize: 14,
                                           fontWeight: FontWeight.w400,
                                           fontFamily: 'Mitr'),
@@ -669,7 +672,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                     subtitle: TextFormField(
                                       controller: editPetAge,
                                       style: TextStyle(
-                                          color: Colors.black54,
+                                          color: Colors.red.shade300,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w400,
                                           fontFamily: 'Mitr'),
@@ -710,7 +713,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                       "การทำหมัน :",
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
-                                          color: Colors.black,
+                                          color: Colors.black54,
                                           fontSize: 14,
                                           fontWeight: FontWeight.w400,
                                           fontFamily: 'Mitr'),
@@ -719,7 +722,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                       hint: Text(
                                         editPetSterilize,
                                         style: TextStyle(
-                                            color: Colors.black54,
+                                            color: Colors.red.shade300,
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400,
                                             fontFamily: 'Mitr'),
@@ -730,7 +733,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                       dropdownColor: Colors.white,
                                       value: valueSterilize,
                                       style: TextStyle(
-                                          color: Colors.black54,
+                                          color: Colors.red.shade300,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w400,
                                           fontFamily: 'Mitr'),
@@ -779,7 +782,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                         "โรคประจำตัว :",
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
-                                            color: Colors.black,
+                                            color: Colors.black54,
                                             fontSize: 14,
                                             fontWeight: FontWeight.w400,
                                             fontFamily: 'Mitr'),
@@ -787,7 +790,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                       subtitle: TextFormField(
                                         controller: editCongenitalDisease,
                                         style: TextStyle(
-                                            color: Colors.black54,
+                                            color: Colors.red.shade300,
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400,
                                             fontFamily: 'Mitr'),
@@ -817,7 +820,8 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                               ),
                             ),
                             Container(
-                              margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
+                              margin: EdgeInsets.fromLTRB(
+                                  10, 2.5, 10, size.height * 0.1),
                               decoration: BoxDecoration(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10)),
@@ -833,7 +837,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                         "วัคซีนที่ได้รับ :",
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
-                                            color: Colors.black,
+                                            color: Colors.black54,
                                             fontSize: 14,
                                             fontWeight: FontWeight.w400,
                                             fontFamily: 'Mitr'),
@@ -841,7 +845,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                       subtitle: TextFormField(
                                         controller: editVaccine,
                                         style: TextStyle(
-                                            color: Colors.black54,
+                                            color: Colors.red.shade300,
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400,
                                             fontFamily: 'Mitr'),

@@ -94,8 +94,8 @@ class AppState extends State<App> {
               topLeft: Radius.circular(30),
             ),
             child: BottomNavigationBar(
-              backgroundColor: Colors.white,
-              selectedItemColor: Colors.red.shade300,
+              backgroundColor: Colors.red.shade300,
+              selectedItemColor: Colors.white,
               onTap: (int index) {
                 _selectTab(pageKeys[index], index);
               },
@@ -112,7 +112,10 @@ class AppState extends State<App> {
                   title: new Text(''),
                 ),
                 BottomNavigationBarItem(
-                  icon: new Icon(FontAwesomeIcons.paw),
+                  icon: new Icon(
+                    FontAwesomeIcons.paw,
+                    size: 30,
+                  ),
                   title: new Text(''),
                 ),
                 BottomNavigationBarItem(
