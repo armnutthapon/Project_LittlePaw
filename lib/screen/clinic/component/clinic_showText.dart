@@ -15,14 +15,15 @@ class ShowText extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
         color: Colors.white,
-      boxShadow: [
-      BoxShadow(
-        color: Colors.grey.withOpacity(0.5),
-        spreadRadius: 1,
-        blurRadius: 2,
-        offset: Offset(0, 3), // changes position of shadow
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 1,
+            blurRadius: 2,
+            offset: Offset(0, 3), // changes position of shadow
+          ),
+        ],
       ),
-    ],),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: RichText(
@@ -31,8 +32,8 @@ class ShowText extends StatelessWidget {
             style: TextStyle(
               fontFamily: 'Mitr',
               fontSize: 14,
-              color: Colors.orange.shade600,
-              fontWeight: FontWeight.w500,
+              color: Colors.black54,
+              fontWeight: FontWeight.w400,
             ),
             children: <TextSpan>[
               TextSpan(
@@ -40,7 +41,7 @@ class ShowText extends StatelessWidget {
                 style: TextStyle(
                   fontFamily: 'Mitr',
                   fontSize: 14,
-                  color: Colors.black,
+                  color: Colors.red.shade300,
                   fontWeight: FontWeight.w400,
                 ),
               ),

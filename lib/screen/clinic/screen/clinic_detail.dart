@@ -74,6 +74,7 @@ class _Page_ClinicDetailState extends State<Page_ClinicDetail> {
                   children: [
                     SizedBox(height: size.height * 0.14),
                     Container(
+                      padding: EdgeInsets.only(bottom: size.height * 0.1),
                       child: Column(
                         children: [
                           Padding(
@@ -85,12 +86,12 @@ class _Page_ClinicDetailState extends State<Page_ClinicDetail> {
                                   fontFamily: 'Mitr',
                                   fontSize: 18,
                                   color: Colors.black,
-                                  fontWeight: FontWeight.w500,
+                                  fontWeight: FontWeight.w400,
                                 ),
                               ),
                               trailing: Icon(
                                 FontAwesomeIcons.mapMarkerAlt,
-                                color: Colors.orange.shade600,
+                                color: Colors.red.shade300,
                                 size: 30,
                               ),
                             ),
@@ -133,7 +134,7 @@ class _Page_ClinicDetailState extends State<Page_ClinicDetail> {
                                 width: 150,
                                 height: 50,
                                 child: FlatButton(
-                                  color: Colors.green,
+                                  color: Colors.red.shade300,
                                   onPressed: () {
                                     setState(() {
                                       send_cid = data['_id'];
@@ -161,7 +162,7 @@ class _Page_ClinicDetailState extends State<Page_ClinicDetail> {
                                       fontFamily: 'Mitr',
                                       fontSize: 20,
                                       color: Colors.white,
-                                      fontWeight: FontWeight.w500,
+                                      fontWeight: FontWeight.w400,
                                     ),
                                   ),
                                 ),
@@ -186,16 +187,19 @@ class _Page_ClinicDetailState extends State<Page_ClinicDetail> {
           title: Text("ข้อมูลคลินิก",
               style: TextStyle(
                   fontSize: 22,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
+                  color: Colors.red.shade300,
+                  fontWeight: FontWeight.w400,
                   fontFamily: 'Mitr')),
           leading: new IconButton(
             padding: EdgeInsets.only(top: 0),
-            icon: new Icon(Icons.arrow_back_ios, color: Colors.white),
+            icon: new Icon(
+              Icons.arrow_back_ios,
+              color: Colors.red.shade300,
+            ),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          backgroundColor: Colors.indigoAccent,
-          elevation: 10.0,
+          backgroundColor: Colors.white,
+          elevation: 0.0,
         ),
       ),
     ]));

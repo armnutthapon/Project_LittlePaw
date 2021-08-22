@@ -92,7 +92,7 @@ class _MyPetState extends State<MyPet> {
                   child: Center(
                       child: GridView.builder(
                     primary: false,
-                    padding: const EdgeInsets.all(20),
+                    padding: EdgeInsets.fromLTRB(20, 20, 20, size.height * 0.1),
                     gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                       childAspectRatio: mediaQueryData.size.height / 900,
                       crossAxisSpacing: 20,

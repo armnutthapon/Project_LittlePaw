@@ -62,12 +62,12 @@ class _NotificationFeedState extends State<NotificationFeed> {
             "แจ้งเตือน นะจ๊ะ",
             style: TextStyle(
                 fontSize: 22,
-                color: Colors.white,
-                fontWeight: FontWeight.w500,
+                color: Colors.red.shade300,
+                fontWeight: FontWeight.w400,
                 fontFamily: 'Mitr'),
           ),
-          backgroundColor: Colors.indigoAccent.withOpacity(1),
-          elevation: 10.0,
+          backgroundColor: Colors.white,
+          elevation: 0.0,
         ),
         body: data != null
             ? SingleChildScrollView(

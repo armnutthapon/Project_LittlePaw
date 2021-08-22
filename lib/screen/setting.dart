@@ -90,100 +90,103 @@ class _SettingState extends State<Setting> {
           elevation: 0,
         ),
         body: data != null
-            ? Column(
-                children: <Widget>[
-                  Container(
-                    child: Container(
-                        child: Container(
-                      margin: EdgeInsets.only(
-                        top: 10,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            padding: EdgeInsets.only(bottom: 10, top: 10),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(100),
-                              child: Image.asset(
-                                'assets/images/1.jpg',
-                                height: 140,
-                                width: 140,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )),
-                  ),
-                  Expanded(
+            ? Container(
+                margin: EdgeInsets.only(bottom: size.height * 0.1),
+                child: Column(
+                  children: <Widget>[
+                    Container(
                       child: Container(
-                    margin: EdgeInsets.only(top: 10),
-                    child: ListView(
-                      // padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
-                      padding: EdgeInsets.zero,
-                      children: [
-                        OwnerInfo(
-                          text: "ชื่อ :",
-                          textdetail: data['name'],
+                          child: Container(
+                        margin: EdgeInsets.only(
+                          top: 10,
                         ),
-                        OwnerInfo(
-                          text: "อีเมล :",
-                          textdetail: data['email'],
-                        ),
-                        OwnerInfo(
-                          text: "เบอร์มือถือ :",
-                          textdetail: data['contact'],
-                        ),
-                        OwnerInfo(
-                          text: "เพศ :",
-                          textdetail: data['sex'],
-                        ),
-                        OwnerInfo(
-                          text: "จำนวนสัตว์เลี้ยง :",
-                          textdetail: "${data['pet_id'].length} ตัว",
-                        ),
-                        Row(
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            TextButton(
-                              child: Text(
-                                "ออกจากระบบ",
+                            Container(
+                              padding: EdgeInsets.only(bottom: 10, top: 10),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(100),
+                                child: Image.asset(
+                                  'assets/images/1.jpg',
+                                  height: 140,
+                                  width: 140,
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )),
+                    ),
+                    Expanded(
+                        child: Container(
+                      margin: EdgeInsets.only(top: 10),
+                      child: ListView(
+                        // padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+                        padding: EdgeInsets.zero,
+                        children: [
+                          OwnerInfo(
+                            text: "ชื่อ :",
+                            textdetail: data['name'],
+                          ),
+                          OwnerInfo(
+                            text: "อีเมล :",
+                            textdetail: data['email'],
+                          ),
+                          OwnerInfo(
+                            text: "เบอร์มือถือ :",
+                            textdetail: data['contact'],
+                          ),
+                          OwnerInfo(
+                            text: "เพศ :",
+                            textdetail: data['sex'],
+                          ),
+                          OwnerInfo(
+                            text: "จำนวนสัตว์เลี้ยง :",
+                            textdetail: "${data['pet_id'].length} ตัว",
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              TextButton(
+                                child: Text(
+                                  "ออกจากระบบ",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400,
+                                      fontFamily: 'Mitr'),
+                                ),
+                                onPressed: () {
+                                  onPressed:
+                                  () async => await loginProvider.logout();
+                                },
+                              ),
+                              IconButton(
+                                  onPressed: () async =>
+                                      await loginProvider.logout(),
+                                  icon: Icon(Icons.exit_to_app)),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "version : 1.2.10",
                                 style: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w200,
                                     fontFamily: 'Mitr'),
                               ),
-                              onPressed: () {
-                                onPressed:
-                                () async => await loginProvider.logout();
-                              },
-                            ),
-                            IconButton(
-                                onPressed: () async =>
-                                    await loginProvider.logout(),
-                                icon: Icon(Icons.exit_to_app)),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "version : 1.2.10",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w200,
-                                  fontFamily: 'Mitr'),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ))
-                ],
+                            ],
+                          )
+                        ],
+                      ),
+                    ))
+                  ],
+                ),
               )
             : Center(child: CircularProgressIndicator()));
   }

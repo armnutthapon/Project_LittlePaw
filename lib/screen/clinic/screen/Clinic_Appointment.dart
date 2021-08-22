@@ -120,6 +120,7 @@ class _Page_AppointmentState extends State<Page_Appointment> {
                 children: [
                   SizedBox(height: size.height * 0.14),
                   Container(
+                    padding: EdgeInsets.only(bottom: size.height * 0.1),
                     child: Column(
                       children: [
                         Padding(
@@ -130,8 +131,8 @@ class _Page_AppointmentState extends State<Page_Appointment> {
                               style: TextStyle(
                                 fontFamily: 'Mitr',
                                 fontSize: 16,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500,
+                                color: Colors.black54,
+                                fontWeight: FontWeight.w400,
                               ),
                             ),
                           ),
@@ -167,11 +168,11 @@ class _Page_AppointmentState extends State<Page_Appointment> {
                               calendarStyle: CalendarStyle(
                                 isTodayHighlighted: true,
                                 selectedDecoration: BoxDecoration(
-                                  color: Colors.orange.shade600,
+                                  color: Colors.red.shade300,
                                   shape: BoxShape.circle,
                                 ),
                                 todayDecoration: BoxDecoration(
-                                  color: Colors.grey.shade400,
+                                  color: Colors.red.shade300,
                                   shape: BoxShape.circle,
                                 ),
                                 selectedTextStyle: TextStyle(
@@ -185,7 +186,7 @@ class _Page_AppointmentState extends State<Page_Appointment> {
                                   titleCentered: true,
                                   formatButtonShowsNext: true,
                                   formatButtonDecoration: BoxDecoration(
-                                      color: Colors.orange.shade600,
+                                      color: Colors.red.shade300,
                                       borderRadius: BorderRadius.circular(5.0)),
                                   formatButtonTextStyle:
                                       TextStyle(color: Colors.white),
@@ -204,8 +205,8 @@ class _Page_AppointmentState extends State<Page_Appointment> {
                               style: TextStyle(
                                 fontFamily: 'Mitr',
                                 fontSize: 16,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500,
+                                color: Colors.black54,
+                                fontWeight: FontWeight.w400,
                               ),
                             ),
                           ),
@@ -231,7 +232,7 @@ class _Page_AppointmentState extends State<Page_Appointment> {
                                     child: TextFormField(
                                       controller: time_appointment,
                                       style: TextStyle(
-                                          color: Colors.black,
+                                          color: Colors.red.shade300,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w400,
                                           fontFamily: 'Mitr'),
@@ -264,8 +265,8 @@ class _Page_AppointmentState extends State<Page_Appointment> {
                               style: TextStyle(
                                 fontFamily: 'Mitr',
                                 fontSize: 16,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500,
+                                color: Colors.black54,
+                                fontWeight: FontWeight.w400,
                               ),
                             ),
                           ),
@@ -286,7 +287,7 @@ class _Page_AppointmentState extends State<Page_Appointment> {
                                 child: TextFormField(
                                   controller: symptom,
                                   style: TextStyle(
-                                      color: Colors.black,
+                                      color: Colors.red.shade300,
                                       fontSize: 16,
                                       fontWeight: FontWeight.w400,
                                       fontFamily: 'Mitr'),
@@ -320,7 +321,7 @@ class _Page_AppointmentState extends State<Page_Appointment> {
                               width: 150,
                               height: 50,
                               child: MaterialButton(
-                                color: Colors.green,
+                                color: Colors.red.shade300,
                                 onPressed: _clicked
                                     ? null
                                     : () {
@@ -347,7 +348,7 @@ class _Page_AppointmentState extends State<Page_Appointment> {
                                     fontFamily: 'Mitr',
                                     fontSize: 20,
                                     color: Colors.white,
-                                    fontWeight: FontWeight.w500,
+                                    fontWeight: FontWeight.w400,
                                   ),
                                 ),
                               ),
@@ -374,16 +375,17 @@ class _Page_AppointmentState extends State<Page_Appointment> {
                 "การนัดหมาย",
                 style: TextStyle(
                     fontSize: 22,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
+                    color: Colors.red.shade300,
+                    fontWeight: FontWeight.w400,
                     fontFamily: 'Mitr'),
               ), // You can add title here
               leading: new IconButton(
-                icon: new Icon(Icons.arrow_back_ios, color: Colors.white),
+                icon:
+                    new Icon(Icons.arrow_back_ios, color: Colors.red.shade300),
                 onPressed: () => Navigator.of(context).pop(),
               ),
-              backgroundColor: Colors.indigoAccent,
-              elevation: 10,
+              backgroundColor: Colors.white,
+              elevation: 0,
             ),
           ),
         ]),

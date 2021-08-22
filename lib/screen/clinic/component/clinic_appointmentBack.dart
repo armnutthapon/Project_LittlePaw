@@ -28,7 +28,7 @@ class _Appointment_BackState extends State<Appointment_Back> {
           width: 150,
           height: 50,
           child: FlatButton(
-            color: Colors.green,
+            color: Colors.red.shade300,
             onPressed: () => Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
@@ -41,7 +41,7 @@ class _Appointment_BackState extends State<Appointment_Back> {
                 fontFamily: 'Mitr',
                 fontSize: 20,
                 color: Colors.white,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w400,
               ),
             ),
           ),
