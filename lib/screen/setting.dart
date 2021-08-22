@@ -77,7 +77,7 @@ class _SettingState extends State<Setting> {
                                     ? getUserInformation()
                                     : null
                                 : Center(child: CircularProgressIndicator()),
-                            print("Reload" + data)
+                            // print("Reload" + data)
                           });
                 },
                 icon: Icon(
