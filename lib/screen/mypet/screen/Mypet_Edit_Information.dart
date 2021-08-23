@@ -366,50 +366,53 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                           fontWeight: FontWeight.w400,
                                           fontFamily: 'Mitr'),
                                     ),
-                                    subtitle: DropdownButtonFormField(
-                                      icon: Icon(
-                                        // Add this
-                                        Icons.arrow_drop_down, // Add this
-                                        color: Colors.grey.shade600, // Add this
-                                      ),
-                                      hint: Text(editPetCategory,
-                                          style: TextStyle(
-                                              color: Colors.red.shade300,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w400,
-                                              fontFamily: 'Mitr')),
-                                      isDense: false,
-                                      decoration: InputDecoration.collapsed(
-                                          hintText: ''),
-                                      dropdownColor: Colors.white,
-                                      value: valueCategory,
-                                      style: TextStyle(
-                                          color: Colors.red.shade300,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
-                                          fontFamily: 'Mitr'),
-                                      onChanged: (newValue) {
-                                        setState(() {
-                                          valueCategory = newValue;
-                                          editPetCategory = newValue;
-                                        });
-                                        print(editPetCategory);
-                                      },
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
+                                    subtitle: Container(
+                                      padding: EdgeInsets.only(
+                                          right: size.width * 0.03),
+                                      child: DropdownButtonFormField(
+                                        icon: Icon(
+                                          Icons.arrow_drop_down,
+                                          color: Colors.grey.shade600,
+                                        ),
+                                        hint: Text(editPetCategory,
+                                            style: TextStyle(
+                                                color: Colors.red.shade300,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w400,
+                                                fontFamily: 'Mitr')),
+                                        isDense: false,
+                                        decoration: InputDecoration.collapsed(
+                                            hintText: ''),
+                                        dropdownColor: Colors.white,
+                                        value: valueCategory,
+                                        style: TextStyle(
+                                            color: Colors.red.shade300,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                            fontFamily: 'Mitr'),
+                                        onChanged: (newValue) {
+                                          setState(() {
+                                            valueCategory = newValue;
+                                            editPetCategory = newValue;
+                                          });
+                                          print(editPetCategory);
+                                        },
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return valueCategory =
+                                                editPetCategory.text;
+                                          }
                                           return valueCategory =
                                               editPetCategory.text;
-                                        }
-                                        return valueCategory =
-                                            editPetCategory.text;
-                                      },
-                                      items: listCategory.map((valueItem) {
-                                        return DropdownMenuItem(
-                                            value: valueItem,
-                                            child: Text(
-                                              valueItem,
-                                            ));
-                                      }).toList(),
+                                        },
+                                        items: listCategory.map((valueItem) {
+                                          return DropdownMenuItem(
+                                              value: valueItem,
+                                              child: Text(
+                                                valueItem,
+                                              ));
+                                        }).toList(),
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -437,49 +440,53 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                           fontWeight: FontWeight.w400,
                                           fontFamily: 'Mitr'),
                                     ),
-                                    subtitle: DropdownButtonFormField(
-                                      icon: Icon(
-                                        // Add this
-                                        Icons.arrow_drop_down, // Add this
-                                        color: Colors.grey.shade600, // Add this
-                                      ),
-                                      hint: Text(editPetGender,
-                                          style: TextStyle(
-                                              color: Colors.red.shade300,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w400,
-                                              fontFamily: 'Mitr')),
-                                      isDense: false,
-                                      decoration: InputDecoration.collapsed(
-                                          hintText: ''),
-                                      dropdownColor: Colors.white,
-                                      value: valueGender,
-                                      style: TextStyle(
-                                          color: Colors.red.shade300,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
-                                          fontFamily: 'Mitr'),
-                                      onChanged: (newValue) {
-                                        setState(() {
-                                          valueGender = newValue;
-                                          editPetGender = newValue;
-                                        });
-                                        print("Sex : $valueGender");
-                                      },
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
+                                    subtitle: Container(
+                                      padding: EdgeInsets.only(
+                                          right: size.width * 0.03),
+                                      child: DropdownButtonFormField(
+                                        icon: Icon(
+                                          Icons.arrow_drop_down,
+                                          color: Colors.grey.shade600,
+                                        ),
+                                        hint: Text(editPetGender,
+                                            style: TextStyle(
+                                                color: Colors.red.shade300,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w400,
+                                                fontFamily: 'Mitr')),
+                                        isDense: false,
+                                        decoration: InputDecoration.collapsed(
+                                            hintText: ''),
+                                        dropdownColor: Colors.white,
+                                        value: valueGender,
+                                        style: TextStyle(
+                                            color: Colors.red.shade300,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                            fontFamily: 'Mitr'),
+                                        onChanged: (newValue) {
+                                          setState(() {
+                                            valueGender = newValue;
+                                            editPetGender = newValue;
+                                          });
+                                          print("Sex : $valueGender");
+                                        },
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return valueGender =
+                                                editPetGender.text;
+                                          }
                                           return valueGender =
                                               editPetGender.text;
-                                        }
-                                        return valueGender = editPetGender.text;
-                                      },
-                                      items: listGender.map((valueItem) {
-                                        return DropdownMenuItem(
-                                            value: valueItem,
-                                            child: Text(
-                                              valueItem,
-                                            ));
-                                      }).toList(),
+                                        },
+                                        items: listGender.map((valueItem) {
+                                          return DropdownMenuItem(
+                                              value: valueItem,
+                                              child: Text(
+                                                valueItem,
+                                              ));
+                                        }).toList(),
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -718,48 +725,56 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                           fontWeight: FontWeight.w400,
                                           fontFamily: 'Mitr'),
                                     ),
-                                    subtitle: DropdownButtonFormField(
-                                      hint: Text(
-                                        editPetSterilize,
+                                    subtitle: Container(
+                                      padding: EdgeInsets.only(
+                                          right: size.width * 0.03),
+                                      child: DropdownButtonFormField(
+                                        icon: Icon(
+                                          Icons.arrow_drop_down,
+                                          color: Colors.grey.shade600,
+                                        ),
+                                        hint: Text(
+                                          editPetSterilize,
+                                          style: TextStyle(
+                                              color: Colors.red.shade300,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w400,
+                                              fontFamily: 'Mitr'),
+                                        ),
+                                        isDense: false,
+                                        decoration: InputDecoration.collapsed(
+                                            hintText: ''),
+                                        dropdownColor: Colors.white,
+                                        value: valueSterilize,
                                         style: TextStyle(
                                             color: Colors.red.shade300,
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400,
                                             fontFamily: 'Mitr'),
+                                        onChanged: (newValue) {
+                                          setState(() {
+                                            valueSterilize = newValue;
+                                            editPetSterilize = newValue;
+
+                                            if (editPetSterilize ==
+                                                "ทำหมันแล้ว") {
+                                              editPetSterilize = "true";
+                                            } else {
+                                              editPetSterilize = "false";
+                                            }
+                                          });
+
+                                          print("การทำหมัน :  " +
+                                              editPetSterilize);
+                                        },
+                                        items: listSterilize.map((valueItem) {
+                                          return DropdownMenuItem(
+                                              value: valueItem,
+                                              child: Text(
+                                                valueItem,
+                                              ));
+                                        }).toList(),
                                       ),
-                                      isDense: false,
-                                      decoration: InputDecoration.collapsed(
-                                          hintText: ''),
-                                      dropdownColor: Colors.white,
-                                      value: valueSterilize,
-                                      style: TextStyle(
-                                          color: Colors.red.shade300,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
-                                          fontFamily: 'Mitr'),
-                                      onChanged: (newValue) {
-                                        setState(() {
-                                          valueSterilize = newValue;
-                                          editPetSterilize = newValue;
-
-                                          if (editPetSterilize ==
-                                              "ทำหมันแล้ว") {
-                                            editPetSterilize = "true";
-                                          } else {
-                                            editPetSterilize = "false";
-                                          }
-                                        });
-
-                                        print(
-                                            "การทำหมัน :  " + editPetSterilize);
-                                      },
-                                      items: listSterilize.map((valueItem) {
-                                        return DropdownMenuItem(
-                                            value: valueItem,
-                                            child: Text(
-                                              valueItem,
-                                            ));
-                                      }).toList(),
                                     ),
                                   ),
                                 ),

@@ -302,48 +302,50 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                                   fontWeight: FontWeight.w400,
                                   fontFamily: 'Mitr'),
                             ),
-                            subtitle: DropdownButtonFormField(
-                              icon: Icon(
-                                // Add this
-                                Icons.arrow_drop_down, // Add this
-                                color: Colors.grey.shade600, // Add this
-                              ),
-                              hint: Text(user_gender,
-                                  style: TextStyle(
-                                      color: Colors.red.shade300,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400,
-                                      fontFamily: 'Mitr')),
-                              isDense: false,
-                              decoration:
-                                  InputDecoration.collapsed(hintText: ''),
-                              dropdownColor: Colors.white,
-                              value: valueGender,
-                              style: TextStyle(
-                                  color: Colors.red.shade300,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w400,
-                                  fontFamily: 'Mitr'),
-                              onChanged: (newValue) {
-                                setState(() {
-                                  valueGender = newValue;
-                                  user_gender = newValue;
-                                });
-                                print("Sex : $valueGender");
-                              },
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
+                            subtitle: Container(
+                              padding:
+                                  EdgeInsets.only(right: size.width * 0.03),
+                              child: DropdownButtonFormField(
+                                icon: Icon(
+                                  Icons.arrow_drop_down,
+                                ),
+                                hint: Text(user_gender,
+                                    style: TextStyle(
+                                        color: Colors.red.shade300,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                        fontFamily: 'Mitr')),
+                                isDense: false,
+                                decoration:
+                                    InputDecoration.collapsed(hintText: ''),
+                                dropdownColor: Colors.white,
+                                value: valueGender,
+                                style: TextStyle(
+                                    color: Colors.red.shade300,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Mitr'),
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    valueGender = newValue;
+                                    user_gender = newValue;
+                                  });
+                                  print("Sex : $valueGender");
+                                },
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return valueGender = user_gender.text;
+                                  }
                                   return valueGender = user_gender.text;
-                                }
-                                return valueGender = user_gender.text;
-                              },
-                              items: listGender.map((valueItem) {
-                                return DropdownMenuItem(
-                                    value: valueItem,
-                                    child: Text(
-                                      valueItem,
-                                    ));
-                              }).toList(),
+                                },
+                                items: listGender.map((valueItem) {
+                                  return DropdownMenuItem(
+                                      value: valueItem,
+                                      child: Text(
+                                        valueItem,
+                                      ));
+                                }).toList(),
+                              ),
                             ),
                           ),
                         ),
