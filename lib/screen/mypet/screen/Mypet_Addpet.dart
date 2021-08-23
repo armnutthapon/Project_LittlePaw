@@ -533,7 +533,7 @@ class _AddpetState extends State<Addpet> {
                             dropdownColor: Colors.white,
                             value: valueSterilize,
                             style: TextStyle(
-                                color: Colors.black54,
+                                color: Colors.red.shade300,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Mitr'),
@@ -664,6 +664,7 @@ class _AddpetState extends State<Addpet> {
                               : () {
                                   if (_formkey.currentState.validate()) {
                                     _clicked = true;
+
                                     if (_addPetSterilize == "ทำหมันแล้ว") {
                                       setState(() {
                                         _addPetSterilize = "true";

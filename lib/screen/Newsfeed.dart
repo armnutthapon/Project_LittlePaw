@@ -65,6 +65,7 @@ class _ImagePickerExampleState extends State<ImagePickerExample> {
   //   _image = File(pickedFile.path);
   // });
   // }
+  bool _clicked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +76,25 @@ class _ImagePickerExampleState extends State<ImagePickerExample> {
               getImage();
             },
             icon: Icon(FontAwesomeIcons.fileImage)),
+        MaterialButton(
+          color: Colors.red.shade300,
+          onPressed: _clicked
+              ? null
+              : () {
+                  setState(() {
+                    _clicked = true;
+                  });
+                },
+          child: Text(
+            "ยืนยัน",
+            style: TextStyle(
+              fontFamily: 'Mitr',
+              fontSize: 20,
+              color: Colors.white,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ),
         image == null
             ? Center(
                 child: Text("select image"),

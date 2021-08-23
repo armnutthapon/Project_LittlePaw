@@ -27,8 +27,8 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
   final user_contact = TextEditingController();
   var user_gender;
 
-  List listGender = ["ชาย", "หญิง", "ไม่ระบุ"];
-
+  // List listGender = ["ชาย", "หญิง", "ไม่ระบุ"];
+  List listGender = ["หญิง", "ชาย", "อื่นๆ"];
   String valueGender;
 
   getUserInformation() async {
@@ -48,8 +48,10 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
       user_name.text = "-";
       return user_name.text = "-";
     }
-    if (valueGender == null) {
-      valueGender = data['sex'];
+    if (user_gender != data['sex']) {
+      user_gender = user_gender;
+    } else {
+      user_gender = data['sex'];
     }
     if (user_contact == null || user_contact.text.isEmpty) {
       user_contact.text = "-";
@@ -86,10 +88,10 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
       user_contact.text = data['contact'];
     }
 
-    if (user_gender.text != data['sex']) {
-      user_gender.text = user_gender.text;
+    if (user_gender != data['sex']) {
+      user_gender = user_gender;
     } else {
-      user_gender.text = data['sex'];
+      user_gender = data['sex'];
     }
   }
 
@@ -136,221 +138,286 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
             onPressed: () => Navigator.of(context).pop(),
           ),
         ),
-        body: data != null
-            ? Container(
-                color: Colors.white,
-                padding: EdgeInsets.only(bottom: size.height * 0.1),
-                child: Column(
-                  children: <Widget>[
-                    Container(
-                      child: Container(
-                          child: Container(
-                        margin: EdgeInsets.only(
-                          top: 10,
+        body:
+            // data != null ?
+            Container(
+          color: Colors.white,
+          padding: EdgeInsets.only(bottom: size.height * 0.1),
+          child: Column(
+            children: <Widget>[
+              Container(
+                child: Container(
+                    child: Container(
+                  margin: EdgeInsets.only(
+                    top: 10,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.only(bottom: 10, top: 10),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.asset(
+                            'assets/images/1.jpg',
+                            height: 140,
+                            width: 140,
+                            fit: BoxFit.fill,
+                          ),
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.only(bottom: 10, top: 10),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Image.asset(
-                                  'assets/images/1.jpg',
-                                  height: 140,
-                                  width: 140,
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      )),
-                    ),
-                    Expanded(
-                        child: Container(
-                      // margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                      child: ListView(
-                        // padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
-                        padding: EdgeInsets.zero,
-                        children: [
-                          Container(
-                            margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              color: Colors.white,
-                              border: Border.all(
-                                  width: 1.0, color: Colors.grey[200]),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 10, bottom: 10),
-                              child: Container(
-                                child: ListTile(
-                                    title: Text(
-                                      "ชื่อ :",
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                          color: Colors.black54,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w400,
-                                          fontFamily: 'Mitr'),
-                                    ),
-                                    subtitle: TextFormField(
-                                      controller: user_name,
-                                      style: TextStyle(
-                                          color: Colors.red.shade300,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
-                                          fontFamily: 'Mitr'),
-                                      decoration: InputDecoration(
-                                        contentPadding: EdgeInsets.zero,
-                                        border: InputBorder.none,
-                                        focusedBorder: InputBorder.none,
-                                      ),
-                                      onSaved: (String value) {},
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
-                                          return '-';
-                                        }
-                                        return "-";
-                                      },
-                                    ),
-                                    trailing: IconButton(
-                                        onPressed: () {
-                                          user_name.clear();
-                                        },
-                                        icon: Icon(
-                                          FontAwesomeIcons.solidTimesCircle,
-                                          size: 16,
-                                          color: Colors.grey,
-                                        ))),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              color: Colors.white,
-                              border: Border.all(
-                                  width: 1.0, color: Colors.grey[200]),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 10, bottom: 10),
-                              child: Container(
-                                child: ListTile(
-                                    title: Text(
-                                      "เบอร์มือถือ :",
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                          color: Colors.black54,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w400,
-                                          fontFamily: 'Mitr'),
-                                    ),
-                                    subtitle: TextFormField(
-                                      controller: user_contact,
-                                      style: TextStyle(
-                                          color: Colors.red.shade300,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
-                                          fontFamily: 'Mitr'),
-                                      decoration: InputDecoration(
-                                        contentPadding: EdgeInsets.zero,
-                                        border: InputBorder.none,
-                                        focusedBorder: InputBorder.none,
-                                      ),
-                                      onSaved: (String value) {},
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
-                                          print("null");
-                                          return 'กรุณาระบุ';
-                                        }
-                                        return null;
-                                      },
-                                    ),
-                                    trailing: IconButton(
-                                        onPressed: () {
-                                          user_contact.clear();
-                                        },
-                                        icon: Icon(
-                                          FontAwesomeIcons.solidTimesCircle,
-                                          size: 16,
-                                          color: Colors.grey,
-                                        ))),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              color: Colors.white,
-                              border: Border.all(
-                                  width: 1.0, color: Colors.grey[200]),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 10, bottom: 10),
-                              child: Container(
-                                child: ListTile(
-                                  title: Text(
-                                    "เพศ :",
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        color: Colors.black54,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w400,
-                                        fontFamily: 'Mitr'),
-                                  ),
-                                  subtitle: DropdownButtonFormField(
-                                    icon: Icon(
-                                      // Add this
-                                      Icons.arrow_drop_down, // Add this
-                                      color: Colors.grey.shade600, // Add this
-                                    ),
-                                    hint: Text(user_gender.text,
-                                        style: TextStyle(
-                                            color: Colors.red.shade300,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w400,
-                                            fontFamily: 'Mitr')),
-                                    isDense: false,
-                                    decoration:
-                                        InputDecoration.collapsed(hintText: ''),
-                                    dropdownColor: Colors.white,
-                                    value: valueGender,
-                                    style: TextStyle(
-                                        color: Colors.red.shade300,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w400,
-                                        fontFamily: 'Mitr'),
-                                    onChanged: (newValue) {
-                                      setState(() {
-                                        valueGender = newValue;
-                                        user_gender.text = newValue;
-                                      });
-                                    },
-                                    items: listGender.map((valueItem) {
-                                      return DropdownMenuItem(
-                                          value: valueItem,
-                                          child: Text(
-                                            valueItem,
-                                          ));
-                                    }).toList(),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
                       ),
-                    ))
+                    ],
+                  ),
+                )),
+              ),
+              Expanded(
+                  child: Container(
+                // margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
+                child: ListView(
+                  // padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+                  padding: EdgeInsets.zero,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        color: Colors.white,
+                        border: Border.all(width: 1.0, color: Colors.grey[200]),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 10, bottom: 10),
+                        child: Container(
+                          child: ListTile(
+                              title: Text(
+                                "ชื่อ :",
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    color: Colors.black54,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Mitr'),
+                              ),
+                              subtitle: TextFormField(
+                                controller: user_name,
+                                style: TextStyle(
+                                    color: Colors.red.shade300,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Mitr'),
+                                decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.zero,
+                                  border: InputBorder.none,
+                                  focusedBorder: InputBorder.none,
+                                ),
+                                onSaved: (String value) {},
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return '-';
+                                  }
+                                  return "-";
+                                },
+                              ),
+                              trailing: IconButton(
+                                  onPressed: () {
+                                    user_name.clear();
+                                  },
+                                  icon: Icon(
+                                    FontAwesomeIcons.solidTimesCircle,
+                                    size: 16,
+                                    color: Colors.grey,
+                                  ))),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        color: Colors.white,
+                        border: Border.all(width: 1.0, color: Colors.grey[200]),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 10, bottom: 10),
+                        child: Container(
+                          child: ListTile(
+                              title: Text(
+                                "เบอร์มือถือ :",
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    color: Colors.black54,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Mitr'),
+                              ),
+                              subtitle: TextFormField(
+                                controller: user_contact,
+                                style: TextStyle(
+                                    color: Colors.red.shade300,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Mitr'),
+                                decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.zero,
+                                  border: InputBorder.none,
+                                  focusedBorder: InputBorder.none,
+                                ),
+                                onSaved: (String value) {},
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    print("null");
+                                    return 'กรุณาระบุ';
+                                  }
+                                  return null;
+                                },
+                              ),
+                              trailing: IconButton(
+                                  onPressed: () {
+                                    user_contact.clear();
+                                  },
+                                  icon: Icon(
+                                    FontAwesomeIcons.solidTimesCircle,
+                                    size: 16,
+                                    color: Colors.grey,
+                                  ))),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        color: Colors.white,
+                        border: Border.all(width: 1.0, color: Colors.grey[200]),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 10, bottom: 10),
+                        child: Container(
+                          child: ListTile(
+                            title: Text(
+                              "เพศ :",
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  color: Colors.black54,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  fontFamily: 'Mitr'),
+                            ),
+                            subtitle: DropdownButtonFormField(
+                              icon: Icon(
+                                // Add this
+                                Icons.arrow_drop_down, // Add this
+                                color: Colors.grey.shade600, // Add this
+                              ),
+                              hint: Text(user_gender,
+                                  style: TextStyle(
+                                      color: Colors.red.shade300,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400,
+                                      fontFamily: 'Mitr')),
+                              isDense: false,
+                              decoration:
+                                  InputDecoration.collapsed(hintText: ''),
+                              dropdownColor: Colors.white,
+                              value: valueGender,
+                              style: TextStyle(
+                                  color: Colors.red.shade300,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                  fontFamily: 'Mitr'),
+                              onChanged: (newValue) {
+                                setState(() {
+                                  valueGender = newValue;
+                                  user_gender = newValue;
+                                });
+                                print("Sex : $valueGender");
+                              },
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return valueGender = user_gender.text;
+                                }
+                                return valueGender = user_gender.text;
+                              },
+                              items: listGender.map((valueItem) {
+                                return DropdownMenuItem(
+                                    value: valueItem,
+                                    child: Text(
+                                      valueItem,
+                                    ));
+                              }).toList(),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    // Container(
+                    //   margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
+                    //   decoration: BoxDecoration(
+                    //     borderRadius:
+                    //         BorderRadius.all(Radius.circular(10)),
+                    //     color: Colors.white,
+                    //     border: Border.all(
+                    //         width: 1.0, color: Colors.grey[200]),
+                    //   ),
+                    //   child: Padding(
+                    //     padding: EdgeInsets.only(top: 10, bottom: 10),
+                    //     child: Container(
+                    //       child: ListTile(
+                    //         title: Text(
+                    //           "เพศ :",
+                    //           overflow: TextOverflow.ellipsis,
+                    //           style: TextStyle(
+                    //               color: Colors.black54,
+                    //               fontSize: 14,
+                    //               fontWeight: FontWeight.w400,
+                    //               fontFamily: 'Mitr'),
+                    //         ),
+                    //         subtitle: DropdownButtonFormField(
+                    //           icon: Icon(
+                    //             // Add this
+                    //             Icons.arrow_drop_down, // Add this
+                    //             color: Colors.grey.shade600, // Add this
+                    //           ),
+                    //           hint: Text(user_gender.text,
+                    //               style: TextStyle(
+                    //                   color: Colors.red.shade300,
+                    //                   fontSize: 16,
+                    //                   fontWeight: FontWeight.w400,
+                    //                   fontFamily: 'Mitr')),
+                    //           isDense: false,
+                    //           decoration:
+                    //               InputDecoration.collapsed(hintText: ''),
+                    //           dropdownColor: Colors.white,
+                    //           value: valueGender,
+                    //           style: TextStyle(
+                    //               color: Colors.red.shade300,
+                    //               fontSize: 16,
+                    //               fontWeight: FontWeight.w400,
+                    //               fontFamily: 'Mitr'),
+                    //           onChanged: (newValue) {
+                    //             setState(() {
+                    //               valueGender = newValue;
+                    //               user_gender.text = newValue;
+                    //             });
+                    //           },
+                    //           items: listGender.map((valueItem) {
+                    //             return DropdownMenuItem(
+                    //                 value: valueItem,
+                    //                 child: Text(
+                    //                   valueItem,
+                    //                 ));
+                    //           }).toList(),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
-              )
-            : Center(child: CircularProgressIndicator()));
+              ))
+            ],
+          ),
+        )
+        // : Center(child: CircularProgressIndicator())
+        );
   }
 }

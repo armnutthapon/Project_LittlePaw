@@ -41,6 +41,7 @@ class Page_SelectPetState extends State<Page_SelectPet> {
     http.Response response = await http
         .get(Uri.parse('$Url/petDetail/deletePet/$uid/${widget.pid}'))
         .then((_) {
+      Navigator.of(context).pop();
       print("DELETE SUCCESS");
     });
   }
@@ -112,15 +113,7 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                   color: Colors.green,
                   onPressed: () async {
                     await deletePetByID();
-
-                    // Navigator.pushAndRemoveUntil(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (BuildContext context) => MyPet()),
-                    //     ModalRoute.withName('/MyPet'));
-                    // Navigator.of(context)
-                    //     .popUntil(ModalRoute.withName('/MyPet'));
-                    // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: builder) => MyPet());
+                    Navigator.of(context).pop();
                   },
                   child: Text(
                     'ยืนยัน',
@@ -135,7 +128,7 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                     borderRadius: BorderRadius.circular(10.0)),
                 color: Colors.red,
                 onPressed: () {
-                  Navigator.of(context).pop(context);
+                  Navigator.of(context).pop();
                 },
                 child: Text(
                   'ยกเลิก',
@@ -293,7 +286,6 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                   onPressed: () async {
                     await deletePet(widget.pid);
                     // deletePet(widget.pid);
-                    Navigator.of(context).pop(context);
                   },
                 ),
               )
