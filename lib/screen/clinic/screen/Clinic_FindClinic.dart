@@ -195,8 +195,7 @@ class _findClinicMainState extends State<findClinicMain> {
                                     Container(
                                       // padding: EdgeInsets.all(5),
                                       child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
+                                        borderRadius: BorderRadius.circular(10),
                                         child: Image.asset(
                                           'assets/images/1.jpg',
                                           height: 120,
@@ -261,6 +260,7 @@ class _findClinicMainState extends State<findClinicMain> {
                 )
         ],
       ),
+      backgroundColor: Colors.white,
     );
   }
 }

@@ -139,7 +139,8 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
           ),
         ),
         body:
-            // data != null ?
+            // data != null
+            //     ?
             Container(
           color: Colors.white,
           padding: EdgeInsets.only(bottom: size.height * 0.1),
@@ -418,8 +419,7 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
               ))
             ],
           ),
-        )
-        // : Center(child: CircularProgressIndicator())
-        );
+        ));
+    //: Center(child: CircularProgressIndicator()));
   }
 }
