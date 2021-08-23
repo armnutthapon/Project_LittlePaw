@@ -42,7 +42,7 @@ class _MyResetPasswordPageState extends State<MyResetPasswordPage> {
 
     return Scaffold(
         key: scaffoldKey,
-        backgroundColor: Colors.red.shade400,
+        backgroundColor: Colors.red.shade300,
         body: Stack(
           children: [
             BackgroundPage(),
@@ -153,7 +153,7 @@ class _MyResetPasswordPageState extends State<MyResetPasswordPage> {
                                         ],
                                       ),
                                       decoration: BoxDecoration(
-                                        color: Colors.red.shade400,
+                                        color: Colors.red.shade300,
                                         borderRadius:
                                             BorderRadius.circular(10.0),
                                       ),

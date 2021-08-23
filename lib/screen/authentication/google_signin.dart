@@ -15,40 +15,41 @@ class GoogleSiginBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return Container(
-      margin: EdgeInsets.only(top: 10),
-      child: Column(
-        children: [
-          MaterialButton(
-            height: 40.0,
-            onPressed: () {},
-            child: Container(
-                child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  FontAwesomeIcons.google,
-                  color: Colors.white,
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  'Google+',
-                  style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: 'Mitr'),
-                ),
-              ],
-            )),
-          ),
-        ],
-      ),
-      decoration: BoxDecoration(
-        color: Colors.blueAccent.shade200,
-        borderRadius: BorderRadius.circular(10.0),
+      margin: EdgeInsets.only(top: size.height * 0.02),
+      width: size.width * 1,
+      height: size.height * 0.06,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: SizedBox(
+          width: 150,
+          height: 50,
+          child: MaterialButton(
+              color: Colors.blue.shade600,
+              onPressed: () {},
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    FontAwesomeIcons.google,
+                    color: Colors.white,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    'Google+',
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                        fontFamily: 'Mitr'),
+                  ),
+                ],
+              )),
+        ),
       ),
     );
   }

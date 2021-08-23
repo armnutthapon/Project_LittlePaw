@@ -158,10 +158,8 @@ class _SettingState extends State<Setting> {
                                       fontWeight: FontWeight.w400,
                                       fontFamily: 'Mitr'),
                                 ),
-                                onPressed: () {
-                                  onPressed:
-                                  () async => await loginProvider.logout();
-                                },
+                                onPressed: () async =>
+                                    await loginProvider.logout(),
                               ),
                               IconButton(
                                   onPressed: () async =>

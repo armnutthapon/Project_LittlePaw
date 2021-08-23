@@ -96,7 +96,7 @@ class _LoginState extends State<Login> {
     final loginProvider = Provider.of<AuthServices>(context);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.deepPurple.shade200,
+      backgroundColor: Colors.red.shade300,
       body: Stack(
         children: [
           BackgroundPage(),
@@ -137,8 +137,8 @@ class _LoginState extends State<Login> {
                                     Text("เข้าสู่ระบบ",
                                         style: TextStyle(
                                             fontSize: 22,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w500,
+                                            color: Colors.red.shade300,
+                                            fontWeight: FontWeight.w400,
                                             fontFamily: 'Mitr')),
                                   ],
                                 ),
@@ -225,14 +225,20 @@ class _LoginState extends State<Login> {
                                   ),
                                 ),
                                 Container(
-                                  margin: EdgeInsets.only(top: 10),
-                                  child: Column(
-                                    children: [
-                                      MaterialButton(
-                                        height: 40.0,
+                                  margin:
+                                      EdgeInsets.only(top: size.height * 0.05),
+                                  width: size.width * 1,
+                                  height: size.height * 0.06,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: SizedBox(
+                                      width: 150,
+                                      height: 50,
+                                      child: MaterialButton(
                                         minWidth: loginProvider.isLoading
                                             ? null
                                             : double.infinity,
+                                        color: Colors.red.shade300,
                                         onPressed: () async {
                                           if (_formkey.currentState.validate())
                                             print(
@@ -245,29 +251,17 @@ class _LoginState extends State<Login> {
                                               _passwordController.text.trim());
                                         },
                                         child: Center(
-                                          child: loginProvider.isLoading
-                                              ? CircularProgressIndicator(
-                                                  valueColor:
-                                                      new AlwaysStoppedAnimation<
-                                                              Color>(
-                                                          Colors.red.shade300),
-                                                )
-                                              : Text(
-                                                  'เข้าสู่ระบบ',
-                                                  style: TextStyle(
-                                                      fontSize: 20,
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontFamily: 'Mitr'),
-                                                ),
+                                          child: Text(
+                                            'เข้าสู่ระบบ',
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: 'Mitr'),
+                                          ),
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Colors.red.shade400,
-                                    borderRadius: BorderRadius.circular(10.0),
+                                    ),
                                   ),
                                 ),
                                 GoogleSiginBtn(),
