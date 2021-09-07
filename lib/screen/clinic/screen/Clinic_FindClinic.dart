@@ -3,11 +3,13 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:little_paw/screen/clinic/screen/Clinic_Detail.dart';
 import 'package:little_paw/screen/clinic/screen/Clinic_Filter.dart';
 import 'package:little_paw/screen/clinic/component/clinic_clinicCard.dart';
 import 'package:http/http.dart' as http;
 import 'package:little_paw/database/database.dart';
+import 'package:geolocator/geolocator.dart';
 
 class Page_FindClinic extends StatefulWidget {
   const Page_FindClinic({Key key}) : super(key: key);
@@ -57,6 +59,12 @@ class _findClinicMainState extends State<findClinicMain> {
   List data;
   var cid;
 
+  void _getCurrentLocation() async {
+    final position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    print(position.latitude);
+    print(position.longitude);
+  }
+
   getClinic() async {
     http.Response response = await http.get(Uri.parse('$Url/clinic'));
 
@@ -71,6 +79,7 @@ class _findClinicMainState extends State<findClinicMain> {
   void initState() {
     super.initState();
     getClinic();
+    _getCurrentLocation();
   }
 
   Widget build(BuildContext context) {
