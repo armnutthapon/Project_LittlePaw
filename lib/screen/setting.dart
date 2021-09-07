@@ -24,6 +24,9 @@ class _SettingState extends State<Setting> {
   var data;
 
   getUserInformation() async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User userId = auth.currentUser;
+    final String uid = userId.uid;
     http.Response response =
         await http.get(Uri.parse('$Url/owner/showByID/$uid'));
     if (response.statusCode == 200) {
@@ -104,17 +107,28 @@ class _SettingState extends State<Setting> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
-                              padding: EdgeInsets.only(bottom: 10, top: 10),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(100),
-                                child: Image.asset(
-                                  'assets/images/1.jpg',
-                                  height: 140,
-                                  width: 140,
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
-                            ),
+                                padding: EdgeInsets.only(bottom: 10, top: 10),
+                                child: data == null
+                            ? null
+                            :CircleAvatar(
+                                  radius: 75,
+                                  backgroundColor: Colors.grey.shade300,
+                                  child: ClipOval(
+                                    child: SizedBox(
+                                      width: 140.0,
+                                      height: 140.0,
+                                      child: (data['urlImage'] != null)
+                                          ? Image.network(
+                                              data['urlImage'],
+                                              fit: BoxFit.fill,
+                                            )
+                                          : Image.asset(
+                                              'assets/images/avatar.jpg',
+                                              fit: BoxFit.fill,
+                                            ),
+                                    ),
+                                  ),
+                                )),
                           ],
                         ),
                       )),
@@ -134,14 +148,14 @@ class _SettingState extends State<Setting> {
                             text: "อีเมล :",
                             textdetail: data['email'],
                           ),
-                          OwnerInfo(
-                            text: "เบอร์มือถือ :",
-                            textdetail: data['contact'],
-                          ),
-                          OwnerInfo(
-                            text: "เพศ :",
-                            textdetail: data['sex'],
-                          ),
+                          // OwnerInfo(
+                          //   text: "เบอร์มือถือ :",
+                          //   textdetail: data['contact'],
+                          // ),
+                          // OwnerInfo(
+                          //   text: "เพศ :",
+                          //   textdetail: data['sex'],
+                          // ),
                           OwnerInfo(
                             text: "จำนวนสัตว์เลี้ยง :",
                             textdetail: "${data['pet_id'].length} ตัว",

@@ -115,14 +115,13 @@ class _LoginState extends State<Login> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            ClipOval(
-                              child: Image.asset(
-                                './assets/images/logo.png',
-                                height: 120.0,
-                                width: 120.0,
-                                fit: BoxFit.cover,
+                              Image.asset(
+                                './assets/images/littlepaw.png',
+                                height: 140.0,
+                                width: 140.0,
+                                fit: BoxFit.cover ,
                               ),
-                            ),
+                            
                           ],
                         ),
                         Card(

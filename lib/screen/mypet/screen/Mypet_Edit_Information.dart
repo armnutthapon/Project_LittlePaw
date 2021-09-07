@@ -1,17 +1,22 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:little_paw/screen/mypet/component/mypet_petInfo.dart';
 import 'package:http/http.dart' as http;
 import 'package:little_paw/database/database.dart';
 import 'package:intl/intl.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class Page_Edit_PetInformaition extends StatefulWidget {
   final String pid;
 
-  const Page_Edit_PetInformaition({Key key, this.pid}) : super(key: key);
+
+  const Page_Edit_PetInformaition({Key key, this.pid})
+      : super(key: key);
 
   @override
   _Page_Edit_PetInformaitionState createState() =>
@@ -42,6 +47,9 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
     'ทำหมันแล้ว',
     'ยังไม่ทำหมัน',
   ];
+  ImagePicker picker = ImagePicker();
+  File _imageFile;
+  String urlImage;
   String valueGender;
   String valueCategory;
   String valueSterilize;
@@ -53,22 +61,42 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
     setState(() {
       data = json.decode(response.body);
     });
-    print(data);
     showPetInformation();
     return data;
   }
 
   updatePetInformation() async {
-    await setData();
-
-    http.Response response = await http
-        .post(Uri.parse(
-            // 'https://littlepaw.herokuapp.com/petDetail/editPetDetail/${widget.pid}/${editPetName.text}/${editPetCategory}/male/white/shisu/12-08-2020/fat/false/ttt/sinovac'))
-            '$Url/petDetail/editPetDetail/${widget.pid}/${editPetName.text}/${editPetCategory}/${editPetGender}/${editPetColor.text}/${editPetBreed.text}/${editPetAge.text}/${editPetCharacteristics.text}/${editPetSterilize}/${editCongenitalDisease.text}/${editVaccine.text}'))
-        .then((value) {
-      print("Update success");
+    if(_imageFile != null){
+      await uploadImageToFirebase();
+    }else{
+      await setData();
+    }
+    
+    
+    
+    // http.Response response = await http
+    //     .post(Uri.parse(
+    //         '$Url/petDetail/editPetDetail/${widget.pid}/${editPetName.text}/${editPetCategory}/${editPetGender}/${editPetColor.text}/${editPetBreed.text}/${editPetAge.text}/${editPetCharacteristics.text}/${editPetSterilize}/${editCongenitalDisease.text}/${editVaccine.text}'))
+    //     .then((value) {
+    //   print("Update success");
+    // });
+    // Navigator.pop(context, true);
+    await http.put(Uri.parse('$Url/petDetail/editpetdetail/${widget.pid}'), body: {
+      'pet_name': '${editPetName.text}',
+      'type': '${editPetCategory}',
+      'sex': '${editPetGender}',
+      'color': '${editPetColor.text}',
+      'breed': '${editPetBreed.text}',
+      'dob': '${editPetAge.text}',
+      'characteristics': '${editPetCharacteristics.text}',
+      'sterilization': '${editPetSterilize}',
+      'congenital_disease': '${editCongenitalDisease.text}',
+      'vaccine': '${editVaccine.text}',
+      'urlImage': '$urlImage',
+    }).then((response) {
+      print("success");
+      Navigator.pop(context, true);
     });
-    Navigator.pop(context, true);
 
     print("name " + editPetName.text);
     print("type " + editPetCategory);
@@ -89,58 +117,76 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
     getPetDetail();
   }
 
-  setData() {
+  setData() async {
     if (editPetName.text != data['pet_name']) {
       editPetName.text = editPetName.text;
     } else {
       editPetName.text = data['pet_name'];
     }
+
     if (editPetCategory != data['type']) {
       editPetCategory = editPetCategory;
     } else {
       editPetCategory = data['type'];
     }
+
     if (editPetGender != data['sex']) {
       editPetGender = editPetGender;
     } else {
       editPetGender = data['sex'];
     }
+
     if (editPetColor.text != data['color']) {
       editPetColor.text = editPetColor.text;
     } else {
       editPetColor.text = data['color'];
     }
+
     if (editPetBreed.text != data['breed']) {
       editPetBreed.text = editPetBreed.text;
     } else {
       editPetBreed.text = data['breed'];
     }
+
     if (editPetCharacteristics.text != data['characteristics']) {
       editPetCharacteristics.text = editPetCharacteristics.text;
     } else {
       editPetCharacteristics.text = data['characteristics'];
     }
+
     if (editPetAge.text != data['dob']) {
       editPetAge.text = editPetAge.text;
     } else {
       editPetAge.text = data['dob'];
       print(editPetAge.text);
     }
+
     if (editPetSterilize != data['sterilization']) {
       editPetSterilize = editPetSterilize;
       print(editPetSterilize);
     } else {
       editPetSterilize = data['sterilization'];
     }
+
     if (editCongenitalDisease.text != data['congenital_disease']) {
       editCongenitalDisease.text = editCongenitalDisease.text;
     } else {
       editCongenitalDisease.text = data['congenital_disease'];
     }
+
     if (editVaccine.text != data['vaccine'][0]) {
       editVaccine.text = editVaccine.text;
     } else {
       editVaccine.text = data['vaccine'][0];
+    }
+
+    if(this.urlImage != data['urlImage']){
+      print("ของใหม่ :" + urlImage);
+      await uploadImageToFirebase();
+
+    }else{
+      urlImage = data['urlImage'];
+      print("ของเดิม :" + urlImage);
     }
   }
 
@@ -156,12 +202,13 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
       editPetSterilize = data['sterilization'];
       editCongenitalDisease.text = data['congenital_disease'];
       editVaccine.text = data['vaccine'][0];
-
+      urlImage = data['urlImage'];
       if (data['sterilization'] == true) {
         return editPetSterilize = "ทำหมันแล้ว";
       } else {
         return editPetSterilize = "ยังไม่ทำหมัน";
       }
+      
     });
   }
 
@@ -179,6 +226,35 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
       });
       print(editPetAge.text);
     }
+  }
+
+  Future pickImage(ImageSource source) async {
+    // final pickedFile = await picker.getImage(source: ImageSource.camera);
+    final pickedFile = await picker.getImage(source: source);
+    if (pickedFile == null) return;
+
+    final imageTemporary = File(pickedFile.path);
+    setState(() {
+      this._imageFile = imageTemporary;
+    });
+  }
+
+  Future<void> uploadImageToFirebase() async {
+    Random random = Random();
+    int random_number = random.nextInt(1000000);
+
+    firebase_storage.FirebaseStorage storage =
+        firebase_storage.FirebaseStorage.instance;
+    // firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
+    //     .ref()
+    //     .child('images_owner/Pet$random_number.jpg');
+    firebase_storage.UploadTask uploadTask =  firebase_storage
+        .FirebaseStorage.instance
+        .ref('pet_images/Pet$random_number.jpg')
+        .putFile(_imageFile);
+
+    urlImage = await (await uploadTask).ref.getDownloadURL();
+    print("urlImage : " + urlImage);
   }
 
   @override
@@ -205,7 +281,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                 ),
                 actions: [
                   IconButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (editPetSterilize == "ทำหมันแล้ว") {
                           setState(() {
                             editPetSterilize = "true";
@@ -215,7 +291,19 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                             editPetSterilize = "false";
                           });
                         }
-                        updatePetInformation();
+                        // if(urlImage != data[''])
+                        //  if(urlImage != data['urlImage']){
+                          
+                        //   print("urlImage != data['urlImage']" + urlImage);
+                        //   await uploadImageToFirebase();
+                        //   updatePetInformation();
+                        // }else{
+                        //   urlImage = data['urlImage'];
+                        //   updatePetInformation();
+                        // }
+                          updatePetInformation();
+
+                        
                       },
                       icon: Icon(
                         FontAwesomeIcons.solidCheckCircle,
@@ -268,17 +356,56 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                padding: EdgeInsets.only(bottom: 10, top: 30),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(100),
-                                  child: Image.asset(
-                                    'assets/images/1.jpg',
-                                    height: 140,
-                                    width: 140,
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                              ),
+                                  padding: EdgeInsets.only(bottom: 10, top: 30),
+                                  child: data == null
+                                      ? null
+                                      : Column(
+                                          children: [
+                                            CircleAvatar(
+                                              radius: 65,
+                                              backgroundColor:
+                                                  Colors.grey.shade300,
+                                              child: ClipOval(
+                                                child: SizedBox(
+                                                    width: 140.0,
+                                                    height: 140.0,
+                                                    child: (_imageFile !=
+                                                            null)
+                                                        ? Image.file(
+                                                            _imageFile,
+                                                            fit: BoxFit.fill,
+                                                          )
+                                                        : Image.network(
+                                                            urlImage,
+                                                            fit: BoxFit.fill,
+                                                          )),
+                                              ),
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                IconButton(
+                                                  icon:
+                                                      Icon(Icons.photo_library),
+                                                  onPressed: () {
+                                                    pickImage(
+                                                        ImageSource.gallery);
+                                                  },
+                                                ),
+                                                IconButton(
+                                                  icon:
+                                                      Icon(Icons.photo_camera),
+                                                  onPressed: () {
+                                                    pickImage(
+                                                        ImageSource.camera);
+                                                  },
+                                                ),
+                                              ],
+                                            
+                                            ),
+                                          ],
+                                        )),
                             ],
                           ),
                         )),

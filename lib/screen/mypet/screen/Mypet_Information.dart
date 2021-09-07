@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:little_paw/screen/mypet/component/mypet_petInfo.dart';
@@ -11,6 +12,7 @@ import 'package:little_paw/screen/mypet/screen/Mypet_Edit_Information.dart';
 class Page_PetInformations extends StatefulWidget {
   final String pid;
 
+
   const Page_PetInformations({Key key, this.pid}) : super(key: key);
 
   @override
@@ -20,21 +22,19 @@ class Page_PetInformations extends StatefulWidget {
 class _Page_PetInformationsState extends State<Page_PetInformations> {
   var data;
   String sterilization = "";
-  // getPetDetail() async {
-  //   http.Response response =
-  //       await http.get(Uri.parse('$Url/petDetail/showPetByPID/${widget.pid}'));
-  //   setState(() {
-  //     data = json.decode(response.body);
-  //   });
-  //   return data;
-  // }
-
+  String age;
   getPetDetail() async {
     http.Response response =
         await http.get(Uri.parse('$Url/petDetail/showPetByPID/${widget.pid}'));
     setState(() {
       data = json.decode(response.body);
+      if(data['age'] <= 0){
+        age = "น้อยกว่า 1";
+      }else{
+        age = "${data['age']}";
+      }
     });
+    print(age);
     return data;
   }
 
@@ -42,6 +42,7 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
   void initState() {
     super.initState();
     getPetDetail();
+    // getImage();
   }
 
   getSterilization() {
@@ -118,6 +119,7 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
                           new MaterialPageRoute(
                               builder: (_) => new Page_Edit_PetInformaition(
                                     pid: widget.pid,
+                                   
                                   )),
                         )
                         .then((data) => {
@@ -159,17 +161,27 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      padding: EdgeInsets.only(bottom: 10, top: 30),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(100),
-                        child: Image.asset(
-                          'assets/images/1.jpg',
-                          height: 140,
-                          width: 140,
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                    ),
+                        padding: EdgeInsets.only(bottom: 10, top: 30),
+                        child: data == null
+                            ? null
+                            : CircleAvatar(
+                                radius: 65,
+                                backgroundColor: Colors.grey.shade300,
+                                child: ClipOval(
+                                  child: SizedBox(
+                                      width: 140.0,
+                                      height: 140.0,
+                                      child: (data['urlImage'] != null)
+                                          ? Image.network(
+                                              data['urlImage'],
+                                              fit: BoxFit.fill,
+                                            )
+                                          : Image.asset(
+                                              'assets/images/avatar.jpg',
+                                              fit: BoxFit.fill,
+                                            )),
+                                ),
+                              )),
                   ],
                 ),
               )),
@@ -209,7 +221,7 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
                         ),
                         PetInfo(
                           text: "อายุ :",
-                          textdetail: data['dob'],
+                          textdetail: "$age ปี",
                         ),
                         PetInfo(
                           text: "ทำหมัน :",

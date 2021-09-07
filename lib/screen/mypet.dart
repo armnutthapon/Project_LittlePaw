@@ -22,6 +22,7 @@ class _MyPetState extends State<MyPet> {
   var data;
   var arr = [];
   var pid;
+  var urlImage;
   List<Function> sendPetDetail = [];
 
   // final String id = "";
@@ -114,14 +115,16 @@ class _MyPetState extends State<MyPet> {
                                 onTap: () {
                                   setState(() {
                                     pid = data[index]['_id'];
+                                    urlImage = data[index]['urlImage'];
                                   });
 
                                   var pid_sendRoute = new MaterialPageRoute(
                                       builder: (BuildContext context) =>
                                           Page_SelectPet(
                                               pid: data[index]['_id'],
-                                              pet_name: data[index]
-                                                  ['pet_name']));
+                                              pet_name: data[index]['pet_name'],
+                                              urlImage : data[index]['urlImage']
+                                                  ));
 
                                   Navigator.of(context)
                                       .push(pid_sendRoute)
@@ -138,19 +141,43 @@ class _MyPetState extends State<MyPet> {
                                     Padding(
                                       padding: const EdgeInsets.only(top: 10.0),
                                       child: Container(
-                                        child: data == null
-                                            ? null
-                                            : ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(100),
-                                                child: Image.asset(
-                                                  'assets/images/1.jpg',
-                                                  height: 120.0,
-                                                  width: 120.0,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                      ),
+                                          child: data == null
+                                              ? null
+                                              // : ClipRRect(
+                                              //     borderRadius:
+                                              //         BorderRadius.circular(100),
+                                              //     child: Image.asset(
+                                              //       'assets/images/1.jpg',
+                                              //       height: 120.0,
+                                              //       width: 120.0,
+                                              //       fit: BoxFit.cover,
+                                              //     ),
+                                              //   ),
+                                              : CircleAvatar(
+                                                  radius: 65,
+                                                  backgroundColor:
+                                                      Colors.grey.shade300,
+                                                  child: ClipOval(
+                                                    child: SizedBox(
+                                                        width: 120.0,
+                                                        height: 120.0,
+                                                        child: (data[index][
+                                                                    'urlImage'] !=
+                                                                null)
+                                                            ? 
+                                                              Image.network(
+                                                                data[index][
+                                                                    'urlImage'],
+                                                                fit:
+                                                                    BoxFit.fill,
+                                                              )
+                                                            : Image.asset(
+                                                                'assets/images/avatar.jpg',
+                                                                fit:
+                                                                    BoxFit.fill,
+                                                              )),
+                                                  ),
+                                                )),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(top: 10),

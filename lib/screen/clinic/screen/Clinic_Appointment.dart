@@ -28,6 +28,9 @@ class _Page_AppointmentState extends State<Page_Appointment> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final time_appointment = TextEditingController();
   final symptom = TextEditingController();
+  var data;
+  var petselected;
+  var pidselected;
   CalendarFormat format = CalendarFormat.month;
   DateTime selectedDay = DateTime.now();
   DateTime focusedDay = DateTime.now();
@@ -35,21 +38,55 @@ class _Page_AppointmentState extends State<Page_Appointment> {
   DateTime aa;
 
   String _selectedTime;
+  String valueSterilize;
+
+  List listpet = [];
+  List listPID = [];
+
+  List listSterilize = [
+    'ทำหมันแล้ว',
+    'ยังไม่ทำหมัน',
+  ];
 
   bool _clicked = false;
 
+  getPetList() async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User userId = auth.currentUser;
+    final String uid = userId.uid;
+
+    http.Response response =
+        await http.get(Uri.parse('$Url/petDetail/showByID/$uid'));
+    setState(() {
+      data = json.decode(response.body);
+    });
+    for (var index = 0; index < data.length; index++) {
+      listpet.add("${index + 1}. " + data[index]['pet_name']);
+      listPID.add(data[index]['_id']);
+    }
+    return data;
+  }
+
   createAppointment() async {
-    http.Response response = await http
-        .post(Uri.parse(
-            '$Url/appointment/add/${widget.cid}/$uid/$formattedDate/${time_appointment.text}/${symptom.text}/${widget.clinic_name}/${widget.doctor_name}'))
-        .then((value) {
-      print("success");
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User userId = auth.currentUser;
+    final String uid = userId.uid;
+    http.Response response =
+        await http.post(Uri.parse('$Url/appointment/addappointment'), body: {
+      'cid': '${widget.cid}',
+      'clinic_name': '${widget.clinic_name}',
+      'doctor_name': '${widget.doctor_name}',
+      'userID': '$uid',
+      'pid': '$pidselected',
+      'date': '$formattedDate',
+      'time_appointment': '${time_appointment.text}',
+      'symptom': '${symptom.text}'
     });
 
     print("cid : " + widget.cid);
     print("Clinic Nmae : " + widget.clinic_name);
     print("Doctor Nmae : " + widget.doctor_name);
-
+    print("PID : " + pidselected);
     print("uid : " + uid);
     print("Date : " + formattedDate);
     print("time : " + time_appointment.text);
@@ -60,15 +97,8 @@ class _Page_AppointmentState extends State<Page_Appointment> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-  }
-
-  void getData(String time_appointment, String symptom, DateTime date) async {
-    // createAppointment(time_appointment, symptom, date);
-    // await data();
-    // startTime();
-    print("success");
+    getPetList();
   }
 
   startTime() async {
@@ -261,6 +291,80 @@ class _Page_AppointmentState extends State<Page_Appointment> {
                           padding: const EdgeInsets.only(left: 15),
                           child: ListTile(
                             title: Text(
+                              "สัตว์เลี้ยงของคุณ",
+                              style: TextStyle(
+                                fontFamily: 'Mitr',
+                                fontSize: 16,
+                                color: Colors.black54,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
+                          child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                                color: Colors.white,
+                                border: Border.all(
+                                    width: 1.0, color: Colors.grey[200]),
+                              ),
+                              child: Container(
+                                height: size.height * 0.07,
+                                padding: EdgeInsets.only(left: 20, right: 20),
+                                child: DropdownButtonFormField(
+                                  hint: Text(
+                                    "เลือกสัตว์เลี้ยง",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w300,
+                                        fontFamily: 'Mitr'),
+                                  ),
+                                  isDense: false,
+                                  decoration:
+                                      InputDecoration.collapsed(hintText: ''),
+                                  dropdownColor: Colors.white,
+                                  value: valueSterilize,
+                                  style: TextStyle(
+                                      color: Colors.red.shade300,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400,
+                                      fontFamily: 'Mitr'),
+                                  onChanged: (newValue) {
+                                    setState(() {
+                                      valueSterilize = newValue;
+                                      petselected = newValue;
+                                      for (var i = 0; i < listpet.length; i++) {
+                                        if (petselected == listpet[i]) {
+                                          pidselected = listPID[i];
+                                        }
+                                      }
+                                    });
+                                    print(pidselected);
+                                    print(petselected);
+                                  },
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return 'กรุณาระบุการทำหมัน';
+                                    }
+                                    return null;
+                                  },
+                                  items: listpet.map((valueItem) {
+                                    return DropdownMenuItem(
+                                        value: valueItem,
+                                        child: Text(
+                                          valueItem,
+                                        ));
+                                  }).toList(),
+                                ),
+                              )),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 15),
+                          child: ListTile(
+                            title: Text(
                               "อาการเบื้องต้น",
                               style: TextStyle(
                                 fontFamily: 'Mitr',
@@ -327,7 +431,7 @@ class _Page_AppointmentState extends State<Page_Appointment> {
                                     : () {
                                         if (_formkey.currentState.validate()) {
                                           _clicked = true;
-
+                                          // if(petselected == )
                                           setState(() {
                                             formattedDate =
                                                 DateFormat('dd-MM-yyyy')

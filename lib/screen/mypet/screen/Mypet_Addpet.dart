@@ -1,10 +1,15 @@
 import 'dart:convert';
+import 'dart:io';
+import 'dart:math';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:little_paw/database/database.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class Page_Addpet extends StatefulWidget {
   const Page_Addpet({Key key}) : super(key: key);
@@ -74,17 +79,21 @@ class _AddpetState extends State<Addpet> {
   final _addCongenitalDisease = TextEditingController();
   final _addVaccine = TextEditingController();
   final _addPetAge = TextEditingController();
-
+  DateTime date;
+  DateTime selectedDate = DateTime.now();
   String valueGender;
   String valueCategory;
   String valueSterilize;
-
+  String urlImage;
   List listCategory = ["สุนัข", "แมว"];
   List listGender = ["เพศผู้", "เพศเมีย"];
   List listSterilize = [
     'ทำหมันแล้ว',
     'ยังไม่ทำหมัน',
   ];
+
+  ImagePicker picker = ImagePicker();
+  File _imageFile;
 
   bool _clicked = false;
 
@@ -93,31 +102,25 @@ class _AddpetState extends State<Addpet> {
     final User userId = auth.currentUser;
     final String uid = userId.uid;
 
-    http.Response response = await http
-        .post(Uri.parse(
-            '$Url/petDetail/add/${_addPetName.text}/${_addPetCategory}/${_addPetGender}/${_addPetColor.text}/${_addPetBreed.text}/${_addPetAge.text}/${_addPetCharacteristics.text}/${_addPetSterilize}/${_addCongenitalDisease.text}/${_addVaccine.text}/$uid'))
-        .then((response) {
+    var response =
+        await http.post(Uri.parse('$Url/petDetail/addpet/$uid'), body: {
+      'pet_name': '${_addPetName.text}',
+      'type': '${_addPetCategory}',
+      'sex': '${_addPetGender}',
+      'color': '${_addPetColor.text}',
+      'breed': '${_addPetBreed.text}',
+      'dob': '${_addPetAge.text}',
+      'characteristics': '${_addPetCharacteristics.text}',
+      'sterilization': '${_addPetSterilize}',
+      'congenital_disease': '${_addCongenitalDisease.text}',
+      'vaccine': '${_addVaccine.text}',
+      'urlImage': '$urlImage',
+    }).then((response) {
       print("success");
       Navigator.pop(context);
     });
-    print("add pet Success");
-
-    print("name " + _addPetName.text);
-    print("type " + _addPetCategory);
-    print("sex " + _addPetGender);
-    print("color " + _addPetColor.text);
-    print("breed " + _addPetBreed.text);
-    print("age " + _addPetAge.text);
-    print("char " + _addPetCharacteristics.text);
-    print("sterlize " + _addPetSterilize);
-    print("dis " + _addCongenitalDisease.text);
-    print("vaccine " + _addVaccine.text);
-    //getPetID();
   }
 
-  DateTime date;
-
-  DateTime selectedDate = DateTime.now();
 
   Future<void> _selectDate(BuildContext context) async {
     final now = DateTime.now();
@@ -134,6 +137,42 @@ class _AddpetState extends State<Addpet> {
     }
   }
 
+  Future pickImage(ImageSource source) async {
+    // final pickedFile = await picker.getImage(source: ImageSource.camera);
+    final pickedFile = await picker.getImage(source: source);
+    if (pickedFile == null) return;
+
+    final imageTemporary = File(pickedFile.path);
+    setState(() {
+      this._imageFile = imageTemporary;
+    });
+  }
+
+  void _clear() {
+    setState(() {
+      _imageFile = null;
+    });
+  }
+
+  Future<void> uploadImageToFirebase() async {
+    Random random = Random();
+    int random_number = random.nextInt(1000000);
+
+    firebase_storage.FirebaseStorage storage =
+        firebase_storage.FirebaseStorage.instance;
+    // firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
+    //     .ref()
+    //     .child('images_owner/Pet$random_number.jpg');
+    firebase_storage.UploadTask uploadTask = firebase_storage
+        .FirebaseStorage.instance
+        .ref('pet_images/Pet$random_number.jpg')
+        .putFile(_imageFile);
+      
+    urlImage = await (await uploadTask).ref.getDownloadURL();
+    // print("urlImage : " + urlImage);
+  }
+
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -150,6 +189,49 @@ class _AddpetState extends State<Addpet> {
               padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
               child: ListView(
                 children: [
+                  Container(
+                    child: Column(
+                      children: [
+                        Center(
+                            child: CircleAvatar(
+                          radius: 75,
+                          backgroundColor: Colors.grey.shade300,
+                          child: ClipOval(
+                            child: SizedBox(
+                              width: 140.0,
+                              height: 140.0,
+                              child: (_imageFile != null)
+                                  ? Image.file(
+                                      _imageFile,
+                                      fit: BoxFit.fill,
+                                    )
+                                  : Image.asset(
+                                      'assets/images/avatar.jpg',
+                                      fit: BoxFit.fill,
+                                    ),
+                            ),
+                          ),
+                        )),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            IconButton(
+                              icon: Icon(Icons.photo_library),
+                              onPressed: () {
+                                pickImage(ImageSource.gallery);
+                              },
+                            ),
+                            IconButton(
+                              icon: Icon(Icons.photo_camera),
+                              onPressed: () {
+                                pickImage(ImageSource.camera);
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                   Container(
                     margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
                     decoration: BoxDecoration(
@@ -661,7 +743,7 @@ class _AddpetState extends State<Addpet> {
                           color: Colors.red.shade300,
                           onPressed: _clicked
                               ? null
-                              : () {
+                              : () async {
                                   if (_formkey.currentState.validate()) {
                                     _clicked = true;
 
@@ -674,7 +756,8 @@ class _AddpetState extends State<Addpet> {
                                       _addPetSterilize = "false";
                                       print(_addPetSterilize);
                                     }
-                                    addPetDetail();
+                                    await uploadImageToFirebase();
+                                    await addPetDetail();
                                   } else {
                                     print('invalid');
                                     setState(() => _autovalidate = true);

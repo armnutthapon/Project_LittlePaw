@@ -17,10 +17,11 @@ import 'package:little_paw/screen/wrapper.dart';
 class Page_SelectPet extends StatefulWidget {
   final String pid;
   final String pet_name;
+  final String urlImage;
   const Page_SelectPet({
     Key key,
     this.pid,
-    this.pet_name,
+    this.pet_name, this.urlImage,
   }) : super(key: key);
 
   @override
@@ -35,6 +36,7 @@ class Page_SelectPetState extends State<Page_SelectPet> {
   @override
   void initState() {
     super.initState();
+    print(widget.urlImage);
   }
 
   deletePetByID() async {
@@ -168,17 +170,28 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                           Container(
                             child: Container(
                               padding: EdgeInsets.all(10),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(100),
-                                child: Image.asset(
-                                  'assets/images/1.jpg',
-                                  height: 140,
-                                  width: 140,
-                                  fit: BoxFit.fill,
+                              child: widget.urlImage == null
+                            ? null
+                            : CircleAvatar(
+                                radius: 65,
+                                backgroundColor: Colors.grey.shade300,
+                                child: ClipOval(
+                                  child: SizedBox(
+                                      width: 140.0,
+                                      height: 140.0,
+                                      child: (widget.urlImage != null)
+                                          ? Image.network(
+                                              widget.urlImage,
+                                              fit: BoxFit.fill,
+                                            )
+                                          : Image.asset(
+                                              'assets/images/avatar.jpg',
+                                              fit: BoxFit.fill,
+                                            )),
                                 ),
-                              ),
+                              )),
                             ),
-                          ),
+                          
                         ],
                       ),
                     ),
@@ -201,7 +214,8 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                                   var cid_sendRoute = new MaterialPageRoute(
                                       builder: (BuildContext context) =>
                                           Page_PetInformations(
-                                              pid: widget.pid));
+                                              pid: widget.pid,
+                                              ));
                                   print(widget.pid);
 
                                   Navigator.of(context)

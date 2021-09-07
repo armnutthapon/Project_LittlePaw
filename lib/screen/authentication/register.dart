@@ -1,11 +1,15 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:little_paw/database/database.dart';
 import 'package:little_paw/screen/authentication/component/background.dart';
 import 'package:little_paw/services/authentication/auth__service.dart';
 import 'package:provider/provider.dart';
 import 'package:little_paw/screen/authentication/login.dart';
+import 'package:http/http.dart' as http;
+
 
 class Register extends StatefulWidget {
   final Function toggleScreen;
@@ -20,6 +24,17 @@ class _RegisterState extends State<Register> {
   var _passwordController = TextEditingController();
   var _confirmPasswordController = TextEditingController();
   var _name = TextEditingController();
+
+  void registorOwner() async {
+    final FirebaseAuth auth = await FirebaseAuth.instance;
+    final User userId = await auth.currentUser;
+    final String uid = await userId.uid;
+    final String email = await userId.email;
+    print("UserID : " + uid);
+    http.Response response =
+        await http.post(Uri.parse('$Url/owner/registor/$uid/${_emailController.text}/${_name.text}'));
+    
+  }
 
   final _formkey = GlobalKey<FormState>();
 
@@ -254,7 +269,7 @@ class _RegisterState extends State<Register> {
                                                       .trim(),
                                                   _name.text.trim(),
                                                 );
-
+                                              await registorOwner();
                                               print(
                                                   "Email : ${_emailController.text}");
                                               print(

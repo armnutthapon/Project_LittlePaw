@@ -1,27 +1,27 @@
 {
     "logs": [
         {
-            "outputFile": "G:\\Project_LittlePaw\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-as\\values-as.xml",
+            "outputFile": "D:\\SE 4\\Project_LittlePaw\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-as\\values-as.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Nutthapon\\.gradle\\caches\\transforms-2\\files-2.1\\99e31c69952765cc51e53427b9bfb4ad\\jetified-play-services-basement-17.1.0\\res\\values-as\\values.xml",
+                    "source": "C:\\Users\\kanom\\.gradle\\caches\\transforms-2\\files-2.1\\d349add8dd2cc6110289a2b002730c63\\core-1.2.0\\res\\values-as\\values-as.xml",
                     "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "247",
-                        "endColumns": "184",
-                        "endOffsets": "431"
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
                     },
                     "to": {
-                        "startLines": "37",
+                        "startLines": "48",
                         "startColumns": "4",
-                        "startOffsets": "3991",
-                        "endColumns": "184",
-                        "endOffsets": "4171"
+                        "startOffsets": "5564",
+                        "endColumns": "100",
+                        "endOffsets": "5660"
                     }
                 },
                 {
-                    "source": "C:\\Users\\Nutthapon\\.gradle\\caches\\transforms-2\\files-2.1\\88b936bf438ae082e10b0434caba329a\\appcompat-1.0.2\\res\\values-as\\values-as.xml",
+                    "source": "C:\\Users\\kanom\\.gradle\\caches\\transforms-2\\files-2.1\\88b936bf438ae082e10b0434caba329a\\appcompat-1.0.2\\res\\values-as\\values-as.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -38,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Nutthapon\\.gradle\\caches\\transforms-2\\files-2.1\\d751e8c8cdc3033452e3a17b99f6f6cf\\play-services-base-17.1.0\\res\\values-as\\values.xml",
+                    "source": "C:\\Users\\kanom\\.gradle\\caches\\transforms-2\\files-2.1\\c23a87840284bb28daa926af4c60a636\\play-services-base-17.2.1\\res\\values-as\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -55,20 +55,20 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Nutthapon\\.gradle\\caches\\transforms-2\\files-2.1\\05a9f2a7e36d67690ba0445fea6ed3de\\core-1.1.0\\res\\values-as\\values-as.xml",
+                    "source": "C:\\Users\\kanom\\.gradle\\caches\\transforms-2\\files-2.1\\27ad13372a0eae7ec0563bc76d273243\\jetified-play-services-basement-17.2.1\\res\\values-as\\values.xml",
                     "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "247",
+                        "endColumns": "184",
+                        "endOffsets": "431"
                     },
                     "to": {
-                        "startLines": "48",
+                        "startLines": "37",
                         "startColumns": "4",
-                        "startOffsets": "5564",
-                        "endColumns": "100",
-                        "endOffsets": "5660"
+                        "startOffsets": "3991",
+                        "endColumns": "184",
+                        "endOffsets": "4171"
                     }
                 }
             ]
