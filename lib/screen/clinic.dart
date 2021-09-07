@@ -46,6 +46,7 @@ class _mainClinicState extends State<mainClinic> {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(

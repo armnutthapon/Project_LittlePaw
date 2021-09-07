@@ -60,6 +60,7 @@ class _selectFilterState extends State<selectFilter> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Container(
         alignment: Alignment.center,
         child: Column(

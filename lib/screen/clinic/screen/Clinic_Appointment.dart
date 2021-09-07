@@ -138,6 +138,7 @@ class _Page_AppointmentState extends State<Page_Appointment> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Form(
         key: _formkey,
         child: Stack(children: <Widget>[
