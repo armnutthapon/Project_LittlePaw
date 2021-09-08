@@ -10,7 +10,6 @@ import 'package:provider/provider.dart';
 import 'package:little_paw/screen/authentication/login.dart';
 import 'package:http/http.dart' as http;
 
-
 class Register extends StatefulWidget {
   final Function toggleScreen;
 
@@ -24,6 +23,9 @@ class _RegisterState extends State<Register> {
   var _passwordController = TextEditingController();
   var _confirmPasswordController = TextEditingController();
   var _name = TextEditingController();
+  var _gender = TextEditingController();
+  var _age = TextEditingController();
+  var _phone = TextEditingController();
 
   void registorOwner() async {
     final FirebaseAuth auth = await FirebaseAuth.instance;
@@ -32,17 +34,29 @@ class _RegisterState extends State<Register> {
     final String email = await userId.email;
     print("UserID : " + uid);
     http.Response response =
-        await http.post(Uri.parse('$Url/owner/registor/$uid/${_emailController.text}/${_name.text}'));
-    
+        await http.post(Uri.parse('$Url/owner/registor'), body: {
+      'userID': '$uid',
+      'name': '${_emailController.text}',
+      'email': '${_name.text}',
+      // contact : req.body.contact
+      'urlImage': 'req.body.urlImage'
+    });
   }
 
   final _formkey = GlobalKey<FormState>();
 
   bool _obscureText = true;
+  bool _obscureText2 = true;
 
   void _toggle() {
     setState(() {
       _obscureText = !_obscureText;
+    });
+  }
+
+  void _toggle2() {
+    setState(() {
+      _obscureText2 = !_obscureText2;
     });
   }
 
@@ -52,6 +66,9 @@ class _RegisterState extends State<Register> {
     _passwordController = TextEditingController();
     _confirmPasswordController = TextEditingController();
     _name = TextEditingController();
+    _gender = TextEditingController();
+    _age = TextEditingController();
+    _phone = TextEditingController();
 
     super.initState();
   }
@@ -62,6 +79,10 @@ class _RegisterState extends State<Register> {
     _passwordController.dispose();
     _confirmPasswordController.dispose();
     _name.dispose();
+    _gender.dispose();
+    _age.dispose();
+    _phone.dispose();
+
     super.dispose();
   }
 
@@ -184,15 +205,15 @@ class _RegisterState extends State<Register> {
                                             fontSize: 18,
                                             fontWeight: FontWeight.w400,
                                             fontFamily: 'Mitr'),
-                                        obscureText: _obscureText,
+                                        obscureText: _obscureText2,
                                         decoration: InputDecoration(
                                           icon: Icon(
                                             FontAwesomeIcons.key,
                                           ),
                                           suffixIcon: InkWell(
-                                            onTap: _toggle,
+                                            onTap: _toggle2,
                                             child: Icon(
-                                              _obscureText
+                                              _obscureText2
                                                   ? FontAwesomeIcons.eyeSlash
                                                   : FontAwesomeIcons.eye,
                                               size: 15.0,
@@ -227,9 +248,87 @@ class _RegisterState extends State<Register> {
                                             fontFamily: 'Mitr'),
                                         decoration: InputDecoration(
                                           icon: Icon(
-                                            FontAwesomeIcons.key,
+                                            FontAwesomeIcons.user,
                                           ),
-                                          labelText: 'ชื่อ',
+                                          labelText: 'ชื่อ-นามสกุล',
+                                          labelStyle: TextStyle(
+                                              fontSize: 18,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w400,
+                                              fontFamily: 'Mitr'),
+                                        ),
+                                        // The validator receives the text that the user has entered.
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'กรุณาระบุชื่อ';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      TextFormField(
+                                        controller: _gender,
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w400,
+                                            fontFamily: 'Mitr'),
+                                        decoration: InputDecoration(
+                                          icon: Icon(
+                                            FontAwesomeIcons.venusMars,
+                                          ),
+                                          labelText: 'เพศ',
+                                          labelStyle: TextStyle(
+                                              fontSize: 18,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w400,
+                                              fontFamily: 'Mitr'),
+                                        ),
+                                        // The validator receives the text that the user has entered.
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'กรุณาระบุชื่อ';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      TextFormField(
+                                        controller: _age,
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w400,
+                                            fontFamily: 'Mitr'),
+                                        decoration: InputDecoration(
+                                          icon: Icon(
+                                            FontAwesomeIcons.calendarDay,
+                                          ),
+                                          labelText: 'อายุ',
+                                          labelStyle: TextStyle(
+                                              fontSize: 18,
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w400,
+                                              fontFamily: 'Mitr'),
+                                        ),
+                                        // The validator receives the text that the user has entered.
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'กรุณาระบุชื่อ';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      TextFormField(
+                                        controller: _phone,
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w400,
+                                            fontFamily: 'Mitr'),
+                                        decoration: InputDecoration(
+                                          icon: Icon(
+                                            FontAwesomeIcons.phone,
+                                          ),
+                                          labelText: 'เบอร์โทรศัพท์',
                                           labelStyle: TextStyle(
                                               fontSize: 18,
                                               color: Colors.black,
@@ -263,13 +362,12 @@ class _RegisterState extends State<Register> {
                                             onPressed: () async {
                                               if (_formkey.currentState
                                                   .validate())
-                                                await loginProvider.register(
-                                                  _emailController.text.trim(),
-                                                  _passwordController.text
-                                                      .trim(),
-                                                  _name.text.trim(),
-                                                );
-                                              await registorOwner();
+                                                await registorOwner();
+                                              await loginProvider.register(
+                                                _emailController.text.trim(),
+                                                _passwordController.text.trim(),
+                                                _name.text.trim(),
+                                              );
                                               print(
                                                   "Email : ${_emailController.text}");
                                               print(

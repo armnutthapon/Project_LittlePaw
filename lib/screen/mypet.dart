@@ -123,8 +123,8 @@ class _MyPetState extends State<MyPet> {
                                           Page_SelectPet(
                                               pid: data[index]['_id'],
                                               pet_name: data[index]['pet_name'],
-                                              urlImage : data[index]['urlImage']
-                                                  ));
+                                              urlImage: data[index]
+                                                  ['urlImage']));
 
                                   Navigator.of(context)
                                       .push(pid_sendRoute)
@@ -164,8 +164,7 @@ class _MyPetState extends State<MyPet> {
                                                         child: (data[index][
                                                                     'urlImage'] !=
                                                                 null)
-                                                            ? 
-                                                              Image.network(
+                                                            ? Image.network(
                                                                 data[index][
                                                                     'urlImage'],
                                                                 fit:
@@ -199,7 +198,18 @@ class _MyPetState extends State<MyPet> {
                     },
                   )),
                 )
-              : Center(child: CircularProgressIndicator())),
+              // : data == null
+              //     ? Container(
+              //         alignment: Alignment.center,
+              //         child: Text("ไม่มีสัตว์เลี้ยง"),
+              //       )
+              //     : Center(
+              //         child: CircularProgressIndicator(),
+              //       )
+
+              : Center(
+                  child: CircularProgressIndicator(),
+                )),
     );
   }
 }

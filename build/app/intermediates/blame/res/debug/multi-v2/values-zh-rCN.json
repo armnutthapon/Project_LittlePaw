@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\SE 4\\new clone\\Project_LittlePaw\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-zh-rCN\\values-zh-rCN.xml",
+            "outputFile": "D:\\SE 4\\Project_LittlePaw\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-zh-rCN\\values-zh-rCN.xml",
             "map": [
                 {
                     "source": "C:\\Users\\66818\\.gradle\\caches\\transforms-2\\files-2.1\\3ca879bbbc580136bb66656181a16977\\jetified-play-services-basement-17.2.1\\res\\values-zh-rCN\\values.xml",

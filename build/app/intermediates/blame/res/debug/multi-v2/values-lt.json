@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\SE 4\\new clone\\Project_LittlePaw\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-lt\\values-lt.xml",
+            "outputFile": "D:\\SE 4\\Project_LittlePaw\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-lt\\values-lt.xml",
             "map": [
                 {
                     "source": "C:\\Users\\66818\\.gradle\\caches\\transforms-2\\files-2.1\\88b936bf438ae082e10b0434caba329a\\appcompat-1.0.2\\res\\values-lt\\values-lt.xml",

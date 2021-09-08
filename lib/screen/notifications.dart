@@ -108,9 +108,9 @@ class _NotificationFeedState extends State<NotificationFeed> {
                                 color: Colors.white,
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.grey.withOpacity(0.5),
+                                    color: Colors.grey.withOpacity(0.3),
                                     spreadRadius: 3,
-                                    blurRadius: 8,
+                                    blurRadius: 5,
                                     offset: Offset(
                                         2, 2), // changes position of shadow
                                   ),

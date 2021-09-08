@@ -140,8 +140,8 @@ class _Page_ClinicDetailState extends State<Page_ClinicDetail> {
                                     width: 150,
                                     height: 50,
                                     child: FlatButton(
-                                      color: Colors.green.shade400,
-                                      // color: Colors.red.shade300,
+                                      // color: Colors.green.shade400,
+                                      color: Colors.red.shade300,
                                       onPressed: () {
                                         setState(() {
                                           send_cid = data['_id'];

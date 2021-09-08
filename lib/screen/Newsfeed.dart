@@ -11,18 +11,18 @@ class Newfeed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade100,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
-          "ข่าว นะจ๊ะ",
+          "กระดานข้อมูล",
           style: TextStyle(
               fontSize: 22,
-              color: Colors.white,
+              color: Colors.red.shade300,
               fontWeight: FontWeight.w500,
               fontFamily: 'Mitr'),
         ),
-        backgroundColor: Colors.green.withOpacity(1),
-        elevation: 10.0,
+        backgroundColor: Colors.white.withOpacity(1),
+        elevation: 0,
       ),
       body: ImagePickerExample(),
     );

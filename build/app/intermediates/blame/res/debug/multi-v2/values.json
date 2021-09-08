@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\SE 4\\new clone\\Project_LittlePaw\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+            "outputFile": "D:\\SE 4\\Project_LittlePaw\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
             "map": [
                 {
                     "source": "C:\\Users\\66818\\.gradle\\caches\\transforms-2\\files-2.1\\3ca879bbbc580136bb66656181a16977\\jetified-play-services-basement-17.2.1\\res\\values\\values.xml",
@@ -78,6 +78,25 @@
                     }
                 },
                 {
+                    "source": "D:\\SE 4\\Project_LittlePaw\\android\\app\\src\\main\\res\\values\\styles.xml",
+                    "from": {
+                        "startLines": "3,14",
+                        "startColumns": "4,4",
+                        "startOffsets": "137,791",
+                        "endLines": "7,16",
+                        "endColumns": "12,12",
+                        "endOffsets": "433,953"
+                    },
+                    "to": {
+                        "startLines": "1394,1399",
+                        "startColumns": "4,4",
+                        "startOffsets": "91582,91879",
+                        "endLines": "1398,1401",
+                        "endColumns": "12,12",
+                        "endOffsets": "91874,92039"
+                    }
+                },
+                {
                     "source": "C:\\Users\\66818\\.gradle\\caches\\transforms-2\\files-2.1\\e9f8cecd919460f524c11e15e847cf70\\browser-1.0.0\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7",
@@ -92,6 +111,23 @@
                         "startOffsets": "1825,1883,1949,2012,10868,10939",
                         "endColumns": "57,65,62,61,70,71",
                         "endOffsets": "1878,1944,2007,2069,10934,11006"
+                    }
+                },
+                {
+                    "source": "D:\\SE 4\\Project_LittlePaw\\build\\app\\generated\\res\\google-services\\debug\\values\\values.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "55,200,283,387,497,617,716",
+                        "endColumns": "144,82,103,109,119,98,75",
+                        "endOffsets": "195,278,382,492,612,711,787"
+                    },
+                    "to": {
+                        "startLines": "320,321,322,323,324,325,326",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "22352,22497,22580,22684,22794,22914,23013",
+                        "endColumns": "144,82,103,109,119,98,75",
+                        "endOffsets": "22492,22575,22679,22789,22909,23008,23084"
                     }
                 },
                 {
@@ -111,42 +147,6 @@
                         "endLines": "62,63,161,162,163,164,165,166,167,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,240,241,245,246,247,248,249,250,251,252,253,254,255,262,328,1651,1655,1656,1660,1661,1798,1799,2470,2656,2688,2725,2732",
                         "endColumns": "68,62,69,67,71,69,60,73,72,60,60,61,63,61,60,67,99,59,65,72,68,56,51,61,71,75,64,58,58,59,59,59,59,59,59,59,59,59,59,58,59,59,59,59,59,59,59,59,59,59,58,59,59,58,58,58,58,58,58,34,34,54,62,54,57,56,49,60,56,33,34,34,69,70,116,12,109,12,128,71,66,24,24,24,24,24",
                         "endOffsets": "4277,4340,11076,11144,11216,11286,11347,11421,11494,12339,12400,12462,12526,12588,12649,12717,12817,12877,12943,13016,13085,13142,13194,13256,13781,13857,13922,13981,14040,14100,14160,14220,14280,14340,14400,14460,14520,14580,14640,14699,14759,14819,14879,14939,14999,15059,15119,15179,15239,15299,15358,15418,15478,15537,15596,15655,15714,15773,15832,16106,16141,16338,16401,16456,16514,16571,16621,16682,16739,16773,16808,16843,17256,23208,111353,111554,111664,111865,111994,122892,122959,159069,170219,172284,174044,174421"
-                    }
-                },
-                {
-                    "source": "D:\\SE 4\\new clone\\Project_LittlePaw\\build\\app\\generated\\res\\google-services\\debug\\values\\values.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "55,200,283,387,497,617,716",
-                        "endColumns": "144,82,103,109,119,98,75",
-                        "endOffsets": "195,278,382,492,612,711,787"
-                    },
-                    "to": {
-                        "startLines": "320,321,322,323,324,325,326",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "22352,22497,22580,22684,22794,22914,23013",
-                        "endColumns": "144,82,103,109,119,98,75",
-                        "endOffsets": "22492,22575,22679,22789,22909,23008,23084"
-                    }
-                },
-                {
-                    "source": "D:\\SE 4\\new clone\\Project_LittlePaw\\android\\app\\src\\main\\res\\values\\styles.xml",
-                    "from": {
-                        "startLines": "3,14",
-                        "startColumns": "4,4",
-                        "startOffsets": "137,791",
-                        "endLines": "7,16",
-                        "endColumns": "12,12",
-                        "endOffsets": "433,953"
-                    },
-                    "to": {
-                        "startLines": "1394,1399",
-                        "startColumns": "4,4",
-                        "startOffsets": "91582,91879",
-                        "endLines": "1398,1401",
-                        "endColumns": "12,12",
-                        "endOffsets": "91874,92039"
                     }
                 }
             ]

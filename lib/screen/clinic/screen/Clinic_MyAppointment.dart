@@ -60,13 +60,14 @@ class _Page_MyAppointmentState extends State<Page_MyAppointment> {
             "การนัดหมาย",
             style: TextStyle(
                 fontSize: 22,
-                color: Colors.white,
+                color: Colors.red.shade300,
                 fontWeight: FontWeight.w500,
                 fontFamily: 'Mitr'),
           ),
-          backgroundColor: Colors.pinkAccent.shade100.withOpacity(1),
-          elevation: 10.0,
+          backgroundColor: Colors.white..withOpacity(1),
+          elevation: 0.0,
         ),
+        backgroundColor: Colors.white,
         body: data != null
             ? SingleChildScrollView(
                 child: Column(children: [
@@ -106,9 +107,9 @@ class _Page_MyAppointmentState extends State<Page_MyAppointment> {
                                 color: Colors.white,
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.grey.withOpacity(0.5),
+                                    color: Colors.grey.withOpacity(0.3),
                                     spreadRadius: 3,
-                                    blurRadius: 8,
+                                    blurRadius: 5,
                                     offset: Offset(
                                         2, 2), // changes position of shadow
                                   ),
