@@ -121,7 +121,6 @@ class _AddpetState extends State<Addpet> {
     });
   }
 
-
   Future<void> _selectDate(BuildContext context) async {
     final now = DateTime.now();
     final DateTime picked = await showDatePicker(
@@ -167,7 +166,7 @@ class _AddpetState extends State<Addpet> {
         .FirebaseStorage.instance
         .ref('pet_images/Pet$random_number.jpg')
         .putFile(_imageFile);
-      
+
     urlImage = await (await uploadTask).ref.getDownloadURL();
     // print("urlImage : " + urlImage);
   }

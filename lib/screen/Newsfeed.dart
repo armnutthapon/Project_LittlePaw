@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:little_paw/services/authentication/auth__service.dart';
 import 'package:path/path.dart' as Path;
+import 'package:provider/provider.dart';
 
 class Newfeed extends StatelessWidget {
   // const Newfeed({Key key}) : super(key: key);
@@ -69,6 +71,8 @@ class _ImagePickerExampleState extends State<ImagePickerExample> {
 
   @override
   Widget build(BuildContext context) {
+    final loginProvider = Provider.of<AuthServices>(context);
+
     return Column(
       children: [
         IconButton(
@@ -86,7 +90,7 @@ class _ImagePickerExampleState extends State<ImagePickerExample> {
                   });
                 },
           child: Text(
-            "ยืนยัน",
+            "aa",
             style: TextStyle(
               fontFamily: 'Mitr',
               fontSize: 20,
@@ -99,7 +103,26 @@ class _ImagePickerExampleState extends State<ImagePickerExample> {
             ? Center(
                 child: Text("select image"),
               )
-            : Image.file(image)
+            : Image.file(image),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextButton(
+              child: Text(
+                "ออกจากระบบ",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                    fontFamily: 'Mitr'),
+              ),
+              onPressed: () async => await loginProvider.logout(),
+            ),
+            IconButton(
+                onPressed: () async => await loginProvider.logout(),
+                icon: Icon(Icons.exit_to_app)),
+          ],
+        ),
       ],
     );
   }
