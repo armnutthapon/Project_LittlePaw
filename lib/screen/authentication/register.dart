@@ -287,7 +287,7 @@ class _RegisterState extends State<Register> {
                                             dropdownColor: Colors.white,
                                             value: valueGender,
                                             style: TextStyle(
-                                                color: Colors.red.shade300,
+                                                color: Colors.black,
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.w400,
                                                 fontFamily: 'Mitr'),

@@ -70,12 +70,6 @@ class _MyPetState extends State<MyPet> {
                 ),
                 tooltip: 'เพิ่มสัตว์เลี้ยง',
                 onPressed: () {
-                  // Navigator.pushNamed(context, '/Pagh').then((_) {
-                  //   // This block runs when you have returned back to the 1st Page from 2nd.
-                  //   setState(() {
-                  //     // Call setState to refresh the page.
-                  //   });
-                  // });
                   Navigator.of(context)
                       .push(MaterialPageRoute(
                           builder: (context) => Page_Addpet()))

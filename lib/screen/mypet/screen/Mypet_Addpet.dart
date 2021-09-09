@@ -264,14 +264,15 @@ class _AddpetState extends State<Addpet> {
                               focusedBorder: InputBorder.none,
                             ),
                             validator: (value) {
-                              Pattern pattern =
-                                  r'^[A-Za-z]+(?:[ _-][A-Za-z]+)*$';
-                              RegExp regex = new RegExp(pattern);
+                              // Pattern pattern =
+                              //     r'^[A-Za-z]+(?:[ _-][A-Za-z]+)*$';
+                              // RegExp regex = new RegExp(pattern);
                               if (value == null || value.isEmpty) {
                                 return 'กรุณาระบุชื่อสัตว์เลี้ยง';
-                              } else if (!regex.hasMatch(value)) {
-                                return 'ชื่อไม่ถูกต้อง';
                               }
+                              // else if (!regex.hasMatch(value)) {
+                              //   return 'ชื่อไม่ถูกต้อง';
+                              // }
                               return null;
                             },
                           ),
