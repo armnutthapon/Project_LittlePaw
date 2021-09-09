@@ -392,13 +392,19 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "vertical_card_pager",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/vertical_card_pager-1.5.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "little_paw",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-09-08T03:08:42.890382Z",
+  "generated": "2021-09-09T17:02:44.996754Z",
   "generator": "pub",
   "generatorVersion": "2.14.0-258.0.dev"
 }
