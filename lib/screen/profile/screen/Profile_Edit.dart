@@ -54,9 +54,9 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
   }
 
   updateUserProfile() async {
-    if(_imageFile != null){
+    if (_imageFile != null) {
       await uploadImageToFirebase();
-    }else{
+    } else {
       await setData();
     }
     // if (user_name == null || user_name.text.isEmpty) {
@@ -182,8 +182,8 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                   Navigator.pop(context, true);
                 },
                 icon: Icon(
-                  FontAwesomeIcons.check,
-                  color: Colors.red.shade300,
+                  FontAwesomeIcons.solidCheckCircle,
+                  color: Colors.green.shade300,
                 ))
             // icon: Icon(Icons.exit_to_app))
           ],
@@ -286,7 +286,7 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                                     subtitle: TextFormField(
                                       controller: user_name,
                                       style: TextStyle(
-                                          color: Colors.red.shade300,
+                                          color: Colors.black,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w400,
                                           fontFamily: 'Mitr'),
@@ -338,7 +338,7 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                           //           subtitle: TextFormField(
                           //             controller: user_contact,
                           //             style: TextStyle(
-                          //                 color: Colors.red.shade300,
+                          //                 color: Colors.black.shade300,
                           //                 fontSize: 16,
                           //                 fontWeight: FontWeight.w400,
                           //                 fontFamily: 'Mitr'),
@@ -397,7 +397,7 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                           //             ),
                           //             hint: Text(user_gender,
                           //                 style: TextStyle(
-                          //                     color: Colors.red.shade300,
+                          //                     color: Colors.black.shade300,
                           //                     fontSize: 16,
                           //                     fontWeight: FontWeight.w400,
                           //                     fontFamily: 'Mitr')),
@@ -407,7 +407,7 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                           //             dropdownColor: Colors.white,
                           //             value: valueGender,
                           //             style: TextStyle(
-                          //                 color: Colors.red.shade300,
+                          //                 color: Colors.black.shade300,
                           //                 fontSize: 16,
                           //                 fontWeight: FontWeight.w400,
                           //                 fontFamily: 'Mitr'),
@@ -467,7 +467,7 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                           //           ),
                           //           hint: Text(user_gender.text,
                           //               style: TextStyle(
-                          //                   color: Colors.red.shade300,
+                          //                   color: Colors.black.shade300,
                           //                   fontSize: 16,
                           //                   fontWeight: FontWeight.w400,
                           //                   fontFamily: 'Mitr')),
@@ -477,7 +477,7 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                           //           dropdownColor: Colors.white,
                           //           value: valueGender,
                           //           style: TextStyle(
-                          //               color: Colors.red.shade300,
+                          //               color: Colors.black.shade300,
                           //               fontSize: 16,
                           //               fontWeight: FontWeight.w400,
                           //               fontFamily: 'Mitr'),

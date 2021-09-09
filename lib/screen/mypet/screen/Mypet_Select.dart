@@ -21,7 +21,8 @@ class Page_SelectPet extends StatefulWidget {
   const Page_SelectPet({
     Key key,
     this.pid,
-    this.pet_name, this.urlImage,
+    this.pet_name,
+    this.urlImage,
   }) : super(key: key);
 
   @override
@@ -169,29 +170,28 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                         children: <Widget>[
                           Container(
                             child: Container(
-                              padding: EdgeInsets.all(10),
-                              child: widget.urlImage == null
-                            ? null
-                            : CircleAvatar(
-                                radius: 65,
-                                backgroundColor: Colors.grey.shade300,
-                                child: ClipOval(
-                                  child: SizedBox(
-                                      width: 140.0,
-                                      height: 140.0,
-                                      child: (widget.urlImage != null)
-                                          ? Image.network(
-                                              widget.urlImage,
-                                              fit: BoxFit.fill,
-                                            )
-                                          : Image.asset(
-                                              'assets/images/avatar.jpg',
-                                              fit: BoxFit.fill,
-                                            )),
-                                ),
-                              )),
-                            ),
-                          
+                                padding: EdgeInsets.all(10),
+                                child: widget.urlImage == null
+                                    ? null
+                                    : CircleAvatar(
+                                        radius: 65,
+                                        backgroundColor: Colors.grey.shade300,
+                                        child: ClipOval(
+                                          child: SizedBox(
+                                              width: 140.0,
+                                              height: 140.0,
+                                              child: (widget.urlImage != null)
+                                                  ? Image.network(
+                                                      widget.urlImage,
+                                                      fit: BoxFit.fill,
+                                                    )
+                                                  : Image.asset(
+                                                      'assets/images/avatar.jpg',
+                                                      fit: BoxFit.fill,
+                                                    )),
+                                        ),
+                                      )),
+                          ),
                         ],
                       ),
                     ),
@@ -214,8 +214,8 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                                   var cid_sendRoute = new MaterialPageRoute(
                                       builder: (BuildContext context) =>
                                           Page_PetInformations(
-                                              pid: widget.pid,
-                                              ));
+                                            pid: widget.pid,
+                                          ));
                                   print(widget.pid);
 
                                   Navigator.of(context)
@@ -293,7 +293,7 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                 child: IconButton(
                   icon: Icon(
                     FontAwesomeIcons.trash,
-                    color: Colors.red.shade300,
+                    color: Colors.red,
                     size: 24,
                   ),
                   tooltip: 'ลบข้อมูล',

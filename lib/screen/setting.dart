@@ -82,7 +82,7 @@ class _SettingState extends State<Setting> {
                 },
                 icon: Icon(
                   FontAwesomeIcons.userEdit,
-                  color: Colors.red.shade300,
+                  color: Colors.amber.shade600,
                 ))
             // icon: Icon(Icons.exit_to_app))
           ],
@@ -103,29 +103,29 @@ class _SettingState extends State<Setting> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Container(
-                                padding: EdgeInsets.only(bottom: 10, top: 10),
-                                child: data == null
-                                    ? null
-                                    : CircleAvatar(
-                                        radius: 75,
-                                        backgroundColor: Colors.grey.shade300,
-                                        child: ClipOval(
-                                          child: SizedBox(
-                                            width: 140.0,
-                                            height: 140.0,
-                                            child: (data['urlImage'] != null)
-                                                ? Image.network(
-                                                    data['urlImage'],
-                                                    fit: BoxFit.fill,
-                                                  )
-                                                : Image.asset(
-                                                    'assets/images/avatar.jpg',
-                                                    fit: BoxFit.fill,
-                                                  ),
-                                          ),
-                                        ),
-                                      )),
+                            // Container(
+                            //     padding: EdgeInsets.only(bottom: 10, top: 10),
+                            //     child: data != null
+                            //         ? null
+                            //         : CircleAvatar(
+                            //             radius: 75,
+                            //             backgroundColor: Colors.grey.shade300,
+                            //             child: ClipOval(
+                            //               child: SizedBox(
+                            //                 width: 140.0,
+                            //                 height: 140.0,
+                            //                 child: (data['urlImage'] != null)
+                            //                     ? Image.network(
+                            //                         data['urlImage'],
+                            //                         fit: BoxFit.fill,
+                            //                       )
+                            //                     : Image.asset(
+                            //                         'assets/images/avatar.jpg',
+                            //                         fit: BoxFit.fill,
+                            //                       ),
+                            //               ),
+                            //             ),
+                            //           )),
                           ],
                         ),
                       )),

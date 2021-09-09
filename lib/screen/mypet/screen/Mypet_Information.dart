@@ -12,7 +12,6 @@ import 'package:little_paw/screen/mypet/screen/Mypet_Edit_Information.dart';
 class Page_PetInformations extends StatefulWidget {
   final String pid;
 
-
   const Page_PetInformations({Key key, this.pid}) : super(key: key);
 
   @override
@@ -28,9 +27,9 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
         await http.get(Uri.parse('$Url/petDetail/showPetByPID/${widget.pid}'));
     setState(() {
       data = json.decode(response.body);
-      if(data['age'] <= 0){
+      if (data['age'] <= 0) {
         age = "น้อยกว่า 1";
-      }else{
+      } else {
         age = "${data['age']}";
       }
     });
@@ -119,7 +118,6 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
                           new MaterialPageRoute(
                               builder: (_) => new Page_Edit_PetInformaition(
                                     pid: widget.pid,
-                                   
                                   )),
                         )
                         .then((data) => {
@@ -133,7 +131,7 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
                   },
                   icon: Icon(
                     FontAwesomeIcons.solidEdit,
-                    color: Colors.red.shade300,
+                    color: Colors.amber.shade700,
                   ))
               // icon: Icon(Icons.exit_to_app))
             ],

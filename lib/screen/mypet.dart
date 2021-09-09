@@ -31,12 +31,13 @@ class _MyPetState extends State<MyPet> {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User userId = auth.currentUser;
     final String uid = userId.uid;
-
+    print(uid);
     http.Response response =
         await http.get(Uri.parse('$Url/petDetail/showByID/$uid'));
     setState(() {
       data = json.decode(response.body);
     });
+    print(data);
     return data;
   }
 

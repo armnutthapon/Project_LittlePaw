@@ -33,7 +33,7 @@ class OwnerInfo extends StatelessWidget {
               textdetail,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                  color: Colors.red.shade300,
+                  color: Colors.black,
                   fontSize: 16,
                   fontWeight: FontWeight.w400,
                   fontFamily: 'Mitr'),

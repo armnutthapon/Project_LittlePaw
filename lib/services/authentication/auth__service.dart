@@ -5,7 +5,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:little_paw/database/database.dart';
 import 'package:little_paw/services/authentication/add_user.dart';
+import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 class AuthServices with ChangeNotifier {
   bool _isLoading = false;
@@ -24,7 +27,6 @@ class AuthServices with ChangeNotifier {
   String get errorMessageReset => _errorMessageReset;
 
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-
   Future register(String email, String password, String name) async {
     try {
       setLoadingRegist(true);
@@ -35,7 +37,33 @@ class AuthServices with ChangeNotifier {
       );
       User user = authResult.user;
       setLoadingRegist(false);
+      final FirebaseAuth auth = FirebaseAuth.instance;
+      final String uid = userId.uid;
+      print("UserID Insert : " + uid);
+      print("Name Insert : " + name);
+      print("Email Insert : " + email);
+      await registorOwner(email, name, uid);
       return user;
+
+      // // void registorOwner() async {
+      // // final FirebaseAuth auth = FirebaseAuth.instance;
+      // // final User userId = auth.currentUser;
+      // // final String uid = userId.uid;
+      // // final String email = userId.email;
+      // print("UserID Insert : " + uid);
+      // print("Name Insert : " + name);
+      // print("Email Insert : " + email);
+
+      // http.Response response =
+      //     await http.post(Uri.parse('$Url/owner/registor'), body: {
+      //   'userID': '$uid',
+      //   'name': '${name}',
+      //   'email': '${email}',
+      //   // contact : req.body.contact
+      //   'urlImage': 'req.body.urlImage'
+      // });
+      // // }
+
     } on SocketException {
       setMessageRegist("No internet");
       setLoadingRegist(false);
@@ -149,4 +177,20 @@ class AuthServices with ChangeNotifier {
 
   Stream<User> get user =>
       firebaseAuth.authStateChanges().map((event) => event);
+}
+
+void registorOwner(userID, email, name) async {
+  final FirebaseAuth auth = await FirebaseAuth.instance;
+  final User userId = await auth.currentUser;
+  final String uid = await userId.uid;
+  final String email = await userId.email;
+  print("UserID : " + uid);
+  http.Response response =
+      await http.post(Uri.parse('$Url/owner/registor'), body: {
+    'userID': '$uid',
+    'name': '${name}',
+    'email': '${email}',
+    // contact : req.body.contact
+    'urlImage': 'req.body.urlImage'
+  });
 }

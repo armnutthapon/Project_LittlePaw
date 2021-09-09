@@ -31,21 +31,6 @@ class _RegisterState extends State<Register> {
   String valueGender;
   DateTime date;
   DateTime selectedDate = DateTime.now();
-  void registorOwner() async {
-    final FirebaseAuth auth = await FirebaseAuth.instance;
-    final User userId = await auth.currentUser;
-    final String uid = await userId.uid;
-    final String email = await userId.email;
-    print("UserID : " + uid);
-    http.Response response =
-        await http.post(Uri.parse('$Url/owner/registor'), body: {
-      'userID': '$uid',
-      'name': '${_emailController.text}',
-      'email': '${_name.text}',
-      // contact : req.body.contact
-      'urlImage': 'req.body.urlImage'
-    });
-  }
 
   Future<void> _selectDate(BuildContext context) async {
     final now = DateTime.now();
@@ -204,7 +189,10 @@ class _RegisterState extends State<Register> {
                                         validator: (value) {
                                           if (value == null || value.isEmpty) {
                                             return 'กรุณาระบุรหัสผ่าน';
+                                          } else if (!(value.length > 5)) {
+                                            return "รหัสผ่านต้องมีมากกว่า 5 ตัว";
                                           }
+
                                           return null;
                                         },
                                       ),
@@ -259,7 +247,7 @@ class _RegisterState extends State<Register> {
                                           icon: Icon(
                                             FontAwesomeIcons.user,
                                           ),
-                                          labelText: 'ชื่อ-นามสกุล',
+                                          labelText: 'ชื่อผู้ใช้',
                                           labelStyle: TextStyle(
                                               fontSize: 18,
                                               color: Colors.black,
@@ -267,9 +255,17 @@ class _RegisterState extends State<Register> {
                                               fontFamily: 'Mitr'),
                                         ),
                                         validator: (value) {
+                                          // Pattern pattern =
+                                          //     r'^[A-Za-z]+(?:[ _-][A-Za-z]+)*$';
+                                          // RegExp regex = new RegExp(pattern);
                                           if (value == null || value.isEmpty) {
-                                            return 'กรุณาระบุชื่อ-นามสกุล';
+                                            return 'กรุณาระบุชื่อผู้ใช้';
+                                          } else if (!(value.length > 5)) {
+                                            return "ชื่อผู้ใช้ต้องมีมากกว่า 5 ตัวอักษร";
                                           }
+                                          // if (!regex.hasMatch(value))
+                                          //   return 'ชื่อ-นามสกุลไม่ถูกต้อง';
+
                                           return null;
                                         },
                                       ),
@@ -358,6 +354,7 @@ class _RegisterState extends State<Register> {
                                       ),
                                       TextFormField(
                                         controller: _phone,
+                                        keyboardType: TextInputType.phone,
                                         style: TextStyle(
                                             color: Colors.black,
                                             fontSize: 18,
@@ -375,9 +372,19 @@ class _RegisterState extends State<Register> {
                                               fontFamily: 'Mitr'),
                                         ),
                                         validator: (value) {
+                                          Pattern pattern =
+                                              r'(^(?:[0])?[0-9]{10}$)';
+
+                                          // r'(^(?:[+0]9)?[0-9]{10}$)';
+                                          RegExp regex = new RegExp(pattern);
                                           if (value == null || value.isEmpty) {
                                             return 'กรุณาระบุเบอร์โทรศัพท์';
+                                          } else if (!(value.length == 10)) {
+                                            return "เบอร์โทรศัพท์ไม่ถูกต้อง";
+                                          } else if (!regex.hasMatch(value)) {
+                                            return 'เบอร์โทรศัพท์ไม่ถูกต้อง';
                                           }
+
                                           return null;
                                         },
                                       ),
@@ -400,8 +407,6 @@ class _RegisterState extends State<Register> {
                                             onPressed: () async {
                                               if (_formkey.currentState
                                                   .validate()) {
-                                                registorOwner();
-
                                                 await loginProvider.register(
                                                   _emailController.text.trim(),
                                                   _passwordController.text

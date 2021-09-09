@@ -15,14 +15,12 @@ class Newfeed extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(
-          "กระดานข้อมูล",
-          style: TextStyle(
-              fontSize: 22,
-              color: Colors.red.shade300,
-              fontWeight: FontWeight.w500,
-              fontFamily: 'Mitr'),
-        ),
+        title: Text("กระดานข้อมูล",
+            style: TextStyle(
+                fontSize: 22,
+                color: Colors.red.shade300,
+                fontWeight: FontWeight.w400,
+                fontFamily: 'Mitr')),
         backgroundColor: Colors.white.withOpacity(1),
         elevation: 0,
       ),

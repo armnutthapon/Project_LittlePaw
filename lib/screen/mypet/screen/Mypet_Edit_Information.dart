@@ -14,9 +14,7 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 class Page_Edit_PetInformaition extends StatefulWidget {
   final String pid;
 
-
-  const Page_Edit_PetInformaition({Key key, this.pid})
-      : super(key: key);
+  const Page_Edit_PetInformaition({Key key, this.pid}) : super(key: key);
 
   @override
   _Page_Edit_PetInformaitionState createState() =>
@@ -66,14 +64,12 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
   }
 
   updatePetInformation() async {
-    if(_imageFile != null){
+    if (_imageFile != null) {
       await uploadImageToFirebase();
-    }else{
+    } else {
       await setData();
     }
-    
-    
-    
+
     // http.Response response = await http
     //     .post(Uri.parse(
     //         '$Url/petDetail/editPetDetail/${widget.pid}/${editPetName.text}/${editPetCategory}/${editPetGender}/${editPetColor.text}/${editPetBreed.text}/${editPetAge.text}/${editPetCharacteristics.text}/${editPetSterilize}/${editCongenitalDisease.text}/${editVaccine.text}'))
@@ -81,7 +77,8 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
     //   print("Update success");
     // });
     // Navigator.pop(context, true);
-    await http.put(Uri.parse('$Url/petDetail/editpetdetail/${widget.pid}'), body: {
+    await http
+        .put(Uri.parse('$Url/petDetail/editpetdetail/${widget.pid}'), body: {
       'pet_name': '${editPetName.text}',
       'type': '${editPetCategory}',
       'sex': '${editPetGender}',
@@ -180,11 +177,10 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
       editVaccine.text = data['vaccine'][0];
     }
 
-    if(this.urlImage != data['urlImage']){
+    if (this.urlImage != data['urlImage']) {
       print("ของใหม่ :" + urlImage);
       await uploadImageToFirebase();
-
-    }else{
+    } else {
       urlImage = data['urlImage'];
       print("ของเดิม :" + urlImage);
     }
@@ -208,7 +204,6 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
       } else {
         return editPetSterilize = "ยังไม่ทำหมัน";
       }
-      
     });
   }
 
@@ -248,7 +243,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
     // firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
     //     .ref()
     //     .child('images_owner/Pet$random_number.jpg');
-    firebase_storage.UploadTask uploadTask =  firebase_storage
+    firebase_storage.UploadTask uploadTask = firebase_storage
         .FirebaseStorage.instance
         .ref('pet_images/Pet$random_number.jpg')
         .putFile(_imageFile);
@@ -293,7 +288,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                         }
                         // if(urlImage != data[''])
                         //  if(urlImage != data['urlImage']){
-                          
+
                         //   print("urlImage != data['urlImage']" + urlImage);
                         //   await uploadImageToFirebase();
                         //   updatePetInformation();
@@ -301,13 +296,11 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                         //   urlImage = data['urlImage'];
                         //   updatePetInformation();
                         // }
-                          updatePetInformation();
-
-                        
+                        updatePetInformation();
                       },
                       icon: Icon(
                         FontAwesomeIcons.solidCheckCircle,
-                        color: Colors.red.shade300,
+                        color: Colors.green.shade300,
                       ))
                   // icon: Icon(Icons.exit_to_app))
                 ],
@@ -369,8 +362,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                                 child: SizedBox(
                                                     width: 140.0,
                                                     height: 140.0,
-                                                    child: (_imageFile !=
-                                                            null)
+                                                    child: (_imageFile != null)
                                                         ? Image.file(
                                                             _imageFile,
                                                             fit: BoxFit.fill,
@@ -402,7 +394,6 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                                   },
                                                 ),
                                               ],
-                                            
                                             ),
                                           ],
                                         )),
@@ -442,7 +433,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                       subtitle: TextFormField(
                                         controller: editPetName,
                                         style: TextStyle(
-                                            color: Colors.red.shade300,
+                                            color: Colors.black,
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400,
                                             fontFamily: 'Mitr'),
@@ -503,7 +494,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                         ),
                                         hint: Text(editPetCategory,
                                             style: TextStyle(
-                                                color: Colors.red.shade300,
+                                                color: Colors.black,
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w400,
                                                 fontFamily: 'Mitr')),
@@ -513,7 +504,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                         dropdownColor: Colors.white,
                                         value: valueCategory,
                                         style: TextStyle(
-                                            color: Colors.red.shade300,
+                                            color: Colors.black,
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400,
                                             fontFamily: 'Mitr'),
@@ -577,7 +568,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                         ),
                                         hint: Text(editPetGender,
                                             style: TextStyle(
-                                                color: Colors.red.shade300,
+                                                color: Colors.black,
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w400,
                                                 fontFamily: 'Mitr')),
@@ -587,7 +578,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                         dropdownColor: Colors.white,
                                         value: valueGender,
                                         style: TextStyle(
-                                            color: Colors.red.shade300,
+                                            color: Colors.black,
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400,
                                             fontFamily: 'Mitr'),
@@ -644,7 +635,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                       subtitle: TextFormField(
                                         controller: editPetColor,
                                         style: TextStyle(
-                                            color: Colors.red.shade300,
+                                            color: Colors.black,
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400,
                                             fontFamily: 'Mitr'),
@@ -698,7 +689,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                       subtitle: TextFormField(
                                         controller: editPetBreed,
                                         style: TextStyle(
-                                            color: Colors.red.shade300,
+                                            color: Colors.black,
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400,
                                             fontFamily: 'Mitr'),
@@ -752,7 +743,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                       subtitle: TextFormField(
                                         controller: editPetCharacteristics,
                                         style: TextStyle(
-                                            color: Colors.red.shade300,
+                                            color: Colors.black,
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400,
                                             fontFamily: 'Mitr'),
@@ -806,7 +797,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                     subtitle: TextFormField(
                                       controller: editPetAge,
                                       style: TextStyle(
-                                          color: Colors.red.shade300,
+                                          color: Colors.black,
                                           fontSize: 16,
                                           fontWeight: FontWeight.w400,
                                           fontFamily: 'Mitr'),
@@ -863,7 +854,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                         hint: Text(
                                           editPetSterilize,
                                           style: TextStyle(
-                                              color: Colors.red.shade300,
+                                              color: Colors.black,
                                               fontSize: 16,
                                               fontWeight: FontWeight.w400,
                                               fontFamily: 'Mitr'),
@@ -874,7 +865,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                         dropdownColor: Colors.white,
                                         value: valueSterilize,
                                         style: TextStyle(
-                                            color: Colors.red.shade300,
+                                            color: Colors.black,
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400,
                                             fontFamily: 'Mitr'),
@@ -932,7 +923,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                       subtitle: TextFormField(
                                         controller: editCongenitalDisease,
                                         style: TextStyle(
-                                            color: Colors.red.shade300,
+                                            color: Colors.black,
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400,
                                             fontFamily: 'Mitr'),
@@ -987,7 +978,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                       subtitle: TextFormField(
                                         controller: editVaccine,
                                         style: TextStyle(
-                                            color: Colors.red.shade300,
+                                            color: Colors.black,
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400,
                                             fontFamily: 'Mitr'),

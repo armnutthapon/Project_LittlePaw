@@ -193,12 +193,12 @@ class _AddpetState extends State<Addpet> {
                       children: [
                         Center(
                             child: CircleAvatar(
-                          radius: 75,
+                          radius: 80,
                           backgroundColor: Colors.grey.shade300,
                           child: ClipOval(
                             child: SizedBox(
-                              width: 140.0,
-                              height: 140.0,
+                              width: 150.0,
+                              height: 150.0,
                               child: (_imageFile != null)
                                   ? Image.file(
                                       _imageFile,
@@ -254,7 +254,7 @@ class _AddpetState extends State<Addpet> {
                           subtitle: TextFormField(
                             controller: _addPetName,
                             style: TextStyle(
-                                color: Colors.red.shade300,
+                                color: Colors.black,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Mitr'),
@@ -264,8 +264,13 @@ class _AddpetState extends State<Addpet> {
                               focusedBorder: InputBorder.none,
                             ),
                             validator: (value) {
+                              Pattern pattern =
+                                  r'^[A-Za-z]+(?:[ _-][A-Za-z]+)*$';
+                              RegExp regex = new RegExp(pattern);
                               if (value == null || value.isEmpty) {
                                 return 'กรุณาระบุชื่อสัตว์เลี้ยง';
+                              } else if (!regex.hasMatch(value)) {
+                                return 'ชื่อไม่ถูกต้อง';
                               }
                               return null;
                             },
@@ -307,7 +312,7 @@ class _AddpetState extends State<Addpet> {
                             dropdownColor: Colors.white,
                             value: valueGender,
                             style: TextStyle(
-                                color: Colors.red.shade300,
+                                color: Colors.black,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Mitr'),
@@ -369,7 +374,7 @@ class _AddpetState extends State<Addpet> {
                             dropdownColor: Colors.white,
                             value: valueCategory,
                             style: TextStyle(
-                                color: Colors.red.shade300,
+                                color: Colors.black,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Mitr'),
@@ -421,7 +426,7 @@ class _AddpetState extends State<Addpet> {
                           subtitle: TextFormField(
                             controller: _addPetColor,
                             style: TextStyle(
-                                color: Colors.red.shade300,
+                                color: Colors.black,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Mitr'),
@@ -431,8 +436,13 @@ class _AddpetState extends State<Addpet> {
                               focusedBorder: InputBorder.none,
                             ),
                             validator: (value) {
+                              Pattern pattern =
+                                  r'^[A-Za-z]+(?:[ _-][A-Za-z]+)*$';
+                              RegExp regex = new RegExp(pattern);
                               if (value == null || value.isEmpty) {
                                 return 'กรุณาระบุสีของสัตว์เลี้ยง';
+                              } else if (!regex.hasMatch(value)) {
+                                return 'สีไม่ถูกต้อง';
                               }
                               return null;
                             },
@@ -464,7 +474,7 @@ class _AddpetState extends State<Addpet> {
                           subtitle: TextFormField(
                             controller: _addPetBreed,
                             style: TextStyle(
-                                color: Colors.red.shade300,
+                                color: Colors.black,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Mitr'),
@@ -474,8 +484,13 @@ class _AddpetState extends State<Addpet> {
                               focusedBorder: InputBorder.none,
                             ),
                             validator: (value) {
+                              Pattern pattern =
+                                  r'^[A-Za-z]+(?:[ _-][A-Za-z]+)*$';
+                              RegExp regex = new RegExp(pattern);
                               if (value == null || value.isEmpty) {
                                 return 'กรุณาระบุสายพันธุ์';
+                              } else if (!regex.hasMatch(value)) {
+                                return 'สายพันธุ์ไม่ถูกต้อง';
                               }
                               return null;
                             },
@@ -507,7 +522,7 @@ class _AddpetState extends State<Addpet> {
                           subtitle: TextFormField(
                             controller: _addPetCharacteristics,
                             style: TextStyle(
-                                color: Colors.red.shade300,
+                                color: Colors.black,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Mitr'),
@@ -550,7 +565,7 @@ class _AddpetState extends State<Addpet> {
                           subtitle: TextFormField(
                             controller: _addPetAge,
                             style: TextStyle(
-                                color: Colors.red.shade300,
+                                color: Colors.black,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Mitr'),
@@ -614,7 +629,7 @@ class _AddpetState extends State<Addpet> {
                             dropdownColor: Colors.white,
                             value: valueSterilize,
                             style: TextStyle(
-                                color: Colors.red.shade300,
+                                color: Colors.black,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Mitr'),
@@ -666,7 +681,7 @@ class _AddpetState extends State<Addpet> {
                           subtitle: TextFormField(
                             controller: _addCongenitalDisease,
                             style: TextStyle(
-                                color: Colors.red.shade300,
+                                color: Colors.black,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Mitr'),
@@ -709,7 +724,7 @@ class _AddpetState extends State<Addpet> {
                           subtitle: TextFormField(
                             controller: _addVaccine,
                             style: TextStyle(
-                                color: Colors.red.shade300,
+                                color: Colors.black,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Mitr'),

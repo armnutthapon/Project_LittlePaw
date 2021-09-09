@@ -16,13 +16,13 @@ class App extends StatefulWidget {
 
 class AppState extends State<App> {
   void insertData() async {
-    final FirebaseAuth auth = await FirebaseAuth.instance;
-    final User userId = await auth.currentUser;
-    final String uid = await userId.uid;
-    final String email = await userId.email;
-    http.Response response =
-        await http.post(Uri.parse('$Url/owner/insert/$uid/$email'));
-    print("UserID : " + uid);
+    // final FirebaseAuth auth = await FirebaseAuth.instance;
+    // final User userId = await auth.currentUser;
+    // final String uid = await userId.uid;
+    // final String email = await userId.email;
+    // http.Response response =
+    //     await http.post(Uri.parse('$Url/owner/insert/$uid/$email'));
+    // print("UserID : " + uid);
   }
 
   @override

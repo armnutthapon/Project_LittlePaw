@@ -27,7 +27,6 @@ class _NotificationFeedState extends State<NotificationFeed> {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User userId = auth.currentUser;
     final String uid = userId.uid;
-    print("UID : ${uid}");
 
     http.Response response =
         await http.get(Uri.parse('$Url/appointment/notificationByID/$uid'));

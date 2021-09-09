@@ -28,9 +28,12 @@ class _Page_AppointmentState extends State<Page_Appointment> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final time_appointment = TextEditingController();
   final symptom = TextEditingController();
+  final date_appointment = TextEditingController();
+
   var data;
   var petselected;
   var pidselected;
+
   CalendarFormat format = CalendarFormat.month;
   DateTime selectedDay = DateTime.now();
   DateTime focusedDay = DateTime.now();
@@ -78,7 +81,7 @@ class _Page_AppointmentState extends State<Page_Appointment> {
       'doctor_name': '${widget.doctor_name}',
       'userID': '$uid',
       'pid': '$pidselected',
-      'date': '$formattedDate',
+      'date': '$date_appointment',
       'time_appointment': '${time_appointment.text}',
       'symptom': '${symptom.text}'
     });
@@ -88,7 +91,7 @@ class _Page_AppointmentState extends State<Page_Appointment> {
     print("Doctor Nmae : " + widget.doctor_name);
     print("PID : " + pidselected);
     print("uid : " + uid);
-    print("Date : " + formattedDate);
+    print("Date : " + date_appointment.text);
     print("time : " + time_appointment.text);
     print("symptom : " + symptom.text);
 
@@ -133,6 +136,25 @@ class _Page_AppointmentState extends State<Page_Appointment> {
     }
   }
 
+  DateTime date;
+  DateTime selectedDate = DateTime.now();
+
+  Future<void> _selectDate(BuildContext context) async {
+    final now = DateTime.now();
+    final DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: date ?? now,
+        firstDate: now,
+        lastDate: DateTime(2025));
+    builder:
+    if (picked != null && picked != date) {
+      setState(() {
+        date_appointment.text = DateFormat('MM-dd-yyyy').format(picked);
+      });
+      print(date_appointment.text);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -168,63 +190,36 @@ class _Page_AppointmentState extends State<Page_Appointment> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 25, right: 25),
-                          child: Container(
-                            child: TableCalendar(
-                              focusedDay: selectedDay,
-                              firstDay: DateTime(2021),
-                              lastDay: DateTime(2050),
-                              calendarFormat: format,
-                              onFormatChanged: (CalendarFormat _format) {
-                                setState(() {
-                                  format = _format;
-                                });
-                              },
-                              startingDayOfWeek: StartingDayOfWeek.monday,
-                              daysOfWeekVisible: true,
-
-                              // Day Changed
-                              onDaySelected:
-                                  (DateTime selectDay, DateTime focusDay) {
-                                setState(() {
-                                  selectedDay = selectDay;
-                                  focusedDay = focusDay;
-                                });
-                                // print(focusedDay);
-                              },
-                              selectedDayPredicate: (DateTime date) {
-                                return isSameDay(selectedDay, date);
-                              },
-                              calendarStyle: CalendarStyle(
-                                isTodayHighlighted: true,
-                                selectedDecoration: BoxDecoration(
-                                  color: Colors.red.shade300,
-                                  shape: BoxShape.circle,
+                        Container(
+                          padding: EdgeInsets.fromLTRB(30, 0, 30, 5),
+                          child: InkWell(
+                            onTap: () {
+                              _selectDate(
+                                  context); // Call Function that has showDatePicker()
+                            },
+                            child: IgnorePointer(
+                              child: TextFormField(
+                                controller: date_appointment,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Mitr'),
+                                decoration: InputDecoration(
+                                  hintText: "ระบุวันที่",
+                                  hintStyle: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w300,
+                                      fontFamily: 'Mitr'),
                                 ),
-                                todayDecoration: BoxDecoration(
-                                  color: Colors.red.shade300,
-                                  shape: BoxShape.circle,
-                                ),
-                                selectedTextStyle: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'Mitr',
-                                  fontSize: 14,
-                                ),
+                                onSaved: (String value) {},
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'กรุณาระบุวันที่';
+                                  }
+                                  return null;
+                                },
                               ),
-                              headerStyle: HeaderStyle(
-                                  formatButtonVisible: true,
-                                  titleCentered: true,
-                                  formatButtonShowsNext: true,
-                                  formatButtonDecoration: BoxDecoration(
-                                      color: Colors.red.shade300,
-                                      borderRadius: BorderRadius.circular(5.0)),
-                                  formatButtonTextStyle:
-                                      TextStyle(color: Colors.white),
-                                  leftChevronVisible: false,
-                                  rightChevronVisible: false,
-                                  headerPadding: EdgeInsets.symmetric(
-                                      vertical: 10.0, horizontal: 5.0)),
                             ),
                           ),
                         ),
@@ -242,51 +237,37 @@ class _Page_AppointmentState extends State<Page_Appointment> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
-                          child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                                color: Colors.white,
-                                border: Border.all(
-                                    width: 1.0, color: Colors.grey[200]),
-                              ),
-                              child: Container(
-                                height: size.height * 0.07,
-                                padding: EdgeInsets.only(left: 20, right: 20),
-                                child: InkWell(
-                                  onTap: () {
-                                    _show(); // Call Function that has showDatePicker()
-                                  },
-                                  child: IgnorePointer(
-                                    child: TextFormField(
-                                      controller: time_appointment,
-                                      style: TextStyle(
-                                          color: Colors.red.shade300,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
-                                          fontFamily: 'Mitr'),
-                                      decoration: InputDecoration(
-                                        border: InputBorder.none,
-                                        focusedBorder: InputBorder.none,
-                                        hintText: "ระบุช่วงเวลา",
-                                        hintStyle: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w300,
-                                            fontFamily: 'Mitr'),
-                                      ),
-                                      onSaved: (String value) {},
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
-                                          return 'กรุณาระบุช่วงเวลา';
-                                        }
-                                        return null;
-                                      },
-                                    ),
-                                  ),
+                        Container(
+                          padding: EdgeInsets.fromLTRB(30, 0, 30, 5),
+                          child: InkWell(
+                            onTap: () {
+                              _show(); // Call Function that has showDatePicker()
+                            },
+                            child: IgnorePointer(
+                              child: TextFormField(
+                                controller: time_appointment,
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Mitr'),
+                                decoration: InputDecoration(
+                                  hintText: "ระบุช่วงเวลา",
+                                  hintStyle: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w300,
+                                      fontFamily: 'Mitr'),
                                 ),
-                              )),
+                                onSaved: (String value) {},
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'กรุณาระบุช่วงเวลา';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 15),
@@ -302,65 +283,59 @@ class _Page_AppointmentState extends State<Page_Appointment> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
-                          child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                                color: Colors.white,
-                                border: Border.all(
-                                    width: 1.0, color: Colors.grey[200]),
-                              ),
-                              child: Container(
-                                height: size.height * 0.07,
-                                padding: EdgeInsets.only(left: 20, right: 20),
-                                child: DropdownButtonFormField(
-                                  hint: Text(
-                                    "เลือกสัตว์เลี้ยง",
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w300,
-                                        fontFamily: 'Mitr'),
-                                  ),
-                                  isDense: false,
-                                  decoration:
-                                      InputDecoration.collapsed(hintText: ''),
-                                  dropdownColor: Colors.white,
-                                  value: valueSterilize,
-                                  style: TextStyle(
-                                      color: Colors.red.shade300,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400,
-                                      fontFamily: 'Mitr'),
-                                  onChanged: (newValue) {
-                                    setState(() {
-                                      valueSterilize = newValue;
-                                      petselected = newValue;
-                                      for (var i = 0; i < listpet.length; i++) {
-                                        if (petselected == listpet[i]) {
-                                          pidselected = listPID[i];
-                                        }
-                                      }
-                                    });
-                                    print(pidselected);
-                                    print(petselected);
-                                  },
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'กรุณาระบุการทำหมัน';
-                                    }
-                                    return null;
-                                  },
-                                  items: listpet.map((valueItem) {
-                                    return DropdownMenuItem(
-                                        value: valueItem,
-                                        child: Text(
-                                          valueItem,
-                                        ));
-                                  }).toList(),
-                                ),
-                              )),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            color: Colors.white,
+                            border:
+                                Border.all(width: 4.0, color: Colors.grey[100]),
+                          ),
+                          margin: EdgeInsets.fromLTRB(20, 0, 20, 5),
+                          padding: EdgeInsets.fromLTRB(10, 0, 30, 5),
+                          child: DropdownButtonFormField(
+                            hint: Text(
+                              "เลือกสัตว์เลี้ยง",
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w300,
+                                  fontFamily: 'Mitr'),
+                            ),
+                            isDense: false,
+                            decoration: InputDecoration.collapsed(hintText: ''),
+                            dropdownColor: Colors.white,
+                            value: valueSterilize,
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                                fontFamily: 'Mitr'),
+                            onChanged: (newValue) {
+                              setState(() {
+                                valueSterilize = newValue;
+                                petselected = newValue;
+                                for (var i = 0; i < listpet.length; i++) {
+                                  if (petselected == listpet[i]) {
+                                    pidselected = listPID[i];
+                                  }
+                                }
+                              });
+                              print(pidselected);
+                              print(petselected);
+                            },
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'กรุณาระบุสัตว์';
+                              }
+                              return null;
+                            },
+                            items: listpet.map((valueItem) {
+                              return DropdownMenuItem(
+                                  value: valueItem,
+                                  child: Text(
+                                    valueItem,
+                                  ));
+                            }).toList(),
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 15),
@@ -376,44 +351,30 @@ class _Page_AppointmentState extends State<Page_Appointment> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
-                          child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                                color: Colors.white,
-                                border: Border.all(
-                                    width: 1.0, color: Colors.grey[200]),
-                              ),
-                              child: Container(
-                                height: size.height * 0.07,
-                                padding: EdgeInsets.only(left: 20, right: 20),
-                                child: TextFormField(
-                                  controller: symptom,
-                                  style: TextStyle(
-                                      color: Colors.red.shade300,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400,
-                                      fontFamily: 'Mitr'),
-                                  decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    focusedBorder: InputBorder.none,
-                                    hintText: "ระบุอาการ",
-                                    hintStyle: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w300,
-                                        fontFamily: 'Mitr'),
-                                  ),
-                                  onSaved: (String value) {},
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'กรุณาระบุอาการ';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                              )),
+                        Container(
+                          padding: EdgeInsets.fromLTRB(30, 0, 30, 5),
+                          child: TextFormField(
+                            controller: symptom,
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                                fontFamily: 'Mitr'),
+                            decoration: InputDecoration(
+                              hintText: "ระบุอาการ",
+                              hintStyle: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w300,
+                                  fontFamily: 'Mitr'),
+                            ),
+                            onSaved: (String value) {},
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'กรุณาระบุอาการ';
+                              }
+                              return null;
+                            },
+                          ),
                         ),
                         Container(
                           margin: EdgeInsets.symmetric(
