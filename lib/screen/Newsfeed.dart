@@ -57,7 +57,6 @@ class _ImagePickerExampleState extends State<ImagePickerExample> {
     setState(() {
       data = json.decode(response.body);
     });
-    print("${data['pet_id'].length}");
     return data;
   }
 

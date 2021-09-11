@@ -27,6 +27,7 @@ class AuthServices with ChangeNotifier {
   String get errorMessageReset => _errorMessageReset;
 
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+
   Future register(String email, String password, String name) async {
     try {
       setLoadingRegist(true);
@@ -35,35 +36,14 @@ class AuthServices with ChangeNotifier {
         email: email,
         password: password,
       );
-      setLoadingRegist(false);
-      final FirebaseAuth auth = FirebaseAuth.instance;
-      final String uid = userId.uid;
-      print("UserID Insert : " + uid);
-      print("Name Insert : " + name);
-      print("Email Insert : " + email);
-      await registorOwner(email, name, uid);
-      User user = authResult.user;
-      return user;
 
-      // // void registorOwner() async {
-      // // final FirebaseAuth auth = FirebaseAuth.instance;
-      // // final User userId = auth.currentUser;
-      // // final String uid = userId.uid;
-      // // final String email = userId.email;
-      // print("UserID Insert : " + uid);
-      // print("Name Insert : " + name);
-      // print("Email Insert : " + email);
+      // final FirebaseAuth auth = await FirebaseAuth.instance;
+      // final String uid = await userId.uid;
+      await registorOwner(email, name);
+      await setLoadingRegist(false);
 
-      // http.Response response =
-      //     await http.post(Uri.parse('$Url/owner/registor'), body: {
-      //   'userID': '$uid',
-      //   'name': '${name}',
-      //   'email': '${email}',
-      //   // contact : req.body.contact
-      //   'urlImage': 'req.body.urlImage'
-      // });
-      // // }
-
+      User user = await authResult.user;
+      return await user;
     } on SocketException {
       setMessageRegist("No internet");
       setLoadingRegist(false);
@@ -179,12 +159,14 @@ class AuthServices with ChangeNotifier {
       firebaseAuth.authStateChanges().map((event) => event);
 }
 
-void registorOwner(userID, email, name) async {
+void registorOwner(email, name) async {
   final FirebaseAuth auth = await FirebaseAuth.instance;
   final User userId = await auth.currentUser;
   final String uid = await userId.uid;
-  final String email = await userId.email;
-  print("UserID : " + uid);
+  // final String email = await userId.email;
+  print("UID : " + uid);
+  // print("UserID :  $userID ");
+
   http.Response response =
       await http.post(Uri.parse('$Url/owner/registor'), body: {
     'userID': '$uid',
@@ -192,5 +174,10 @@ void registorOwner(userID, email, name) async {
     'email': '${email}',
     // contact : req.body.contact
     'urlImage': 'req.body.urlImage'
+  }).then((value) {
+    print("insert sucess");
+    print("insert userID: $uid");
+    print("insert name : ${name}");
+    print("insert email : ${email}");
   });
 }
