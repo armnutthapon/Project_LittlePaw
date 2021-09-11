@@ -35,7 +35,6 @@ class AuthServices with ChangeNotifier {
         email: email,
         password: password,
       );
-      User user = authResult.user;
       setLoadingRegist(false);
       final FirebaseAuth auth = FirebaseAuth.instance;
       final String uid = userId.uid;
@@ -43,6 +42,7 @@ class AuthServices with ChangeNotifier {
       print("Name Insert : " + name);
       print("Email Insert : " + email);
       await registorOwner(email, name, uid);
+      User user = authResult.user;
       return user;
 
       // // void registorOwner() async {
