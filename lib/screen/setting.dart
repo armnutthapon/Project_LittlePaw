@@ -24,9 +24,9 @@ class _SettingState extends State<Setting> {
   var data;
 
   getUserInformation() async {
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    final User userId = auth.currentUser;
-    final String uid = userId.uid;
+    final FirebaseAuth auth = await FirebaseAuth.instance;
+    final User userId = await auth.currentUser;
+    final String uid = await userId.uid;
     http.Response response =
         await http.get(Uri.parse('$Url/owner/showByID/$uid'));
     if (response.statusCode == 200) {
