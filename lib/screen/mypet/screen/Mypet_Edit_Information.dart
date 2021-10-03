@@ -56,9 +56,11 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
     print("PID :  ${widget.pid}");
     http.Response response =
         await http.get(Uri.parse('$Url/petDetail/showPetByPID/${widget.pid}'));
-    setState(() {
-      data = json.decode(response.body);
-    });
+    if (this.mounted) {
+      setState(() {
+        data = json.decode(response.body);
+      });
+    }
     showPetInformation();
     return data;
   }
@@ -187,24 +189,26 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
   }
 
   showPetInformation() {
-    setState(() {
-      editPetName.text = data['pet_name'];
-      editPetCategory = data['type'];
-      editPetGender = data['sex'];
-      editPetColor.text = data['color'];
-      editPetBreed.text = data['breed'];
-      editPetCharacteristics.text = data['characteristics'];
-      editPetAge.text = data['dob'];
-      editPetSterilize = data['sterilization'];
-      editCongenitalDisease.text = data['congenital_disease'];
-      editVaccine.text = data['vaccine'][0];
-      urlImage = data['urlImage'];
-      if (data['sterilization'] == true) {
-        return editPetSterilize = "ทำหมันแล้ว";
-      } else {
-        return editPetSterilize = "ยังไม่ทำหมัน";
-      }
-    });
+    if (this.mounted) {
+      setState(() {
+        editPetName.text = data['pet_name'];
+        editPetCategory = data['type'];
+        editPetGender = data['sex'];
+        editPetColor.text = data['color'];
+        editPetBreed.text = data['breed'];
+        editPetCharacteristics.text = data['characteristics'];
+        editPetAge.text = data['dob'];
+        editPetSterilize = data['sterilization'];
+        editCongenitalDisease.text = data['congenital_disease'];
+        editVaccine.text = data['vaccine'][0];
+        urlImage = data['urlImage'];
+        if (data['sterilization'] == true) {
+          return editPetSterilize = "ทำหมันแล้ว";
+        } else {
+          return editPetSterilize = "ยังไม่ทำหมัน";
+        }
+      });
+    }
   }
 
   DateTime date;

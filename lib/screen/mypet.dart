@@ -27,25 +27,27 @@ class _MyPetState extends State<MyPet> {
 
   // final String id = "";
 
-  getPetList() async {
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    final User userId = auth.currentUser;
-    final String uid = userId.uid;
-    print(uid);
+    getPetList() async {
+    FirebaseAuth auth = await FirebaseAuth.instance;
+    User userId = await auth. currentUser;
+    String uid = await userId.uid;
+    print("mypet ID : " + uid); 
     http.Response response =
         await http.get(Uri.parse('$Url/petDetail/showByID/$uid'));
     setState(() {
       data = json.decode(response.body);
     });
-    print(data);
+    print(response.statusCode);
+    print("mypet : $data");
     return data;
   }
 
   @override
   void initState() {
-    super.initState();
     getPetList();
+    super.initState();
   }
+
 
   @override
   Widget build(BuildContext context) {

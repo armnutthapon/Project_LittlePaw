@@ -2,71 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Page_FilterClinic extends StatefulWidget {
-  const Page_FilterClinic({Key key}) : super(key: key);
+  final int dintance = 0;
+  const Page_FilterClinic({Key key,}) : super(key: key);
 
   @override
   _Page_FilterClinicState createState() => _Page_FilterClinicState();
 }
 
 class _Page_FilterClinicState extends State<Page_FilterClinic> {
+  RangeValues _currentRangeValues =  RangeValues(0, 35);
+
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(children: <Widget>[
-        selectFilter(),
-        new Positioned(
-          top: 0.0,
-          left: 0.0,
-          right: 0.0,
-          child: AppBar(
-            title: Text(
-              "กรองข้อมูล",
-              style: TextStyle(
-                  fontSize: 22,
-                  color: Colors.red.shade300,
-                  fontWeight: FontWeight.w400,
-                  fontFamily: 'Mitr'),
-            ), // You can add title here
-            leading: new IconButton(
-              padding: EdgeInsets.only(top: 0),
-              icon: new Icon(
-                Icons.arrow_back_ios,
-                color: Colors.red.shade300,
-              ),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-            backgroundColor: Colors.white,
-            elevation: 0.0,
-          ),
-        ),
-      ]),
-    );
-  }
-}
-
-class selectFilter extends StatefulWidget {
-  @override
-  _selectFilterState createState() => _selectFilterState();
-}
-
-class _selectFilterState extends State<selectFilter> {
-  RangeValues _currentRangeValues = const RangeValues(0, 40);
-
-  bool A = false;
-  bool B = false;
-  bool C = false;
-  bool D = false;
-  bool E = false;
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Container(
+      body: Stack(children: <Widget>[
+      // backgroundColor: Colors.white,
+      Container(
         alignment: Alignment.center,
         child: Column(
           children: [
             SizedBox(
-              height: size.height * 0.07,
+              height: size.height * 0.05,
             ),
             Container(
                 child: Column(
@@ -84,7 +41,7 @@ class _selectFilterState extends State<selectFilter> {
                   padding: EdgeInsets.only(left: 40),
                   child: ListTile(
                     title: Text(
-                      "ระยะทาง",
+                      "ระยะทาง ( กิโลเมตร )",
                       style: TextStyle(
                           fontSize: 20,
                           color: Colors.black,
@@ -105,9 +62,10 @@ class _selectFilterState extends State<selectFilter> {
                         activeColor: Colors.red.shade400,
                         inactiveColor: Colors.red.shade100,
                         values: _currentRangeValues,
+                      
                         min: 0,
-                        max: 100,
-                        divisions: 5,
+                        max: 14000,
+                        divisions: 2,
                         labels: RangeLabels(
                           _currentRangeValues.start.round().toString(),
                           _currentRangeValues.end.round().toString(),
@@ -116,125 +74,128 @@ class _selectFilterState extends State<selectFilter> {
                           setState(() {
                             _currentRangeValues = values;
                           });
+                          // print(_currentRangeValues.end);
                         }),
                   ),
                 ],
               ),
             ),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 55),
-                    child: Column(
-                      children: [
-                        Text(
-                          "ประเภทการรักษา",
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w300,
-                              fontFamily: 'Mitr'),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Container(
-                child: ListView(
-                  children: [
-                    Column(
-                      children: [
-                        Padding(
-                            padding: EdgeInsets.only(left: 60),
-                            child: Container(
-                              child: Column(
-                                children: <Widget>[
-                                  Column(
-                                    children: <Widget>[
-                                      Row(
-                                        children: [
-                                          Checkbox(
-                                            value: A,
-                                            onChanged: (bool value) {
-                                              setState(() {
-                                                A = value;
-                                              });
-                                            },
-                                          ),
-                                          Text("A"),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Checkbox(
-                                            value: B,
-                                            onChanged: (bool value) {
-                                              setState(() {
-                                                B = value;
-                                              });
-                                            },
-                                          ),
-                                          Text("B"),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Checkbox(
-                                            value: C,
-                                            onChanged: (bool value) {
-                                              setState(() {
-                                                C = value;
-                                              });
-                                            },
-                                          ),
-                                          Text("C"),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Checkbox(
-                                            value: D,
-                                            onChanged: (bool value) {
-                                              setState(() {
-                                                D = value;
-                                              });
-                                            },
-                                          ),
-                                          Text("D"),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          Checkbox(
-                                            value: E,
-                                            onChanged: (bool value) {
-                                              setState(() {
-                                                E = value;
-                                              });
-                                            },
-                                          ),
-                                          Text("E"),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ))
-                      ],
-                    )
-                  ],
-                ),
-              ),
-            ),
           ],
         ),
-      ),
+    ),
+        new Positioned(
+          top: 0.0,
+          left: 0.0,
+          right: 0.0,
+          child: AppBar(
+            title: Text(
+              "กรองข้อมูล",
+              style: TextStyle(
+                  fontSize: 22,
+                  color: Colors.red.shade300,
+                  fontWeight: FontWeight.w400,
+                  fontFamily: 'Mitr'),
+            ), // You can add title here
+            leading: new IconButton(
+              padding: EdgeInsets.only(top: 0),
+              icon: new Icon(
+                Icons.arrow_back_ios,
+                color: Colors.red.shade300,
+              ),
+              onPressed: () => 
+              Navigator.pop(context,[_currentRangeValues.start,_currentRangeValues.end])
+            ),
+            backgroundColor: Colors.white,
+            elevation: 0.0,
+          ),
+        ),
+      ]),
     );
   }
 }
+
+// class selectFilter extends StatefulWidget {
+//   @override
+//   _selectFilterState createState() => _selectFilterState();
+// }
+
+// class _selectFilterState extends State<selectFilter> {
+//   var start = 0 , end = 35;
+//   RangeValues _currentRangeValues =  RangeValues(0, 35);
+//   static String _valueToString(double value) {
+//       return value.toStringAsFixed(0);
+//   }
+  
+//   Widget build(BuildContext context) {
+//     Size size = MediaQuery.of(context).size;
+//     return Scaffold(
+//       backgroundColor: Colors.white,
+//       body: Container(
+//         alignment: Alignment.center,
+//         child: Column(
+//           children: [
+//             SizedBox(
+//               height: size.height * 0.07,
+//             ),
+//             Container(
+//                 child: Column(
+//               children: [
+//                 Padding(
+//                   padding: EdgeInsets.only(left: 40),
+//                   child: ListTile(),
+//                 )
+//               ],
+//             )),
+//             Container(
+//                 child: Column(
+//               children: [
+//                 Padding(
+//                   padding: EdgeInsets.only(left: 40),
+//                   child: ListTile(
+//                     title: Text(
+//                       "ระยะทาง ( กิโลเมตร )",
+//                       style: TextStyle(
+//                           fontSize: 20,
+//                           color: Colors.black,
+//                           fontWeight: FontWeight.w300,
+//                           fontFamily: 'Mitr'),
+//                     ),
+//                   ),
+//                 )
+//               ],
+//             )),
+//             Container(
+//               margin: new EdgeInsets.only(left: 20, right: 20),
+//               child: Column(
+//                 children: [
+//                   Padding(
+//                     padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+//                     child: RangeSlider(
+//                         activeColor: Colors.red.shade400,
+//                         inactiveColor: Colors.red.shade100,
+//                         values: _currentRangeValues,
+                      
+//                         min: 0,
+//                         max: 50,
+//                         divisions: 50,
+//                         labels: RangeLabels(
+//                           _currentRangeValues.start.round().toString(),
+//                           _currentRangeValues.end.round().toString(),
+//                         ),
+//                         onChanged: (RangeValues values) {
+//                           setState(() {
+//                             _currentRangeValues = values;
+//                             RangeValues(_currentRangeValues.start, _currentRangeValues.end);
+//                           });
+//                           print(_currentRangeValues.end);
+//                         }),
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }

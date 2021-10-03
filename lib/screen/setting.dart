@@ -22,28 +22,50 @@ class Setting extends StatefulWidget {
 class _SettingState extends State<Setting> {
   _getReload() async {}
   var data;
+  var getAge;
+  String age;
 
   getUserInformation() async {
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    final User userId = auth.currentUser;
-    final String uid = userId.uid;
+    FirebaseAuth auth = await FirebaseAuth.instance;
+    User userId = await auth.currentUser;
+    String uid = await userId.uid;
+    print("profile ID : " + uid);
     http.Response response =
         await http.get(Uri.parse('$Url/owner/showByID/$uid'));
-    if (response.statusCode == 200) {
-      Map<String, dynamic> data = jsonDecode(response.body);
-      this.setState(() {
-        this.data = data;
+    if (this.mounted) {
+      setState(() {
+        data = json.decode(response.body);
       });
     }
 
+    // คำนวณอายุ
+    // await getOwnerAge();
+
+    print("profile : $data");
     return data;
   }
 
+  // ## function คำนวณอายุ
+  // getOwnerAge() async {
+  //   http.Response response = await http
+  //       .post(Uri.parse('$Url/owner/getage'), body: {'dob': data['dob']});
+  //   if (this.mounted) {
+  //     setState(() {
+  //       getAge = json.decode(response.body);
+  //       if (getAge[0]['age'] <= 0) {
+  //         age = "น้อยกว่า 1";
+  //       } else {
+  //         age = "${getAge[0]['age']}";
+  //       }
+  //     });
+  //   }
+  //   print(getAge[0]['age']);
+  // }
+
   @override
   void initState() {
-    super.initState();
-    //showOwnerDetail();
     getUserInformation();
+    super.initState();
   }
 
   @override
@@ -105,7 +127,7 @@ class _SettingState extends State<Setting> {
                           children: [
                             Container(
                                 padding: EdgeInsets.only(bottom: 10, top: 10),
-                                child: data != null
+                                child: data == null
                                     ? null
                                     : CircleAvatar(
                                         radius: 75,
@@ -152,6 +174,10 @@ class _SettingState extends State<Setting> {
                           // OwnerInfo(
                           //   text: "เพศ :",
                           //   textdetail: data['sex'],
+                          // ),
+                          // OwnerInfo(
+                          //   text: "อายุ :",
+                          //   textdetail: "$age ปี",
                           // ),
                           OwnerInfo(
                             text: "จำนวนสัตว์เลี้ยง :",

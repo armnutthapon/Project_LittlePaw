@@ -39,15 +39,21 @@ class _Page_ClinicDetailState extends State<Page_ClinicDetail> {
     http.Response response =
         await http.get(Uri.parse('$Url/clinic/showByID/${widget.cid}'));
     print("CID :: :" + widget.cid);
-    setState(() {
-      data = json.decode(response.body);
-      address.add(data['address'][0]['building']);
-      address.add(data['address'][0]['alley']);
-      address.add(data['address'][0]['street']);
-      address.add(data['address'][0]['city']);
-      address.add(data['address'][0]['province']);
-    });
-    print(address.join(' '));
+    if (this.mounted) {
+      setState(() {
+        data = json.decode(response.body);
+        address.add(data['address'][0]['building']);
+        address.add(data['address'][0]['alley']);
+        address.add(data['address'][0]['street']);
+        address.add(data['address'][0]['city']);
+        address.add(data['address'][0]['province']);
+        address.remove(null);
+        address.remove('-');
+        
+      });
+    }
+
+    print("address : " + address.join(' '));
 
     return data;
   }

@@ -47,7 +47,8 @@ class ImagePickerExample extends StatefulWidget {
 
 class _ImagePickerExampleState extends State<ImagePickerExample> {
   var data;
-
+  var appointment;
+  String sum_appointment;
   getDashboard() async {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User userId = auth.currentUser;
@@ -57,14 +58,35 @@ class _ImagePickerExampleState extends State<ImagePickerExample> {
     setState(() {
       data = json.decode(response.body);
     });
-    print("${data['pet_id'].length}");
+    print(data['pet_id'].length);
     return data;
+  }
+
+  getNotificationByID() async {
+    FirebaseAuth auth = await FirebaseAuth.instance;
+    User userId = await auth.currentUser;
+    String uid = await userId.uid;
+
+    http.Response response =
+        await http.get(Uri.parse('$Url/appointment/notificationByID/$uid'));
+
+    this.setState(() {
+      appointment = json.decode(response.body);
+      if(appointment == [] ){
+        sum_appointment = '0';
+      }else{
+        sum_appointment = '${appointment.length}';
+      }
+    });
+    print("count : ${appointment.length}");
+    return appointment;
   }
 
   @override
   void initState() {
     super.initState();
     getDashboard();
+    getNotificationByID();
   }
 
   bool _clicked = false;
@@ -74,7 +96,7 @@ class _ImagePickerExampleState extends State<ImagePickerExample> {
     Size size = MediaQuery.of(context).size;
 
     final loginProvider = Provider.of<AuthServices>(context);
-    return Container(
+    return data != null ? Container(
       padding: EdgeInsets.all(10),
       height: size.height,
       child: Column(
@@ -125,8 +147,8 @@ class _ImagePickerExampleState extends State<ImagePickerExample> {
                             fontFamily: 'Mitr'),
                       ),
                       Text(
-                        "555",
-                        // "${data['pet_id'].length}",
+                        
+                        "${data['pet_id'].length}",
                         style: const TextStyle(
                           color: Colors.black,
                           fontSize: 40,
@@ -240,7 +262,7 @@ class _ImagePickerExampleState extends State<ImagePickerExample> {
                             fontFamily: 'Mitr'),
                       ),
                       Text(
-                        "2",
+                        sum_appointment,
                         style: const TextStyle(
                           color: Colors.black,
                           fontSize: 40,
@@ -253,7 +275,7 @@ class _ImagePickerExampleState extends State<ImagePickerExample> {
               )),
         ],
       ),
-    );
+    ): Center(child: CircularProgressIndicator());
   }
 }
 

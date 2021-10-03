@@ -36,12 +36,12 @@ class AuthServices with ChangeNotifier {
         password: password,
       );
       setLoadingRegist(false);
-      final FirebaseAuth auth = FirebaseAuth.instance;
-      final String uid = userId.uid;
+      final FirebaseAuth auth = await FirebaseAuth.instance;
+      final String uid = await userId.uid;
       print("UserID Insert : " + uid);
       print("Name Insert : " + name);
       print("Email Insert : " + email);
-      await registorOwner(email, name, uid);
+      await registorOwner(uid, email, name);
       User user = authResult.user;
       return user;
 
@@ -180,17 +180,19 @@ class AuthServices with ChangeNotifier {
 }
 
 void registorOwner(userID, email, name) async {
-  final FirebaseAuth auth = await FirebaseAuth.instance;
-  final User userId = await auth.currentUser;
-  final String uid = await userId.uid;
-  final String email = await userId.email;
+  // final FirebaseAuth auth = await FirebaseAuth.instance;
+  // final User userId = await auth.currentUser;
+  // final String uid = await userId.uid;
+  // final String email = await userId.email;
   print("UserID : " + uid);
   http.Response response =
       await http.post(Uri.parse('$Url/owner/registor'), body: {
-    'userID': '$uid',
+    'userID': '$userID',
     'name': '${name}',
     'email': '${email}',
-    // contact : req.body.contact
+    'gender' : '',
+    'dob' : '',
+    'contact' : '',
     'urlImage': 'req.body.urlImage'
   });
 }

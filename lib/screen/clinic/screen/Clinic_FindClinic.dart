@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:ffi';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -51,6 +52,7 @@ class _Page_FindClinicState extends State<Page_FindClinic> {
 }
 
 class findClinicMain extends StatefulWidget {
+  const findClinicMain({Key key}) : super(key: key);
   @override
   _findClinicMainState createState() => _findClinicMainState();
 }
@@ -58,28 +60,129 @@ class findClinicMain extends StatefulWidget {
 class _findClinicMainState extends State<findClinicMain> {
   List data;
   var cid;
+  final search = TextEditingController();
+  var listclinic = [];
+  double latitude, longitude;
+  var distance;
+  var mindistance , maxdistance;
 
   void _getCurrentLocation() async {
-    final position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-    print(position.latitude);
-    print(position.longitude);
+    final position = await Geolocator()
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    if (this.mounted) {
+      setState(() {
+        latitude = position.latitude;
+        longitude = position.longitude;
+      });
+    }
+    print(latitude);
+    print(longitude);
   }
 
   getClinic() async {
-    http.Response response = await http.get(Uri.parse('$Url/clinic'));
+    await _getCurrentLocation();
+    http.Response response = await http.post(Uri.parse('$Url/clinic/distance'),
+        body: {"longitude": '$longitude', "latitude": '$latitude'});
+    
+      setState(() {
+        data = json.decode(response.body);
+        for (var i = 0; i < data.length; i++) {
+          listclinic.add(data[i]);
+        }
 
-    setState(() {
-      data = json.decode(response.body);
-    });
-    print(data);
+      });
+      print(listclinic[0]['clinic_name']);
+    
     return data;
+  }
+
+  void filterSearchResult(String query) {
+    var dummySearchList = [];
+    for (var i = 0; i < data.length; i++) {
+      dummySearchList.add(data[i]);
+    }
+
+    if (query.isNotEmpty) {
+      var dummyListData = [];
+      dummySearchList.forEach((item) {
+        print(item['clinic_name']);
+        if (item['clinic_name'].contains((query))) {
+          dummyListData.add(item);
+        }
+        print(listclinic);
+      });
+      setState(() {
+        listclinic.clear();
+        listclinic.addAll(dummyListData);
+      });
+      return;
+    } else {
+      setState(() {
+        listclinic.clear();
+        for (var i = 0; i < data.length; i++) {
+          listclinic.add(data[i]);
+        }
+      });
+    }
+  }
+  void filterDistanceSearchResult(double mindistance , double maxdistance) {
+    var dummySearchList = [];
+    for (var i = 0; i < data.length; i++) {
+      dummySearchList.add(data[i]);
+      print(dummySearchList[i]['distance']/1000);
+    }
+    print(mindistance);
+    print(maxdistance);
+    if (maxdistance != 0) {
+      var dummyListData = [];
+      dummySearchList.forEach((item) {
+        print((item['distance']/1000.toInt()));
+        if (item['distance']/1000 <= maxdistance) {
+          dummyListData.add(item);
+        }else{
+          dummyListData.remove(item);
+        }
+        // print(listclinic);
+      });
+      setState(() {
+        listclinic.clear();
+        listclinic.addAll(dummyListData);
+      });
+      return;
+    } else {
+      setState(() {
+        listclinic.clear();
+        for (var i = 0; i < data.length; i++) {
+          listclinic.add(data[i]);
+        }
+      });
+    }
+  }
+
+  void _navigateAndDisplaySelection(BuildContext context) async {
+    // Navigator.push returns a Future that completes after calling
+    // Navigator.pop on the Selection Screen.
+    final result = await Navigator.push(
+        context, MaterialPageRoute(builder: (context) => Page_FilterClinic()));
+
+    // After the Selection Screen returns a result, hide any previous snackbars
+    // and show the new result.
+    if(this.mounted){
+      setState(() {
+        mindistance = result[0];
+        maxdistance = result[1];
+      });
+    }
+    await filterDistanceSearchResult(mindistance , maxdistance);
+    // print(mindistance);
+    // print(maxdistance);
   }
 
   @override
   void initState() {
-    super.initState();
     getClinic();
-    _getCurrentLocation();
+    // _getCurrentLocation();
+    super.initState();
   }
 
   Widget build(BuildContext context) {
@@ -89,7 +192,7 @@ class _findClinicMainState extends State<findClinicMain> {
       body: Column(
         children: [
           SizedBox(
-            height: size.height * 0.15,
+            height: size.height * 0.10,
             //  height: size.height * 0.05,
           ),
           Container(
@@ -100,7 +203,8 @@ class _findClinicMainState extends State<findClinicMain> {
                     child: Row(
                       children: <Widget>[
                         Expanded(
-                          child: TextFormField(
+                          child: TextField(
+                            controller: search,
                             cursorColor: Colors.red.shade300,
                             style: TextStyle(
                                 color: Colors.red.shade300,
@@ -123,7 +227,17 @@ class _findClinicMainState extends State<findClinicMain> {
                                     color: Colors.red.shade300,
                                   ),
                                   onPressed: () {}),
+                              // suffixIcon: data.isNotEmpty ? GestureDetector(
+                              //   child: Icon(Icons.close , size: 20,
+                              //       color: Colors.red.shade300,),
+                              //   onTap: () {
+                              //      FocusScope.of(context).requestFocus(FocusNode());
+                              //   },
+                              // ):null
                             ),
+                            onChanged: (value) {
+                              filterSearchResult(value);
+                            },
                           ),
                         ),
                       ],
@@ -147,9 +261,14 @@ class _findClinicMainState extends State<findClinicMain> {
                         size: 20,
                       ),
                       color: Colors.white,
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => Page_FilterClinic()));
+                      onPressed: () async {
+                        // Navigator.of(context).push(MaterialPageRoute(
+                        //     builder: (context) => Page_FilterClinic())).then((value)
+                        //   {
+                        //      mindistance = (value as Map)['mindistance'];
+                        //      maxdistance =  (value as Map)['maxdistance'];
+                        //   });
+                        _navigateAndDisplaySelection(context);
                       },
                     ),
                     decoration: BoxDecoration(
@@ -168,14 +287,14 @@ class _findClinicMainState extends State<findClinicMain> {
               ? Expanded(
                   child: ListView.builder(
                       padding: EdgeInsets.zero,
-                      itemCount: data == null ? 0 : data.length,
+                      itemCount: data == null ? 0 : listclinic.length,
                       itemBuilder: (BuildContext context, int index) {
                         return Container(
                           padding: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
                           child: InkWell(
                             onTap: () {
                               setState(() {
-                                cid = data[index]['_id'];
+                                cid = listclinic[index]['_id'];
                               });
 
                               var cid_sendRoute = new MaterialPageRoute(
@@ -222,7 +341,7 @@ class _findClinicMainState extends State<findClinicMain> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            data[index]['clinic_name'],
+                                            listclinic[index]['clinic_name'],
                                             style: TextStyle(
                                                 color: Colors.black54,
                                                 fontSize: 16,
@@ -230,7 +349,7 @@ class _findClinicMainState extends State<findClinicMain> {
                                                 fontFamily: 'Mitr'),
                                           ),
                                           Text(
-                                            "3.5 กิโลเมตร",
+                                            "${(listclinic[index]['distance']/1000).toStringAsFixed(2)} กิโลเมตร",
                                             style: TextStyle(
                                                 color: Colors.black54,
                                                 fontSize: 14,
@@ -238,7 +357,8 @@ class _findClinicMainState extends State<findClinicMain> {
                                                 fontFamily: 'Mitr'),
                                           ),
                                           Text(
-                                            data[index]['address'][0]['city'],
+                                            listclinic[index]['address'][0]
+                                                ['city'],
                                             style: TextStyle(
                                                 color: Colors.black54,
                                                 fontSize: 14,
@@ -246,7 +366,7 @@ class _findClinicMainState extends State<findClinicMain> {
                                                 fontFamily: 'Mitr'),
                                           ),
                                           Text(
-                                            data[index]['opening_time'],
+                                            listclinic[index]['opening_time'],
                                             style: TextStyle(
                                                 color: Colors.black54,
                                                 fontSize: 14,

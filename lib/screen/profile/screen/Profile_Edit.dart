@@ -44,7 +44,7 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
     final String uid = userId.uid;
     http.Response response =
         await http.get(Uri.parse('$Url/owner/showByID/$uid'));
-    if (response.statusCode == 200) {
+    if (this.mounted) {
       this.setState(() {
         this.data = jsonDecode(response.body);
       });
@@ -73,11 +73,11 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
     //   return user_contact.text = "-";
     // }
 
-    http.Response response = await http
-        .put(Uri.parse('$Url/owner/editUserProfile/$uid'), body: {
+    http.Response response =
+        await http.put(Uri.parse('$Url/owner/editUserProfile/$uid'), body: {
       'name': '${user_name.text}',
-      'contact': '',
-      'sex': '',
+      'contact': '${user_contact.text}',
+      'sex': '$user_gender',
       'urlImage': '$urlImage'
     }).then((value) {});
     print(
@@ -120,12 +120,14 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
   }
 
   showUserProfile() {
-    setState(() {
-      user_name.text = data['name'];
-      user_contact.text = data['contact'];
-      user_gender = data['sex'];
-      urlImage = data['urlImage'];
-    });
+    if (this.mounted) {
+      setState(() {
+        user_name.text = data['name'];
+        user_contact.text = data['contact'];
+        user_gender = data['sex'];
+        urlImage = data['urlImage'];
+      });
+    }
   }
 
   Future pickImage(ImageSource source) async {
@@ -145,12 +147,9 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
 
     firebase_storage.FirebaseStorage storage =
         firebase_storage.FirebaseStorage.instance;
-    // firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
-    //     .ref()
-    //     .child('images_owner/Pet$random_number.jpg');
     firebase_storage.UploadTask uploadTask = firebase_storage
         .FirebaseStorage.instance
-        .ref('pet_images/Pet$random_number.jpg')
+        .ref('owner_images/Owner$random_number.jpg')
         .putFile(_imageFile);
 
     urlImage = await (await uploadTask).ref.getDownloadURL();
@@ -209,47 +208,50 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                           children: [
                             Container(
                                 padding: EdgeInsets.only(bottom: 10, top: 10),
-                                child: Column(
-                                  children: [
-                                    CircleAvatar(
-                                      radius: 75,
-                                      backgroundColor: Colors.grey.shade300,
-                                      child: ClipOval(
-                                        child: SizedBox(
-                                          width: 140.0,
-                                          height: 140.0,
-                                          child: (_imageFile != null)
-                                              ? Image.file(
-                                                  _imageFile,
-                                                  fit: BoxFit.fill,
-                                                )
-                                              : Image.network(
-                                                  urlImage,
-                                                  fit: BoxFit.fill,
-                                                ),
-                                        ),
-                                      ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        IconButton(
-                                          icon: Icon(Icons.photo_library),
-                                          onPressed: () {
-                                            pickImage(ImageSource.gallery);
-                                          },
-                                        ),
-                                        IconButton(
-                                          icon: Icon(Icons.photo_camera),
-                                          onPressed: () {
-                                            pickImage(ImageSource.camera);
-                                          },
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ))
+                                child: data == null
+                                    ? null
+                                    : Column(
+                                        children: [
+                                          CircleAvatar(
+                                            radius: 65,
+                                            backgroundColor:
+                                                Colors.grey.shade300,
+                                            child: ClipOval(
+                                              child: SizedBox(
+                                                  width: 140.0,
+                                                  height: 140.0,
+                                                  child: (_imageFile != null)
+                                                      ? Image.file(
+                                                          _imageFile,
+                                                          fit: BoxFit.fill,
+                                                        )
+                                                      : Image.network(
+                                                          urlImage,
+                                                          fit: BoxFit.fill,
+                                                        )),
+                                            ),
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              IconButton(
+                                                icon: Icon(Icons.photo_library),
+                                                onPressed: () {
+                                                  pickImage(
+                                                      ImageSource.gallery);
+                                                },
+                                              ),
+                                              IconButton(
+                                                icon: Icon(Icons.photo_camera),
+                                                onPressed: () {
+                                                  pickImage(ImageSource.camera);
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ))
                           ],
                         ),
                       )),

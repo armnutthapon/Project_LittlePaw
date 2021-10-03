@@ -24,9 +24,9 @@ class _NotificationFeedState extends State<NotificationFeed> {
   DateTime focusedDay = DateTime.now();
 
   getNotificationByID() async {
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    final User userId = auth.currentUser;
-    final String uid = userId.uid;
+    FirebaseAuth auth = await FirebaseAuth.instance;
+    User userId = await auth.currentUser;
+    String uid = await userId.uid;
 
     http.Response response =
         await http.get(Uri.parse('$Url/appointment/notificationByID/$uid'));
