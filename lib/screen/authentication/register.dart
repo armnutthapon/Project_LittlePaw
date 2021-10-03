@@ -41,7 +41,7 @@ class _RegisterState extends State<Register> {
         lastDate: now);
     if (picked != null && picked != date) {
       setState(() {
-        _age.text = DateFormat('MM-dd-yyyy').format(picked);
+        _age.text = DateFormat('dd-MM-yyyy').format(picked);
       });
       print(_age.text);
     }
@@ -408,11 +408,14 @@ class _RegisterState extends State<Register> {
                                               if (_formkey.currentState
                                                   .validate()) {
                                                 await loginProvider.register(
-                                                  _emailController.text.trim(),
-                                                  _passwordController.text
-                                                      .trim(),
-                                                  _name.text.trim(),
-                                                );
+                                                    _emailController.text
+                                                        .trim(),
+                                                    _passwordController.text
+                                                        .trim(),
+                                                    _name.text.trim(),
+                                                    _gender.trim(),
+                                                    _age.text.trim(),
+                                                    _phone.text.trim());
 
                                                 // widget.toggleScreen();
                                                 // print(

@@ -28,23 +28,22 @@ class AuthServices with ChangeNotifier {
 
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
-  Future register(String email, String password, String name) async {
+  Future register(String email, String password, String name, String gender,
+      String age, String phone) async {
     try {
       setLoadingRegist(true);
-      UserCredential authResult =
-          await firebaseAuth.createUserWithEmailAndPassword(
+      UserCredential authResult = await firebaseAuth
+          .createUserWithEmailAndPassword(
         email: email,
         password: password,
-      );
-      setLoadingRegist(false);
-      final FirebaseAuth auth = await FirebaseAuth.instance;
-      final String uid = await userId.uid;
-      print("UserID Insert : " + uid);
-      print("Name Insert : " + name);
-      print("Email Insert : " + email);
-      await registorOwner(uid, email, name);
-      User user = authResult.user;
-      return user;
+      )
+          .then((value) async {
+        await registorOwner(email, name, gender, age, phone);
+      });
+      await setLoadingRegist(false);
+
+      User user = await authResult.user;
+      return await user;
     } on SocketException {
       setMessageRegist("No internet");
       setLoadingRegist(false);
@@ -160,20 +159,22 @@ class AuthServices with ChangeNotifier {
       firebaseAuth.authStateChanges().map((event) => event);
 }
 
-void registorOwner(userID, email, name) async {
-  // final FirebaseAuth auth = await FirebaseAuth.instance;
-  // final User userId = await auth.currentUser;
-  // final String uid = await userId.uid;
+void registorOwner(email, name, gender, age, phone) async {
+  final FirebaseAuth auth = await FirebaseAuth.instance;
+  final User userId = await auth.currentUser;
+  final String uid = await userId.uid;
   // final String email = await userId.email;
-  print("UserID : " + uid);
+  print("UID : " + uid);
+  // print("UserID :  $userID ");
+
   http.Response response =
       await http.post(Uri.parse('$Url/owner/registor'), body: {
-    'userID': '$userID',
+    'userID': '$uid',
     'name': '${name}',
     'email': '${email}',
-    'gender' : '',
-    'dob' : '',
-    'contact' : '',
+    'gender': '${gender}',
+    'dob': '${age}',
+    'contact': '${phone}',
     'urlImage': 'req.body.urlImage'
   }).then((value) {
     print("insert sucess");
