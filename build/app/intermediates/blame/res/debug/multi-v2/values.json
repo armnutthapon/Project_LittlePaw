@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\SE 4\\Project_LittlePaw\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+            "outputFile": "D:\\SE 4\\Little paw - Born\\Project_LittlePaw\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
             "map": [
                 {
                     "source": "C:\\Users\\kanom\\.gradle\\caches\\transforms-2\\files-2.1\\c23a87840284bb28daa926af4c60a636\\play-services-base-17.2.1\\res\\values\\values.xml",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "D:\\SE 4\\Project_LittlePaw\\android\\app\\src\\main\\res\\values\\styles.xml",
+                    "source": "D:\\SE 4\\Little paw - Born\\Project_LittlePaw\\android\\app\\src\\main\\res\\values\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
@@ -39,6 +39,23 @@
                         "endLines": "1398,1401",
                         "endColumns": "12,12",
                         "endOffsets": "91874,92039"
+                    }
+                },
+                {
+                    "source": "D:\\SE 4\\Little paw - Born\\Project_LittlePaw\\build\\app\\generated\\res\\google-services\\debug\\values\\values.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "55,200,283,387,497,617,716",
+                        "endColumns": "144,82,103,109,119,98,75",
+                        "endOffsets": "195,278,382,492,612,711,787"
+                    },
+                    "to": {
+                        "startLines": "320,321,322,323,324,325,326",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "22352,22497,22580,22684,22794,22914,23013",
+                        "endColumns": "144,82,103,109,119,98,75",
+                        "endOffsets": "22492,22575,22679,22789,22909,23008,23084"
                     }
                 },
                 {
@@ -75,23 +92,6 @@
                         "startOffsets": "17123,21059",
                         "endColumns": "67,166",
                         "endOffsets": "17186,21221"
-                    }
-                },
-                {
-                    "source": "D:\\SE 4\\Project_LittlePaw\\build\\app\\generated\\res\\google-services\\debug\\values\\values.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "55,200,283,387,497,617,716",
-                        "endColumns": "144,82,103,109,119,98,75",
-                        "endOffsets": "195,278,382,492,612,711,787"
-                    },
-                    "to": {
-                        "startLines": "320,321,322,323,324,325,326",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "22352,22497,22580,22684,22794,22914,23013",
-                        "endColumns": "144,82,103,109,119,98,75",
-                        "endOffsets": "22492,22575,22679,22789,22909,23008,23084"
                     }
                 },
                 {
