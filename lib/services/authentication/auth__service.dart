@@ -27,6 +27,7 @@ class AuthServices with ChangeNotifier {
   String get errorMessageReset => _errorMessageReset;
 
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+
   Future register(String email, String password, String name) async {
     try {
       setLoadingRegist(true);
@@ -44,26 +45,6 @@ class AuthServices with ChangeNotifier {
       await registorOwner(uid, email, name);
       User user = authResult.user;
       return user;
-
-      // // void registorOwner() async {
-      // // final FirebaseAuth auth = FirebaseAuth.instance;
-      // // final User userId = auth.currentUser;
-      // // final String uid = userId.uid;
-      // // final String email = userId.email;
-      // print("UserID Insert : " + uid);
-      // print("Name Insert : " + name);
-      // print("Email Insert : " + email);
-
-      // http.Response response =
-      //     await http.post(Uri.parse('$Url/owner/registor'), body: {
-      //   'userID': '$uid',
-      //   'name': '${name}',
-      //   'email': '${email}',
-      //   // contact : req.body.contact
-      //   'urlImage': 'req.body.urlImage'
-      // });
-      // // }
-
     } on SocketException {
       setMessageRegist("No internet");
       setLoadingRegist(false);
@@ -194,5 +175,10 @@ void registorOwner(userID, email, name) async {
     'dob' : '',
     'contact' : '',
     'urlImage': 'req.body.urlImage'
+  }).then((value) {
+    print("insert sucess");
+    print("insert userID: $uid");
+    print("insert name : ${name}");
+    print("insert email : ${email}");
   });
 }

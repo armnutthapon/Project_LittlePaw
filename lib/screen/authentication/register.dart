@@ -413,13 +413,15 @@ class _RegisterState extends State<Register> {
                                                       .trim(),
                                                   _name.text.trim(),
                                                 );
-                                                print(
-                                                    "Email : ${_emailController.text}");
-                                                print(
-                                                    "Password : ${_passwordController.text}");
-                                                print(
-                                                    "C_password : ${_confirmPasswordController.text}");
-                                                print("ชื่อ : ${_name.text}");
+
+                                                // widget.toggleScreen();
+                                                // print(
+                                                //     "Email : ${_emailController.text}");
+                                                // print(
+                                                //     "Password : ${_passwordController.text}");
+                                                // print(
+                                                //     "C_password : ${_confirmPasswordController.text}");
+                                                // print("ชื่อ : ${_name.text}");
                                               }
                                             },
                                             child: Center(

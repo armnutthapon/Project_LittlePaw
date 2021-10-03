@@ -64,8 +64,8 @@ class _SettingState extends State<Setting> {
 
   @override
   void initState() {
-    getUserInformation();
     super.initState();
+    getUserInformation();
   }
 
   @override
