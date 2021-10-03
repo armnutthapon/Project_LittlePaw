@@ -113,7 +113,7 @@ class _SettingState extends State<Setting> {
         ),
         body: data != null
             ? Container(
-                margin: EdgeInsets.only(bottom: size.height * 0.1),
+                margin: EdgeInsets.only(bottom: size.height * 0.05),
                 child: Column(
                   children: <Widget>[
                     Container(

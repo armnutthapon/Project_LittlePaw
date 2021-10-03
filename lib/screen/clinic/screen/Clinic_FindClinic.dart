@@ -64,7 +64,7 @@ class _findClinicMainState extends State<findClinicMain> {
   var listclinic = [];
   double latitude, longitude;
   var distance;
-  var mindistance , maxdistance;
+  var mindistance, maxdistance;
 
   void _getCurrentLocation() async {
     final position = await Geolocator()
@@ -83,16 +83,15 @@ class _findClinicMainState extends State<findClinicMain> {
     await _getCurrentLocation();
     http.Response response = await http.post(Uri.parse('$Url/clinic/distance'),
         body: {"longitude": '$longitude', "latitude": '$latitude'});
-    
-      setState(() {
-        data = json.decode(response.body);
-        for (var i = 0; i < data.length; i++) {
-          listclinic.add(data[i]);
-        }
 
-      });
-      print(listclinic[0]['clinic_name']);
-    
+    setState(() {
+      data = json.decode(response.body);
+      for (var i = 0; i < data.length; i++) {
+        listclinic.add(data[i]);
+      }
+    });
+    print(listclinic[0]['clinic_name']);
+
     return data;
   }
 
@@ -125,21 +124,22 @@ class _findClinicMainState extends State<findClinicMain> {
       });
     }
   }
-  void filterDistanceSearchResult(double mindistance , double maxdistance) {
+
+  void filterDistanceSearchResult(double mindistance, double maxdistance) {
     var dummySearchList = [];
     for (var i = 0; i < data.length; i++) {
       dummySearchList.add(data[i]);
-      print(dummySearchList[i]['distance']/1000);
+      print(dummySearchList[i]['distance'] / 1000);
     }
     print(mindistance);
     print(maxdistance);
     if (maxdistance != 0) {
       var dummyListData = [];
       dummySearchList.forEach((item) {
-        print((item['distance']/1000.toInt()));
-        if (item['distance']/1000 <= maxdistance) {
+        print((item['distance'] / 1000.toInt()));
+        if (item['distance'] / 1000 <= maxdistance) {
           dummyListData.add(item);
-        }else{
+        } else {
           dummyListData.remove(item);
         }
         // print(listclinic);
@@ -167,13 +167,13 @@ class _findClinicMainState extends State<findClinicMain> {
 
     // After the Selection Screen returns a result, hide any previous snackbars
     // and show the new result.
-    if(this.mounted){
+    if (this.mounted) {
       setState(() {
         mindistance = result[0];
         maxdistance = result[1];
       });
     }
-    await filterDistanceSearchResult(mindistance , maxdistance);
+    await filterDistanceSearchResult(mindistance, maxdistance);
     // print(mindistance);
     // print(maxdistance);
   }
@@ -192,7 +192,7 @@ class _findClinicMainState extends State<findClinicMain> {
       body: Column(
         children: [
           SizedBox(
-            height: size.height * 0.10,
+            height: size.height * 0.14,
             //  height: size.height * 0.05,
           ),
           Container(
@@ -349,7 +349,7 @@ class _findClinicMainState extends State<findClinicMain> {
                                                 fontFamily: 'Mitr'),
                                           ),
                                           Text(
-                                            "${(listclinic[index]['distance']/1000).toStringAsFixed(2)} กิโลเมตร",
+                                            "${(listclinic[index]['distance'] / 1000).toStringAsFixed(2)} กิโลเมตร",
                                             style: TextStyle(
                                                 color: Colors.black54,
                                                 fontSize: 14,

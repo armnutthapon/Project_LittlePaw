@@ -64,7 +64,11 @@ class _Page_MyAppointmentState extends State<Page_MyAppointment> {
                 fontWeight: FontWeight.w500,
                 fontFamily: 'Mitr'),
           ),
-          backgroundColor: Colors.white..withOpacity(1),
+          leading: new IconButton(
+            icon: new Icon(Icons.arrow_back_ios, color: Colors.red.shade300),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+          backgroundColor: Colors.white,
           elevation: 0.0,
         ),
         backgroundColor: Colors.white,
