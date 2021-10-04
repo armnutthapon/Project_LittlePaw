@@ -42,6 +42,9 @@ class _SettingState extends State<Setting> {
     await getOwnerAge();
 
     print("profile : $data");
+    print(data['dob']);
+    print(getAge[0]['age']);
+
     return data;
   }
 
@@ -136,15 +139,11 @@ class _SettingState extends State<Setting> {
                                           child: SizedBox(
                                             width: 140.0,
                                             height: 140.0,
-                                            child: (data['urlImage'] != null)
-                                                ? Image.asset(
-                                                    'assets/images/avatar.jpg',
+                                            child: (data['urlImage'] != " ")
+                                                ? Image.network(
+                                                    data['urlImage'],
                                                     fit: BoxFit.fill,
                                                   )
-                                                // Image.network(
-                                                //     data['urlImage'],
-                                                //     fit: BoxFit.fill,
-                                                //   )
                                                 : Image.asset(
                                                     'assets/images/avatar.jpg',
                                                     fit: BoxFit.fill,
@@ -158,10 +157,12 @@ class _SettingState extends State<Setting> {
                     ),
                     Expanded(
                         child: Container(
-                      margin: EdgeInsets.only(top: 10),
+                      margin: EdgeInsets.only(
+                        top: 10,
+                      ),
                       child: ListView(
                         // padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
-                        padding: EdgeInsets.zero,
+                        padding: EdgeInsets.only(bottom: size.height * 0.1),
                         children: [
                           OwnerInfo(
                             text: "ชื่อ :",

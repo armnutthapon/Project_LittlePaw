@@ -69,15 +69,22 @@ class _RegisterState extends State<Register> {
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
     _confirmPasswordController = TextEditingController();
-
+    _name = TextEditingController();
+    _age = TextEditingController();
+    _phone = TextEditingController();
+    _gender;
     super.initState();
   }
 
   @override
   void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    _confirmPasswordController.dispose();
+    _emailController?.dispose();
+    _passwordController?.dispose();
+    _confirmPasswordController?.dispose();
+    _name?.dispose();
+    _age?.dispose();
+    _phone?.dispose();
+    _gender?.dispose();
 
     super.dispose();
   }
@@ -416,18 +423,6 @@ class _RegisterState extends State<Register> {
                                                     _gender.trim(),
                                                     _age.text.trim(),
                                                     _phone.text.trim());
-
-                                                // widget.toggleScreen();
-                                                print(
-                                                    "Email : ${_emailController.text}");
-                                                print(
-                                                    "Password : ${_passwordController.text}");
-                                                print(
-                                                    "C_password : ${_confirmPasswordController.text}");
-                                                print("ชื่อ : ${_name.text}");
-                                                print("เพศ : ${_gender}");
-                                                print("อายุ : ${_age.text}");
-                                                print("เบอร์ : ${_phone.text}");
                                               }
                                             },
                                             child: Center(

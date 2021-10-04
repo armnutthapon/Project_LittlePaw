@@ -221,7 +221,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
         lastDate: now);
     if (picked != null && picked != date) {
       setState(() {
-        editPetAge.text = DateFormat('MM-dd-yyyy').format(picked);
+        editPetAge.text = DateFormat('dd-MM-yyyy').format(picked);
       });
       print(editPetAge.text);
     }

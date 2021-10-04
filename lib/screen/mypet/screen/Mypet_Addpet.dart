@@ -130,7 +130,7 @@ class _AddpetState extends State<Addpet> {
         lastDate: now);
     if (picked != null && picked != date) {
       setState(() {
-        _addPetAge.text = DateFormat('MM-dd-yyyy').format(picked);
+        _addPetAge.text = DateFormat('dd-MM-yyyy').format(picked);
       });
       print(_addPetAge.text);
     }

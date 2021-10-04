@@ -166,39 +166,39 @@ class _Page_MyAppointmentState extends State<Page_MyAppointment> {
                                       ),
                                     ),
                                   ),
-                                  Align(
-                                    alignment: Alignment.topRight,
-                                    child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: <Widget>[
-                                          Text(
-                                            data[index]['date_notification'],
-                                            style: TextStyle(
-                                                fontSize: 14,
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w400,
-                                                fontFamily: 'Mitr'),
-                                          ),
-                                          SizedBox(
-                                            width: size.width * 0.01,
-                                          ),
-                                          Text(
-                                            data[index]['time_notification'],
-                                            style: TextStyle(
-                                                fontSize: 14,
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w400,
-                                                fontFamily: 'Mitr'),
-                                          ),
-                                          SizedBox(
-                                            width: size.width * 0.01,
-                                          ),
-                                          Icon(
-                                            FontAwesomeIcons.clock,
-                                            color: Colors.blue.shade800,
-                                          )
-                                        ]),
-                                  ),
+                                  // Align(
+                                  //   alignment: Alignment.topRight,
+                                  //   child: Row(
+                                  //       mainAxisSize: MainAxisSize.min,
+                                  //       children: <Widget>[
+                                  //         Text(
+                                  //           data[index]['date_notification'],
+                                  //           style: TextStyle(
+                                  //               fontSize: 14,
+                                  //               color: Colors.black,
+                                  //               fontWeight: FontWeight.w400,
+                                  //               fontFamily: 'Mitr'),
+                                  //         ),
+                                  //         SizedBox(
+                                  //           width: size.width * 0.01,
+                                  //         ),
+                                  //         Text(
+                                  //           data[index]['time_notification'],
+                                  //           style: TextStyle(
+                                  //               fontSize: 14,
+                                  //               color: Colors.black,
+                                  //               fontWeight: FontWeight.w400,
+                                  //               fontFamily: 'Mitr'),
+                                  //         ),
+                                  //         SizedBox(
+                                  //           width: size.width * 0.01,
+                                  //         ),
+                                  //         Icon(
+                                  //           FontAwesomeIcons.clock,
+                                  //           color: Colors.blue.shade800,
+                                  //         )
+                                  //       ]),
+                                  // ),
                                 ],
                               ),
                             ),

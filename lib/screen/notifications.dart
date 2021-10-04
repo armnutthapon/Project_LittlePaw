@@ -58,7 +58,7 @@ class _NotificationFeedState extends State<NotificationFeed> {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            "แจ้งเตือน นะจ๊ะ",
+            "แจ้งเตือน",
             style: TextStyle(
                 fontSize: 22,
                 color: Colors.red.shade300,
@@ -72,6 +72,7 @@ class _NotificationFeedState extends State<NotificationFeed> {
             ? SingleChildScrollView(
                 child: Column(children: [
                 Container(
+                    color: Colors.white,
                     height: size.height * 0.8,
                     child: ListView.builder(
                       itemCount: data == null ? 0 : data.length,

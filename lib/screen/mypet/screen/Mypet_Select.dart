@@ -71,7 +71,7 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                       fontFamily: 'Mitr'),
                   children: const <TextSpan>[
                     TextSpan(
-                      text: "dd",
+                      text: "TEST001",
                       style: TextStyle(
                           fontSize: 18,
                           color: Colors.black,

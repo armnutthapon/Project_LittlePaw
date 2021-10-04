@@ -33,19 +33,19 @@ class Newfeed extends StatelessWidget {
         backgroundColor: Colors.white.withOpacity(1),
         elevation: 0,
       ),
-      body: ImagePickerExample(),
+      body: Dashboard(),
     );
   }
 }
 
-class ImagePickerExample extends StatefulWidget {
-  const ImagePickerExample({Key key}) : super(key: key);
+class Dashboard extends StatefulWidget {
+  const Dashboard({Key key}) : super(key: key);
 
   @override
-  _ImagePickerExampleState createState() => _ImagePickerExampleState();
+  _DashboardState createState() => _DashboardState();
 }
 
-class _ImagePickerExampleState extends State<ImagePickerExample> {
+class _DashboardState extends State<Dashboard> {
   var data;
   var appointment;
   String sum_appointment;
@@ -204,7 +204,7 @@ class _ImagePickerExampleState extends State<ImagePickerExample> {
                                   fontFamily: 'Mitr'),
                             ),
                             Text(
-                              "30",
+                              "0",
                               style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 40,
@@ -262,6 +262,7 @@ class _ImagePickerExampleState extends State<ImagePickerExample> {
                             ),
                             Text(
                               "1",
+                              // sum_appointment,
                               style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 40,

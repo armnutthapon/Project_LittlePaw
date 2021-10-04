@@ -160,109 +160,107 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
             elevation: 0.0,
           ),
         ),
-         Column(
-                children: <Widget>[
-                  SizedBox(
-                    height: size.height * 0.1,
-                  ),
-                  Container(
-                    child: Container(
-                        child: Container(
-                      margin: EdgeInsets.only(
-                        top: 10,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                              padding: EdgeInsets.only(bottom: 10, top: 30),
-                              child: data == null
-                                  ? null
-                                  : CircleAvatar(
-                                      radius: 65,
-                                      backgroundColor: Colors.grey.shade300,
-                                      child: ClipOval(
-                                        child: SizedBox(
-                                            width: 140.0,
-                                            height: 140.0,
-                                            child: (data['urlImage'] != null)
-                                                ? Image.network(
-                                                    data['urlImage'],
-                                                    fit: BoxFit.fill,
-                                                  )
-                                                : Image.asset(
-                                                    'assets/images/avatar.jpg',
-                                                    fit: BoxFit.fill,
-                                                  )),
-                                      ),
-                                    )),
-                        ],
-                      ),
-                    )),
-                  ),
-                  data != null && getAge != null
-                      ? Expanded(
-                          child: Container(
-                          color: Colors.white,
-                          margin: EdgeInsets.only(top: 10),
-                          child: ListView(
-                            // padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
-                            padding: EdgeInsets.zero,
-                            children: [
-                              PetInfo(
-                                text: "ชื่อ :",
-                                textdetail: data['pet_name'],
-                              ),
-                              PetInfo(
-                                text: "ประเภท :",
-                                textdetail: data['type'],
-                              ),
-                              PetInfo(
-                                text: "เพศ :",
-                                textdetail: data['sex'],
-                              ),
-                              PetInfo(
-                                text: "สี :",
-                                textdetail: data['color'],
-                              ),
-                              PetInfo(
-                                text: "สายพันธุ์ :",
-                                textdetail: data['breed'],
-                              ),
-                              PetInfo(
-                                text: "ลักษณะเฉพาะ :",
-                                textdetail: data['characteristics'],
-                              ),
-                              PetInfo(
-                                text: "อายุ :",
-                                textdetail: "$age ปี",
-                              ),
-                              PetInfo(
-                                text: "ทำหมัน :",
-                                textdetail: getSterilization(),
-                              ),
-                              PetInfo(
-                                text: "โรคประจำตัว :",
-                                textdetail: data['congenital_disease'],
-                              ),
-                              Container(
-                                margin:
-                                    EdgeInsets.only(bottom: size.height * 0.1),
-                                child: PetInfo(
-                                  text: "วัคซีนที่ได้รับ :",
-                                  textdetail: data['vaccine'][0],
+        Column(
+          children: <Widget>[
+            SizedBox(
+              height: size.height * 0.1,
+            ),
+            Container(
+              child: Container(
+                  child: Container(
+                margin: EdgeInsets.only(
+                  top: 10,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                        padding: EdgeInsets.only(bottom: 10, top: 30),
+                        child: data == null
+                            ? null
+                            : CircleAvatar(
+                                radius: 65,
+                                backgroundColor: Colors.grey.shade300,
+                                child: ClipOval(
+                                  child: SizedBox(
+                                      width: 140.0,
+                                      height: 140.0,
+                                      child: (data['urlImage'] != null)
+                                          ? Image.network(
+                                              data['urlImage'],
+                                              fit: BoxFit.fill,
+                                            )
+                                          : Image.asset(
+                                              'assets/images/avatar.jpg',
+                                              fit: BoxFit.fill,
+                                            )),
                                 ),
-                              ),
-                            ],
+                              )),
+                  ],
+                ),
+              )),
+            ),
+            data != null && getAge != null
+                ? Expanded(
+                    child: Container(
+                    color: Colors.white,
+                    margin: EdgeInsets.only(top: 10),
+                    child: ListView(
+                      // padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+                      padding: EdgeInsets.zero,
+                      children: [
+                        PetInfo(
+                          text: "ชื่อ :",
+                          textdetail: data['pet_name'],
+                        ),
+                        PetInfo(
+                          text: "ประเภท :",
+                          textdetail: data['type'],
+                        ),
+                        PetInfo(
+                          text: "เพศ :",
+                          textdetail: data['sex'],
+                        ),
+                        PetInfo(
+                          text: "สี :",
+                          textdetail: data['color'],
+                        ),
+                        PetInfo(
+                          text: "สายพันธุ์ :",
+                          textdetail: data['breed'],
+                        ),
+                        PetInfo(
+                          text: "ลักษณะเฉพาะ :",
+                          textdetail: data['characteristics'],
+                        ),
+                        PetInfo(
+                          text: "อายุ :",
+                          textdetail: "$age ปี",
+                        ),
+                        PetInfo(
+                          text: "ทำหมัน :",
+                          textdetail: getSterilization(),
+                        ),
+                        PetInfo(
+                          text: "โรคประจำตัว :",
+                          textdetail: data['congenital_disease'],
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(bottom: size.height * 0.1),
+                          child: PetInfo(
+                            text: "วัคซีนที่ได้รับ :",
+                            textdetail: data['vaccine'][0],
                           ),
-                        ))
-                      : Expanded(
-                          child: Container(
-                              child:
-                                  Center(child: CircularProgressIndicator())),
-                        )
-                ],
-              ),
+                        ),
+                      ],
+                    ),
+                  ))
+                : Expanded(
+                    child: Container(
+                        child: Center(child: CircularProgressIndicator())),
+                  )
+          ],
+        ),
       ]),
     );
   }
