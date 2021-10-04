@@ -192,11 +192,9 @@ class _findClinicMainState extends State<findClinicMain> {
       body: Column(
         children: [
           SizedBox(
-            height: size.height * 0.14,
-            //  height: size.height * 0.05,
+            height: size.height * 0.1,
           ),
           Container(
-              // color: Colors.amber,
               padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
               child: ListTile(
                   title: Container(

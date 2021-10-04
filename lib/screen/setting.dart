@@ -116,7 +116,7 @@ class _SettingState extends State<Setting> {
         ),
         body: data != null
             ? Container(
-                margin: EdgeInsets.only(bottom: size.height * 0.05),
+                margin: EdgeInsets.only(bottom: size.height * 0.01),
                 child: Column(
                   children: <Widget>[
                     Container(
@@ -191,29 +191,40 @@ class _SettingState extends State<Setting> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              TextButton(
-                                child: Text(
-                                  "ออกจากระบบ",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w400,
-                                      fontFamily: 'Mitr'),
-                                ),
-                                onPressed: () async =>
-                                    await loginProvider.logout(),
+                              Container(
+                                margin: EdgeInsets.only(top: 5, bottom: 5),
+                                width: size.width * 0.4,
+                                height: size.height * 0.05,
+                                child: FlatButton(
+                                    color: Colors.transparent,
+                                    onPressed: () async =>
+                                        await loginProvider.logout(),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Text(
+                                          "ออกจากระบบ",
+                                          style: TextStyle(
+                                              color: Colors.red.shade400,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w400,
+                                              fontFamily: 'Mitr'),
+                                        ),
+                                        Icon(
+                                          Icons.exit_to_app,
+                                          color: Colors.red.shade400,
+                                        ),
+                                      ],
+                                    )),
                               ),
-                              IconButton(
-                                  onPressed: () async =>
-                                      await loginProvider.logout(),
-                                  icon: Icon(Icons.exit_to_app)),
                             ],
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "version : 1.2.10",
+                                "LITTLE PAW",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 12,
@@ -221,7 +232,7 @@ class _SettingState extends State<Setting> {
                                     fontFamily: 'Mitr'),
                               ),
                             ],
-                          )
+                          ),
                         ],
                       ),
                     ))

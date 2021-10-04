@@ -28,7 +28,10 @@ class GoogleSiginBtn extends StatelessWidget {
           height: 50,
           child: MaterialButton(
               color: Colors.blue.shade600,
-              onPressed: () {},
+              onPressed: () {
+                // processSignInWithGoogle();
+                loginWithGoogle();
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -54,15 +57,16 @@ class GoogleSiginBtn extends StatelessWidget {
     );
   }
 
-  // Future loginWithGoogle(BuildContext context) async {
-  //   GoogleSignIn _googleSignIn = GoogleSignIn(
-  //     scopes: [
-  //       'https://www.googleapis.com/auth/contacts.readonly',
-  //     ],
-  //   );
-  //   GoogleSignInAccount? user = await _googleSignIn.signIn();
-  //   GoogleSignInAuthentication userAuth = await user.authentication?;
-  // }
+  Future loginWithGoogle() async {
+    GoogleSignIn _googleSignIn = GoogleSignIn(
+      scopes: [
+        'https://www.googleapis.com/auth/contacts.readonly',
+      ],
+    );
+    GoogleSignInAccount user = await _googleSignIn.signIn();
+    GoogleSignInAuthentication userAuth = await user.authentication;
+  }
+
   Future<Null> processSignInWithGoogle() async {
     GoogleSignIn _googleSignIn = GoogleSignIn(
       scopes: [
@@ -70,6 +74,8 @@ class GoogleSiginBtn extends StatelessWidget {
         'https://www.googleapis.com/auth/contacts.readonly',
       ],
     );
+    GoogleSignInAccount user = await _googleSignIn.signIn();
+    GoogleSignInAuthentication userAuth = await user.authentication;
 
     await Firebase.initializeApp().then((value) async {
       await _googleSignIn.signIn().then((value) => {});

@@ -42,13 +42,12 @@ class _MyPetState extends State<MyPet> {
   //       print('500 Error ${response.body}');
   //       break;
   //   }
-  //   // setState(() {
-  //   //   data = json.decode(response.body);
-  //   // });
+
   //   print(data);
 
   //   return data;
   // }
+
   getPetList() async {
     FirebaseAuth auth = await FirebaseAuth.instance;
     User userId = await auth.currentUser;
@@ -56,9 +55,13 @@ class _MyPetState extends State<MyPet> {
     // print("mypet ID : " + uid);
     http.Response response =
         await http.get(Uri.parse('$Url/petDetail/showByID/$uid'));
-    setState(() {
-      data = json.decode(response.body);
-    });
+
+    if (this.mounted) {
+      setState(() {
+        data = json.decode(response.body);
+      });
+    }
+    // setState(() {});
     // print(response.statusCode);
     // print("mypet : $data");
     return data;
