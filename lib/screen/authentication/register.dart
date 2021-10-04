@@ -418,13 +418,16 @@ class _RegisterState extends State<Register> {
                                                     _phone.text.trim());
 
                                                 // widget.toggleScreen();
-                                                // print(
-                                                //     "Email : ${_emailController.text}");
-                                                // print(
-                                                //     "Password : ${_passwordController.text}");
-                                                // print(
-                                                //     "C_password : ${_confirmPasswordController.text}");
-                                                // print("ชื่อ : ${_name.text}");
+                                                print(
+                                                    "Email : ${_emailController.text}");
+                                                print(
+                                                    "Password : ${_passwordController.text}");
+                                                print(
+                                                    "C_password : ${_confirmPasswordController.text}");
+                                                print("ชื่อ : ${_name.text}");
+                                                print("เพศ : ${_gender}");
+                                                print("อายุ : ${_age.text}");
+                                                print("เบอร์ : ${_phone.text}");
                                               }
                                             },
                                             child: Center(

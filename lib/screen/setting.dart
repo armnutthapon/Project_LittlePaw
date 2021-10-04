@@ -39,28 +39,28 @@ class _SettingState extends State<Setting> {
     }
 
     // คำนวณอายุ
-    // await getOwnerAge();
+    await getOwnerAge();
 
     print("profile : $data");
     return data;
   }
 
   // ## function คำนวณอายุ
-  // getOwnerAge() async {
-  //   http.Response response = await http
-  //       .post(Uri.parse('$Url/owner/getage'), body: {'dob': data['dob']});
-  //   if (this.mounted) {
-  //     setState(() {
-  //       getAge = json.decode(response.body);
-  //       if (getAge[0]['age'] <= 0) {
-  //         age = "น้อยกว่า 1";
-  //       } else {
-  //         age = "${getAge[0]['age']}";
-  //       }
-  //     });
-  //   }
-  //   print(getAge[0]['age']);
-  // }
+  getOwnerAge() async {
+    http.Response response = await http
+        .post(Uri.parse('$Url/owner/getage'), body: {'dob': data['dob']});
+    if (this.mounted) {
+      setState(() {
+        getAge = json.decode(response.body);
+        if (getAge[0]['age'] <= 0) {
+          age = "น้อยกว่า 1";
+        } else {
+          age = "${getAge[0]['age']}";
+        }
+      });
+    }
+    print(getAge[0]['age']);
+  }
 
   @override
   void initState() {
@@ -137,10 +137,14 @@ class _SettingState extends State<Setting> {
                                             width: 140.0,
                                             height: 140.0,
                                             child: (data['urlImage'] != null)
-                                                ? Image.network(
-                                                    data['urlImage'],
+                                                ? Image.asset(
+                                                    'assets/images/avatar.jpg',
                                                     fit: BoxFit.fill,
                                                   )
+                                                // Image.network(
+                                                //     data['urlImage'],
+                                                //     fit: BoxFit.fill,
+                                                //   )
                                                 : Image.asset(
                                                     'assets/images/avatar.jpg',
                                                     fit: BoxFit.fill,
@@ -167,18 +171,18 @@ class _SettingState extends State<Setting> {
                             text: "อีเมล :",
                             textdetail: data['email'],
                           ),
-                          // OwnerInfo(
-                          //   text: "เบอร์มือถือ :",
-                          //   textdetail: data['contact'],
-                          // ),
-                          // OwnerInfo(
-                          //   text: "เพศ :",
-                          //   textdetail: data['sex'],
-                          // ),
-                          // OwnerInfo(
-                          //   text: "อายุ :",
-                          //   textdetail: "$age ปี",
-                          // ),
+                          OwnerInfo(
+                            text: "เบอร์มือถือ :",
+                            textdetail: data['contact'],
+                          ),
+                          OwnerInfo(
+                            text: "เพศ :",
+                            textdetail: data['gender'],
+                          ),
+                          OwnerInfo(
+                            text: "อายุ :",
+                            textdetail: "$age ปี",
+                          ),
                           OwnerInfo(
                             text: "จำนวนสัตว์เลี้ยง :",
                             textdetail: "${data['pet_id'].length} ตัว",

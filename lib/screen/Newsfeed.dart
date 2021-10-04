@@ -58,7 +58,6 @@ class _ImagePickerExampleState extends State<ImagePickerExample> {
     setState(() {
       data = json.decode(response.body);
     });
-    print(data['pet_id'].length);
     return data;
   }
 
@@ -72,9 +71,9 @@ class _ImagePickerExampleState extends State<ImagePickerExample> {
 
     this.setState(() {
       appointment = json.decode(response.body);
-      if(appointment == [] ){
+      if (appointment == []) {
         sum_appointment = '0';
-      }else{
+      } else {
         sum_appointment = '${appointment.length}';
       }
     });
@@ -96,186 +95,187 @@ class _ImagePickerExampleState extends State<ImagePickerExample> {
     Size size = MediaQuery.of(context).size;
 
     final loginProvider = Provider.of<AuthServices>(context);
-    return data != null ? Container(
-      padding: EdgeInsets.all(10),
-      height: size.height,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Container(
-              height: size.height * 0.15,
-              margin: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.blue.shade300.withOpacity(0.2),
-                    blurRadius: 10,
-                    offset: Offset(3, 3),
-                  ),
-                ],
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      CircleAvatar(
-                          radius: 25,
-                          backgroundColor: Colors.blue.shade300,
-                          child: ClipOval(
-                              child: SizedBox(
-                            child: Icon(
-                              Icons.pets,
-                              size: 30,
-                              color: Colors.white,
-                            ),
-                          ))),
-                    ],
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        "จำนวนสัตว์เลี้ยง : ",
-                        style: TextStyle(
-                            color: Colors.blue.shade300,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
-                            fontFamily: 'Mitr'),
-                      ),
-                      Text(
-                        
-                        "${data['pet_id'].length}",
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold,
+    return data != null
+        ? Container(
+            padding: EdgeInsets.all(10),
+            height: size.height,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                    height: size.height * 0.15,
+                    margin: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.blue.shade300.withOpacity(0.2),
+                          blurRadius: 10,
+                          offset: Offset(3, 3),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
-              )),
-          Container(
-              height: size.height * 0.15,
-              margin: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.green.shade300.withOpacity(0.2),
-                    blurRadius: 10,
-                    offset: Offset(3, 3),
-                  ),
-                ],
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      CircleAvatar(
-                          radius: 25,
-                          backgroundColor: Colors.green.shade300,
-                          child: ClipOval(
-                              child: SizedBox(
-                            height: 50,
-                            child: Icon(
-                              FontAwesomeIcons.bookMedical,
-                              size: 30,
-                              color: Colors.white,
-                            ),
-                          ))),
-                    ],
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        "จำนวนการรักษา :",
-                        style: TextStyle(
-                            color: Colors.green.shade300,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
-                            fontFamily: 'Mitr'),
-                      ),
-                      Text(
-                        "30",
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold,
+                      ],
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            CircleAvatar(
+                                radius: 25,
+                                backgroundColor: Colors.blue.shade300,
+                                child: ClipOval(
+                                    child: SizedBox(
+                                  child: Icon(
+                                    Icons.pets,
+                                    size: 30,
+                                    color: Colors.white,
+                                  ),
+                                ))),
+                          ],
                         ),
-                      ),
-                    ],
-                  ),
-                ],
-              )),
-          Container(
-              height: size.height * 0.15,
-              margin: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.amber.shade600.withOpacity(0.2),
-                    blurRadius: 10,
-                    offset: Offset(3, 3),
-                  ),
-                ],
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      CircleAvatar(
-                          radius: 25,
-                          backgroundColor: Colors.amber.shade600,
-                          child: ClipOval(
-                              child: SizedBox(
-                            height: 50,
-                            child: Icon(
-                              FontAwesomeIcons.calendarCheck,
-                              size: 30,
-                              color: Colors.white,
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              "จำนวนสัตว์เลี้ยง : ",
+                              style: TextStyle(
+                                  color: Colors.blue.shade300,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400,
+                                  fontFamily: 'Mitr'),
                             ),
-                          ))),
-                    ],
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        "จำนวนการนัด : ",
-                        style: TextStyle(
-                            color: Colors.amber.shade600,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
-                            fontFamily: 'Mitr'),
-                      ),
-                      Text(
-                        sum_appointment,
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold,
+                            Text(
+                              "${data['pet_id'].length}",
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 40,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
-                  ),
-                ],
-              )),
-        ],
-      ),
-    ): Center(child: CircularProgressIndicator());
+                      ],
+                    )),
+                Container(
+                    height: size.height * 0.15,
+                    margin: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.green.shade300.withOpacity(0.2),
+                          blurRadius: 10,
+                          offset: Offset(3, 3),
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            CircleAvatar(
+                                radius: 25,
+                                backgroundColor: Colors.green.shade300,
+                                child: ClipOval(
+                                    child: SizedBox(
+                                  height: 50,
+                                  child: Icon(
+                                    FontAwesomeIcons.bookMedical,
+                                    size: 30,
+                                    color: Colors.white,
+                                  ),
+                                ))),
+                          ],
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              "จำนวนการรักษา :",
+                              style: TextStyle(
+                                  color: Colors.green.shade300,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400,
+                                  fontFamily: 'Mitr'),
+                            ),
+                            Text(
+                              "30",
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 40,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    )),
+                Container(
+                    height: size.height * 0.15,
+                    margin: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.amber.shade600.withOpacity(0.2),
+                          blurRadius: 10,
+                          offset: Offset(3, 3),
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            CircleAvatar(
+                                radius: 25,
+                                backgroundColor: Colors.amber.shade600,
+                                child: ClipOval(
+                                    child: SizedBox(
+                                  height: 50,
+                                  child: Icon(
+                                    FontAwesomeIcons.calendarCheck,
+                                    size: 30,
+                                    color: Colors.white,
+                                  ),
+                                ))),
+                          ],
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              "จำนวนการนัด : ",
+                              style: TextStyle(
+                                  color: Colors.amber.shade600,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400,
+                                  fontFamily: 'Mitr'),
+                            ),
+                            Text(
+                              "1",
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 40,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    )),
+              ],
+            ),
+          )
+        : Center(child: CircularProgressIndicator());
   }
 }
 

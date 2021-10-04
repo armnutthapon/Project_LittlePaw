@@ -32,14 +32,13 @@ class AuthServices with ChangeNotifier {
       String age, String phone) async {
     try {
       setLoadingRegist(true);
-      UserCredential authResult = await firebaseAuth
-          .createUserWithEmailAndPassword(
+      UserCredential authResult =
+          await firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
-      )
-          .then((value) async {
-        await registorOwner(email, name, gender, age, phone);
-      });
+      );
+      await registorOwner(email, name, gender, age, phone);
+
       await setLoadingRegist(false);
 
       User user = await authResult.user;
@@ -175,7 +174,7 @@ void registorOwner(email, name, gender, age, phone) async {
     'gender': '${gender}',
     'dob': '${age}',
     'contact': '${phone}',
-    'urlImage': 'req.body.urlImage'
+    'urlImage': " "
   }).then((value) {
     print("insert sucess");
     print("insert userID: $uid");
