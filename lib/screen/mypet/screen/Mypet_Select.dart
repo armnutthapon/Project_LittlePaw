@@ -57,33 +57,60 @@ class Page_SelectPetState extends State<Page_SelectPet> {
       ),
       actions: [
         Container(
-          height: size.height * 0.1,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              RichText(
-                text: TextSpan(
-                  text: 'ID : ',
-                  style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w300,
-                      fontFamily: 'Mitr'),
-                  children: const <TextSpan>[
-                    TextSpan(
-                      text: "TEST001",
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: 'Mitr'),
-                    ),
-                  ],
+            child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                RichText(
+                  text: TextSpan(
+                    text: 'ID : ',
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w300,
+                        fontFamily: 'Mitr'),
+                    children: const <TextSpan>[
+                      TextSpan(
+                        text: "ASDF12",
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: 'Mitr'),
+                      ),
+                    ],
+                  ),
                 ),
-              )
-            ],
-          ),
-        )
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                RichText(
+                  text: TextSpan(
+                    text: 'PASSWORD : ',
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w300,
+                        fontFamily: 'Mitr'),
+                    children: const <TextSpan>[
+                      TextSpan(
+                        text: "LKJH53",
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: 'Mitr'),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ))
       ],
     );
     showDialog(
@@ -102,7 +129,7 @@ class Page_SelectPetState extends State<Page_SelectPet> {
               borderRadius: BorderRadius.circular(10),
             ),
             title: Text(
-              pid,
+              "ต้องการลบข้อมูลสัตว์เลี้ยง ?",
               style: TextStyle(
                   fontSize: 18,
                   color: Colors.black,
