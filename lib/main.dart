@@ -37,6 +37,7 @@ class MyApp extends StatelessWidget {
                 return MaterialApp(
                   debugShowCheckedModeBanner: false,
                   theme: ThemeData(
+                    // fontFamily: 'Mitr',
                     primaryColor: Colors.redAccent,
                     primarySwatch: Colors.red,
                   ),

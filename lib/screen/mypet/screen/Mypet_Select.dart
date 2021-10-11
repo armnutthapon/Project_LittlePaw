@@ -12,6 +12,7 @@ import 'package:little_paw/screen/mypet/screen/Mypet_Medical.dart';
 import 'package:little_paw/screen/mypet/screen/Mypet_Information.dart';
 import 'package:http/http.dart' as http;
 import 'package:little_paw/database/database.dart';
+import 'package:little_paw/screen/mypet/screen/Mypet_Vaccine.dart';
 import 'package:little_paw/screen/wrapper.dart';
 
 class Page_SelectPet extends StatefulWidget {
@@ -279,7 +280,7 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                               child: InkWell(
                                 onTap: () {
                                   Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => Page_PetMedical()));
+                                      builder: (context) => Vaccineted()));
                                 },
                                 child: Mypet_ButtonInfo(
                                   text: "ข้อมูลวัคซีน",
