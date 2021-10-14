@@ -37,23 +37,22 @@ class _Page_ClinicDetailState extends State<Page_ClinicDetail> {
 
   getClinicDetail() async {
     http.Response response =
-        await http.get(Uri.parse('$Url/clinic/showByID/${widget.cid}'));
+        await http.get(Uri.parse('$Url/clinic/showbycid/${widget.cid}'));
     print("CID :: :" + widget.cid);
     if (this.mounted) {
       setState(() {
         data = json.decode(response.body);
-        address.add(data['address'][0]['building']);
-        address.add(data['address'][0]['alley']);
-        address.add(data['address'][0]['street']);
-        address.add(data['address'][0]['city']);
-        address.add(data['address'][0]['province']);
-        address.remove(null);
-        address.remove('-');
-        
+        // address.add(data['address'][0]['building']);
+        // address.add(data['address'][0]['alley']);
+        // address.add(data['address'][0]['street']);
+        // address.add(data['address'][0]['city']);
+        // address.add(data['address'][0]['province']);
+        // address.remove(null);
+        // address.remove('-');
       });
     }
 
-    print("address : " + address.join(' '));
+    // print("address : " + address.join(' '));
 
     return data;
   }
@@ -120,7 +119,7 @@ class _Page_ClinicDetailState extends State<Page_ClinicDetail> {
                                 children: [
                                   ShowAddress(
                                       topic: "ที่อยู่ : ",
-                                      detail: address.join(' '))
+                                      detail: data['address'])
                                 ],
                               ),
                               ShowText(
@@ -150,7 +149,7 @@ class _Page_ClinicDetailState extends State<Page_ClinicDetail> {
                                       color: Colors.red.shade300,
                                       onPressed: () {
                                         setState(() {
-                                          send_cid = data['_id'];
+                                          send_cid = data['cid'];
                                           send_doctor_name =
                                               data['doctor_name'];
                                           send_clinic_name =

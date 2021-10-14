@@ -149,7 +149,7 @@ class _Page_AppointmentState extends State<Page_Appointment> {
     builder:
     if (picked != null && picked != date) {
       setState(() {
-        date_appointment.text = DateFormat('MM-dd-yyyy').format(picked);
+        date_appointment.text = DateFormat('dd-MM-yyyy').format(picked);
       });
       print(date_appointment.text);
     }

@@ -192,7 +192,7 @@ class _findClinicMainState extends State<findClinicMain> {
       body: Column(
         children: [
           SizedBox(
-            height: size.height * 0.1,
+            height: size.height * 0.15,
           ),
           Container(
               padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
@@ -292,7 +292,7 @@ class _findClinicMainState extends State<findClinicMain> {
                           child: InkWell(
                             onTap: () {
                               setState(() {
-                                cid = listclinic[index]['_id'];
+                                cid = listclinic[index]['cid'];
                               });
 
                               var cid_sendRoute = new MaterialPageRoute(
@@ -348,15 +348,6 @@ class _findClinicMainState extends State<findClinicMain> {
                                           ),
                                           Text(
                                             "${(listclinic[index]['distance'] / 1000).toStringAsFixed(2)} กิโลเมตร",
-                                            style: TextStyle(
-                                                color: Colors.black54,
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w300,
-                                                fontFamily: 'Mitr'),
-                                          ),
-                                          Text(
-                                            listclinic[index]['address'][0]
-                                                ['city'],
                                             style: TextStyle(
                                                 color: Colors.black54,
                                                 fontSize: 14,
