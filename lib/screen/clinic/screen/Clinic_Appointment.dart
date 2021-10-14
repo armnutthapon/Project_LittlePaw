@@ -33,6 +33,7 @@ class _Page_AppointmentState extends State<Page_Appointment> {
   var data;
   var petselected;
   var pidselected;
+  var pet_image;
 
   CalendarFormat format = CalendarFormat.month;
   DateTime selectedDay = DateTime.now();
@@ -45,6 +46,7 @@ class _Page_AppointmentState extends State<Page_Appointment> {
 
   List listpet = [];
   List listPID = [];
+  List listpet_image = [];
 
   List listSterilize = [
     'ทำหมันแล้ว',
@@ -66,6 +68,7 @@ class _Page_AppointmentState extends State<Page_Appointment> {
     for (var index = 0; index < data.length; index++) {
       listpet.add("${index + 1}. " + data[index]['pet_name']);
       listPID.add(data[index]['_id']);
+      listpet_image.add(data[index]['urlImage']);
     }
     return data;
   }
@@ -81,6 +84,8 @@ class _Page_AppointmentState extends State<Page_Appointment> {
       'doctor_name': '${widget.doctor_name}',
       'userID': '$uid',
       'pid': '$pidselected',
+      'pet_name': '${petselected.substring(3)}',
+      'urlImage': '$pet_image',
       'date': '${date_appointment.text}',
       'time_appointment': '${time_appointment.text}',
       'symptom': '${symptom.text}'
@@ -90,6 +95,9 @@ class _Page_AppointmentState extends State<Page_Appointment> {
     print("Clinic Nmae : " + widget.clinic_name);
     print("Doctor Nmae : " + widget.doctor_name);
     print("PID : " + pidselected);
+    print("Pet Name : " + petselected.substring(3));
+    print("Pet Image : " + pet_image);
+
     print("uid : " + uid);
     print("Date : " + date_appointment.text);
     print("time : " + time_appointment.text);
@@ -316,11 +324,13 @@ class _Page_AppointmentState extends State<Page_Appointment> {
                                 for (var i = 0; i < listpet.length; i++) {
                                   if (petselected == listpet[i]) {
                                     pidselected = listPID[i];
+                                    pet_image = listpet_image[i];
+                                    print(petselected.substring(3));
+                                    print(listpet_image[i]);
                                   }
                                 }
                               });
                               print(pidselected);
-                              print(petselected);
                             },
                             validator: (value) {
                               if (value == null || value.isEmpty) {
