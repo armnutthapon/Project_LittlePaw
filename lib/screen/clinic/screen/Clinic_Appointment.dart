@@ -81,7 +81,7 @@ class _Page_AppointmentState extends State<Page_Appointment> {
       'doctor_name': '${widget.doctor_name}',
       'userID': '$uid',
       'pid': '$pidselected',
-      'date': '$date_appointment',
+      'date': '${date_appointment.text}',
       'time_appointment': '${time_appointment.text}',
       'symptom': '${symptom.text}'
     });
@@ -132,7 +132,7 @@ class _Page_AppointmentState extends State<Page_Appointment> {
       setState(() {
         time_appointment.text = result.format(context);
       });
-      print(time_appointment);
+      print(time_appointment.text);
     }
   }
 
@@ -394,13 +394,13 @@ class _Page_AppointmentState extends State<Page_Appointment> {
                                         if (_formkey.currentState.validate()) {
                                           _clicked = true;
                                           // if(petselected == )
-                                          setState(() {
-                                            formattedDate =
-                                                DateFormat('dd-MM-yyyy')
-                                                    .format(focusedDay);
-                                            // aa =  DateFormat("dd-M-yyyy hh:mm:ss").parse(formattedDate);
-                                          });
-                                          print(formattedDate);
+                                          // setState(() {
+                                          //   formattedDate =
+                                          //       DateFormat('dd-MM-yyyy')
+                                          //           .format(focusedDay);
+                                          //   // aa =  DateFormat("dd-M-yyyy hh:mm:ss").parse(formattedDate);
+                                          // });
+                                          // print(formattedDate);
                                           // print(aa);
                                           createAppointment();
                                         }
