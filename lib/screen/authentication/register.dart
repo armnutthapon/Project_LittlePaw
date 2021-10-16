@@ -72,7 +72,8 @@ class _RegisterState extends State<Register> {
     _name = TextEditingController();
     _age = TextEditingController();
     _phone = TextEditingController();
-    _gender;
+    _gender = TextEditingController();
+
     super.initState();
   }
 

@@ -31,7 +31,7 @@ class Page_SelectPet extends StatefulWidget {
 }
 
 class Page_SelectPetState extends State<Page_SelectPet> {
-  List data;
+  var data;
 
   var send_pid;
 
@@ -49,6 +49,57 @@ class Page_SelectPetState extends State<Page_SelectPet> {
       print("DELETE SUCCESS");
     });
   }
+
+  walkin() async {
+    http.Response response = await http
+        .post(Uri.parse('$Url/petDetail/createWalkInID/${widget.pid}'))
+        .then((value) {
+      print("Doggy Create Walkin");
+    });
+    // _onLoading();
+    await shareID_show();
+  }
+
+  void _onLoading() async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: new Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              new CircularProgressIndicator(),
+              new Text("Loading"),
+            ],
+          ),
+        );
+      },
+    );
+    await new Future.delayed(const Duration(seconds: 1));
+  }
+
+  shareID_show() async {
+    http.Response response =
+        await http.get(Uri.parse('$Url/petDetail/showPetByPID/${widget.pid}'));
+    if (this.mounted) {
+      setState(() {
+        data = json.decode(response.body);
+      });
+    }
+    print(data['WalkIn_id']);
+    print(data['WalkIn_pass']);
+
+    return data;
+  }
+
+  // shareID_show() async {
+  //   http.Response response = await http
+  //       .post(Uri.parse('$Url/petDetail/${widget.pid}'))
+  //       .then((value) {
+  //     print("Show");
+  //   });
+  // }
 
   void shareID(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -71,9 +122,9 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                         color: Colors.black,
                         fontWeight: FontWeight.w300,
                         fontFamily: 'Mitr'),
-                    children: const <TextSpan>[
+                    children: <TextSpan>[
                       TextSpan(
-                        text: "ASDF12",
+                        text: "${data['WalkIn_id']}",
                         style: TextStyle(
                             fontSize: 18,
                             color: Colors.black,
@@ -96,9 +147,9 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                         color: Colors.black,
                         fontWeight: FontWeight.w300,
                         fontFamily: 'Mitr'),
-                    children: const <TextSpan>[
+                    children: <TextSpan>[
                       TextSpan(
-                        text: "LKJH53",
+                        text: "${data['WalkIn_pass']}",
                         style: TextStyle(
                             fontSize: 18,
                             color: Colors.black,
@@ -288,18 +339,79 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                                 ),
                               ),
                             ),
-                            Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              elevation: 5,
-                              child: InkWell(
-                                onTap: () {
-                                  shareID(context);
-                                },
-                                child: Mypet_ButtonInfo(
-                                  text: "แชร์",
-                                  icon: FontAwesomeIcons.share,
-                                ),
+                            // Card(
+                            //   shape: RoundedRectangleBorder(
+                            //       borderRadius: BorderRadius.circular(10)),
+                            //   elevation: 5,
+                            //   child: InkWell(
+                            //     onTap: () {
+                            //       shareID(context);
+                            //     },
+                            //     child: Mypet_ButtonInfo(
+                            //       text: "แชร์",
+                            //       icon: FontAwesomeIcons.share,
+                            //     ),
+                            //   ),
+                            // ),
+                            Container(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Container(
+                                    width: size.width * 0.5,
+                                    height: size.height * 0.08,
+                                    child: Card(
+                                      color: Colors.red.shade400,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      elevation: 5,
+                                      child: InkWell(
+                                          onTap: () {
+                                            walkin();
+                                          },
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                              "Walk In",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w300,
+                                                  fontFamily: 'Mitr'),
+                                            ),
+                                          )),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: size.width * 0.5,
+                                    height: size.height * 0.08,
+                                    child: Card(
+                                      color: Colors.red.shade200,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      elevation: 5,
+                                      child: InkWell(
+                                          onTap: () {
+                                            shareID(context);
+                                          },
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                              "แชร์ไอดี",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w300,
+                                                  fontFamily: 'Mitr'),
+                                            ),
+                                          )),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
