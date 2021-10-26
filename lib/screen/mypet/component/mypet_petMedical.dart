@@ -23,32 +23,36 @@ class PetMedical extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+      padding: EdgeInsets.all(10),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            date,
-            style: TextStyle(
-                color: Colors.black,
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
-                fontFamily: 'Mitr'),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text(
+                "วันที่ : ${date}",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w300,
+                    fontFamily: 'Mitr'),
+              ),
+            ],
           ),
           Text(
             clinicname,
             style: TextStyle(
                 color: Colors.black,
-                fontSize: 16,
-                fontWeight: FontWeight.w300,
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
                 fontFamily: 'Mitr'),
           ),
           Text(
             title,
             style: TextStyle(
                 color: Colors.black,
-                fontSize: 16,
+                fontSize: 14,
                 fontWeight: FontWeight.w300,
                 fontFamily: 'Mitr'),
           ),
@@ -56,7 +60,7 @@ class PetMedical extends StatelessWidget {
             details,
             style: TextStyle(
                 color: Colors.black,
-                fontSize: 16,
+                fontSize: 14,
                 fontWeight: FontWeight.w300,
                 fontFamily: 'Mitr'),
           ),

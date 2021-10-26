@@ -76,9 +76,8 @@ class _VaccinetedState extends State<Vaccineted> {
                         itemBuilder: (BuildContext context, int index) {
                           return Container(
                               height: size.height * 0.1,
-                              padding:
-                                  const EdgeInsets.fromLTRB(30, 10, 30, 10),
-                              margin: const EdgeInsets.all(10.0),
+                              padding: const EdgeInsets.fromLTRB(30, 10, 30, 0),
+                              margin: const EdgeInsets.all(15.0),
                               decoration: BoxDecoration(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10.0)),
@@ -111,6 +110,7 @@ class _VaccinetedState extends State<Vaccineted> {
                                       ),
                                       Icon(
                                         FontAwesomeIcons.clock,
+                                        size: 14,
                                         color: Colors.blue.shade800,
                                       )
                                     ],
@@ -119,10 +119,10 @@ class _VaccinetedState extends State<Vaccineted> {
                                     padding: EdgeInsets.only(top: 1),
                                     alignment: Alignment.bottomLeft,
                                     child: Text(
-                                      data['vaccine'][index]['vaccine_name'],
+                                      "ชื่อวัคซีน : ${data['vaccine'][index]['vaccine_name']}",
                                       style: TextStyle(
                                           fontSize: 16,
-                                          color: Colors.green,
+                                          color: Colors.black,
                                           fontWeight: FontWeight.w400,
                                           fontFamily: 'Mitr'),
                                     ),

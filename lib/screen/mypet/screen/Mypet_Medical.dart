@@ -53,18 +53,22 @@ class _petMedicalState extends State<petMedical> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Container(
         alignment: Alignment.center,
         child: Column(
           children: [
             SizedBox(
-              height: size.height * 0.05,
+              height: size.height * 0.02,
             ),
             Expanded(
                 child: Container(
               margin: EdgeInsets.fromLTRB(0, 40, 0, 0),
               child: ShowMedicalDetail(),
             )),
+            SizedBox(
+              height: size.height * 0.01,
+            ),
           ],
         ),
       ),
@@ -96,7 +100,7 @@ class _ShowMedicalDetailState extends State<ShowMedicalDetail> {
                     Container(
                       width: 2,
                       height: 70,
-                      color: Colors.red.shade100,
+                      color: Colors.green.shade100,
                     ),
                     Container(
                       margin: EdgeInsets.only(left: 15, right: 15),
@@ -113,30 +117,34 @@ class _ShowMedicalDetailState extends State<ShowMedicalDetail> {
                     Container(
                       width: 2,
                       height: 70,
-                      color: Colors.red.shade100,
+                      color: Colors.green.shade100,
                     )
                   ],
                 ),
                 Expanded(
                     child: Container(
-                        margin: EdgeInsets.all(10),
-                        height: 140,
-                        child: Padding(
-                          padding: EdgeInsets.fromLTRB(10, 15, 15, 10),
-                          child: Row(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                              ),
-                              PetMedical(
-                                date: "02/02/2020",
-                                title: "ฉีดยา",
-                                clinicname: "คลินิคหมอตู่",
-                                details: "วัคซีน ABC",
-                              ),
-                            ],
-                          ),
-                        )))
+                  padding: EdgeInsets.fromLTRB(10, 15, 10, 15),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    color: Colors.white,
+                    border: Border.all(width: 1.0, color: Colors.grey[200]),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 2,
+                        blurRadius: 7,
+                        offset: Offset(1, 3), // changes position of shadow
+                      ),
+                    ],
+                  ),
+                  height: size.height * 0.18,
+                  child: PetMedical(
+                    date: "02/02/2020",
+                    title: "ฉีดยา",
+                    clinicname: "คลินิคหมอตู่",
+                    details: "วัคซีน ABC",
+                  ),
+                ))
               ],
             ),
           );

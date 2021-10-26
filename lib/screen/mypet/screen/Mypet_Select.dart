@@ -127,7 +127,7 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                         text: "${data['WalkIn_id']}",
                         style: TextStyle(
                             fontSize: 18,
-                            color: Colors.black,
+                            color: Colors.green.shade400,
                             fontWeight: FontWeight.w500,
                             fontFamily: 'Mitr'),
                       ),
@@ -152,7 +152,7 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                         text: "${data['WalkIn_pass']}",
                         style: TextStyle(
                             fontSize: 18,
-                            color: Colors.black,
+                            color: Colors.green.shade400,
                             fontWeight: FontWeight.w500,
                             fontFamily: 'Mitr'),
                       ),
