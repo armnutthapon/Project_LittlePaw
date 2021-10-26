@@ -36,7 +36,6 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
   final editPetBreed = TextEditingController();
   final editPetCharacteristics = TextEditingController();
   final editCongenitalDisease = TextEditingController();
-  final editVaccine = TextEditingController();
   final editPetAge = TextEditingController();
 
   List listCategory = ["สุนัข", "แมว"];
@@ -90,7 +89,6 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
       'characteristics': '${editPetCharacteristics.text}',
       'sterilization': '${editPetSterilize}',
       'congenital_disease': '${editCongenitalDisease.text}',
-      'vaccine': '${editVaccine.text}',
       'urlImage': '$urlImage',
     }).then((response) {
       print("success");
@@ -106,7 +104,6 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
     print("char " + editPetCharacteristics.text);
     print("sterlize " + editPetSterilize);
     print("dis " + editCongenitalDisease.text);
-    print("vaccine " + editVaccine.text);
   }
 
   @override
@@ -173,12 +170,6 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
       editCongenitalDisease.text = data['congenital_disease'];
     }
 
-    if (editVaccine.text != data['vaccine'][0]) {
-      editVaccine.text = editVaccine.text;
-    } else {
-      editVaccine.text = data['vaccine'][0];
-    }
-
     if (this.urlImage != data['urlImage']) {
       print("ของใหม่ :" + urlImage);
       await uploadImageToFirebase();
@@ -200,7 +191,6 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
         editPetAge.text = data['dob'];
         editPetSterilize = data['sterilization'];
         editCongenitalDisease.text = data['congenital_disease'];
-        editVaccine.text = data['vaccine'][0];
         urlImage = data['urlImage'];
         if (data['sterilization'] == true) {
           return editPetSterilize = "ทำหมันแล้ว";
@@ -947,61 +937,6 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                       trailing: IconButton(
                                           onPressed: () {
                                             editCongenitalDisease.clear();
-                                          },
-                                          icon: Icon(
-                                            FontAwesomeIcons.solidTimesCircle,
-                                            size: 16,
-                                            color: Colors.grey,
-                                          ))),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.fromLTRB(
-                                  10, 2.5, 10, size.height * 0.1),
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                                color: Colors.white,
-                                border: Border.all(
-                                    width: 1.0, color: Colors.grey[200]),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.only(top: 10, bottom: 10),
-                                child: Container(
-                                  child: ListTile(
-                                      title: Text(
-                                        "วัคซีนที่ได้รับ :",
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                            color: Colors.black54,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w400,
-                                            fontFamily: 'Mitr'),
-                                      ),
-                                      subtitle: TextFormField(
-                                        controller: editVaccine,
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w400,
-                                            fontFamily: 'Mitr'),
-                                        decoration: InputDecoration(
-                                          contentPadding: EdgeInsets.zero,
-                                          border: InputBorder.none,
-                                          focusedBorder: InputBorder.none,
-                                        ),
-                                        onSaved: (String value) {},
-                                        validator: (value) {
-                                          if (value == null || value.isEmpty) {
-                                            return '-';
-                                          }
-                                          return "-";
-                                        },
-                                      ),
-                                      trailing: IconButton(
-                                          onPressed: () {
-                                            editVaccine.clear();
                                           },
                                           icon: Icon(
                                             FontAwesomeIcons.solidTimesCircle,

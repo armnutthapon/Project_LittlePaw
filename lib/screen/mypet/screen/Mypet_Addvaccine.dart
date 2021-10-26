@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
@@ -5,8 +6,12 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:little_paw/database/database.dart';
+
 class Add_Vaccine extends StatefulWidget {
-  const Add_Vaccine({Key key}) : super(key: key);
+  final String pid;
+
+  const Add_Vaccine({Key key, this.pid}) : super(key: key);
 
   @override
   _Add_VaccineState createState() => _Add_VaccineState();
@@ -19,6 +24,14 @@ class _Add_VaccineState extends State<Add_Vaccine> {
 
   DateTime date;
   DateTime selectedDate = DateTime.now();
+
+  addPetVaccine() async {
+    var response = await http
+        .post(Uri.parse('$Url/petDetail/addvaccine/${widget.pid}'), body: {
+      'vaccine_name': '${vaccine_name.text}',
+      'date': '${vaccine_date.text}',
+    });
+  }
 
   Future<void> _selectDate(BuildContext context) async {
     final now = DateTime.now();
@@ -168,7 +181,8 @@ class _Add_VaccineState extends State<Add_Vaccine> {
                                   color: Colors.red.shade300,
                                   onPressed: () {
                                     if (_formkey.currentState.validate()) {
-                                      print("Add vaccine");
+                                      addPetVaccine();
+                                      Navigator.pop(context);
                                     }
                                   },
                                   child: Center(

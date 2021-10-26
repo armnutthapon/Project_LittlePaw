@@ -245,13 +245,6 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
                           text: "โรคประจำตัว :",
                           textdetail: data['congenital_disease'],
                         ),
-                        Container(
-                          margin: EdgeInsets.only(bottom: size.height * 0.1),
-                          child: PetInfo(
-                            text: "วัคซีนที่ได้รับ :",
-                            textdetail: data['vaccine'][0],
-                          ),
-                        ),
                       ],
                     ),
                   ))

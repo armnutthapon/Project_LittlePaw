@@ -77,7 +77,6 @@ class _AddpetState extends State<Addpet> {
   var _addPetSterilize;
   final _addPetCharacteristics = TextEditingController();
   final _addCongenitalDisease = TextEditingController();
-  final _addVaccine = TextEditingController();
   final _addPetAge = TextEditingController();
   DateTime date;
   DateTime selectedDate = DateTime.now();
@@ -113,7 +112,6 @@ class _AddpetState extends State<Addpet> {
       'characteristics': '${_addPetCharacteristics.text}',
       'sterilization': '${_addPetSterilize}',
       'congenital_disease': '${_addCongenitalDisease.text}',
-      'vaccine': '${_addVaccine.text}',
       'urlImage': '$urlImage',
     }).then((response) {
       print("success");
@@ -694,49 +692,6 @@ class _AddpetState extends State<Addpet> {
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'กรุณาระบุโรคประจำตัว';
-                              }
-                              return null;
-                            },
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      color: Colors.white,
-                      border: Border.all(width: 1.0, color: Colors.grey[200]),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 10, bottom: 10),
-                      child: Container(
-                        child: ListTile(
-                          title: Text(
-                            "วัคซีน :",
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                color: Colors.black54,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                fontFamily: 'Mitr'),
-                          ),
-                          subtitle: TextFormField(
-                            controller: _addVaccine,
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
-                                fontFamily: 'Mitr'),
-                            decoration: InputDecoration(
-                              contentPadding: EdgeInsets.zero,
-                              border: InputBorder.none,
-                              focusedBorder: InputBorder.none,
-                            ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'กรุณาระบุวัคซีน';
                               }
                               return null;
                             },
