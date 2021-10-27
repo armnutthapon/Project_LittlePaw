@@ -35,6 +35,8 @@ class Page_SelectPetState extends State<Page_SelectPet> {
 
   var send_pid;
 
+  bool isLoading = false;
+
   @override
   void initState() {
     super.initState();
@@ -54,9 +56,12 @@ class Page_SelectPetState extends State<Page_SelectPet> {
     http.Response response = await http
         .post(Uri.parse('$Url/petDetail/createWalkInID/${widget.pid}'))
         .then((value) {
+      isLoading = false;
+
       print("Doggy Create Walkin");
     });
     // _onLoading();
+
     await shareID_show();
   }
 
@@ -103,68 +108,99 @@ class Page_SelectPetState extends State<Page_SelectPet> {
 
   void shareID(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    var QR = AlertDialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-      actions: [
-        Container(
-            child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                RichText(
-                  text: TextSpan(
-                    text: 'ID : ',
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w300,
-                        fontFamily: 'Mitr'),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: "${data['WalkIn_id']}",
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.green.shade400,
-                            fontWeight: FontWeight.w500,
-                            fontFamily: 'Mitr'),
+    var QR = data == null
+        ? AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            actions: [
+              Container(
+                  height: size.height * 0.1,
+                  child: Center(
+                      child: RichText(
+                    text: TextSpan(
+                      text: 'กรุณากดปุ่ม ',
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.black87,
+                          fontWeight: FontWeight.w300,
+                          fontFamily: 'Mitr'),
+                      children: const <TextSpan>[
+                        TextSpan(
+                          text: 'Walk In',
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black87,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: 'Mitr'),
+                        ),
+                      ],
+                    ),
+                  )))
+            ],
+          )
+        : AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            actions: [
+              Container(
+                  child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      RichText(
+                        text: TextSpan(
+                          text: 'ID : ',
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w300,
+                              fontFamily: 'Mitr'),
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: "${data['WalkIn_id']}",
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: 'Mitr'),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                RichText(
-                  text: TextSpan(
-                    text: 'PASSWORD : ',
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w300,
-                        fontFamily: 'Mitr'),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: "${data['WalkIn_pass']}",
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.green.shade400,
-                            fontWeight: FontWeight.w500,
-                            fontFamily: 'Mitr'),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      RichText(
+                        text: TextSpan(
+                          text: 'PASSWORD : ',
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w300,
+                              fontFamily: 'Mitr'),
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: "${data['WalkIn_pass']}",
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: 'Mitr'),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
-                ),
-              ],
-            ),
-          ],
-        ))
-      ],
-    );
+                ],
+              ))
+            ],
+          );
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -362,21 +398,36 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Container(
-                                    width: size.width * 0.5,
-                                    height: size.height * 0.08,
-                                    child: Card(
-                                      color: Colors.red.shade400,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      elevation: 5,
-                                      child: InkWell(
-                                          onTap: () {
+                                    width: size.width * 0.4,
+                                    height: size.height * 0.07,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Colors.red.shade400,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                      ),
+                                      onPressed: () async {
+                                        setState(() {
+                                          isLoading = true;
+                                        });
+                                        Future.delayed(
+                                            const Duration(seconds: 1), () {
+                                          setState(() {
                                             walkin();
-                                          },
-                                          child: Container(
-                                            alignment: Alignment.center,
-                                            child: Text(
+                                            // Here you can write your code for open new view
+                                          });
+                                        });
+                                      },
+                                      child: (isLoading)
+                                          ? const SizedBox(
+                                              width: 16,
+                                              height: 16,
+                                              child: CircularProgressIndicator(
+                                                color: Colors.white,
+                                                strokeWidth: 1.5,
+                                              ))
+                                          : const Text(
                                               "Walk In",
                                               style: TextStyle(
                                                   color: Colors.white,
@@ -384,33 +435,29 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                                                   fontWeight: FontWeight.w300,
                                                   fontFamily: 'Mitr'),
                                             ),
-                                          )),
                                     ),
                                   ),
                                   Container(
-                                    width: size.width * 0.5,
-                                    height: size.height * 0.08,
-                                    child: Card(
-                                      color: Colors.red.shade200,
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      elevation: 5,
-                                      child: InkWell(
-                                          onTap: () {
-                                            shareID(context);
-                                          },
-                                          child: Container(
-                                            alignment: Alignment.center,
-                                            child: Text(
-                                              "แชร์ไอดี",
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w300,
-                                                  fontFamily: 'Mitr'),
-                                            ),
-                                          )),
+                                    width: size.width * 0.4,
+                                    height: size.height * 0.07,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Colors.red.shade300,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                      ),
+                                      onPressed: () {
+                                        shareID(context);
+                                      },
+                                      child: const Text(
+                                        "แชร์ไอดี",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w300,
+                                            fontFamily: 'Mitr'),
+                                      ),
                                     ),
                                   ),
                                 ],

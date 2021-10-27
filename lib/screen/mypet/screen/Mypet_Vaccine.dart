@@ -62,75 +62,83 @@ class _VaccinetedState extends State<Vaccineted> {
       Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
-          child: SingleChildScrollView(
-              child: Column(children: <Widget>[
-            Container(
-                margin: EdgeInsets.only(top: size.height * 0.06),
-                color: Colors.white,
-                height: size.height * 0.8,
-                child: data == null
-                    ? null
-                    : ListView.builder(
-                        itemCount: data['vaccine'].length,
-                        // ignore: missing_return
-                        itemBuilder: (BuildContext context, int index) {
-                          return Container(
-                              height: size.height * 0.1,
-                              padding: const EdgeInsets.fromLTRB(30, 10, 30, 0),
-                              margin: const EdgeInsets.all(15.0),
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.3),
-                                    spreadRadius: 3,
-                                    blurRadius: 5,
-                                    offset: Offset(
-                                        2, 2), // changes position of shadow
-                                  ),
-                                ],
-                              ),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Text(
-                                        "วันที่ได้รับ : ${data['vaccine'][index]['date']} ",
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w300,
-                                            fontFamily: 'Mitr'),
-                                      ),
-                                      SizedBox(
-                                        width: size.width * 0.01,
-                                      ),
-                                      Icon(
-                                        FontAwesomeIcons.clock,
-                                        size: 14,
-                                        color: Colors.blue.shade800,
-                                      )
-                                    ],
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.only(top: 1),
-                                    alignment: Alignment.bottomLeft,
-                                    child: Text(
-                                      "ชื่อวัคซีน : ${data['vaccine'][index]['vaccine_name']}",
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w400,
-                                          fontFamily: 'Mitr'),
+          child: data == null
+              ? Center(
+                  child: CircularProgressIndicator(
+                    value: null,
+                  ),
+                )
+              : SingleChildScrollView(
+                  child: Column(children: <Widget>[
+                  Container(
+                      margin: EdgeInsets.only(top: size.height * 0.06),
+                      color: Colors.white,
+                      height: size.height * 0.8,
+                      child: data == null
+                          ? null
+                          : ListView.builder(
+                              itemCount: data['vaccine'].length,
+                              // ignore: missing_return
+                              itemBuilder: (BuildContext context, int index) {
+                                return Container(
+                                    height: size.height * 0.1,
+                                    padding: const EdgeInsets.fromLTRB(
+                                        30, 10, 30, 0),
+                                    margin: const EdgeInsets.all(15.0),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                      color: Colors.white,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.3),
+                                          spreadRadius: 3,
+                                          blurRadius: 5,
+                                          offset: Offset(2,
+                                              2), // changes position of shadow
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                ],
-                              ));
-                        }))
-          ])),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            Text(
+                                              "วันที่ได้รับ : ${data['vaccine'][index]['date']} ",
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.w300,
+                                                  fontFamily: 'Mitr'),
+                                            ),
+                                            SizedBox(
+                                              width: size.width * 0.01,
+                                            ),
+                                            Icon(
+                                              FontAwesomeIcons.clock,
+                                              size: 14,
+                                              color: Colors.blue.shade800,
+                                            )
+                                          ],
+                                        ),
+                                        Container(
+                                          padding: EdgeInsets.only(top: 1),
+                                          alignment: Alignment.bottomLeft,
+                                          child: Text(
+                                            "ชื่อวัคซีน : ${data['vaccine'][index]['vaccine_name']}",
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w400,
+                                                fontFamily: 'Mitr'),
+                                          ),
+                                        ),
+                                      ],
+                                    ));
+                              }))
+                ])),
         ),
       ),
       new Positioned(

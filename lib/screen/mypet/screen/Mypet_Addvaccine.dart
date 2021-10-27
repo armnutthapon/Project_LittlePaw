@@ -5,8 +5,11 @@ import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:io';
+import 'package:intl/intl.dart';
+import 'dart:async';
 
 import 'package:little_paw/database/database.dart';
+import 'package:little_paw/screen/mypet/screen/Mypet_Vaccine.dart';
 
 class Add_Vaccine extends StatefulWidget {
   final String pid;
@@ -30,6 +33,24 @@ class _Add_VaccineState extends State<Add_Vaccine> {
         .post(Uri.parse('$Url/petDetail/addvaccine/${widget.pid}'), body: {
       'vaccine_name': '${vaccine_name.text}',
       'date': '${vaccine_date.text}',
+    }).then((response) {
+      print("success");
+      Navigator.pop(context);
+    });
+  }
+
+  addPetDetail() async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User userId = auth.currentUser;
+    final String uid = userId.uid;
+
+    var response = await http
+        .post(Uri.parse('$Url/petDetail/addvaccine/${widget.pid}'), body: {
+      'vaccine_name': '${vaccine_name.text}',
+      'date': '${vaccine_date.text}',
+    }).then((response) {
+      print("success");
+      Navigator.pop(context);
     });
   }
 
@@ -179,10 +200,13 @@ class _Add_VaccineState extends State<Add_Vaccine> {
                                 height: 50,
                                 child: MaterialButton(
                                   color: Colors.red.shade300,
-                                  onPressed: () {
+                                  onPressed: () async {
                                     if (_formkey.currentState.validate()) {
-                                      addPetVaccine();
-                                      Navigator.pop(context);
+                                      print("PID V : ${widget.pid}");
+                                      print("Name V : ${vaccine_name.text}");
+                                      print("Date V : ${vaccine_date.text}");
+                                      await addPetDetail();
+                                      // Navigator.pop(context);
                                     }
                                   },
                                   child: Center(
