@@ -28,30 +28,27 @@ class _Add_VaccineState extends State<Add_Vaccine> {
   DateTime date;
   DateTime selectedDate = DateTime.now();
 
-  addPetVaccine() async {
-    var response = await http
-        .post(Uri.parse('$Url/petDetail/addvaccine/${widget.pid}'), body: {
-      'vaccine_name': '${vaccine_name.text}',
-      'date': '${vaccine_date.text}',
-    }).then((response) {
-      print("success");
-      Navigator.pop(context);
-    });
-  }
+  // addPetVaccine() async {
+  //   var response = await http
+  //       .post(Uri.parse('$Url/petDetail/addvaccine/${widget.pid}'), body: {
+  //     'vaccine_name': '${vaccine_name.text}',
+  //     'date': '${vaccine_date.text}',
+  //   }).then((response) {
+  //     print("success");
+  //     Navigator.pop(context);
+  //   });
+  // }
 
   addPetDetail() async {
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    final User userId = auth.currentUser;
-    final String uid = userId.uid;
-
-    var response = await http
+    http.Response response = await http
         .post(Uri.parse('$Url/petDetail/addvaccine/${widget.pid}'), body: {
       'vaccine_name': '${vaccine_name.text}',
       'date': '${vaccine_date.text}',
     }).then((response) {
       print("success");
-      Navigator.pop(context);
     });
+
+    // Navigator.pop(context, true);
   }
 
   Future<void> _selectDate(BuildContext context) async {
@@ -200,13 +197,13 @@ class _Add_VaccineState extends State<Add_Vaccine> {
                                 height: 50,
                                 child: MaterialButton(
                                   color: Colors.red.shade300,
-                                  onPressed: () async {
+                                  onPressed: () {
                                     if (_formkey.currentState.validate()) {
-                                      print("PID V : ${widget.pid}");
-                                      print("Name V : ${vaccine_name.text}");
-                                      print("Date V : ${vaccine_date.text}");
-                                      await addPetDetail();
-                                      // Navigator.pop(context);
+                                      // print("PID V : ${widget.pid}");
+                                      // print("Name V : ${vaccine_name.text}");
+                                      // print("Date V : ${vaccine_date.text}");
+                                      addPetDetail();
+                                      Navigator.of(context).pop();
                                     }
                                   },
                                   child: Center(

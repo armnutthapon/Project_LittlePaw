@@ -65,25 +65,6 @@ class Page_SelectPetState extends State<Page_SelectPet> {
     await shareID_show();
   }
 
-  void _onLoading() async {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return Dialog(
-          child: new Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              new CircularProgressIndicator(),
-              new Text("Loading"),
-            ],
-          ),
-        );
-      },
-    );
-    await new Future.delayed(const Duration(seconds: 1));
-  }
-
   shareID_show() async {
     http.Response response =
         await http.get(Uri.parse('$Url/petDetail/showPetByPID/${widget.pid}'));
@@ -97,14 +78,6 @@ class Page_SelectPetState extends State<Page_SelectPet> {
 
     return data;
   }
-
-  // shareID_show() async {
-  //   http.Response response = await http
-  //       .post(Uri.parse('$Url/petDetail/${widget.pid}'))
-  //       .then((value) {
-  //     print("Show");
-  //   });
-  // }
 
   void shareID(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -377,20 +350,6 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                                 ),
                               ),
                             ),
-                            // Card(
-                            //   shape: RoundedRectangleBorder(
-                            //       borderRadius: BorderRadius.circular(10)),
-                            //   elevation: 5,
-                            //   child: InkWell(
-                            //     onTap: () {
-                            //       shareID(context);
-                            //     },
-                            //     child: Mypet_ButtonInfo(
-                            //       text: "แชร์",
-                            //       icon: FontAwesomeIcons.share,
-                            //     ),
-                            //   ),
-                            // ),
                             Container(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -442,7 +401,7 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                                     height: size.height * 0.07,
                                     child: ElevatedButton(
                                       style: ElevatedButton.styleFrom(
-                                        primary: Colors.red.shade300,
+                                        primary: Colors.red.shade200,
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10)),
