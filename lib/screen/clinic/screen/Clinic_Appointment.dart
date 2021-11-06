@@ -14,10 +14,17 @@ class Page_Appointment extends StatefulWidget {
   final String cid;
   final String doctor_name;
   final String clinic_name;
+  final String ownername;
+  final String ownercontact;
 
-  const Page_Appointment(
-      {Key key, this.cid, this.doctor_name, this.clinic_name})
-      : super(key: key);
+  const Page_Appointment({
+    Key key,
+    this.cid,
+    this.doctor_name,
+    this.clinic_name,
+    this.ownername,
+    this.ownercontact,
+  }) : super(key: key);
 
   @override
   _Page_AppointmentState createState() => _Page_AppointmentState();
@@ -73,6 +80,28 @@ class _Page_AppointmentState extends State<Page_Appointment> {
     return data;
   }
 
+  var ownername;
+  var ownercontact;
+
+  getOwnerDetail() async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User userId = auth.currentUser;
+    final String uid = userId.uid;
+
+    http.Response response =
+        await http.get(Uri.parse('$Url/owner/showByID/$uid'));
+    if (this.mounted) {
+      setState(() {
+        data = json.decode(response.body);
+        ownername = data['name'];
+        ownercontact = data['contact'];
+        print(ownername);
+        print(ownercontact);
+      });
+    }
+    return data;
+  }
+
   createAppointment() async {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User userId = auth.currentUser;
@@ -84,6 +113,8 @@ class _Page_AppointmentState extends State<Page_Appointment> {
       'doctor_name': '${widget.doctor_name}',
       'userID': '$uid',
       'pid': '$pidselected',
+      'owner_name': '$ownername',
+      'owner_contact': '$ownercontact',
       'pet_name': '${petselected.substring(3)}',
       'urlImage': '$pet_image',
       'date': '${date_appointment.text}',
@@ -110,6 +141,7 @@ class _Page_AppointmentState extends State<Page_Appointment> {
   void initState() {
     super.initState();
     getPetList();
+    getOwnerDetail();
   }
 
   startTime() async {
