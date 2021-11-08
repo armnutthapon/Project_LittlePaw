@@ -375,7 +375,10 @@ class _findClinicMainState extends State<findClinicMain> {
               : Expanded(
                   child: Container(
                       child: Center(child: CircularProgressIndicator())),
-                )
+                ),
+          SizedBox(
+            height: size.height * 0.085,
+          )
         ],
       ),
       backgroundColor: Colors.white,

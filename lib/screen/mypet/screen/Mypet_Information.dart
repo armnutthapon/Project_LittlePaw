@@ -251,7 +251,10 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
                 : Expanded(
                     child: Container(
                         child: Center(child: CircularProgressIndicator())),
-                  )
+                  ),
+            SizedBox(
+              height: size.height * 0.085,
+            )
           ],
         ),
       ]),

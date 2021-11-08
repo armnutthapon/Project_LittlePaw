@@ -78,28 +78,28 @@ class _Page_MyAppointmentState extends State<Page_MyAppointment> {
                 Container(
                     height: size.height * 0.8,
                     child: ListView.builder(
-                      itemCount: data == null ? 0 : data.length,
-                      // ignore: missing_return
-                      itemBuilder: (BuildContext context, int index) {
-                        Color getColor() {
-                          if (data[index]['status'] == "Waiting") {
-                            return Colors.amber;
-                          } else if (data[index]['status'] == "Confirmed") {
-                            setState(() {
-                              formattedDate = DateFormat('dd-MM-yyyy').format(
-                                  data[data.length - 1]['time_notification']);
-                            });
-                            return Colors.green;
-                          } else if (data[index]['status'] == "Denided") {
-                            setState(() {
-                              formattedDate = DateFormat('dd-MM-yyyy').format(
-                                  data[data.length - 1]['time_notification']);
-                            });
-                            return Colors.red;
+                        itemCount: data == null ? 0 : data.length,
+                        // ignore: missing_return
+                        itemBuilder: (BuildContext context, int index) {
+                          Color getColor() {
+                            if (data[index]['status'] == "Waiting") {
+                              return Colors.amber;
+                            } else if (data[index]['status'] == "Confirmed") {
+                              // setState(() {
+                              //   formattedDate = DateFormat('dd-MM-yyyy').format(
+                              //       data[data.length - 1]['time_notification']);
+                              // });
+                              return Colors.green;
+                            } else if (data[index]['status'] == "Denided") {
+                              // setState(() {
+                              //   formattedDate = DateFormat('dd-MM-yyyy').format(
+                              //       data[data.length - 1]['time_notification']);
+                              // });
+                              return Colors.red;
+                            }
                           }
-                        }
 
-                        if (data[index]['status'] == "Waiting") {
+                          // if (data[index]['status'] == "Waiting") {
                           return Container(
                             height: size.height * 0.17,
                             child: Container(
@@ -166,46 +166,46 @@ class _Page_MyAppointmentState extends State<Page_MyAppointment> {
                                       ),
                                     ),
                                   ),
-                                  // Align(
-                                  //   alignment: Alignment.topRight,
-                                  //   child: Row(
-                                  //       mainAxisSize: MainAxisSize.min,
-                                  //       children: <Widget>[
-                                  //         Text(
-                                  //           data[index]['date_notification'],
-                                  //           style: TextStyle(
-                                  //               fontSize: 14,
-                                  //               color: Colors.black,
-                                  //               fontWeight: FontWeight.w400,
-                                  //               fontFamily: 'Mitr'),
-                                  //         ),
-                                  //         SizedBox(
-                                  //           width: size.width * 0.01,
-                                  //         ),
-                                  //         Text(
-                                  //           data[index]['time_notification'],
-                                  //           style: TextStyle(
-                                  //               fontSize: 14,
-                                  //               color: Colors.black,
-                                  //               fontWeight: FontWeight.w400,
-                                  //               fontFamily: 'Mitr'),
-                                  //         ),
-                                  //         SizedBox(
-                                  //           width: size.width * 0.01,
-                                  //         ),
-                                  //         Icon(
-                                  //           FontAwesomeIcons.clock,
-                                  //           color: Colors.blue.shade800,
-                                  //         )
-                                  //       ]),
-                                  // ),
+                                  Align(
+                                    alignment: Alignment.topRight,
+                                    child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: <Widget>[
+                                          Text(
+                                            data[index]['date_notification'],
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w400,
+                                                fontFamily: 'Mitr'),
+                                          ),
+                                          SizedBox(
+                                            width: size.width * 0.01,
+                                          ),
+                                          Text(
+                                            data[index]['time_notification'],
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w400,
+                                                fontFamily: 'Mitr'),
+                                          ),
+                                          SizedBox(
+                                            width: size.width * 0.01,
+                                          ),
+                                          Icon(
+                                            FontAwesomeIcons.clock,
+                                            color: Colors.blue.shade800,
+                                          )
+                                        ]),
+                                  ),
                                 ],
                               ),
                             ),
                           );
                         }
-                      },
-                    ))
+                        // },
+                        ))
               ]))
             : Center(child: CircularProgressIndicator()));
   }
