@@ -58,8 +58,6 @@ class _Page_AddpetState extends State<Page_Addpet> {
 }
 
 class Addpet extends StatefulWidget {
-  static const routeName = '/showNav';
-
   @override
   _AddpetState createState() => _AddpetState();
 }

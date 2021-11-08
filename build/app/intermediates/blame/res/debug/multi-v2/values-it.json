@@ -4,7 +4,7 @@
             "outputFile": "D:\\SE 4\\Project_LittlePaw\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-it\\values-it.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\66818\\.gradle\\caches\\transforms-2\\files-2.1\\c11b41ec4084934fd74db75e969c8ce7\\jetified-play-services-basement-17.2.1\\res\\values-it\\values.xml",
+                    "source": "C:\\Users\\66818\\.gradle\\caches\\transforms-2\\files-2.1\\b2e5918e5128bed1b8b333869522ca61\\jetified-play-services-basement-17.2.1\\res\\values-it\\values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",

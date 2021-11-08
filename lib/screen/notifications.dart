@@ -75,6 +75,7 @@ class _NotificationFeedState extends State<NotificationFeed> {
                     color: Colors.white,
                     height: size.height * 0.8,
                     child: ListView.builder(
+                      reverse: true,
                       itemCount: data == null ? 0 : data.length,
                       // ignore: missing_return
                       itemBuilder: (BuildContext context, int index) {

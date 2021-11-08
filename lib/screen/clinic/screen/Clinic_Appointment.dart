@@ -49,7 +49,13 @@ class _Page_AppointmentState extends State<Page_Appointment> {
   DateTime aa;
 
   String _selectedTime;
-  String valueSterilize;
+  List test = [
+    "สุนัข",
+    "แมว",
+    "สุนัข1",
+    "สุนัข2",
+    "สุนัข3",
+  ];
 
   List listpet = [];
   List listPID = [];
@@ -73,7 +79,7 @@ class _Page_AppointmentState extends State<Page_Appointment> {
       data = json.decode(response.body);
     });
     for (var index = 0; index < data.length; index++) {
-      listpet.add("${index + 1}. " + data[index]['pet_name']);
+      listpet.add(data[index]['pet_name']);
       listPID.add(data[index]['_id']);
       listpet_image.add(data[index]['urlImage']);
     }
@@ -343,7 +349,7 @@ class _Page_AppointmentState extends State<Page_Appointment> {
                             isDense: false,
                             decoration: InputDecoration.collapsed(hintText: ''),
                             dropdownColor: Colors.white,
-                            value: valueSterilize,
+                            value: petselected,
                             style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 16,
@@ -351,7 +357,6 @@ class _Page_AppointmentState extends State<Page_Appointment> {
                                 fontFamily: 'Mitr'),
                             onChanged: (newValue) {
                               setState(() {
-                                valueSterilize = newValue;
                                 petselected = newValue;
                                 for (var i = 0; i < listpet.length; i++) {
                                   if (petselected == listpet[i]) {
