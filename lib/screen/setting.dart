@@ -135,13 +135,22 @@ class _SettingState extends State<Setting> {
                                   backgroundColor: Colors.grey.shade300,
                                   child: ClipOval(
                                     child: SizedBox(
-                                      width: 140.0,
-                                      height: 140.0,
-                                      child: Image.asset(
-                                        'assets/images/avatar.jpg',
-                                        fit: BoxFit.fill,
-                                      ),
-                                    ),
+                                        width: 140.0,
+                                        height: 140.0,
+                                        child: data['gender'] == "ชาย"
+                                            ? Image.asset(
+                                                'assets/images/male.png',
+                                                fit: BoxFit.fill,
+                                              )
+                                            : data['gender'] == "หญิง"
+                                                ? Image.asset(
+                                                    'assets/images/female.png',
+                                                    fit: BoxFit.fill,
+                                                  )
+                                                : Image.asset(
+                                                    'assets/images/hamster.jpg',
+                                                    fit: BoxFit.fill,
+                                                  )),
                                   ),
                                 )),
                           ],

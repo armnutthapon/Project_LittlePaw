@@ -53,25 +53,25 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
 
   updateUserProfile() async {
     await setData();
-    // if (user_name == null || user_name.text.isEmpty) {
-    //   user_name.text = "-";
-    //   return user_name.text = "-";
-    // }
-    // if (user_gender != data['sex']) {
-    //   user_gender = user_gender;
-    // } else {
-    //   user_gender = data['sex'];
-    // }
-    // if (user_contact == null || user_contact.text.isEmpty) {
-    //   user_contact.text = "-";
-    //   return user_contact.text = "-";
-    // }
+    if (user_name == null || user_name.text.isEmpty) {
+      user_name.text = "-";
+      return user_name.text = "-";
+    }
+    if (user_gender != data['gender']) {
+      user_gender = user_gender;
+    } else {
+      user_gender = data['gender'];
+    }
+    if (user_contact == null || user_contact.text.isEmpty) {
+      user_contact.text = "-";
+      return user_contact.text = "-";
+    }
 
     http.Response response =
         await http.put(Uri.parse('$Url/owner/editUserProfile/$uid'), body: {
       'name': '${user_name.text}',
       'contact': '${user_contact.text}',
-      'sex': '$user_gender',
+      'gender': '${user_gender}',
       // 'urlImage': '$urlImage'
     }).then((value) {});
     print(
@@ -99,10 +99,10 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
       user_contact.text = data['contact'];
     }
 
-    if (user_gender != data['sex']) {
+    if (user_gender != data['gender']) {
       user_gender = user_gender;
     } else {
-      user_gender = data['sex'];
+      user_gender = data['gender'];
     }
 
     // if (this.urlImage != data['urlImage']) {
@@ -118,9 +118,10 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
       setState(() {
         user_name.text = data['name'];
         user_contact.text = data['contact'];
-        user_gender = data['sex'];
+        user_gender = data['gender'];
         // urlImage = data['urlImage'];
       });
+      print("เพศ  " + user_gender);
     }
   }
 
@@ -251,194 +252,132 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                               ),
                             ),
                           ),
-                          // Container(
-                          //   margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
-                          //   decoration: BoxDecoration(
-                          //     borderRadius:
-                          //         BorderRadius.all(Radius.circular(10)),
-                          //     color: Colors.white,
-                          //     border: Border.all(
-                          //         width: 1.0, color: Colors.grey[200]),
-                          //   ),
-                          //   child: Padding(
-                          //     padding: EdgeInsets.only(top: 10, bottom: 10),
-                          //     child: Container(
-                          //       child: ListTile(
-                          //           title: Text(
-                          //             "เบอร์มือถือ :",
-                          //             overflow: TextOverflow.ellipsis,
-                          //             style: TextStyle(
-                          //                 color: Colors.black54,
-                          //                 fontSize: 14,
-                          //                 fontWeight: FontWeight.w400,
-                          //                 fontFamily: 'Mitr'),
-                          //           ),
-                          //           subtitle: TextFormField(
-                          //             controller: user_contact,
-                          //             style: TextStyle(
-                          //                 color: Colors.black,
-                          //                 fontSize: 16,
-                          //                 fontWeight: FontWeight.w400,
-                          //                 fontFamily: 'Mitr'),
-                          //             decoration: InputDecoration(
-                          //               contentPadding: EdgeInsets.zero,
-                          //               border: InputBorder.none,
-                          //               focusedBorder: InputBorder.none,
-                          //             ),
-                          //             onSaved: (String value) {},
-                          //             validator: (value) {
-                          //               if (value == null || value.isEmpty) {
-                          //                 print("null");
-                          //                 return 'กรุณาระบุ';
-                          //               }
-                          //               return null;
-                          //             },
-                          //           ),
-                          //           trailing: IconButton(
-                          //               onPressed: () {
-                          //                 user_contact.clear();
-                          //               },
-                          //               icon: Icon(
-                          //                 FontAwesomeIcons.solidTimesCircle,
-                          //                 size: 16,
-                          //                 color: Colors.grey,
-                          //               ))),
-                          //     ),
-                          //   ),
-                          // ),
-                          // Container(
-                          //   margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
-                          //   decoration: BoxDecoration(
-                          //     borderRadius:
-                          //         BorderRadius.all(Radius.circular(10)),
-                          //     color: Colors.white,
-                          //     border: Border.all(
-                          //         width: 1.0, color: Colors.grey[200]),
-                          //   ),
-                          //   child: Padding(
-                          //     padding: EdgeInsets.only(top: 10, bottom: 10),
-                          //     child: Container(
-                          //       child: ListTile(
-                          //         title: Text(
-                          //           "เพศ :",
-                          //           overflow: TextOverflow.ellipsis,
-                          //           style: TextStyle(
-                          //               color: Colors.black54,
-                          //               fontSize: 14,
-                          //               fontWeight: FontWeight.w400,
-                          //               fontFamily: 'Mitr'),
-                          //         ),
-                          //         subtitle: Container(
-                          //           padding: EdgeInsets.only(
-                          //               right: size.width * 0.03),
-                          //           child: DropdownButtonFormField(
-                          //             icon: Icon(
-                          //               Icons.arrow_drop_down,
-                          //             ),
-                          //             hint: Text(user_gender,
-                          //                 style: TextStyle(
-                          //                     color: Colors.black,
-                          //                     fontSize: 16,
-                          //                     fontWeight: FontWeight.w400,
-                          //                     fontFamily: 'Mitr')),
-                          //             isDense: false,
-                          //             decoration: InputDecoration.collapsed(
-                          //                 hintText: ''),
-                          //             dropdownColor: Colors.white,
-                          //             value: valueGender,
-                          //             style: TextStyle(
-                          //                 color: Colors.black,
-                          //                 fontSize: 16,
-                          //                 fontWeight: FontWeight.w400,
-                          //                 fontFamily: 'Mitr'),
-                          //             onChanged: (newValue) {
-                          //               setState(() {
-                          //                 valueGender = newValue;
-                          //                 user_gender = newValue;
-                          //               });
-                          //               print("Sex : $valueGender");
-                          //             },
-                          //             validator: (value) {
-                          //               if (value == null || value.isEmpty) {
-                          //                 return valueGender = user_gender.text;
-                          //               }
-                          //               return valueGender = user_gender.text;
-                          //             },
-                          //             items: listGender.map((valueItem) {
-                          //               return DropdownMenuItem(
-                          //                   value: valueItem,
-                          //                   child: Text(
-                          //                     valueItem,
-                          //                   ));
-                          //             }).toList(),
-                          //           ),
-                          //         ),
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
-                          // Container(
-                          //   margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
-                          //   decoration: BoxDecoration(
-                          //     borderRadius:
-                          //         BorderRadius.all(Radius.circular(10)),
-                          //     color: Colors.white,
-                          //     border: Border.all(
-                          //         width: 1.0, color: Colors.grey[200]),
-                          //   ),
-                          //   child: Padding(
-                          //     padding: EdgeInsets.only(top: 10, bottom: 10),
-                          //     child: Container(
-                          //       child: ListTile(
-                          //         title: Text(
-                          //           "เพศ :",
-                          //           overflow: TextOverflow.ellipsis,
-                          //           style: TextStyle(
-                          //               color: Colors.black54,
-                          //               fontSize: 14,
-                          //               fontWeight: FontWeight.w400,
-                          //               fontFamily: 'Mitr'),
-                          //         ),
-                          //         subtitle: DropdownButtonFormField(
-                          //           icon: Icon(
-                          //             // Add this
-                          //             Icons.arrow_drop_down, // Add this
-                          //             color: Colors.grey.shade600, // Add this
-                          //           ),
-                          //           hint: Text(user_gender.text,
-                          //               style: TextStyle(
-                          //                   color: Colors.black,
-                          //                   fontSize: 16,
-                          //                   fontWeight: FontWeight.w400,
-                          //                   fontFamily: 'Mitr')),
-                          //           isDense: false,
-                          //           decoration:
-                          //               InputDecoration.collapsed(hintText: ''),
-                          //           dropdownColor: Colors.white,
-                          //           value: valueGender,
-                          //           style: TextStyle(
-                          //               color: Colors.black,
-                          //               fontSize: 16,
-                          //               fontWeight: FontWeight.w400,
-                          //               fontFamily: 'Mitr'),
-                          //           onChanged: (newValue) {
-                          //             setState(() {
-                          //               valueGender = newValue;
-                          //               user_gender.text = newValue;
-                          //             });
-                          //           },
-                          //           items: listGender.map((valueItem) {
-                          //             return DropdownMenuItem(
-                          //                 value: valueItem,
-                          //                 child: Text(
-                          //                   valueItem,
-                          //                 ));
-                          //           }).toList(),
-                          //         ),
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
+                          Container(
+                            margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              color: Colors.white,
+                              border: Border.all(
+                                  width: 1.0, color: Colors.grey[200]),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.only(top: 10, bottom: 10),
+                              child: Container(
+                                child: ListTile(
+                                    title: Text(
+                                      "เบอร์มือถือ :",
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          color: Colors.black54,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: 'Mitr'),
+                                    ),
+                                    subtitle: TextFormField(
+                                      controller: user_contact,
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: 'Mitr'),
+                                      decoration: InputDecoration(
+                                        contentPadding: EdgeInsets.zero,
+                                        border: InputBorder.none,
+                                        focusedBorder: InputBorder.none,
+                                      ),
+                                      onSaved: (String value) {},
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          print("null");
+                                          return 'กรุณาระบุ';
+                                        }
+                                        return null;
+                                      },
+                                    ),
+                                    trailing: IconButton(
+                                        onPressed: () {
+                                          user_contact.clear();
+                                        },
+                                        icon: Icon(
+                                          FontAwesomeIcons.solidTimesCircle,
+                                          size: 16,
+                                          color: Colors.grey,
+                                        ))),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              color: Colors.white,
+                              border: Border.all(
+                                  width: 1.0, color: Colors.grey[200]),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.only(top: 10, bottom: 10),
+                              child: Container(
+                                child: ListTile(
+                                  title: Text(
+                                    "เพศ :",
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        color: Colors.black54,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400,
+                                        fontFamily: 'Mitr'),
+                                  ),
+                                  subtitle: Container(
+                                    padding: EdgeInsets.only(
+                                        right: size.width * 0.03),
+                                    child: DropdownButtonFormField(
+                                      icon: Icon(
+                                        Icons.arrow_drop_down,
+                                        color: Colors.grey.shade600,
+                                      ),
+                                      hint: Text(user_gender,
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w400,
+                                              fontFamily: 'Mitr')),
+                                      isDense: false,
+                                      decoration: InputDecoration.collapsed(
+                                          hintText: ''),
+                                      dropdownColor: Colors.white,
+                                      //value: valueGender,
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: 'Mitr'),
+                                      onChanged: (newValue) {
+                                        setState(() {
+                                          valueGender = newValue;
+                                          user_gender = newValue;
+                                        });
+                                      },
+                                      // validator: (value) {
+                                      //   if (value == null || value.isEmpty) {
+                                      //     return valueGender = user_gender.text;
+                                      //   }
+                                      //   return valueGender = user_gender.text;
+                                      // },
+                                      items: listGender.map((valueItem) {
+                                        return DropdownMenuItem(
+                                            value: valueItem,
+                                            child: Text(
+                                              valueItem,
+                                            ));
+                                      }).toList(),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     )
