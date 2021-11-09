@@ -35,8 +35,6 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
   List listGender = ["หญิง", "ชาย", "อื่นๆ"];
   String valueGender;
   String urlImage;
-  ImagePicker picker = ImagePicker();
-  File _imageFile;
 
   getUserInformation() async {
     final FirebaseAuth auth = FirebaseAuth.instance;
@@ -54,11 +52,7 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
   }
 
   updateUserProfile() async {
-    if (_imageFile != null) {
-      await uploadImageToFirebase();
-    } else {
-      await setData();
-    }
+    await setData();
     // if (user_name == null || user_name.text.isEmpty) {
     //   user_name.text = "-";
     //   return user_name.text = "-";
@@ -78,7 +72,7 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
       'name': '${user_name.text}',
       'contact': '${user_contact.text}',
       'sex': '$user_gender',
-      'urlImage': '$urlImage'
+      // 'urlImage': '$urlImage'
     }).then((value) {});
     print(
         '$uid    ${user_name.text}/  ${user_contact.text}/     ${valueGender}');
@@ -111,12 +105,12 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
       user_gender = data['sex'];
     }
 
-    if (this.urlImage != data['urlImage']) {
-      print("ของใหม่ :" + urlImage);
-    } else {
-      urlImage = data['urlImage'];
-      print("ของเดิม :" + urlImage);
-    }
+    // if (this.urlImage != data['urlImage']) {
+    //   print("ของใหม่ :" + urlImage);
+    // } else {
+    //   urlImage = data['urlImage'];
+    //   print("ของเดิม :" + urlImage);
+    // }
   }
 
   showUserProfile() {
@@ -125,36 +119,36 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
         user_name.text = data['name'];
         user_contact.text = data['contact'];
         user_gender = data['sex'];
-        urlImage = data['urlImage'];
+        // urlImage = data['urlImage'];
       });
     }
   }
 
-  Future pickImage(ImageSource source) async {
-    // final pickedFile = await picker.getImage(source: ImageSource.camera);
-    final pickedFile = await picker.getImage(source: source);
-    if (pickedFile == null) return;
+  // Future pickImage(ImageSource source) async {
+  //   // final pickedFile = await picker.getImage(source: ImageSource.camera);
+  //   final pickedFile = await picker.getImage(source: source);
+  //   if (pickedFile == null) return;
 
-    final imageTemporary = File(pickedFile.path);
-    setState(() {
-      this._imageFile = imageTemporary;
-    });
-  }
+  //   final imageTemporary = File(pickedFile.path);
+  //   setState(() {
+  //     this._imageFile = imageTemporary;
+  //   });
+  // }
 
-  Future<void> uploadImageToFirebase() async {
-    Random random = Random();
-    int random_number = random.nextInt(1000000);
+  // Future<void> uploadImageToFirebase() async {
+  //   Random random = Random();
+  //   int random_number = random.nextInt(1000000);
 
-    firebase_storage.FirebaseStorage storage =
-        firebase_storage.FirebaseStorage.instance;
-    firebase_storage.UploadTask uploadTask = firebase_storage
-        .FirebaseStorage.instance
-        .ref('owner_images/Owner$random_number.jpg')
-        .putFile(_imageFile);
+  //   firebase_storage.FirebaseStorage storage =
+  //       firebase_storage.FirebaseStorage.instance;
+  //   firebase_storage.UploadTask uploadTask = firebase_storage
+  //       .FirebaseStorage.instance
+  //       .ref('owner_images/Owner$random_number.jpg')
+  //       .putFile(_imageFile);
 
-    urlImage = await (await uploadTask).ref.getDownloadURL();
-    print("urlImage : " + urlImage);
-  }
+  //   urlImage = await (await uploadTask).ref.getDownloadURL();
+  //   print("urlImage : " + urlImage);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -197,67 +191,7 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                 padding: EdgeInsets.only(bottom: size.height * 0.1),
                 child: Column(
                   children: <Widget>[
-                    Container(
-                      child: Container(
-                          child: Container(
-                        margin: EdgeInsets.only(
-                          top: 10,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                                padding: EdgeInsets.only(bottom: 10, top: 10),
-                                child: data == null
-                                    ? null
-                                    : Column(
-                                        children: [
-                                          CircleAvatar(
-                                            radius: 65,
-                                            backgroundColor:
-                                                Colors.grey.shade300,
-                                            child: ClipOval(
-                                              child: SizedBox(
-                                                  width: 140.0,
-                                                  height: 140.0,
-                                                  child: (_imageFile != null)
-                                                      ? Image.file(
-                                                          _imageFile,
-                                                          fit: BoxFit.fill,
-                                                        )
-                                                      : Image.network(
-                                                          urlImage,
-                                                          fit: BoxFit.fill,
-                                                        )),
-                                            ),
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              IconButton(
-                                                icon: Icon(Icons.photo_library),
-                                                onPressed: () {
-                                                  pickImage(
-                                                      ImageSource.gallery);
-                                                },
-                                              ),
-                                              IconButton(
-                                                icon: Icon(Icons.photo_camera),
-                                                onPressed: () {
-                                                  pickImage(ImageSource.camera);
-                                                },
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ))
-                          ],
-                        ),
-                      )),
-                    ),
                     Expanded(
-                        child: Container(
                       // margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
                       child: ListView(
                         // padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
@@ -320,9 +254,11 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                           // Container(
                           //   margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
                           //   decoration: BoxDecoration(
-                          //     borderRadius: BorderRadius.all(Radius.circular(10)),
+                          //     borderRadius:
+                          //         BorderRadius.all(Radius.circular(10)),
                           //     color: Colors.white,
-                          //     border: Border.all(width: 1.0, color: Colors.grey[200]),
+                          //     border: Border.all(
+                          //         width: 1.0, color: Colors.grey[200]),
                           //   ),
                           //   child: Padding(
                           //     padding: EdgeInsets.only(top: 10, bottom: 10),
@@ -340,7 +276,7 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                           //           subtitle: TextFormField(
                           //             controller: user_contact,
                           //             style: TextStyle(
-                          //                 color: Colors.black.shade300,
+                          //                 color: Colors.black,
                           //                 fontSize: 16,
                           //                 fontWeight: FontWeight.w400,
                           //                 fontFamily: 'Mitr'),
@@ -373,9 +309,11 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                           // Container(
                           //   margin: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
                           //   decoration: BoxDecoration(
-                          //     borderRadius: BorderRadius.all(Radius.circular(10)),
+                          //     borderRadius:
+                          //         BorderRadius.all(Radius.circular(10)),
                           //     color: Colors.white,
-                          //     border: Border.all(width: 1.0, color: Colors.grey[200]),
+                          //     border: Border.all(
+                          //         width: 1.0, color: Colors.grey[200]),
                           //   ),
                           //   child: Padding(
                           //     padding: EdgeInsets.only(top: 10, bottom: 10),
@@ -391,25 +329,25 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                           //               fontFamily: 'Mitr'),
                           //         ),
                           //         subtitle: Container(
-                          //           padding:
-                          //               EdgeInsets.only(right: size.width * 0.03),
+                          //           padding: EdgeInsets.only(
+                          //               right: size.width * 0.03),
                           //           child: DropdownButtonFormField(
                           //             icon: Icon(
                           //               Icons.arrow_drop_down,
                           //             ),
                           //             hint: Text(user_gender,
                           //                 style: TextStyle(
-                          //                     color: Colors.black.shade300,
+                          //                     color: Colors.black,
                           //                     fontSize: 16,
                           //                     fontWeight: FontWeight.w400,
                           //                     fontFamily: 'Mitr')),
                           //             isDense: false,
-                          //             decoration:
-                          //                 InputDecoration.collapsed(hintText: ''),
+                          //             decoration: InputDecoration.collapsed(
+                          //                 hintText: ''),
                           //             dropdownColor: Colors.white,
                           //             value: valueGender,
                           //             style: TextStyle(
-                          //                 color: Colors.black.shade300,
+                          //                 color: Colors.black,
                           //                 fontSize: 16,
                           //                 fontWeight: FontWeight.w400,
                           //                 fontFamily: 'Mitr'),
@@ -469,7 +407,7 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                           //           ),
                           //           hint: Text(user_gender.text,
                           //               style: TextStyle(
-                          //                   color: Colors.black.shade300,
+                          //                   color: Colors.black,
                           //                   fontSize: 16,
                           //                   fontWeight: FontWeight.w400,
                           //                   fontFamily: 'Mitr')),
@@ -479,7 +417,7 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                           //           dropdownColor: Colors.white,
                           //           value: valueGender,
                           //           style: TextStyle(
-                          //               color: Colors.black.shade300,
+                          //               color: Colors.black,
                           //               fontSize: 16,
                           //               fontWeight: FontWeight.w400,
                           //               fontFamily: 'Mitr'),
@@ -503,7 +441,7 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                           // ),
                         ],
                       ),
-                    ))
+                    )
                   ],
                 ),
               )

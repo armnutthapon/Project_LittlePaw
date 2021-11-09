@@ -170,7 +170,7 @@ class _findClinicMainState extends State<findClinicMain> {
     if (this.mounted) {
       setState(() {
         mindistance = result[0];
-        maxdistance = result[1];
+        maxdistance = result[0];
       });
     }
     await filterDistanceSearchResult(mindistance, maxdistance);

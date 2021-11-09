@@ -325,7 +325,8 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                               child: InkWell(
                                 onTap: () {
                                   Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => Page_PetMedical()));
+                                      builder: (context) =>
+                                          Page_PetMedical(pid: widget.pid)));
                                 },
                                 child: Mypet_ButtonInfo(
                                   text: "ประวัติการรักษา",

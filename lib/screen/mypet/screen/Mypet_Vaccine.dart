@@ -74,8 +74,16 @@ class _VaccinetedState extends State<Vaccineted> {
                       margin: EdgeInsets.only(top: size.height * 0.06),
                       color: Colors.white,
                       height: size.height * 0.8,
-                      child: data == null
-                          ? null
+                      child: data['vaccine'].isEmpty
+                          ? Center(
+                              child: Text(
+                              'ไม่มีประวัติวัคซีน',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w300,
+                                  fontFamily: 'Mitr'),
+                            ))
                           : ListView.builder(
                               itemCount: data['vaccine'].length,
                               // ignore: missing_return

@@ -3,86 +3,99 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Page_FilterClinic extends StatefulWidget {
   final int dintance = 0;
-  const Page_FilterClinic({Key key,}) : super(key: key);
+  const Page_FilterClinic({
+    Key key,
+  }) : super(key: key);
 
   @override
   _Page_FilterClinicState createState() => _Page_FilterClinicState();
 }
 
 class _Page_FilterClinicState extends State<Page_FilterClinic> {
-  RangeValues _currentRangeValues =  RangeValues(0, 35);
+  double _currentRangeValues = 0;
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Stack(children: <Widget>[
-      // backgroundColor: Colors.white,
-      Container(
-        alignment: Alignment.center,
-        child: Column(
-          children: [
-            SizedBox(
-              height: size.height * 0.05,
-            ),
-            Container(
-                child: Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 40),
-                  child: ListTile(),
-                )
-              ],
-            )),
-            Container(
-                child: Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 40),
-                  child: ListTile(
-                    title: Text(
-                      "ระยะทาง ( กิโลเมตร )",
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w300,
-                          fontFamily: 'Mitr'),
-                    ),
-                  ),
-                )
-              ],
-            )),
-            Container(
-              margin: new EdgeInsets.only(left: 20, right: 20),
-              child: Column(
+        // backgroundColor: Colors.white,
+        Container(
+          alignment: Alignment.center,
+          child: Column(
+            children: [
+              SizedBox(
+                height: size.height * 0.05,
+              ),
+              Container(
+                  child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                    child: RangeSlider(
-                        activeColor: Colors.red.shade400,
-                        inactiveColor: Colors.red.shade100,
-                        values: _currentRangeValues,
-                      
-                        min: 0,
-                        max: 14000,
-                        divisions: 2,
-                        labels: RangeLabels(
-                          _currentRangeValues.start.round().toString(),
-                          _currentRangeValues.end.round().toString(),
-                        ),
-                        onChanged: (RangeValues values) {
-                          setState(() {
-                            _currentRangeValues = values;
-                          });
-                          // print(_currentRangeValues.end);
-                        }),
-                  ),
+                    padding: EdgeInsets.only(left: 40),
+                    child: ListTile(),
+                  )
                 ],
+              )),
+              Container(
+                  child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: 40),
+                    child: ListTile(
+                      title: Text(
+                        "ระยะทาง ( กิโลเมตร )",
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w300,
+                            fontFamily: 'Mitr'),
+                      ),
+                    ),
+                  )
+                ],
+              )),
+              Container(
+                margin: new EdgeInsets.only(left: 20, right: 20),
+                child: Column(
+                  children: [
+                    Padding(
+                        padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                        child: Slider(
+                          value: _currentRangeValues,
+                          min: 0,
+                          max: 100,
+                          divisions: 50,
+                          label: _currentRangeValues.round().toString(),
+                          onChanged: (double value) {
+                            setState(() {
+                              _currentRangeValues = value;
+                            });
+                          },
+                        )
+                        // RangeSlider(
+                        //     activeColor: Colors.red.shade400,
+                        //     inactiveColor: Colors.red.shade100,
+                        //     values: _currentRangeValues,
+                        //     min: 0,
+                        //     max: 14000,
+                        //     divisions: 2,
+                        //     labels: RangeLabels(
+                        //       _currentRangeValues.start.round().toString(),
+                        //       _currentRangeValues.end.round().toString(),
+                        //     ),
+                        //     onChanged: (RangeValues values) {
+                        //       setState(() {
+                        //         _currentRangeValues = values;
+                        //       });
+                        //       // print(_currentRangeValues.end);
+                        //     }),
+                        ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-    ),
         new Positioned(
           top: 0.0,
           left: 0.0,
@@ -97,14 +110,12 @@ class _Page_FilterClinicState extends State<Page_FilterClinic> {
                   fontFamily: 'Mitr'),
             ), // You can add title here
             leading: new IconButton(
-              padding: EdgeInsets.only(top: 0),
-              icon: new Icon(
-                Icons.arrow_back_ios,
-                color: Colors.red.shade300,
-              ),
-              onPressed: () => 
-              Navigator.pop(context,[_currentRangeValues.start,_currentRangeValues.end])
-            ),
+                padding: EdgeInsets.only(top: 0),
+                icon: new Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.red.shade300,
+                ),
+                onPressed: () => Navigator.pop(context, [_currentRangeValues])),
             backgroundColor: Colors.white,
             elevation: 0.0,
           ),

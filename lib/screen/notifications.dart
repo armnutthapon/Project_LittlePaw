@@ -76,7 +76,17 @@ class _NotificationFeedState extends State<NotificationFeed> {
                     height: size.height * 0.8,
                     child: ListView.builder(
                       reverse: true,
-                      itemCount: data == null ? 0 : data.length,
+                      itemCount: data == null
+                          ? Center(
+                              child: Text(
+                              'ไม่มีประวัติวัคซีน',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w300,
+                                  fontFamily: 'Mitr'),
+                            ))
+                          : data.length,
                       // ignore: missing_return
                       itemBuilder: (BuildContext context, int index) {
                         Color getColor() {

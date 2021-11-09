@@ -130,27 +130,20 @@ class _SettingState extends State<Setting> {
                           children: [
                             Container(
                                 padding: EdgeInsets.only(bottom: 10, top: 10),
-                                child: data == null
-                                    ? null
-                                    : CircleAvatar(
-                                        radius: 75,
-                                        backgroundColor: Colors.grey.shade300,
-                                        child: ClipOval(
-                                          child: SizedBox(
-                                            width: 140.0,
-                                            height: 140.0,
-                                            child: (data['urlImage'] != " ")
-                                                ? Image.network(
-                                                    data['urlImage'],
-                                                    fit: BoxFit.fill,
-                                                  )
-                                                : Image.asset(
-                                                    'assets/images/avatar.jpg',
-                                                    fit: BoxFit.fill,
-                                                  ),
-                                          ),
-                                        ),
-                                      )),
+                                child: CircleAvatar(
+                                  radius: 75,
+                                  backgroundColor: Colors.grey.shade300,
+                                  child: ClipOval(
+                                    child: SizedBox(
+                                      width: 140.0,
+                                      height: 140.0,
+                                      child: Image.asset(
+                                        'assets/images/avatar.jpg',
+                                        fit: BoxFit.fill,
+                                      ),
+                                    ),
+                                  ),
+                                )),
                           ],
                         ),
                       )),
