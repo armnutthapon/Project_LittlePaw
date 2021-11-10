@@ -148,7 +148,7 @@ class _SettingState extends State<Setting> {
                                                     fit: BoxFit.fill,
                                                   )
                                                 : Image.asset(
-                                                    'assets/images/hamster.jpg',
+                                                    'assets/images/hamster.png',
                                                     fit: BoxFit.fill,
                                                   )),
                                   ),

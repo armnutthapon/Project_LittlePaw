@@ -174,7 +174,6 @@ void registorOwner(email, name, gender, age, phone) async {
     'gender': '${gender}',
     'dob': '${age}',
     'contact': '${phone}',
-    'urlImage': " "
   }).then((value) {
     print("insert sucess");
     print("insert userID: $uid");

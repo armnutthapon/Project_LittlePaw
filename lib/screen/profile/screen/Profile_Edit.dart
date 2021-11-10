@@ -75,7 +75,7 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
       // 'urlImage': '$urlImage'
     }).then((value) {});
     print(
-        '$uid    ${user_name.text}/  ${user_contact.text}/     ${valueGender}');
+        '$uid    ${user_name.text}/  ${user_contact.text}/     ${user_gender}');
     print("Update success");
   }
 
@@ -356,8 +356,9 @@ class _Page_EditProfileState extends State<Page_EditProfile> {
                                       onChanged: (newValue) {
                                         setState(() {
                                           valueGender = newValue;
-                                          user_gender = newValue;
+                                          user_gender = valueGender;
                                         });
+                                        print("select : " + user_gender);
                                       },
                                       // validator: (value) {
                                       //   if (value == null || value.isEmpty) {
