@@ -43,6 +43,45 @@ class Page_SelectPetState extends State<Page_SelectPet> {
     print(widget.urlImage);
   }
 
+  createAlertDialog(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            actions: [
+              Container(
+                  height: size.height * 0.1,
+                  child: Center(
+                      child: RichText(
+                    text: TextSpan(
+                      text: 'สำเร็จ! กดปุ่ม ',
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.black87,
+                          fontWeight: FontWeight.w300,
+                          fontFamily: 'Mitr'),
+                      children: const <TextSpan>[
+                        TextSpan(
+                          text: 'แชร์ไอดี',
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.green,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: 'Mitr'),
+                        ),
+                      ],
+                    ),
+                  )))
+            ],
+          );
+        });
+  }
+
   deletePetByID() async {
     http.Response response = await http
         .get(Uri.parse('$Url/petDetail/deletePet/$uid/${widget.pid}'))
@@ -103,7 +142,7 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                           text: 'Walk In',
                           style: TextStyle(
                               fontSize: 16,
-                              color: Colors.black87,
+                              color: Colors.blue,
                               fontWeight: FontWeight.w400,
                               fontFamily: 'Mitr'),
                         ),
@@ -362,7 +401,7 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                                     height: size.height * 0.07,
                                     child: ElevatedButton(
                                       style: ElevatedButton.styleFrom(
-                                        primary: Colors.red.shade400,
+                                        primary: Colors.blue,
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10)),
@@ -373,14 +412,16 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                                         });
                                         Future.delayed(
                                             const Duration(seconds: 1), () {
-                                          setState(() {
-                                            walkin();
+                                          setState(() async {
+                                            await walkin();
+                                            createAlertDialog(context);
+
                                             // Here you can write your code for open new view
                                           });
                                         });
                                       },
                                       child: (isLoading)
-                                          ? const SizedBox(
+                                          ? SizedBox(
                                               width: 16,
                                               height: 16,
                                               child: CircularProgressIndicator(
@@ -402,7 +443,7 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                                     height: size.height * 0.07,
                                     child: ElevatedButton(
                                       style: ElevatedButton.styleFrom(
-                                        primary: Colors.red.shade200,
+                                        primary: Colors.green,
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10)),

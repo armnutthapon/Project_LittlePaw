@@ -41,28 +41,31 @@ class _SettingState extends State<Setting> {
     // คำนวณอายุ
     await getOwnerAge();
 
-    print("profile : $data");
-    print(data['dob']);
-    print(getAge[0]['age']);
-
     return data;
   }
 
   // ## function คำนวณอายุ
   getOwnerAge() async {
-    http.Response response = await http
-        .post(Uri.parse('$Url/owner/getage'), body: {'dob': data['dob']});
-    if (this.mounted) {
-      setState(() {
-        getAge = json.decode(response.body);
-        if (getAge[0]['age'] <= 0) {
-          age = "น้อยกว่า 1";
-        } else {
-          age = "${getAge[0]['age']}";
+    Future.delayed(const Duration(milliseconds: 1), () {
+// Here you can write your code
+
+      setState(() async {
+        http.Response response = await http
+            .post(Uri.parse('$Url/owner/getage'), body: {'dob': data['dob']});
+        if (this.mounted) {
+          setState(() {
+            getAge = json.decode(response.body);
+            if (getAge[0]['age'] <= 0) {
+              age = "น้อยกว่า 1";
+            } else {
+              age = "${getAge[0]['age']}";
+            }
+          });
         }
+        print(getAge[0]['age']);
+        // Here you can write your code for open new view
       });
-    }
-    print(getAge[0]['age']);
+    });
   }
 
   @override
@@ -225,8 +228,16 @@ class _SettingState extends State<Setting> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+                              Icon(
+                                FontAwesomeIcons.paw,
+                                size: 10,
+                                color: Colors.red.shade400,
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
                               Text(
-                                "LITTLE PAW",
+                                "LITTLE PAW ",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 12,

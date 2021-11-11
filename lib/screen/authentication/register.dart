@@ -77,18 +77,18 @@ class _RegisterState extends State<Register> {
     super.initState();
   }
 
-  @override
-  void dispose() {
-    _emailController?.dispose();
-    _passwordController?.dispose();
-    _confirmPasswordController?.dispose();
-    _name?.dispose();
-    _age?.dispose();
-    _phone?.dispose();
-    _gender?.dispose();
+  // @override
+  // void dispose() {
+  //   _emailController?.dispose();
+  //   _passwordController?.dispose();
+  //   _confirmPasswordController?.dispose();
+  //   _name?.dispose();
+  //   _age?.dispose();
+  //   _phone?.dispose();
+  //   _gender?.dispose();
 
-    super.dispose();
-  }
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -302,7 +302,7 @@ class _RegisterState extends State<Register> {
                                             onChanged: (newValue) {
                                               setState(() {
                                                 valueGender = newValue;
-                                                _gender = newValue;
+                                                _gender = valueGender;
                                               });
                                               print(_gender);
                                             },
@@ -413,17 +413,22 @@ class _RegisterState extends State<Register> {
                                                 : double.infinity,
                                             color: Colors.red.shade300,
                                             onPressed: () async {
+                                              print(_emailController.text);
+                                              print(_passwordController.text);
+                                              print(_name.text);
+                                              print(_gender);
+                                              print(_age.text);
+                                              print(_phone.text);
+
                                               if (_formkey.currentState
                                                   .validate()) {
                                                 await loginProvider.register(
-                                                    _emailController.text
-                                                        .trim(),
-                                                    _passwordController.text
-                                                        .trim(),
-                                                    _name.text.trim(),
-                                                    _gender.trim(),
-                                                    _age.text.trim(),
-                                                    _phone.text.trim());
+                                                    _emailController.text,
+                                                    _passwordController.text,
+                                                    _name.text,
+                                                    _gender,
+                                                    _age.text,
+                                                    _phone.text);
                                               }
                                             },
                                             child: Center(

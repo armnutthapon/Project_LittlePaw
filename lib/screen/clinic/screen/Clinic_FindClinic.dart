@@ -192,7 +192,7 @@ class _findClinicMainState extends State<findClinicMain> {
       body: Column(
         children: [
           SizedBox(
-            height: size.height * 0.15,
+            height: size.height * 0.12,
           ),
           Container(
               padding: EdgeInsets.fromLTRB(0, 10, 0, 0),

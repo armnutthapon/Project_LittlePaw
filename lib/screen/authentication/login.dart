@@ -115,13 +115,12 @@ class _LoginState extends State<Login> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                              Image.asset(
-                                './assets/images/littlepaw.png',
-                                height: 140.0,
-                                width: 140.0,
-                                fit: BoxFit.cover ,
-                              ),
-                            
+                            Image.asset(
+                              './assets/images/littlepaw.png',
+                              height: 140.0,
+                              width: 140.0,
+                              fit: BoxFit.cover,
+                            ),
                           ],
                         ),
                         Card(
@@ -263,7 +262,7 @@ class _LoginState extends State<Login> {
                                     ),
                                   ),
                                 ),
-                                GoogleSiginBtn(),
+                                //GoogleSiginBtn(),
                                 Container(
                                   margin: EdgeInsets.only(top: 10),
                                   child: Row(
