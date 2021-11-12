@@ -26,31 +26,38 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
   getPetDetail() async {
     http.Response response =
         await http.get(Uri.parse('$Url/petDetail/showPetByPID/${widget.pid}'));
+    if (!mounted) return;
+
     if (this.mounted) {
       setState(() {
         data = json.decode(response.body);
       });
     }
     await getPetAge();
-    print(data['dob']);
-    print(getAge[0]['age']);
+    // print(data['dob']);
+    // print("get : " + getAge);
+    // print(data);
     return data;
   }
 
   getPetAge() async {
-    http.Response response = await http
-        .post(Uri.parse('$Url/petDetail/getage'), body: {'dob': data['dob']});
-    if (this.mounted) {
-      setState(() {
-        getAge = json.decode(response.body);
-        if (getAge[0]['age'] <= 0) {
-          age = "น้อยกว่า 1";
-        } else {
-          age = "${getAge[0]['age']}";
-        }
-      });
+    try {
+      http.Response response = await http
+          .post(Uri.parse('$Url/petDetail/getage'), body: {'dob': data['dob']});
+      if (this.mounted) {
+        setState(() {
+          getAge = json.decode(response.body);
+          if (getAge[0]['age'] <= 0) {
+            age = "น้อยกว่า 1";
+          } else {
+            age = "${getAge[0]['age']}";
+          }
+        });
+      }
+      print(getAge[0]['age']);
+    } catch (e) {
+      print(e);
     }
-    print(getAge[0]['age']);
   }
 
   @override
