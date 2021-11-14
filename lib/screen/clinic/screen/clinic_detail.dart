@@ -37,25 +37,29 @@ class _Page_ClinicDetailState extends State<Page_ClinicDetail> {
   var send_clinic_name;
 
   getClinicDetail() async {
-    http.Response response =
-        await http.get(Uri.parse('$Url/clinic/showbycid/${widget.cid}'));
-    print("CID :: :" + widget.cid);
-    if (this.mounted) {
-      setState(() {
-        data = json.decode(response.body);
-        // address.add(data['address'][0]['building']);
-        // address.add(data['address'][0]['alley']);
-        // address.add(data['address'][0]['street']);
-        // address.add(data['address'][0]['city']);
-        // address.add(data['address'][0]['province']);
-        // address.remove(null);
-        // address.remove('-');
-      });
+    try {
+      http.Response response =
+          await http.get(Uri.parse('$Url/clinic/showbycid/${widget.cid}'));
+      print("CID :: :" + widget.cid);
+      if (this.mounted) {
+        setState(() {
+          data = json.decode(response.body);
+          // address.add(data['address'][0]['building']);
+          // address.add(data['address'][0]['alley']);
+          // address.add(data['address'][0]['street']);
+          // address.add(data['address'][0]['city']);
+          // address.add(data['address'][0]['province']);
+          // address.remove(null);
+          // address.remove('-');
+        });
+      }
+
+      // print("address : " + address.join(' '));
+
+      return data;
+    } catch (e) {
+      print(e);
     }
-
-    // print("address : " + address.join(' '));
-
-    return data;
   }
 
   @override

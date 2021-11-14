@@ -49,13 +49,6 @@ class _Page_AppointmentState extends State<Page_Appointment> {
   DateTime aa;
 
   String _selectedTime;
-  List test = [
-    "สุนัข",
-    "แมว",
-    "สุนัข1",
-    "สุนัข2",
-    "สุนัข3",
-  ];
 
   List listpet = [];
   List listPID = [];
@@ -69,21 +62,25 @@ class _Page_AppointmentState extends State<Page_Appointment> {
   bool _clicked = false;
 
   getPetList() async {
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    final User userId = auth.currentUser;
-    final String uid = userId.uid;
+    try {
+      final FirebaseAuth auth = FirebaseAuth.instance;
+      final User userId = auth.currentUser;
+      final String uid = userId.uid;
 
-    http.Response response =
-        await http.get(Uri.parse('$Url/petDetail/showByID/$uid'));
-    setState(() {
-      data = json.decode(response.body);
-    });
-    for (var index = 0; index < data.length; index++) {
-      listpet.add(data[index]['pet_name']);
-      listPID.add(data[index]['_id']);
-      listpet_image.add(data[index]['urlImage']);
+      http.Response response =
+          await http.get(Uri.parse('$Url/petDetail/showByID/$uid'));
+      setState(() {
+        data = json.decode(response.body);
+      });
+      for (var index = 0; index < data.length; index++) {
+        listpet.add("${index + 1}. " + data[index]['pet_name']);
+        listPID.add(data[index]['_id']);
+        listpet_image.add(data[index]['urlImage']);
+      }
+      return data;
+    } catch (e) {
+      print(e);
     }
-    return data;
   }
 
   var ownername;
@@ -109,38 +106,42 @@ class _Page_AppointmentState extends State<Page_Appointment> {
   }
 
   createAppointment() async {
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    final User userId = auth.currentUser;
-    final String uid = userId.uid;
-    http.Response response =
-        await http.post(Uri.parse('$Url/appointment/addappointment'), body: {
-      'cid': '${widget.cid}',
-      'clinic_name': '${widget.clinic_name}',
-      'doctor_name': '${widget.doctor_name}',
-      'userID': '$uid',
-      'pid': '$pidselected',
-      'owner_name': '$ownername',
-      'owner_contact': '$ownercontact',
-      'pet_name': '${petselected.substring(3)}',
-      'urlImage': '$pet_image',
-      'date': '${date_appointment.text}',
-      'time_appointment': '${time_appointment.text}',
-      'symptom': '${symptom.text}'
-    });
+    try {
+      final FirebaseAuth auth = FirebaseAuth.instance;
+      final User userId = auth.currentUser;
+      final String uid = userId.uid;
+      http.Response response =
+          await http.post(Uri.parse('$Url/appointment/addappointment'), body: {
+        'cid': '${widget.cid}',
+        'clinic_name': '${widget.clinic_name}',
+        'doctor_name': '${widget.doctor_name}',
+        'userID': '$uid',
+        'pid': '$pidselected',
+        'owner_name': '$ownername',
+        'owner_contact': '$ownercontact',
+        'pet_name': '${petselected.substring(3)}',
+        'urlImage': '$pet_image',
+        'date': '${date_appointment.text}',
+        'time_appointment': '${time_appointment.text}',
+        'symptom': '${symptom.text}'
+      });
 
-    print("cid : " + widget.cid);
-    print("Clinic Nmae : " + widget.clinic_name);
-    print("Doctor Nmae : " + widget.doctor_name);
-    print("PID : " + pidselected);
-    print("Pet Name : " + petselected.substring(3));
-    print("Pet Image : " + pet_image);
+      print("cid : " + widget.cid);
+      print("Clinic Nmae : " + widget.clinic_name);
+      print("Doctor Nmae : " + widget.doctor_name);
+      print("PID : " + pidselected);
+      print("Pet Name : " + petselected.substring(3));
+      print("Pet Image : " + pet_image);
 
-    print("uid : " + uid);
-    print("Date : " + date_appointment.text);
-    print("time : " + time_appointment.text);
-    print("symptom : " + symptom.text);
+      print("uid : " + uid);
+      print("Date : " + date_appointment.text);
+      print("time : " + time_appointment.text);
+      print("symptom : " + symptom.text);
 
-    startTime();
+      startTime();
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
@@ -362,12 +363,13 @@ class _Page_AppointmentState extends State<Page_Appointment> {
                                   if (petselected == listpet[i]) {
                                     pidselected = listPID[i];
                                     pet_image = listpet_image[i];
-                                    print(petselected.substring(3));
+                                    print(petselected.substring(0));
                                     print(listpet_image[i]);
                                   }
                                 }
                               });
-                              print(pidselected);
+                              print("selected " + pidselected);
+                              print("selected " + petselected);
                             },
                             validator: (value) {
                               if (value == null || value.isEmpty) {

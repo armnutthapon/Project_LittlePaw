@@ -80,19 +80,24 @@ class _findClinicMainState extends State<findClinicMain> {
   }
 
   getClinic() async {
-    await _getCurrentLocation();
-    http.Response response = await http.post(Uri.parse('$Url/clinic/distance'),
-        body: {"longitude": '$longitude', "latitude": '$latitude'});
+    try {
+      await _getCurrentLocation();
+      http.Response response = await http.post(
+          Uri.parse('$Url/clinic/distance'),
+          body: {"longitude": '$longitude', "latitude": '$latitude'});
 
-    setState(() {
-      data = json.decode(response.body);
-      for (var i = 0; i < data.length; i++) {
-        listclinic.add(data[i]);
-      }
-    });
-    print(listclinic[0]['clinic_name']);
+      setState(() {
+        data = json.decode(response.body);
+        for (var i = 0; i < data.length; i++) {
+          listclinic.add(data[i]);
+        }
+      });
+      print(listclinic[0]['clinic_name']);
 
-    return data;
+      return data;
+    } catch (e) {
+      print(e);
+    }
   }
 
   void filterSearchResult(String query) {
