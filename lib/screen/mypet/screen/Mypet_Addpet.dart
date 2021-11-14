@@ -95,26 +95,30 @@ class _AddpetState extends State<Addpet> {
   bool _clicked = false;
 
   addPetDetail() async {
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    final User userId = auth.currentUser;
-    final String uid = userId.uid;
+    try {
+      final FirebaseAuth auth = FirebaseAuth.instance;
+      final User userId = auth.currentUser;
+      final String uid = userId.uid;
 
-    var response =
-        await http.post(Uri.parse('$Url/petDetail/addpet/$uid'), body: {
-      'pet_name': '${_addPetName.text}',
-      'type': '${_addPetCategory}',
-      'sex': '${_addPetGender}',
-      'color': '${_addPetColor.text}',
-      'breed': '${_addPetBreed.text}',
-      'dob': '${_addPetAge.text}',
-      'characteristics': '${_addPetCharacteristics.text}',
-      'sterilization': '${_addPetSterilize}',
-      'congenital_disease': '${_addCongenitalDisease.text}',
-      'urlImage': '$urlImage',
-    }).then((response) {
-      print("success");
-      Navigator.pop(context);
-    });
+      var response =
+          await http.post(Uri.parse('$Url/petDetail/addpet/$uid'), body: {
+        'pet_name': '${_addPetName.text}',
+        'type': '${_addPetCategory}',
+        'sex': '${_addPetGender}',
+        'color': '${_addPetColor.text}',
+        'breed': '${_addPetBreed.text}',
+        'dob': '${_addPetAge.text}',
+        'characteristics': '${_addPetCharacteristics.text}',
+        'sterilization': '${_addPetSterilize}',
+        'congenital_disease': '${_addCongenitalDisease.text}',
+        'urlImage': '$urlImage',
+      }).then((response) {
+        print("success");
+        Navigator.pop(context);
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 
   Future<void> _selectDate(BuildContext context) async {

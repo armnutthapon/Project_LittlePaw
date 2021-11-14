@@ -89,13 +89,37 @@ class Page_SelectPetState extends State<Page_SelectPet>
         });
   }
 
+  // deletePetByID() async {
+  //   try {
+  //     http.Response response = await http
+  //         .get(Uri.parse('$Url/petDetail/deletePet/$uid/${widget.pid}'))
+  //         .then((response) {
+  //       Navigator.pushAndRemoveUntil(
+  //           context,
+  //           MaterialPageRoute(builder: (BuildContext context) => MyPet()),
+  //           (Route<dynamic> route) => false);
+  //       // Navigator.of(context).pop();
+  //     });
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
   deletePetByID() async {
-    http.Response response = await http
-        .get(Uri.parse('$Url/petDetail/deletePet/$uid/${widget.pid}'))
-        .then((_) {
-      Navigator.of(context).pop();
-      print("DELETE SUCCESS");
-    });
+    try {
+      http.Response response = await http
+          .get(Uri.parse('$Url/petDetail/deletePet/$uid/${widget.pid}'))
+          .then((response) async {
+        Navigator.of(context).pop();
+
+        // Navigator.pushAndRemoveUntil(
+        //     context,
+        //     MaterialPageRoute(builder: (BuildContext context) => MyPet()),
+        //     (Route<dynamic> route) => false);
+        // Navigator.of(context).pop();
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 
   walkin() async {
