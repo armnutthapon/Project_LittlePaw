@@ -30,7 +30,8 @@ class Page_SelectPet extends StatefulWidget {
   Page_SelectPetState createState() => Page_SelectPetState();
 }
 
-class Page_SelectPetState extends State<Page_SelectPet> {
+class Page_SelectPetState extends State<Page_SelectPet>
+    with TickerProviderStateMixin {
   var data;
 
   var send_pid;
@@ -41,7 +42,13 @@ class Page_SelectPetState extends State<Page_SelectPet> {
   void initState() {
     super.initState();
     print(widget.urlImage);
+    _controller =
+        AnimationController(vsync: this, duration: Duration(minutes: 3));
+    // _controller.forward();
   }
+
+  Animation<int> animation;
+  AnimationController _controller;
 
   createAlertDialog(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -76,7 +83,7 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                         ),
                       ],
                     ),
-                  )))
+                  ))),
             ],
           );
         });
@@ -95,8 +102,11 @@ class Page_SelectPetState extends State<Page_SelectPet> {
     http.Response response = await http
         .post(Uri.parse('$Url/petDetail/createWalkInID/${widget.pid}'))
         .then((value) {
+      setState(() {
+        _controller.reset();
+        _controller.forward();
+      });
       isLoading = false;
-
       print("Doggy Create Walkin");
     });
     // _onLoading();
@@ -159,6 +169,28 @@ class Page_SelectPetState extends State<Page_SelectPet> {
               Container(
                   child: Column(
                 children: [
+                  Container(
+                    padding: EdgeInsets.all(3),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          "เหลือเวลาอีก : ",
+                          style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w300,
+                              fontFamily: 'Mitr'),
+                        ),
+                        Countdown(
+                          animation: StepTween(
+                            begin: 3 * 60,
+                            end: 0,
+                          ).animate(_controller),
+                        )
+                      ],
+                    ),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -501,15 +533,41 @@ class Page_SelectPetState extends State<Page_SelectPet> {
                     fontWeight: FontWeight.w400,
                     fontFamily: 'Mitr')),
             leading: new IconButton(
-              padding: EdgeInsets.only(top: 0),
-              icon: new Icon(Icons.arrow_back_ios, color: Colors.red.shade300),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
+                padding: EdgeInsets.only(top: 0),
+                icon:
+                    new Icon(Icons.arrow_back_ios, color: Colors.red.shade300),
+                onPressed: () {
+                  _controller.reset();
+
+                  Navigator.of(context).pop();
+                }),
             backgroundColor: Colors.white,
             elevation: 0.0,
           ),
         ),
       ]),
+    );
+  }
+}
+
+class Countdown extends AnimatedWidget {
+  Countdown({Key key, this.animation}) : super(key: key, listenable: animation);
+  Animation<int> animation;
+
+  @override
+  build(BuildContext context) {
+    Duration clockTimer = Duration(seconds: animation.value);
+
+    String timerText =
+        '${clockTimer.inMinutes.remainder(60).toString()}:${(clockTimer.inSeconds.remainder(60) % 60).toString().padLeft(2, '0')}';
+
+    return Text(
+      "$timerText",
+      style: TextStyle(
+          fontSize: 12,
+          color: Colors.red.shade400,
+          fontWeight: FontWeight.w400,
+          fontFamily: 'Mitr'),
     );
   }
 }
