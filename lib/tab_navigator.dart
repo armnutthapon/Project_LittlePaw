@@ -21,7 +21,7 @@ class TabNavigator extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget child;
     if (tabItem == "Newfeed")
-      child = Newfeed();
+      child = Dashboard();
     else if (tabItem == "Clinic")
       child = Clinic();
     else if (tabItem == "MyPet")

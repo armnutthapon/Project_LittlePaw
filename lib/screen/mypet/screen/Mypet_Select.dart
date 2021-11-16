@@ -52,41 +52,44 @@ class Page_SelectPetState extends State<Page_SelectPet>
 
   createAlertDialog(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            actions: [
-              Container(
-                  height: size.height * 0.1,
-                  child: Center(
-                      child: RichText(
-                    text: TextSpan(
-                      text: 'สำเร็จ! กดปุ่ม ',
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.black87,
-                          fontWeight: FontWeight.w300,
-                          fontFamily: 'Mitr'),
-                      children: const <TextSpan>[
-                        TextSpan(
-                          text: 'แชร์ไอดี',
-                          style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.green,
-                              fontWeight: FontWeight.w400,
-                              fontFamily: 'Mitr'),
-                        ),
-                      ],
-                    ),
-                  ))),
-            ],
-          );
-        });
+    try {
+      return showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              actions: [
+                Container(
+                    height: size.height * 0.1,
+                    child: Center(
+                        child: RichText(
+                      text: TextSpan(
+                        text: 'สำเร็จ! กดปุ่ม ',
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black87,
+                            fontWeight: FontWeight.w300,
+                            fontFamily: 'Mitr'),
+                        children: const <TextSpan>[
+                          TextSpan(
+                            text: 'แชร์ไอดี',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.green,
+                                fontWeight: FontWeight.w400,
+                                fontFamily: 'Mitr'),
+                          ),
+                        ],
+                      ),
+                    ))),
+              ],
+            );
+          });
+    } catch (e) {
+      print(e);
+    }
   }
 
   // deletePetByID() async {
@@ -123,33 +126,37 @@ class Page_SelectPetState extends State<Page_SelectPet>
   }
 
   walkin() async {
-    http.Response response = await http
-        .post(Uri.parse('$Url/petDetail/createWalkInID/${widget.pid}'))
-        .then((value) {
-      setState(() {
-        _controller.reset();
-        _controller.forward();
+    try {
+      http.Response response = await http
+          .post(Uri.parse('$Url/petDetail/createWalkInID/${widget.pid}'))
+          .then((value) {
+        setState(() {
+          _controller.reset();
+          _controller.forward();
+        });
+        isLoading = false;
+        print("Doggy Create Walkin");
       });
-      isLoading = false;
-      print("Doggy Create Walkin");
-    });
-    // _onLoading();
+      await shareID_show();
+    } catch (e) {}
 
-    await shareID_show();
+    // _onLoading();
   }
 
   shareID_show() async {
-    http.Response response =
-        await http.get(Uri.parse('$Url/petDetail/showPetByPID/${widget.pid}'));
-    if (this.mounted) {
-      setState(() {
-        data = json.decode(response.body);
-      });
-    }
-    print(data['WalkIn_id']);
-    print(data['WalkIn_pass']);
+    try {
+      http.Response response = await http
+          .get(Uri.parse('$Url/petDetail/showPetByPID/${widget.pid}'));
+      if (this.mounted) {
+        setState(() {
+          data = json.decode(response.body);
+        });
+      }
+      print(data['WalkIn_id']);
+      print(data['WalkIn_pass']);
 
-    return data;
+      return data;
+    } catch (e) {}
   }
 
   void shareID(BuildContext context) {

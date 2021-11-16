@@ -100,11 +100,6 @@ class _Page_ClinicDetailState extends State<Page_ClinicDetail> {
                                       fontWeight: FontWeight.w400,
                                     ),
                                   ),
-                                  trailing: Icon(
-                                    FontAwesomeIcons.mapMarkerAlt,
-                                    color: Colors.red.shade300,
-                                    size: 30,
-                                  ),
                                 ),
                               ),
                               Container(
@@ -114,11 +109,21 @@ class _Page_ClinicDetailState extends State<Page_ClinicDetail> {
                                     top: 10,
                                     bottom: 10),
                                 child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: Image(
-                                      image: AssetImage(
-                                          'assets/images/clinic_pet.jpg')),
-                                ),
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    child: (data['urlImage'] != null)
+                                        ? Image.network(
+                                            data['urlImage'],
+                                            fit: BoxFit.fill,
+                                            height: size.height * 0.2,
+                                          )
+                                        : Image.asset(
+                                            'assets/images/no_clinic_image.jpg',
+                                            fit: BoxFit.fill,
+                                          )
+                                    // Image(
+                                    //     image: AssetImage(
+                                    //         'assets/images/clinic_pet.jpg')),
+                                    ),
                               ),
                               Wrap(
                                 children: [

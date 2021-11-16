@@ -217,8 +217,8 @@ class _MyPetState extends State<MyPet> {
                                                                   child:
                                                                       ClipOval(
                                                                     child: SizedBox(
-                                                                        width: 120.0,
                                                                         height: 120.0,
+                                                                        width: 120.0,
                                                                         child: (data[index]['urlImage'] != null)
                                                                             ? Image.network(
                                                                                 data[index]['urlImage'],

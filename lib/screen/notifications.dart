@@ -24,25 +24,27 @@ class _NotificationFeedState extends State<NotificationFeed> {
   DateTime focusedDay = DateTime.now();
 
   getNotificationByID() async {
-    FirebaseAuth auth = await FirebaseAuth.instance;
-    User userId = await auth.currentUser;
-    String uid = await userId.uid;
+    try {
+      FirebaseAuth auth = await FirebaseAuth.instance;
+      User userId = await auth.currentUser;
+      String uid = await userId.uid;
 
-    http.Response response =
-        await http.get(Uri.parse('$Url/appointment/notificationByID/$uid'));
+      http.Response response =
+          await http.get(Uri.parse('$Url/appointment/notificationByID/$uid'));
 
-    this.setState(() {
-      data = json.decode(response.body);
+      this.setState(() {
+        data = json.decode(response.body);
 
-      // formattedDate = DateFormat('yyyy-MM-dd – kk:mm')
-      //     .format(data[data.length - 1]['time_notification']);
+        // formattedDate = DateFormat('yyyy-MM-dd – kk:mm')
+        //     .format(data[data.length - 1]['time_notification']);
 
-      // aa =  DateFormat("dd-M-yyyy hh:mm:ss").parse(formattedDate);
+        // aa =  DateFormat("dd-M-yyyy hh:mm:ss").parse(formattedDate);
 
-      // aa =  DateFormat("dd-M-yyyy hh:mm:ss").parse(formattedDate);
-    });
-    // print(data[data.length - 1]['time_notification']);
-    return data;
+        // aa =  DateFormat("dd-M-yyyy hh:mm:ss").parse(formattedDate);
+      });
+      // print(data[data.length - 1]['time_notification']);
+      return data;
+    } catch (e) {}
   }
 
   @override
@@ -87,28 +89,16 @@ class _NotificationFeedState extends State<NotificationFeed> {
                         : ListView.builder(
                             shrinkWrap: true,
                             reverse: true,
-                            itemCount: data == null
-                                ? Center(child: CircularProgressIndicator())
-                                : data.length,
+                            itemCount: data == null ? 0 : data.length,
                             // ignore: missing_return
                             itemBuilder: (BuildContext context, int index) {
-                              final reversedIndex = data.length - 1 - index;
-                              final item = data[reversedIndex];
                               Color getColor() {
                                 if (data[index]['status'] == "Waiting") {
                                   return Colors.amber;
                                 } else if (data[index]['status'] ==
                                     "Confirmed") {
-                                  // setState(() {
-                                  //   formattedDate = DateFormat('dd-MM-yyyy').format(
-                                  //       data[data.length - 1]['time_notification']);
-                                  // });
                                   return Colors.green;
                                 } else if (data[index]['status'] == "Denided") {
-                                  // setState(() {
-                                  //   formattedDate = DateFormat('dd-MM-yyyy').format(
-                                  //       data[data.length - 1]['time_notification']);
-                                  // });
                                   return Colors.red;
                                 }
                               }
@@ -224,7 +214,7 @@ class _NotificationFeedState extends State<NotificationFeed> {
                                   ),
                                 );
                               } else {
-                                print("Waiting");
+                                // print("Waiting");
                               }
                             },
                           ))
