@@ -63,7 +63,7 @@ class _Page_MyAppointmentState extends State<Page_MyAppointment> {
             style: TextStyle(
                 fontSize: 22,
                 color: Colors.red.shade300,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w400,
                 fontFamily: 'Mitr'),
           ),
           leading: new IconButton(
@@ -120,7 +120,6 @@ class _Page_MyAppointmentState extends State<Page_MyAppointment> {
 
                                 // if (data[index]['status'] == "Waiting") {
                                 return Container(
-                                  height: size.height * 0.2,
                                   child: Container(
                                       padding: const EdgeInsets.all(20.0),
                                       margin: const EdgeInsets.all(10.0),
@@ -144,14 +143,143 @@ class _Page_MyAppointmentState extends State<Page_MyAppointment> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: [
-                                              Text(
-                                                data[index]['pet_name'],
-                                                style: TextStyle(
-                                                    fontSize: 16,
-                                                    color: Colors.black,
-                                                    fontWeight: FontWeight.w500,
-                                                    fontFamily: 'Mitr'),
+                                              RichText(
+                                                text: TextSpan(
+                                                  text: 'ชื่อสัตว์เลี้ยง  :  ',
+                                                  style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.w300,
+                                                      fontFamily: 'Mitr'),
+                                                  children: <TextSpan>[
+                                                    TextSpan(
+                                                      text: data[index]
+                                                          ['pet_name'],
+                                                      style: TextStyle(
+                                                          fontSize: 16,
+                                                          color: Colors.black,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontFamily: 'Mitr'),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Flexible(
+                                                child: RichText(
+                                                  text: TextSpan(
+                                                    text: 'ชื่อคลินิก  :  ',
+                                                    style: TextStyle(
+                                                        fontSize: 14,
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.w300,
+                                                        fontFamily: 'Mitr'),
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                        text: data[index]
+                                                            ['clinic_name'],
+                                                        style: TextStyle(
+                                                            fontSize: 14,
+                                                            color: Colors.black,
+                                                            fontWeight:
+                                                                FontWeight.w300,
+                                                            fontFamily: 'Mitr'),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              RichText(
+                                                text: TextSpan(
+                                                  text: 'เวลา : ',
+                                                  style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.w300,
+                                                      fontFamily: 'Mitr'),
+                                                  children: <TextSpan>[
+                                                    TextSpan(
+                                                      text: data[index]
+                                                          ['time_appointment'],
+                                                      style: TextStyle(
+                                                          fontSize: 14,
+                                                          color: Colors.black,
+                                                          fontWeight:
+                                                              FontWeight.w300,
+                                                          fontFamily: 'Mitr'),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              RichText(
+                                                text: TextSpan(
+                                                  text: 'วันที่ : ',
+                                                  style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.w300,
+                                                      fontFamily: 'Mitr'),
+                                                  children: <TextSpan>[
+                                                    TextSpan(
+                                                      text: data[index]['date'],
+                                                      style: TextStyle(
+                                                          fontSize: 14,
+                                                          color: Colors.black,
+                                                          fontWeight:
+                                                              FontWeight.w300,
+                                                          fontFamily: 'Mitr'),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Flexible(
+                                                child: RichText(
+                                                  text: TextSpan(
+                                                    text: 'อาการ : ',
+                                                    style: TextStyle(
+                                                        fontSize: 14,
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.w300,
+                                                        fontFamily: 'Mitr'),
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                        text: data[index]
+                                                            ['symptom'],
+                                                        style: TextStyle(
+                                                            fontSize: 14,
+                                                            color: Colors.black,
+                                                            fontWeight:
+                                                                FontWeight.w300,
+                                                            fontFamily: 'Mitr'),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
                                               RichText(
                                                 text: TextSpan(
                                                   text: 'สถานะ  :  ',
@@ -176,98 +304,7 @@ class _Page_MyAppointmentState extends State<Page_MyAppointment> {
                                                 ),
                                               ),
                                             ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                data[index]['clinic_name'],
-                                                style: TextStyle(
-                                                    fontSize: 14,
-                                                    color: Colors.black,
-                                                    fontWeight: FontWeight.w400,
-                                                    fontFamily: 'Mitr'),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              RichText(
-                                                text: TextSpan(
-                                                  text: 'วันที่ : ',
-                                                  style: TextStyle(
-                                                      fontSize: 12,
-                                                      color: Colors.black,
-                                                      fontWeight:
-                                                          FontWeight.w300,
-                                                      fontFamily: 'Mitr'),
-                                                  children: <TextSpan>[
-                                                    TextSpan(
-                                                      text: data[index]['date'],
-                                                      style: TextStyle(
-                                                          fontSize: 12,
-                                                          color: Colors.black,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontFamily: 'Mitr'),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 5,
-                                              ),
-                                              RichText(
-                                                text: TextSpan(
-                                                  text: 'เวลา : ',
-                                                  style: TextStyle(
-                                                      fontSize: 12,
-                                                      color: Colors.black,
-                                                      fontWeight:
-                                                          FontWeight.w300,
-                                                      fontFamily: 'Mitr'),
-                                                  children: <TextSpan>[
-                                                    TextSpan(
-                                                      text: data[index]
-                                                          ['time_appointment'],
-                                                      style: TextStyle(
-                                                          fontSize: 12,
-                                                          color: Colors.black,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontFamily: 'Mitr'),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              RichText(
-                                                text: TextSpan(
-                                                  text: 'อาการ : ',
-                                                  style: TextStyle(
-                                                      fontSize: 14,
-                                                      color: Colors.black,
-                                                      fontWeight:
-                                                          FontWeight.w300,
-                                                      fontFamily: 'Mitr'),
-                                                  children: <TextSpan>[
-                                                    TextSpan(
-                                                      text: data[index]
-                                                          ['symptom'],
-                                                      style: TextStyle(
-                                                          fontSize: 14,
-                                                          color: Colors.black,
-                                                          fontWeight:
-                                                              FontWeight.w300,
-                                                          fontFamily: 'Mitr'),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
+                                          )
                                         ],
                                       )),
                                 );

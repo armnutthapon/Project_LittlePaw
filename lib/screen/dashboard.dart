@@ -47,6 +47,11 @@ class _DashboardState extends State<Dashboard> {
           await http.get(Uri.parse('$Url/appointment/countbyuid/$uid'));
       setState(() {
         appointment = json.decode(response.body);
+        if (response.body == null) {
+          appointment = 0;
+        } else {
+          appointment = json.decode(response.body);
+        }
       });
       print(appointment);
       return appointment;

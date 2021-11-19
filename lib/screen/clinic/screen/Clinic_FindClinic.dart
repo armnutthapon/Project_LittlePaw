@@ -92,7 +92,7 @@ class _findClinicMainState extends State<findClinicMain> {
           listclinic.add(data[i]);
         }
       });
-      print(listclinic[0]['clinic_name']);
+      print("TEST  :  " + listclinic[0]['clinic_name']);
 
       return data;
     } catch (e) {}
@@ -289,103 +289,119 @@ class _findClinicMainState extends State<findClinicMain> {
                   ))),
           data != null
               ? Expanded(
-                  child: ListView.builder(
-                      padding: EdgeInsets.zero,
-                      itemCount: data == null ? 0 : listclinic.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          padding: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
-                          child: InkWell(
-                            onTap: () {
-                              setState(() {
-                                cid = listclinic[index]['cid'];
-                              });
+                  child: listclinic.isEmpty
+                      ? Center(
+                          child: Text(
+                          'ไม่มีคลินิกให้บริการ',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w300,
+                              fontFamily: 'Mitr'),
+                        ))
+                      : ListView.builder(
+                          padding: EdgeInsets.zero,
+                          itemCount: data == null ? 0 : listclinic.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Container(
+                              padding: EdgeInsets.fromLTRB(10, 2.5, 10, 2.5),
+                              child: InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    cid = listclinic[index]['cid'];
+                                  });
 
-                              var cid_sendRoute = new MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      Page_ClinicDetail(cid: cid));
+                                  var cid_sendRoute = new MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          Page_ClinicDetail(cid: cid));
 
-                              Navigator.of(context)
-                                  .push(cid_sendRoute)
-                                  .then((value) {
-                                setState(() {});
-                              });
-                            },
-                            child: Card(
-                              elevation: 5,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              margin: EdgeInsets.fromLTRB(5, 8, 5, 8),
-                              child: Container(
-                                margin: EdgeInsets.fromLTRB(15, 2, 15, 2),
-                                padding: EdgeInsets.fromLTRB(10, 10, 20, 10),
-                                height: 150,
-                                width: 250,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      // padding: EdgeInsets.all(5),
-                                      child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          child: (listclinic[index]
-                                                      ['urlImage'] !=
-                                                  null)
-                                              ? Image.network(
-                                                  listclinic[index]['urlImage'],
-                                                  fit: BoxFit.cover,
-                                                  width: size.width * 0.25,
-                                                  height: size.height * 0.1,
-                                                )
-                                              : Image.asset(
-                                                  'assets/images/no_clinic_image.jpg',
-                                                  width: size.width * 0.2,
-                                                  fit: BoxFit.cover,
-                                                )),
+                                  Navigator.of(context)
+                                      .push(cid_sendRoute)
+                                      .then((value) {
+                                    setState(() {});
+                                  });
+                                },
+                                child: Card(
+                                  elevation: 5,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  margin: EdgeInsets.fromLTRB(5, 8, 5, 8),
+                                  child: Container(
+                                    margin: EdgeInsets.fromLTRB(15, 2, 15, 2),
+                                    padding:
+                                        EdgeInsets.fromLTRB(10, 10, 20, 10),
+                                    height: 150,
+                                    width: 250,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          // padding: EdgeInsets.all(5),
+                                          child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              child: (listclinic[index]
+                                                          ['urlImage'] !=
+                                                      null)
+                                                  ? Image.network(
+                                                      listclinic[index]
+                                                          ['urlImage'],
+                                                      fit: BoxFit.cover,
+                                                      width: size.width * 0.25,
+                                                      height: size.height * 0.1,
+                                                    )
+                                                  : Image.asset(
+                                                      'assets/images/no_clinic_image.jpg',
+                                                      width: size.width * 0.2,
+                                                      fit: BoxFit.cover,
+                                                    )),
+                                        ),
+                                        Container(
+                                          padding:
+                                              EdgeInsets.fromLTRB(15, 0, 0, 0),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                listclinic[index]
+                                                    ['clinic_name'],
+                                                style: TextStyle(
+                                                    color: Colors.black54,
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.w400,
+                                                    fontFamily: 'Mitr'),
+                                              ),
+                                              Text(
+                                                "${(listclinic[index]['distance'] / 1000).toStringAsFixed(2)} กิโลเมตร",
+                                                style: TextStyle(
+                                                    color: Colors.black54,
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w300,
+                                                    fontFamily: 'Mitr'),
+                                              ),
+                                              Text(
+                                                listclinic[index]
+                                                    ['opening_time'],
+                                                style: TextStyle(
+                                                    color: Colors.black54,
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w300,
+                                                    fontFamily: 'Mitr'),
+                                              )
+                                            ],
+                                          ),
+                                        )
+                                      ],
                                     ),
-                                    Container(
-                                      padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            listclinic[index]['clinic_name'],
-                                            style: TextStyle(
-                                                color: Colors.black54,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w400,
-                                                fontFamily: 'Mitr'),
-                                          ),
-                                          Text(
-                                            "${(listclinic[index]['distance'] / 1000).toStringAsFixed(2)} กิโลเมตร",
-                                            style: TextStyle(
-                                                color: Colors.black54,
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w300,
-                                                fontFamily: 'Mitr'),
-                                          ),
-                                          Text(
-                                            listclinic[index]['opening_time'],
-                                            style: TextStyle(
-                                                color: Colors.black54,
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w300,
-                                                fontFamily: 'Mitr'),
-                                          )
-                                        ],
-                                      ),
-                                    )
-                                  ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          ),
-                        );
-                      }))
+                            );
+                          }))
               : Expanded(
                   child: Container(
                       child: Center(child: CircularProgressIndicator())),
