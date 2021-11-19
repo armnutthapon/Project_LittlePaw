@@ -34,15 +34,7 @@ class _NotificationFeedState extends State<NotificationFeed> {
 
       this.setState(() {
         data = json.decode(response.body);
-
-        // formattedDate = DateFormat('yyyy-MM-dd – kk:mm')
-        //     .format(data[data.length - 1]['time_notification']);
-
-        // aa =  DateFormat("dd-M-yyyy hh:mm:ss").parse(formattedDate);
-
-        // aa =  DateFormat("dd-M-yyyy hh:mm:ss").parse(formattedDate);
       });
-      // print(data[data.length - 1]['time_notification']);
       return data;
     } catch (e) {}
   }

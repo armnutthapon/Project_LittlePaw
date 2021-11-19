@@ -77,7 +77,7 @@ class Page_SelectPetState extends State<Page_SelectPet>
                             text: 'แชร์ไอดี',
                             style: TextStyle(
                                 fontSize: 16,
-                                color: Colors.green,
+                                color: Colors.black,
                                 fontWeight: FontWeight.w400,
                                 fontFamily: 'Mitr'),
                           ),
@@ -92,33 +92,12 @@ class Page_SelectPetState extends State<Page_SelectPet>
     }
   }
 
-  // deletePetByID() async {
-  //   try {
-  //     http.Response response = await http
-  //         .get(Uri.parse('$Url/petDetail/deletePet/$uid/${widget.pid}'))
-  //         .then((response) {
-  //       Navigator.pushAndRemoveUntil(
-  //           context,
-  //           MaterialPageRoute(builder: (BuildContext context) => MyPet()),
-  //           (Route<dynamic> route) => false);
-  //       // Navigator.of(context).pop();
-  //     });
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
   deletePetByID() async {
     try {
       http.Response response = await http
           .get(Uri.parse('$Url/petDetail/deletePet/$uid/${widget.pid}'))
           .then((response) async {
         Navigator.of(context).pop();
-
-        // Navigator.pushAndRemoveUntil(
-        //     context,
-        //     MaterialPageRoute(builder: (BuildContext context) => MyPet()),
-        //     (Route<dynamic> route) => false);
-        // Navigator.of(context).pop();
       });
     } catch (e) {
       print(e);
@@ -183,7 +162,7 @@ class Page_SelectPetState extends State<Page_SelectPet>
                           text: 'Walk In',
                           style: TextStyle(
                               fontSize: 16,
-                              color: Colors.blue,
+                              color: Colors.black,
                               fontWeight: FontWeight.w400,
                               fontFamily: 'Mitr'),
                         ),
@@ -200,28 +179,6 @@ class Page_SelectPetState extends State<Page_SelectPet>
               Container(
                   child: Column(
                 children: [
-                  Container(
-                    padding: EdgeInsets.all(3),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(
-                          "เหลือเวลาอีก : ",
-                          style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w300,
-                              fontFamily: 'Mitr'),
-                        ),
-                        Countdown(
-                          animation: StepTween(
-                            begin: 3 * 60,
-                            end: 0,
-                          ).animate(_controller),
-                        )
-                      ],
-                    ),
-                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -270,6 +227,25 @@ class Page_SelectPetState extends State<Page_SelectPet>
                           ],
                         ),
                       ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "เหลือเวลาอีก : ",
+                        style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w300,
+                            fontFamily: 'Mitr'),
+                      ),
+                      Countdown(
+                        animation: StepTween(
+                          begin: 3 * 60,
+                          end: 0,
+                        ).animate(_controller),
+                      )
                     ],
                   ),
                 ],
@@ -464,7 +440,7 @@ class Page_SelectPetState extends State<Page_SelectPet>
                                     height: size.height * 0.07,
                                     child: ElevatedButton(
                                       style: ElevatedButton.styleFrom(
-                                        primary: Colors.blue,
+                                        primary: Colors.red.shade400,
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10)),
@@ -506,7 +482,7 @@ class Page_SelectPetState extends State<Page_SelectPet>
                                     height: size.height * 0.07,
                                     child: ElevatedButton(
                                       style: ElevatedButton.styleFrom(
-                                        primary: Colors.green,
+                                        primary: Colors.red.shade200,
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10)),

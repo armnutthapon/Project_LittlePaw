@@ -149,7 +149,7 @@ class _DashboardState extends State<Dashboard> {
                           color: Colors.white,
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.green.shade300.withOpacity(0.2),
+                              color: Colors.pink.shade300.withOpacity(0.2),
                               blurRadius: 10,
                               offset: Offset(3, 3),
                             ),
@@ -163,7 +163,7 @@ class _DashboardState extends State<Dashboard> {
                               children: [
                                 CircleAvatar(
                                     radius: 25,
-                                    backgroundColor: Colors.green.shade300,
+                                    backgroundColor: Colors.pink.shade300,
                                     child: ClipOval(
                                         child: SizedBox(
                                       height: 50,
@@ -181,7 +181,7 @@ class _DashboardState extends State<Dashboard> {
                                 Text(
                                   "จำนวนการทำนัดทั้งหมด :",
                                   style: TextStyle(
-                                      color: Colors.green.shade300,
+                                      color: Colors.pink.shade300,
                                       fontSize: 12,
                                       fontWeight: FontWeight.w400,
                                       fontFamily: 'Mitr'),

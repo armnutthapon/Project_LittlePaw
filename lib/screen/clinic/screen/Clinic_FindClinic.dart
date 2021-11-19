@@ -80,50 +80,55 @@ class _findClinicMainState extends State<findClinicMain> {
   }
 
   getClinic() async {
-    await _getCurrentLocation();
-    http.Response response = await http.post(Uri.parse('$Url/clinic/distance'),
-        body: {"longitude": '$longitude', "latitude": '$latitude'});
+    try {
+      await _getCurrentLocation();
+      http.Response response = await http.post(
+          Uri.parse('$Url/clinic/distance'),
+          body: {"longitude": '$longitude', "latitude": '$latitude'});
 
-    setState(() {
-      data = json.decode(response.body);
-      for (var i = 0; i < data.length; i++) {
-        listclinic.add(data[i]);
-      }
-    });
-    print(listclinic[0]['clinic_name']);
-
-    return data;
-  }
-
-  void filterSearchResult(String query) {
-    var dummySearchList = [];
-    for (var i = 0; i < data.length; i++) {
-      dummySearchList.add(data[i]);
-    }
-
-    if (query.isNotEmpty) {
-      var dummyListData = [];
-      dummySearchList.forEach((item) {
-        print(item['clinic_name']);
-        if ((item['clinic_name'].toLowerCase())
-            .contains((query.toLowerCase()))) {
-          dummyListData.add(item);
-        }
-        print(listclinic);
-      });
       setState(() {
-        listclinic.clear();
-        listclinic.addAll(dummyListData);
-      });
-      return;
-    } else {
-      setState(() {
-        listclinic.clear();
+        data = json.decode(response.body);
         for (var i = 0; i < data.length; i++) {
           listclinic.add(data[i]);
         }
       });
-    }
+      print(listclinic[0]['clinic_name']);
+
+      return data;
+    } catch (e) {}
+  }
+
+  void filterSearchResult(String query) {
+    try {
+      var dummySearchList = [];
+      for (var i = 0; i < data.length; i++) {
+        dummySearchList.add(data[i]);
+      }
+
+      if (query.isNotEmpty) {
+        var dummyListData = [];
+        dummySearchList.forEach((item) {
+          print(item['clinic_name']);
+          if ((item['clinic_name'].toLowerCase())
+              .contains((query.toLowerCase()))) {
+            dummyListData.add(item);
+          }
+          print(listclinic);
+        });
+        setState(() {
+          listclinic.clear();
+          listclinic.addAll(dummyListData);
+        });
+        return;
+      } else {
+        setState(() {
+          listclinic.clear();
+          for (var i = 0; i < data.length; i++) {
+            listclinic.add(data[i]);
+          }
+        });
+      }
+    } catch (e) {}
   }
 
   void filterDistanceSearchResult(double mindistance, double maxdistance) {

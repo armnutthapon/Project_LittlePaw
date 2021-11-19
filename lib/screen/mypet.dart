@@ -49,22 +49,24 @@ class _MyPetState extends State<MyPet> {
   // }
 
   getPetList() async {
-    FirebaseAuth auth = await FirebaseAuth.instance;
-    User userId = await auth.currentUser;
-    String uid = await userId.uid;
-    // print("mypet ID : " + uid);
-    http.Response response =
-        await http.get(Uri.parse('$Url/petDetail/showByID/$uid'));
+    try {
+      FirebaseAuth auth = await FirebaseAuth.instance;
+      User userId = await auth.currentUser;
+      String uid = await userId.uid;
+      // print("mypet ID : " + uid);
+      http.Response response =
+          await http.get(Uri.parse('$Url/petDetail/showByID/$uid'));
 
-    if (this.mounted) {
-      setState(() {
-        data = json.decode(response.body);
-      });
-    }
-    // setState(() {});
-    // print(response.statusCode);
-    // print("mypet : $data");
-    return data;
+      if (this.mounted) {
+        setState(() {
+          data = json.decode(response.body);
+        });
+      }
+      // setState(() {});
+      // print(response.statusCode);
+      // print("mypet : $data");
+      return data;
+    } catch (e) {}
   }
 
   @override
