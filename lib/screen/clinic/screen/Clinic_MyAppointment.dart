@@ -34,15 +34,8 @@ class _Page_MyAppointmentState extends State<Page_MyAppointment> {
 
       this.setState(() {
         data = json.decode(response.body);
-
-        // formattedDate = DateFormat('yyyy-MM-dd – kk:mm')
-        //     .format(data[data.length - 1]['time_notification']);
-
-        // aa =  DateFormat("dd-M-yyyy hh:mm:ss").parse(formattedDate);
-
-        // aa =  DateFormat("dd-M-yyyy hh:mm:ss").parse(formattedDate);
       });
-      // print(data[data.length - 1]['time_notification']);
+
       return data;
     } catch (e) {
       print(e);
@@ -276,107 +269,7 @@ class _Page_MyAppointmentState extends State<Page_MyAppointment> {
                                             ],
                                           ),
                                         ],
-                                      )
-
-                                      // Stack(
-                                      //   children: <Widget>[
-                                      //     Align(
-                                      //       alignment: Alignment.topLeft,
-                                      //       child: Text(
-                                      //         data[index]['pet_name'],
-                                      //         style: TextStyle(
-                                      //             fontSize: 16,
-                                      //             color: Colors.black,
-                                      //             fontWeight: FontWeight.w500,
-                                      //             fontFamily: 'Mitr'),
-                                      //       ),
-                                      //     ),
-                                      //     Align(
-                                      //       alignment: Alignment.centerLeft,
-                                      //       child: Text(
-                                      //         data[index]['symptom'],
-                                      //         style: TextStyle(
-                                      //             fontSize: 16,
-                                      //             color: Colors.black,
-                                      //             fontWeight: FontWeight.w300,
-                                      //             fontFamily: 'Mitr'),
-                                      //       ),
-                                      //     ),
-                                      //     Align(
-                                      //       alignment: Alignment.bottomLeft,
-                                      //       child: RichText(
-                                      //         text: TextSpan(
-                                      //           text: 'สถานะ  :  ',
-                                      //           style: TextStyle(
-                                      //               fontSize: 16,
-                                      //               color: Colors.black,
-                                      //               fontWeight: FontWeight.w300,
-                                      //               fontFamily: 'Mitr'),
-                                      //           children: <TextSpan>[
-                                      //             TextSpan(
-                                      //               text: data[index]['status'],
-                                      //               style: TextStyle(
-                                      //                   fontSize: 16,
-                                      //                   color: getColor(),
-                                      //                   fontWeight:
-                                      //                       FontWeight.w500,
-                                      //                   fontFamily: 'Mitr'),
-                                      //             ),
-                                      //           ],
-                                      //         ),
-                                      //       ),
-                                      //     ),
-                                      //     Align(
-                                      //       alignment: Alignment.bottomRight,
-                                      //       child: Text(
-                                      //         data[index]['clinic_name'],
-                                      //         style: TextStyle(
-                                      //             fontSize: 16,
-                                      //             color: Colors.black,
-                                      //             fontWeight: FontWeight.w500,
-                                      //             fontFamily: 'Mitr'),
-                                      //       ),
-                                      //     ),
-                                      //     Align(
-                                      //       alignment: Alignment.topRight,
-                                      //       child: Row(
-                                      //           mainAxisSize: MainAxisSize.min,
-                                      //           children: <Widget>[
-                                      //             Text(
-                                      //               data[index]
-                                      //                   ['date_notification'],
-                                      //               style: TextStyle(
-                                      //                   fontSize: 14,
-                                      //                   color: Colors.black,
-                                      //                   fontWeight:
-                                      //                       FontWeight.w400,
-                                      //                   fontFamily: 'Mitr'),
-                                      //             ),
-                                      //             SizedBox(
-                                      //               width: size.width * 0.01,
-                                      //             ),
-                                      //             Text(
-                                      //               data[index]
-                                      //                   ['time_notification'],
-                                      //               style: TextStyle(
-                                      //                   fontSize: 14,
-                                      //                   color: Colors.black,
-                                      //                   fontWeight:
-                                      //                       FontWeight.w400,
-                                      //                   fontFamily: 'Mitr'),
-                                      //             ),
-                                      //             SizedBox(
-                                      //               width: size.width * 0.01,
-                                      //             ),
-                                      //             Icon(
-                                      //               FontAwesomeIcons.clock,
-                                      //               color: Colors.blue.shade800,
-                                      //             )
-                                      //           ]),
-                                      //     ),
-                                      //   ],
-                                      // ),
-                                      ),
+                                      )),
                                 );
                               }
                               // },

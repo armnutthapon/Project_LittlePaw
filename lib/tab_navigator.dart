@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:little_paw/screen/Newsfeed.dart';
+import 'package:little_paw/screen/dashboard.dart';
 import 'package:little_paw/screen/Notifications.dart';
 import 'package:little_paw/screen/Setting.dart';
 import 'screen/Mypet.dart';

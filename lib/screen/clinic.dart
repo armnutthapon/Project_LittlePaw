@@ -5,6 +5,7 @@ import 'package:little_paw/app.dart';
 import 'package:little_paw/screen/clinic/component/clinic_buttonInfo.dart';
 import 'package:little_paw/screen/clinic/screen/Clinic_FindClinic.dart';
 import 'package:little_paw/screen/clinic/screen/Clinic_MyAppointment.dart';
+import 'package:little_paw/screen/clinic/screen/Clinit_FollowUp.dart';
 
 class Clinic extends StatefulWidget {
   const Clinic({Key key}) : super(key: key);
@@ -122,7 +123,22 @@ class _mainClinicState extends State<mainClinic> {
                             },
                             child: ButtonInfo(
                               text: "การนัดหมาย",
-                              icon: FontAwesomeIcons.calendar,
+                              icon: FontAwesomeIcons.calendarCheck,
+                            ),
+                          ),
+                        ),
+                        Card(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          elevation: 5,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => FollowUp_Page()));
+                            },
+                            child: ButtonInfo(
+                              text: "การติดตามอาการ",
+                              icon: FontAwesomeIcons.calendarDay,
                             ),
                           ),
                         ),
