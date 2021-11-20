@@ -20,7 +20,6 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   var data;
   var appointment;
-  String sum_appointment;
 
   getDashboard() async {
     try {
@@ -173,7 +172,7 @@ class _DashboardState extends State<Dashboard> {
                                         child: SizedBox(
                                       height: 50,
                                       child: Icon(
-                                        FontAwesomeIcons.bookMedical,
+                                        FontAwesomeIcons.calendarCheck,
                                         size: 30,
                                         color: Colors.white,
                                       ),

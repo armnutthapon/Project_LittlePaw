@@ -199,11 +199,8 @@ class _Add_VaccineState extends State<Add_Vaccine> {
                                   color: Colors.red.shade300,
                                   onPressed: () {
                                     if (_formkey.currentState.validate()) {
-                                      // print("PID V : ${widget.pid}");
-                                      // print("Name V : ${vaccine_name.text}");
-                                      // print("Date V : ${vaccine_date.text}");
                                       addPetDetail();
-                                      Navigator.of(context).pop();
+                                      Navigator.of(context).pop(true);
                                     }
                                   },
                                   child: Center(

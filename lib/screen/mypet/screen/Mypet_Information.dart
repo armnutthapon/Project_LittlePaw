@@ -195,11 +195,11 @@ class _Page_PetInformationsState extends State<Page_PetInformations> {
                                       child: (data['urlImage'] != null)
                                           ? Image.network(
                                               data['urlImage'],
-                                              fit: BoxFit.fill,
+                                              fit: BoxFit.cover,
                                             )
                                           : Image.asset(
                                               'assets/images/avatar.jpg',
-                                              fit: BoxFit.fill,
+                                              fit: BoxFit.cover,
                                             )),
                                 ),
                               )),

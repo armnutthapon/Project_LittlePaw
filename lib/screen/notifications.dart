@@ -80,7 +80,7 @@ class _NotificationFeedState extends State<NotificationFeed> {
                           ))
                         : ListView.builder(
                             shrinkWrap: true,
-                            reverse: true,
+                            reverse: false,
                             itemCount: data == null ? 0 : data.length,
                             // ignore: missing_return
                             itemBuilder: (BuildContext context, int index) {
@@ -131,13 +131,27 @@ class _NotificationFeedState extends State<NotificationFeed> {
                                         ),
                                         Align(
                                           alignment: Alignment.centerLeft,
-                                          child: Text(
-                                            data[index]['clinic_name'],
-                                            style: TextStyle(
-                                                fontSize: 16,
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w300,
-                                                fontFamily: 'Mitr'),
+                                          child: RichText(
+                                            text: TextSpan(
+                                              text: 'คลินิก  :  ',
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.w300,
+                                                  fontFamily: 'Mitr'),
+                                              children: <TextSpan>[
+                                                TextSpan(
+                                                  text: data[index]
+                                                      ['clinic_name'],
+                                                  style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.w300,
+                                                      fontFamily: 'Mitr'),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                         Align(
@@ -146,7 +160,7 @@ class _NotificationFeedState extends State<NotificationFeed> {
                                             text: TextSpan(
                                               text: 'สถานะ  :  ',
                                               style: TextStyle(
-                                                  fontSize: 16,
+                                                  fontSize: 14,
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.w300,
                                                   fontFamily: 'Mitr'),
@@ -154,7 +168,7 @@ class _NotificationFeedState extends State<NotificationFeed> {
                                                 TextSpan(
                                                   text: data[index]['status'],
                                                   style: TextStyle(
-                                                      fontSize: 16,
+                                                      fontSize: 14,
                                                       color: getColor(),
                                                       fontWeight:
                                                           FontWeight.w500,
@@ -173,7 +187,7 @@ class _NotificationFeedState extends State<NotificationFeed> {
                                                   data[index]
                                                       ['date_notification'],
                                                   style: TextStyle(
-                                                      fontSize: 14,
+                                                      fontSize: 12,
                                                       color: Colors.black,
                                                       fontWeight:
                                                           FontWeight.w400,
@@ -186,7 +200,7 @@ class _NotificationFeedState extends State<NotificationFeed> {
                                                   data[index]
                                                       ['time_notification'],
                                                   style: TextStyle(
-                                                      fontSize: 14,
+                                                      fontSize: 12,
                                                       color: Colors.black,
                                                       fontWeight:
                                                           FontWeight.w400,

@@ -51,8 +51,9 @@ class Page_SelectPetState extends State<Page_SelectPet>
   AnimationController _controller;
 
   createAlertDialog(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     try {
+      Size size = MediaQuery.of(context).size;
+
       return showDialog(
           context: context,
           builder: (context) {
@@ -139,124 +140,128 @@ class Page_SelectPetState extends State<Page_SelectPet>
   }
 
   void shareID(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    var QR = data == null
-        ? AlertDialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            actions: [
-              Container(
-                  height: size.height * 0.1,
-                  child: Center(
-                      child: RichText(
-                    text: TextSpan(
-                      text: 'กรุณากดปุ่ม ',
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.black87,
-                          fontWeight: FontWeight.w300,
-                          fontFamily: 'Mitr'),
-                      children: const <TextSpan>[
-                        TextSpan(
-                          text: 'Walk In',
-                          style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w400,
-                              fontFamily: 'Mitr'),
+    try {
+      Size size = MediaQuery.of(context).size;
+      var QR = data == null
+          ? AlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              actions: [
+                Container(
+                    height: size.height * 0.1,
+                    child: Center(
+                        child: RichText(
+                      text: TextSpan(
+                        text: 'กรุณากดปุ่ม ',
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black87,
+                            fontWeight: FontWeight.w300,
+                            fontFamily: 'Mitr'),
+                        children: const <TextSpan>[
+                          TextSpan(
+                            text: 'Walk In',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w400,
+                                fontFamily: 'Mitr'),
+                          ),
+                        ],
+                      ),
+                    )))
+              ],
+            )
+          : AlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              actions: [
+                Container(
+                    child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        RichText(
+                          text: TextSpan(
+                            text: 'ID : ',
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w300,
+                                fontFamily: 'Mitr'),
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: "${data['WalkIn_id']}",
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: 'Mitr'),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
-                  )))
-            ],
-          )
-        : AlertDialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            actions: [
-              Container(
-                  child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      RichText(
-                        text: TextSpan(
-                          text: 'ID : ',
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        RichText(
+                          text: TextSpan(
+                            text: 'PASSWORD : ',
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w300,
+                                fontFamily: 'Mitr'),
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: "${data['WalkIn_pass']}",
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: 'Mitr'),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "เหลือเวลาอีก : ",
                           style: TextStyle(
-                              fontSize: 18,
+                              fontSize: 12,
                               color: Colors.black,
                               fontWeight: FontWeight.w300,
                               fontFamily: 'Mitr'),
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: "${data['WalkIn_id']}",
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w500,
-                                  fontFamily: 'Mitr'),
-                            ),
-                          ],
                         ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      RichText(
-                        text: TextSpan(
-                          text: 'PASSWORD : ',
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w300,
-                              fontFamily: 'Mitr'),
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: "${data['WalkIn_pass']}",
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w500,
-                                  fontFamily: 'Mitr'),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "เหลือเวลาอีก : ",
-                        style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w300,
-                            fontFamily: 'Mitr'),
-                      ),
-                      Countdown(
-                        animation: StepTween(
-                          begin: 3 * 60,
-                          end: 0,
-                        ).animate(_controller),
-                      )
-                    ],
-                  ),
-                ],
-              ))
-            ],
-          );
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return QR;
-        });
+                        Countdown(
+                          animation: StepTween(
+                            begin: 3 * 60,
+                            end: 0,
+                          ).animate(_controller),
+                        )
+                      ],
+                    ),
+                  ],
+                ))
+              ],
+            );
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return QR;
+          });
+    } catch (e) {
+      print(e);
+    }
   }
 
   deletePet(pid) {
@@ -349,11 +354,11 @@ class Page_SelectPetState extends State<Page_SelectPet>
                                               child: (widget.urlImage != null)
                                                   ? Image.network(
                                                       widget.urlImage,
-                                                      fit: BoxFit.fill,
+                                                      fit: BoxFit.cover,
                                                     )
                                                   : Image.asset(
                                                       'assets/images/avatar.jpg',
-                                                      fit: BoxFit.fill,
+                                                      fit: BoxFit.cover,
                                                     )),
                                         ),
                                       )),

@@ -23,31 +23,6 @@ class _MyPetState extends State<MyPet> {
   var arr = [];
   var pid;
   var urlImage;
-
-  // final String id = "";
-
-  // Future<List> getPetList() async {
-  //   final FirebaseAuth auth = await FirebaseAuth.instance;
-  //   final User userId = await auth.currentUser;
-  //   final String uid = await userId.uid;
-  //   print(uid);
-  //   http.Response response =
-  //       await http.get(Uri.parse('$Url/petDetail/showByID/$uid'));
-  //   switch (response.statusCode) {
-  //     case (200):
-  //       data = json.decode(response.body);
-  //       print(data);
-  //       break;
-  //     case (500):
-  //       print('500 Error ${response.body}');
-  //       break;
-  //   }
-
-  //   print(data);
-
-  //   return data;
-  // }
-
   getPetList() async {
     try {
       FirebaseAuth auth = await FirebaseAuth.instance;
@@ -62,9 +37,6 @@ class _MyPetState extends State<MyPet> {
           data = json.decode(response.body);
         });
       }
-      // setState(() {});
-      // print(response.statusCode);
-      // print("mypet : $data");
       return data;
     } catch (e) {}
   }
@@ -200,22 +172,12 @@ class _MyPetState extends State<MyPet> {
                                                       child: Container(
                                                           child: data == null
                                                               ? null
-                                                              // : ClipRRect(
-                                                              //     borderRadius:
-                                                              //         BorderRadius.circular(100),
-                                                              //     child: Image.asset(
-                                                              //       'assets/images/1.jpg',
-                                                              //       height: 120.0,
-                                                              //       width: 120.0,
-                                                              //       fit: BoxFit.cover,
-                                                              //     ),
-                                                              //   ),
                                                               : CircleAvatar(
                                                                   radius: 65,
                                                                   backgroundColor:
                                                                       Colors
                                                                           .grey
-                                                                          .shade300,
+                                                                          .shade200,
                                                                   child:
                                                                       ClipOval(
                                                                     child: SizedBox(
@@ -224,11 +186,11 @@ class _MyPetState extends State<MyPet> {
                                                                         child: (data[index]['urlImage'] != null)
                                                                             ? Image.network(
                                                                                 data[index]['urlImage'],
-                                                                                fit: BoxFit.fill,
+                                                                                fit: BoxFit.cover,
                                                                               )
                                                                             : Image.asset(
                                                                                 'assets/images/avatar.jpg',
-                                                                                fit: BoxFit.fill,
+                                                                                fit: BoxFit.cover,
                                                                               )),
                                                                   ),
                                                                 )),

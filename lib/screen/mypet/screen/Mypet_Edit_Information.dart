@@ -71,13 +71,6 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
       await setData();
     }
 
-    // http.Response response = await http
-    //     .post(Uri.parse(
-    //         '$Url/petDetail/editPetDetail/${widget.pid}/${editPetName.text}/${editPetCategory}/${editPetGender}/${editPetColor.text}/${editPetBreed.text}/${editPetAge.text}/${editPetCharacteristics.text}/${editPetSterilize}/${editCongenitalDisease.text}/${editVaccine.text}'))
-    //     .then((value) {
-    //   print("Update success");
-    // });
-    // Navigator.pop(context, true);
     await http
         .put(Uri.parse('$Url/petDetail/editpetdetail/${widget.pid}'), body: {
       'pet_name': '${editPetName.text}',
@@ -280,16 +273,7 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                             editPetSterilize = "false";
                           });
                         }
-                        // if(urlImage != data[''])
-                        //  if(urlImage != data['urlImage']){
 
-                        //   print("urlImage != data['urlImage']" + urlImage);
-                        //   await uploadImageToFirebase();
-                        //   updatePetInformation();
-                        // }else{
-                        //   urlImage = data['urlImage'];
-                        //   updatePetInformation();
-                        // }
                         updatePetInformation();
                       },
                       icon: Icon(
@@ -305,26 +289,6 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                   onPressed: () => Navigator.of(context).pop(),
                 ),
                 elevation: 0.0,
-                // actions: [
-                //   IconButton(
-                //       onPressed: () {
-                //         if (editPetSterilize == "ทำหมันแล้ว") {
-                //           setState(() {
-                //             editPetSterilize = "true";
-                //           });
-                //         } else {
-                //           setState(() {
-                //             editPetSterilize = "false";
-                //           });
-                //         }
-                //         updatePetInformation();
-                //       },
-                //       icon: Icon(
-                //         FontAwesomeIcons.check,
-                //         color: Colors.white,
-                //       ))
-                //   // icon: Icon(Icons.exit_to_app))
-                // ],
               ),
             ),
             data != null
@@ -359,11 +323,11 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                                                     child: (_imageFile != null)
                                                         ? Image.file(
                                                             _imageFile,
-                                                            fit: BoxFit.fill,
+                                                            fit: BoxFit.cover,
                                                           )
                                                         : Image.network(
                                                             urlImage,
-                                                            fit: BoxFit.fill,
+                                                            fit: BoxFit.cover,
                                                           )),
                                               ),
                                             ),

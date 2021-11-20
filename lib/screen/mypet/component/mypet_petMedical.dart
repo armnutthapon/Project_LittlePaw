@@ -30,13 +30,15 @@ class PetMedical extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text(
-                "วันที่ : ${date}",
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w300,
-                    fontFamily: 'Mitr'),
+              Flexible(
+                child: Text(
+                  "วันที่ : ${date}",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w300,
+                      fontFamily: 'Mitr'),
+                ),
               ),
             ],
           ),
@@ -59,7 +61,7 @@ class PetMedical extends StatelessWidget {
           Text(
             "คลินิก : ${title}",
             style: TextStyle(
-                color: Colors.green,
+                color: Colors.black,
                 fontSize: 14,
                 fontWeight: FontWeight.w300,
                 fontFamily: 'Mitr'),
