@@ -94,7 +94,7 @@ class _Page_MyAppointmentState extends State<Page_MyAppointment> {
                           : ListView.builder(
                               shrinkWrap: true,
                               physics: const AlwaysScrollableScrollPhysics(),
-                              reverse: true,
+                              reverse: false,
                               itemCount: data == null ? 0 : data.length,
                               // ignore: missing_return
                               itemBuilder: (BuildContext context, int index) {

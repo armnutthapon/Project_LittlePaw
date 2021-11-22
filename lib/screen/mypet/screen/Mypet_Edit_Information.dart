@@ -912,7 +912,10 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
                             ),
                           ],
                         ),
-                      ))
+                      )),
+                      SizedBox(
+                        height: size.height * 0.085,
+                      )
                     ],
                   )
                 : Center(child: CircularProgressIndicator())
