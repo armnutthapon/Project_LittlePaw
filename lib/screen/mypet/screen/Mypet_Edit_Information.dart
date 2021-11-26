@@ -67,9 +67,8 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
   updatePetInformation() async {
     if (_imageFile != null) {
       await uploadImageToFirebase();
-    } else {
-      await setData();
     }
+    await setData();
 
     await http
         .put(Uri.parse('$Url/petDetail/editpetdetail/${widget.pid}'), body: {
@@ -107,7 +106,9 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
   }
 
   setData() async {
-    if (editPetName.text != data['pet_name']) {
+    if (editPetName.text == '') {
+      editPetName.text = data['pet_name'];
+    } else if (editPetName.text != data['pet_name']) {
       editPetName.text = editPetName.text;
     } else {
       editPetName.text = data['pet_name'];
@@ -124,20 +125,23 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
     } else {
       editPetGender = data['sex'];
     }
-
-    if (editPetColor.text != data['color']) {
+    if (editPetColor.text == '') {
+      editPetColor.text = data['color'];
+    } else if (editPetColor.text != data['color']) {
       editPetColor.text = editPetColor.text;
     } else {
       editPetColor.text = data['color'];
     }
-
-    if (editPetBreed.text != data['breed']) {
+    if (editPetBreed.text == '') {
+      editPetBreed.text = data['breed'];
+    } else if (editPetBreed.text != data['breed']) {
       editPetBreed.text = editPetBreed.text;
     } else {
       editPetBreed.text = data['breed'];
     }
-
-    if (editPetCharacteristics.text != data['characteristics']) {
+    if (editPetCharacteristics.text == '') {
+      editPetCharacteristics.text = data['characteristics'];
+    } else if (editPetCharacteristics.text != data['characteristics']) {
       editPetCharacteristics.text = editPetCharacteristics.text;
     } else {
       editPetCharacteristics.text = data['characteristics'];
@@ -149,15 +153,15 @@ class _Page_Edit_PetInformaitionState extends State<Page_Edit_PetInformaition> {
       editPetAge.text = data['dob'];
       print(editPetAge.text);
     }
-
     if (editPetSterilize != data['sterilization']) {
       editPetSterilize = editPetSterilize;
       print(editPetSterilize);
     } else {
       editPetSterilize = data['sterilization'];
     }
-
-    if (editCongenitalDisease.text != data['congenital_disease']) {
+    if (editCongenitalDisease.text == '') {
+      editCongenitalDisease.text = data['congenital_disease'];
+    } else if (editCongenitalDisease.text != data['congenital_disease']) {
       editCongenitalDisease.text = editCongenitalDisease.text;
     } else {
       editCongenitalDisease.text = data['congenital_disease'];

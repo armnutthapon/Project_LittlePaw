@@ -77,19 +77,6 @@ class _RegisterState extends State<Register> {
     super.initState();
   }
 
-  // @override
-  // void dispose() {
-  //   _emailController?.dispose();
-  //   _passwordController?.dispose();
-  //   _confirmPasswordController?.dispose();
-  //   _name?.dispose();
-  //   _age?.dispose();
-  //   _phone?.dispose();
-  //   _gender?.dispose();
-
-  //   super.dispose();
-  // }
-
   @override
   Widget build(BuildContext context) {
     final loginProvider = Provider.of<AuthServices>(context);
@@ -144,6 +131,8 @@ class _RegisterState extends State<Register> {
                                     ),
                                     Column(children: [
                                       TextFormField(
+                                        autovalidateMode:
+                                            AutovalidateMode.onUserInteraction,
                                         controller: _emailController,
                                         style: TextStyle(
                                             color: Colors.black,
@@ -166,6 +155,8 @@ class _RegisterState extends State<Register> {
                                             : "กรุณาระบุอีเมล",
                                       ),
                                       TextFormField(
+                                        autovalidateMode:
+                                            AutovalidateMode.onUserInteraction,
                                         controller: _passwordController,
                                         style: TextStyle(
                                             color: Colors.black,
@@ -198,13 +189,15 @@ class _RegisterState extends State<Register> {
                                           if (value == null || value.isEmpty) {
                                             return 'กรุณาระบุรหัสผ่าน';
                                           } else if (!(value.length > 5)) {
-                                            return "รหัสผ่านต้องมีมากกว่า 5 ตัว";
+                                            return "รหัสผ่านต้องมีมากกว่า 5 ตัวอักษร";
                                           }
 
                                           return null;
                                         },
                                       ),
                                       TextFormField(
+                                        autovalidateMode:
+                                            AutovalidateMode.onUserInteraction,
                                         controller: _confirmPasswordController,
                                         style: TextStyle(
                                             color: Colors.black,
@@ -245,6 +238,8 @@ class _RegisterState extends State<Register> {
                                         },
                                       ),
                                       TextFormField(
+                                        autovalidateMode:
+                                            AutovalidateMode.onUserInteraction,
                                         controller: _name,
                                         style: TextStyle(
                                             color: Colors.black,
@@ -283,6 +278,8 @@ class _RegisterState extends State<Register> {
                                         child: ListTile(
                                           // leading: Icon(Icons.ac_unit),
                                           title: DropdownButtonFormField(
+                                            autovalidateMode: AutovalidateMode
+                                                .onUserInteraction,
                                             hint: Text(
                                               "เพศ",
                                               style: TextStyle(
@@ -325,6 +322,8 @@ class _RegisterState extends State<Register> {
                                         ),
                                       ),
                                       TextFormField(
+                                        autovalidateMode:
+                                            AutovalidateMode.onUserInteraction,
                                         controller: _age,
                                         style: TextStyle(
                                             color: Colors.black,
@@ -361,6 +360,8 @@ class _RegisterState extends State<Register> {
                                         },
                                       ),
                                       TextFormField(
+                                        autovalidateMode:
+                                            AutovalidateMode.onUserInteraction,
                                         controller: _phone,
                                         keyboardType: TextInputType.phone,
                                         style: TextStyle(

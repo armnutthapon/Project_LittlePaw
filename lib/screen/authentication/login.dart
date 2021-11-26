@@ -142,6 +142,8 @@ class _LoginState extends State<Login> {
                                 ),
                                 Column(children: [
                                   TextFormField(
+                                    autovalidateMode:
+                                        AutovalidateMode.onUserInteraction,
                                     controller: _emailController,
                                     style: TextStyle(
                                         color: Colors.black,
@@ -163,6 +165,8 @@ class _LoginState extends State<Login> {
                                         val.isNotEmpty ? null : "กรุณาใส่อีเมล",
                                   ),
                                   TextFormField(
+                                    autovalidateMode:
+                                        AutovalidateMode.onUserInteraction,
                                     controller: _passwordController,
                                     style: TextStyle(
                                         color: Colors.black,
